@@ -1,0 +1,515 @@
+// Enhanced Prisma Schema with Password Reset and Security Features
+
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+enum Role {
+  EMPLOYEE
+  HR
+  MANAGER
+  OWNER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  INTERNSHIP
+  REMOTE
+  HYBRID
+  CONTRACT
+}
+
+enum ExperienceLevel {
+  FRESHER
+  ONE_TO_THREE
+  THREE_TO_FIVE
+  FIVE_TO_TEN
+  TEN_PLUS
+}
+
+enum ApplicationStatus {
+  NEW
+  SHORTLISTED
+  INTERVIEW
+  HIRED
+  REJECTED
+}
+
+enum ApplicationSource {
+  CAREER_PAGE
+  REFERRAL
+  INTERNAL
+  LINKEDIN
+  OTHER
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  IN_REVIEW
+  COMPLETED
+  BLOCKED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum BannerType {
+  INFO
+  WARNING
+  SUCCESS
+  PROMOTION
+  HIRING
+  ANNOUNCEMENT
+  CUSTOM
+}
+
+enum DisplayType {
+  TOP_BAR
+  POPUP
+  CAROUSEL_SLIDE
+  CUSTOM_HTML
+}
+
+enum LeaveType {
+  SICK
+  CASUAL
+  EARNED
+  UNPAID
+  MATERNITY
+  PATERNITY
+}
+
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  HALF_DAY
+  LEAVE
+  HOLIDAY
+}
+
+// ============================================
+// USER & AUTHENTICATION
+// ============================================
+
+model User {
+  id                 String     @id @default(uuid())
+  name               String
+  email              String     @unique
+  passwordHash       String     @map("password_hash")
+  role               Role       @default(EMPLOYEE)
+  status             UserStatus @default(ACTIVE)
+  mustChangePassword Boolean    @default(false) @map("must_change_password")
+  lastLoginAt        DateTime?  @map("last_login_at")
+  createdAt          DateTime   @default(now()) @map("created_at")
+  updatedAt          DateTime   @updatedAt @map("updated_at")
+
+  // Relations
+  employeeProfile     EmployeeProfile?
+  refreshTokens       RefreshToken[]
+  passwordResetTokens PasswordResetToken[]
+  createdJobs         Job[]                @relation("JobCreator")
+  createdTasks        Task[]               @relation("TaskCreator")
+  assignedTasks       Task[]               @relation("TaskAssignee")
+  taskComments        TaskComment[]
+  taskAttachments     TaskAttachment[]
+  createdBanners      NotificationBanner[] @relation("BannerCreator")
+  leaves              Leave[]
+  attendance          Attendance[]
+  payslips            Payslip[]
+  organizedMeetings   Meeting[]            @relation("MeetingOrganizer")
+
+  @@index([email])
+  @@index([role])
+  @@index([status])
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@map("refresh_tokens")
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@map("password_reset_tokens")
+}
+
+// ============================================
+// EMPLOYEE MANAGEMENT
+// ============================================
+
+model EmployeeProfile {
+  id               String    @id @default(uuid())
+  userId           String    @unique @map("user_id")
+  designation      String?
+  department       String?
+  phone            String?
+  joiningDate      DateTime? @map("joining_date")
+  employeeCode     String?   @unique @map("employee_code")
+  location         String?
+  address          String?
+  dateOfBirth      DateTime? @map("date_of_birth")
+  emergencyContact String?   @map("emergency_contact")
+  salary           Decimal?  @db.Decimal(10, 2)
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([department])
+  @@index([employeeCode])
+  @@map("employee_profiles")
+}
+
+// ============================================
+// CAREER PORTAL & JOBS
+// ============================================
+
+model Job {
+  id                 String          @id @default(uuid())
+  title              String
+  department         String
+  location           String
+  jobType            JobType         @map("job_type")
+  experienceLevel    ExperienceLevel @map("experience_level")
+  salaryMin          Decimal?        @map("salary_min") @db.Decimal(10, 2)
+  salaryMax          Decimal?        @map("salary_max") @db.Decimal(10, 2)
+  salaryCurrency     String?         @default("INR") @map("salary_currency")
+  description        String          @db.Text
+  responsibilities   String          @db.Text // JSON array or rich text
+  requirements       String          @db.Text // JSON array or rich text
+  benefits           String?         @db.Text
+  isActive           Boolean         @default(true) @map("is_active")
+  isVisibleOnWebsite Boolean         @default(false) @map("is_visible_on_website")
+  openings           Int             @default(1)
+  createdById        String          @map("created_by_id")
+  createdAt          DateTime        @default(now()) @map("created_at")
+  updatedAt          DateTime        @updatedAt @map("updated_at")
+
+  // Relations
+  createdBy    User          @relation("JobCreator", fields: [createdById], references: [id])
+  applications Application[]
+
+  @@index([isActive])
+  @@index([isVisibleOnWebsite])
+  @@index([department])
+  @@index([jobType])
+  @@index([experienceLevel])
+  @@index([createdAt])
+  @@map("jobs")
+}
+
+// ============================================
+// APPLICATIONS & RESUMES (ATS)
+// ============================================
+
+model Application {
+  id              String            @id @default(uuid())
+  jobId           String            @map("job_id")
+  name            String
+  email           String
+  phone           String
+  experienceYears Int               @map("experience_years")
+  currentCTC      Decimal?          @map("current_ctc") @db.Decimal(10, 2)
+  expectedCTC     Decimal?          @map("expected_ctc") @db.Decimal(10, 2)
+  noticePeriod    String?           @map("notice_period")
+  skills          String            @db.Text // JSON array
+  resumeUrl       String            @map("resume_url")
+  resumeFileName  String            @map("resume_file_name")
+  coverLetter     String?           @map("cover_letter") @db.Text
+  status          ApplicationStatus @default(NEW)
+  appliedFrom     ApplicationSource @default(CAREER_PAGE) @map("applied_from")
+  notes           String?           @db.Text // HR internal notes
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+
+  // Relations
+  job Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@index([jobId])
+  @@index([status])
+  @@index([email])
+  @@index([createdAt])
+  @@map("applications")
+}
+
+// ============================================
+// TASK MANAGEMENT
+// ============================================
+
+model Task {
+  id                 String       @id @default(uuid())
+  title              String
+  description        String       @db.Text
+  createdById        String       @map("created_by_id")
+  assignedToId       String       @map("assigned_to_id")
+  status             TaskStatus   @default(TODO)
+  priority           TaskPriority @default(MEDIUM)
+  startDate          DateTime?    @map("start_date")
+  dueDate            DateTime?    @map("due_date")
+  progressPercentage Int          @default(0) @map("progress_percentage")
+  tags               String?      @db.Text // JSON array
+  createdAt          DateTime     @default(now()) @map("created_at")
+  updatedAt          DateTime     @updatedAt @map("updated_at")
+
+  // Relations
+  createdBy   User             @relation("TaskCreator", fields: [createdById], references: [id])
+  assignedTo  User             @relation("TaskAssignee", fields: [assignedToId], references: [id])
+  comments    TaskComment[]
+  attachments TaskAttachment[]
+
+  @@index([assignedToId])
+  @@index([createdById])
+  @@index([status])
+  @@index([priority])
+  @@index([dueDate])
+  @@map("tasks")
+}
+
+model TaskComment {
+  id        String   @id @default(uuid())
+  taskId    String   @map("task_id")
+  userId    String   @map("user_id")
+  comment   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([taskId])
+  @@index([userId])
+  @@map("task_comments")
+}
+
+model TaskAttachment {
+  id         String   @id @default(uuid())
+  taskId     String   @map("task_id")
+  fileUrl    String   @map("file_url")
+  fileName   String   @map("file_name")
+  fileSize   Int?     @map("file_size")
+  uploadedBy String   @map("uploaded_by")
+  uploadedAt DateTime @default(now()) @map("uploaded_at")
+
+  // Relations
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [uploadedBy], references: [id])
+
+  @@index([taskId])
+  @@map("task_attachments")
+}
+
+// ============================================
+// NOTIFICATIONS & BANNERS
+// ============================================
+
+model NotificationBanner {
+  id            String      @id @default(uuid())
+  title         String
+  message       String      @db.Text
+  type          BannerType  @default(INFO)
+  displayType   DisplayType @default(TOP_BAR) @map("display_type")
+  htmlContent   String?     @map("html_content") @db.Text
+  imageUrl      String?     @map("image_url")
+  linkUrl       String?     @map("link_url")
+  linkText      String?     @map("link_text")
+  startDateTime DateTime?   @map("start_date_time")
+  endDateTime   DateTime?   @map("end_date_time")
+  isActive      Boolean     @default(false) @map("is_active")
+  priority      Int         @default(0) // Higher number = higher priority
+  createdById   String      @map("created_by_id")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  // Relations
+  createdBy User @relation("BannerCreator", fields: [createdById], references: [id])
+
+  @@index([isActive])
+  @@index([startDateTime])
+  @@index([endDateTime])
+  @@index([priority])
+  @@map("notification_banners")
+}
+
+// ============================================
+// LEAVE MANAGEMENT
+// ============================================
+
+model Leave {
+  id           String      @id @default(uuid())
+  userId       String      @map("user_id")
+  leaveType    LeaveType   @map("leave_type")
+  startDate    DateTime    @map("start_date")
+  endDate      DateTime    @map("end_date")
+  days         Int
+  reason       String      @db.Text
+  status       LeaveStatus @default(PENDING)
+  approvedBy   String?     @map("approved_by")
+  rejectedBy   String?     @map("rejected_by")
+  approvalNote String?     @map("approval_note") @db.Text
+  createdAt    DateTime    @default(now()) @map("created_at")
+  updatedAt    DateTime    @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+  @@index([startDate])
+  @@map("leaves")
+}
+
+// ============================================
+// ATTENDANCE TRACKING
+// ============================================
+
+model Attendance {
+  id        String           @id @default(uuid())
+  userId    String           @map("user_id")
+  date      DateTime         @db.Date
+  checkIn   DateTime?        @map("check_in")
+  checkOut  DateTime?        @map("check_out")
+  status    AttendanceStatus @default(PRESENT)
+  notes     String?          @db.Text
+  createdAt DateTime         @default(now()) @map("created_at")
+  updatedAt DateTime         @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@index([userId])
+  @@index([date])
+  @@map("attendance")
+}
+
+// ============================================
+// PAYROLL MANAGEMENT
+// ============================================
+
+model Payslip {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  month       Int // 1-12
+  year        Int
+  basicSalary Decimal  @map("basic_salary") @db.Decimal(10, 2)
+  allowances  Decimal  @default(0) @db.Decimal(10, 2)
+  deductions  Decimal  @default(0) @db.Decimal(10, 2)
+  netSalary   Decimal  @map("net_salary") @db.Decimal(10, 2)
+  pdfUrl      String?  @map("pdf_url")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, month, year])
+  @@index([userId])
+  @@map("payslips")
+}
+
+// ============================================
+// CONTACT FORM
+// ============================================
+
+model ContactSubmission {
+  id        String   @id @default(uuid())
+  firstName String   @map("first_name")
+  lastName  String   @map("last_name")
+  email     String
+  subject   String
+  message   String   @db.Text
+  status    String   @default("NEW") // NEW, READ, REPLIED
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("contact_submissions")
+}
+
+// ============================================
+// RESOURCES CMS
+// ============================================
+
+model Resource {
+  id        String   @id @default(uuid())
+  title     String
+  content   String   @db.Text
+  thumbnail String?
+  category  String
+  author    String
+  status    String   @default("PUBLISHED") // DRAFT, PUBLISHED, ARCHIVED
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("resources")
+}
+
+// ============================================
+// MEETINGS
+// ============================================
+
+model Meeting {
+  id          String   @id @default(uuid())
+  title       String
+  description String?  @db.Text
+  startTime   DateTime @map("start_time")
+  endTime     DateTime @map("end_time")
+  location    String?  // Physical room or URL
+  meetingLink String?  @map("meeting_link")
+  organizerId String   @map("organizer_id")
+  attendees   String   @db.Text // JSON array of user IDs or emails
+  status      String   @default("SCHEDULED") // SCHEDULED, CANCELLED, COMPLETED
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  organizer User @relation("MeetingOrganizer", fields: [organizerId], references: [id])
+
+  @@index([organizerId])
+  @@index([startTime])
+  @@map("meetings")
+}
