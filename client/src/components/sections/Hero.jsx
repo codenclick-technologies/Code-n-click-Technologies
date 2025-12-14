@@ -193,7 +193,7 @@ const Hero = () => {
 
           {/* RIGHT SECTION: Premium Interactive Tech Showcase */}
           <motion.div
-            variants={floatVariants}
+            variants={floatVariants} 
             className="relative h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px] order-2 lg:order-2 flex items-center justify-center"
           >
             {/* Animated background orbs */}
