@@ -1,5 +1,5 @@
 // API Configuration and Base Service
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://code-n-click-backend-cg8nwfnks-codenclick-technologys-projects.vercel.app/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://code-n-click-backend.vercel.app/api';
 
 class ApiService {
     constructor() {
