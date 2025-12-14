@@ -10,12 +10,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="space-y-6">
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                C
-              </div>
-              <span className="font-bold text-2xl tracking-tight text-white">
-                Code'n'Click
-              </span>
+              <img src="/logo.png" alt="Code-n-Click" className="h-12 w-auto" />
             </Link>
             <p className="text-gray-400 leading-relaxed">
               Transforming digital landscapes with cutting-edge technology and premium design. We build the future of the web.

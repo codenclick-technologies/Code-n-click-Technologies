@@ -36,13 +36,12 @@ import { MeetingsModule } from './modules/meetings/meetings.module';
       envFilePath: '.env',
     }),
 
-    // Rate limiting
-    ThrottlerModule.forRoot([
-      {
-        ttl: 60000, // 60 seconds
-        limit: 1000, // 1000 requests per TTL
-      },
-    ]),
+    // ThrottlerModule.forRoot([
+    //   {
+    //     ttl: 60000, // 60 seconds
+    //     limit: 1000, // 1000 requests per TTL
+    //   },
+    // ]),
 
     // Feature modules
     AuthModule,
@@ -74,10 +73,12 @@ import { MeetingsModule } from './modules/meetings/meetings.module';
       provide: APP_GUARD,
       useClass: RolesGuard,
     },
+    /*
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
+    */
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,

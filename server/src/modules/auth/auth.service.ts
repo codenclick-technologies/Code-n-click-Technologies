@@ -484,13 +484,18 @@ export class AuthService {
    * Generate access and refresh tokens
    */
   private async generateTokens(userId: string, email: string, role: Role) {
+    const jwtExpiresIn = String(this.configService.get('JWT_EXPIRES_IN') || '15m').replace(/['"\s]/g, '');
+    const refreshExpiresIn = String(this.configService.get('JWT_REFRESH_EXPIRES_IN') || '7d').replace(/['"\s]/g, '');
+
+    console.log('Generating Tokens with Expiry:', { jwtExpiresIn, refreshExpiresIn, rawJwt: this.configService.get('JWT_EXPIRES_IN') });
+
     const [accessToken, refreshToken] = await Promise.all([
       // Access token
       this.jwtService.signAsync(
         { sub: userId, email, role },
         {
           secret: this.configService.get('JWT_SECRET'),
-          expiresIn: this.configService.get('JWT_EXPIRES_IN') || '15m',
+          expiresIn: jwtExpiresIn,
         },
       ),
       // Refresh token
@@ -498,7 +503,7 @@ export class AuthService {
         { sub: userId, email, role },
         {
           secret: this.configService.get('JWT_REFRESH_SECRET'),
-          expiresIn: this.configService.get('JWT_REFRESH_EXPIRES_IN') || '7d',
+          expiresIn: refreshExpiresIn,
         },
       ),
     ]);

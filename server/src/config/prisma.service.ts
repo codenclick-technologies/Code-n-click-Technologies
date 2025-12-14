@@ -10,7 +10,18 @@ export class PrismaService
   extends PrismaClient
   implements OnModuleInit, OnModuleDestroy {
   constructor() {
+    // Prevent P2037: Too many DB connections in serverless environment
+    const dbUrl = process.env.DATABASE_URL || '';
+    const connectionLimitUrl = dbUrl.includes('?')
+      ? `${dbUrl}&connection_limit=1`
+      : `${dbUrl}?connection_limit=1`;
+
     super({
+      datasources: {
+        db: {
+          url: connectionLimitUrl,
+        },
+      },
       log:
         process.env.NODE_ENV === 'development'
           ? ['query', 'error', 'warn']
@@ -19,8 +30,15 @@ export class PrismaService
   }
 
   async onModuleInit() {
-    await this.$connect();
-    console.log('✅ Database connected successfully');
+    try {
+      console.log('PrismaService: Connecting...', process.cwd());
+      await this.$connect();
+      console.log('✅ Database connected successfully');
+    } catch (e: any) {
+      console.error('❌ Prisma Connect Error:', e);
+      console.error('Stack:', e.stack);
+      throw e;
+    }
   }
 
   async onModuleDestroy() {

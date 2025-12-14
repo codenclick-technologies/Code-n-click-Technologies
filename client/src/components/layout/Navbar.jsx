@@ -55,12 +55,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
-              C
-            </div>
-            <span className="font-bold text-xl tracking-tight text-gray-900 dark:text-white">
-              Code'N'Click
-            </span>
+            <img src="/logo.png" alt="Code-n-Click" className="h-10 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
