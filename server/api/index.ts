@@ -3,7 +3,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppModule } from '../src/app.module';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
-import express from 'express';
+import express = require('express');
 
 const server = express();
 
