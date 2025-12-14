@@ -3,11 +3,11 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppModule } from '../src/app.module';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
-import * as express from 'express';
+import express from 'express';
 
 const server = express();
 
-const createNestServer = async (expressInstance) => {
+const createNestServer = async (expressInstance: express.Express) => {
     const app = await NestFactory.create(
         AppModule,
         new ExpressAdapter(expressInstance),
@@ -48,7 +48,7 @@ const createNestServer = async (expressInstance) => {
 
     // CORS - Allow Vercel Frontend
     app.enableCors({
-        origin: ['http://localhost:5173', 'https://code-n-click-technologies.vercel.app'],
+        origin: true, // Reflects the request origin (Allows all if credentials=true is handled by browser checks, effectively)
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
@@ -70,10 +70,10 @@ const createNestServer = async (expressInstance) => {
     await app.init();
 };
 
-export default async (req, res) => {
-    if (!server['_isInit']) { // Custom property check to avoid re-init
+export default async (req: express.Request, res: express.Response) => {
+    if (!(server as any)._isInit) { // Custom property check to avoid re-init
         await createNestServer(server);
-        server['_isInit'] = true;
+        (server as any)._isInit = true;
     }
     server(req, res);
 };
