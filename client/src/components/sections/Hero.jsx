@@ -260,7 +260,7 @@ const Hero = () => {
                   
                   {/* Header section */}
                   <div className="space-y-2">
-                    <motion.h3
+                    <motion.h2
                       className="text-2xl sm:text-3xl font-black text-white"
                       animate={{ 
                         backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
@@ -270,7 +270,7 @@ const Hero = () => {
                       <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent bg-300% animate-pulse">
                         Our Services
                       </span>
-                    </motion.h3>
+                    </motion.h2>
                     <p className="text-xs sm:text-sm text-gray-400 font-medium">What we deliver for your success</p>
                   </div>
 
