@@ -3,11 +3,14 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppModule } from '../src/app.module';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
-import express from 'express';
+import { Request, Response, Express } from 'express';
+
+// @ts-ignore
+const express = require('express');
 
 const server = express();
 
-const createNestServer = async (expressInstance: express.Express) => {
+const createNestServer = async (expressInstance: Express) => {
     const app = await NestFactory.create(
         AppModule,
         new ExpressAdapter(expressInstance),
@@ -70,7 +73,7 @@ const createNestServer = async (expressInstance: express.Express) => {
     await app.init();
 };
 
-export default async (req: express.Request, res: express.Response) => {
+export default async (req: Request, res: Response) => {
     if (!(server as any)._isInit) { // Custom property check to avoid re-init
         await createNestServer(server);
         (server as any)._isInit = true;
