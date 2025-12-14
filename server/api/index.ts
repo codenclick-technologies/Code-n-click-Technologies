@@ -3,11 +3,19 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppModule } from '../src/app.module';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
-import express = require('express');
+import * as express from 'express';
 
-const server = express();
+const createExpressApp = () => {
+    const app: any = express;
+    if (typeof app !== 'function' && app.default) {
+        return app.default();
+    }
+    return app();
+};
 
-const createNestServer = async (expressInstance: express.Express) => {
+const server = createExpressApp();
+
+const createNestServer = async (expressInstance: any) => {
     const app = await NestFactory.create(
         AppModule,
         new ExpressAdapter(expressInstance),
