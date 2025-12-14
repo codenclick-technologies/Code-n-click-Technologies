@@ -20,6 +20,7 @@ const Footer = () => {
                 <a 
                   key={index} 
                   href="#" 
+                  aria-label={`Visit our ${['Facebook', 'Twitter', 'Instagram', 'LinkedIn'][index]} page`}
                   className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white transition-all duration-300"
                 >
                   <Icon size={18} />
