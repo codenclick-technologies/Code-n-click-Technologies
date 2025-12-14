@@ -10,7 +10,14 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="space-y-6">
             <Link to="/" className="flex items-center gap-2">
-              <img src="/logo.png" alt="Code-n-Click" className="h-16 w-auto" />
+              <img 
+                src="/logo.png" 
+                alt="Code-n-Click" 
+                className="h-16 w-auto" 
+                width="711" 
+                height="351"
+                loading="lazy"
+              />
             </Link>
             <p className="text-gray-400 leading-relaxed">
               Transforming digital landscapes with cutting-edge technology and premium design. We build the future of the web.

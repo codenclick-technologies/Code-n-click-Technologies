@@ -12,21 +12,22 @@ const Navbar = () => {
 
   // Handle Scroll
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Handle Scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+
 
   const navLinks = [
     { name: 'About Us', path: '/about', icon: Info },
@@ -55,7 +56,14 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center gap-2">
-            <img src="/logo.png" alt="Code-n-Click" className="h-16 w-auto" />
+            <img 
+              src="/logo.png" 
+              alt="Code-n-Click" 
+              className="h-16 w-auto" 
+              width="711" 
+              height="351"
+              fetchPriority="high"
+            />
           </Link>
 
           {/* Desktop Navigation */}
