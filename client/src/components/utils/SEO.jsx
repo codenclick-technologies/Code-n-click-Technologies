@@ -52,7 +52,7 @@ const SEO = ({
           "logo": `${domain}/logo.png`,
           "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+91-1234567890", // Placeholder
+            "telephone": "+91-9876543210", // Updated placeholder to match Home
             "contactType": "customer service"
           },
           "sameAs": [

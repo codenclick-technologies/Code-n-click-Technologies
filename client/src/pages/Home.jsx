@@ -20,27 +20,7 @@ const Home = () => {
         keywords="software development company India, web development services, SaaS development, mobile app development, digital marketing agency, SEO services India, Google Ads management, Meta Ads, Facebook Ads, graphic design services, UI UX design, custom software development, enterprise solutions, startup development, ecommerce development, React development, Node.js development"
         canonical="/"
       >
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "Code-n-Click Technologies",
-              "url": "https://codenclick.com",
-              "logo": "https://codenclick.com/logo.png",
-              "sameAs": [
-                "https://www.facebook.com/codenclick",
-                "https://www.linkedin.com/company/codenclick",
-                "https://twitter.com/codenclick"
-              ],
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+91-9876543210",
-                "contactType": "customer service"
-              }
-            }
-          `}
-        </script>
+
       </SEO>
       <Hero />
 
