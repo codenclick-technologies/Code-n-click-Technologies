@@ -55,7 +55,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center gap-2">
-            <img src="/logo.png" alt="Code-n-Click" className="h-10 w-auto" />
+            <img src="/logo.png" alt="Code-n-Click" className="h-17 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
