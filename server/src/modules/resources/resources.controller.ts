@@ -3,6 +3,7 @@ import { ResourcesService } from './resources.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
+import { Public } from '../../common/decorators/public.decorator';
 import { Role } from '@prisma/client';
 
 @Controller('resources')
@@ -16,11 +17,13 @@ export class ResourcesController {
         return this.resourcesService.create(body);
     }
 
+    @Public()
     @Get()
     findAll(@Query() query: any) {
         return this.resourcesService.findAll(query);
     }
 
+    @Public()
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.resourcesService.findOne(id);

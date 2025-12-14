@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Code, Globe, BarChart, PenTool, Search, ArrowRight } from 'lucide-react';
+import { Code, Server, Globe, BarChart, PenTool, Search, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { fadeInUp, staggerContainer } from '../../utils/animations';
 import SpotlightCard from '../ui/SpotlightCard';
@@ -15,12 +15,12 @@ const services = [
     bg: 'bg-blue-50 dark:bg-blue-900/20'
   },
   {
-    icon: Code,
+    icon: Server,
     title: 'SaaS Development',
     description: 'Reliable, scalable SaaS products with multi-tenant architecture and enterprise-grade infrastructure.',
     link: '/services/saas-development',
-    color: 'text-blue-500',
-    bg: 'bg-blue-50 dark:bg-blue-900/20'
+    color: 'text-cyan-500',
+    bg: 'bg-cyan-50 dark:bg-cyan-900/20'
   },
   {
     icon: Globe,
@@ -56,6 +56,101 @@ const services = [
   }
 ];
 
+const ServiceCard = ({ service }) => {
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
+    setRotation({ x: rotateX, y: rotateY });
+  };
+
+  const handleMouseLeave = () => {
+    setRotation({ x: 0, y: 0 });
+  };
+
+  return (
+    <motion.div 
+      variants={fadeInUp} 
+      className="relative h-full group perspective"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        perspective: '1000px',
+        transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
+        transition: 'transform 0.1s ease-out'
+      }}
+    >
+      {/* Animated glass reflection border */}
+      <div className="relative rounded-3xl p-[2px] h-full overflow-hidden">
+        {/* Animated gradient border */}
+        <div 
+          className="absolute inset-0 rounded-3xl opacity-75"
+          style={{
+            background: 'linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6)',
+            backgroundSize: '300% 100%',
+            animation: 'gradient-shift 3s ease infinite'
+          }}
+        />
+        
+        {/* Glass reflection effect */}
+        <div 
+          className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{
+            background: 'linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)',
+            backgroundSize: '200% 200%',
+            animation: 'shine 2s ease-in-out infinite'
+          }}
+        />
+        
+        {/* Content */}
+        <SpotlightCard className="h-60 p-6 relative z-10">
+          <div className="flex items-start gap-4 h-full">
+            <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${service.bg} ${service.color} shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+              <service.icon size={20} className="text-white/95" />
+            </div>
+            <div className="flex-1 flex flex-col">
+              <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-2">{service.title}</h3>
+              <p className="text-sm text-gray-400 mb-6 leading-relaxed flex-1">{service.description}</p>
+              <div>
+                <Link to={service.link} className="inline-flex items-center text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors uppercase tracking-wider group-hover:gap-3 gap-2 transition-all">
+                  Learn More <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </SpotlightCard>
+      </div>
+
+      <style jsx>{`
+        @keyframes gradient-shift {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+        
+        @keyframes shine {
+          0% {
+            background-position: -200% -200%;
+          }
+          100% {
+            background-position: 200% 200%;
+          }
+        }
+      `}</style>
+    </motion.div>
+  );
+};
+
 const ServicesGrid = () => {
   return (
     <section className="py-20 bg-gray-950 relative z-10">
@@ -89,30 +184,7 @@ const ServicesGrid = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
           {services.map((service, index) => (
-            <motion.div key={service.title} variants={fadeInUp} whileHover={{ scale: 1.03 }} className="transition-transform h-full">
-              {/* Gradient border -> SpotlightCard for the inner glass panel (equal heights) */}
-              <div className="relative rounded-3xl p-[1px] h-full" style={{
-                background: 'linear-gradient(90deg, rgba(59,130,246,0.9), rgba(139,92,246,0.9), rgba(6,182,212,0.9))',
-                backgroundSize: '300% 100%'
-              }}>
-                <SpotlightCard className="h-60 p-6">
-                  <div className="flex items-start gap-4 h-full">
-                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${service.bg} ${service.color} shadow-lg flex-shrink-0`}>
-                      <service.icon size={20} className="text-white/95" />
-                    </div>
-                    <div className="flex-1 flex flex-col">
-                      <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-2">{service.title}</h3>
-                      <p className="text-sm text-gray-400 mb-6 leading-relaxed flex-1">{service.description}</p>
-                      <div>
-                        <Link to={service.link} className="inline-flex items-center text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors uppercase tracking-wider">
-                          Learn More <ArrowRight size={14} className="ml-2" />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </SpotlightCard>
-              </div>
-            </motion.div>
+            <ServiceCard key={service.title} service={service} />
           ))}
         </motion.div>
       </div>

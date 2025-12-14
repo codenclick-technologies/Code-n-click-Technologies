@@ -15,6 +15,7 @@ import { CreateJobDto, UpdateJobDto, QueryJobsDto } from './dto/job.dto';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
+import { Public } from '../../common/decorators/public.decorator';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { Role } from '@prisma/client';
 
@@ -24,12 +25,14 @@ export class JobsController {
   constructor(private readonly jobsService: JobsService) { }
 
   // Public endpoints
+  @Public()
   @Get('public')
   @ApiOperation({ summary: 'Get all public job listings' })
   findAllPublic(@Query() query: QueryJobsDto) {
     return this.jobsService.findAll(query, true);
   }
 
+  @Public()
   @Get('public/:id')
   @ApiOperation({ summary: 'Get public job by ID' })
   findOnePublic(@Param('id') id: string) {

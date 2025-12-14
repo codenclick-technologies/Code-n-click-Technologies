@@ -1,13 +1,11 @@
 import { Module, Global } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { UploadService } from './services/upload.service';
-import { UploadController } from './controllers/upload.controller';
+import { SanitizationService } from './services/sanitization.service';
+import { CloudinaryProvider } from './providers/cloudinary.provider';
 
 @Global()
 @Module({
-    imports: [ConfigModule],
-    controllers: [UploadController],
-    providers: [UploadService],
-    exports: [UploadService],
+    providers: [CloudinaryProvider, UploadService, SanitizationService],
+    exports: [UploadService, SanitizationService],
 })
 export class CommonModule { }

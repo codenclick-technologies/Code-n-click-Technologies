@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '../../components/utils/SEO';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -99,10 +99,12 @@ const SEO = () => {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
-      <Helmet>
-        <title>SEO Services (Search Engine Optimization) | Code'N'Click</title>
-        <meta name="description" content="Expert SEO services. We help businesses rank higher on Google, drive organic traffic, and increase revenue with data-driven strategies." />
-        <meta name="keywords" content="seo services, search engine optimization, technical seo, link building, local seo, seo audit, content marketing" />
+      <SEOHead
+        title="SEO Services (Search Engine Optimization)"
+        description="Expert SEO services. We help businesses rank higher on Google, drive organic traffic, and increase revenue with data-driven strategies."
+        keywords="seo services, search engine optimization, technical seo, link building, local seo, seo audit, content marketing"
+        canonical="/services/seo"
+      >
         <script type="application/ld+json">
           {`
             {
@@ -122,7 +124,7 @@ const SEO = () => {
             }
           `}
         </script>
-      </Helmet>
+      </SEOHead>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">

@@ -24,8 +24,9 @@ const About = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden pt-32 px-4 sm:px-6 lg:px-8">
       <SEO 
-        title="About Us"
-        description="Meet the team behind Code-n-Click Technologies. We are a multidisciplinary team of developers, designers, and strategists."
+        title="About Us - Leading Software Development & Digital Marketing Company"
+        description="Codenclick Technologies is India's premier software development and digital marketing agency. We combine cutting-edge technology with creative strategies to deliver measurable business growth. From web development to digital marketing, we're your partner in digital transformation."
+        keywords="about code-n-click, software development company, digital agency India, custom software solutions, web development team, digital marketing experts"
       />
       
       <div className="max-w-7xl mx-auto">
@@ -37,10 +38,13 @@ const About = () => {
           className="text-center mb-20"
         >
           <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-gray-400">
-            About Us
+            Transforming Ideas into Digital Success
           </motion.h1>
+          <motion.p variants={fadeInUp} className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-4">
+            We are <strong className="text-white">Codenclick Technologies</strong> — a technology-driven software development and digital marketing agency based in India, dedicated to helping businesses thrive in the digital era.
+          </motion.p>
           <motion.p variants={fadeInUp} className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            A multidisciplinary team combining product thinking, design, and engineering to create measurable growth for our partners.
+            Our multidisciplinary team of expert developers, creative designers, and strategic marketers combine innovation with execution to deliver solutions that drive real, measurable business growth.
           </motion.p>
         </motion.section>
 
@@ -66,14 +70,23 @@ const About = () => {
         {/* Mission + Timeline */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-16">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:col-span-2">
-            <h2 className="text-3xl font-bold text-white mb-4">Our Mission</h2>
-            <p className="text-gray-400 mb-6 leading-relaxed">We're a startup that built our reputation on a simple principle: <strong className="text-white">We don't promise what we can't deliver.</strong> Every project is executed with the same rigor, obsession over detail, and commitment to results — whether it's a bootstrapped startup or a Fortune 500 company.</p>
-            <p className="text-gray-400 mb-6 leading-relaxed">We focus on building products that work — fast, reliable, and measurable. Join us once and you'll see: we deliver outcomes, not excuses.</p>
+            <h2 className="text-3xl font-bold text-white mb-4">Who We Are</h2>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Founded with a vision to bridge the gap between technology and business growth, <strong className="text-white">Codenclick Technologies</strong> has emerged as a trusted partner for businesses seeking digital transformation. We are more than just a service provider—we are strategic partners invested in your success.
+            </p>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Our expertise spans <strong className="text-white">custom software development, web and mobile applications, SaaS platforms, digital marketing, SEO, and brand design</strong>. Whether you're a startup looking to build your MVP or an enterprise seeking to modernize legacy systems, we bring the technical prowess and creative thinking to make it happen.
+            </p>
 
-            <div className="space-y-6">
+            <h3 className="text-2xl font-bold text-white mb-4 mt-8">Our Commitment</h3>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              We built our reputation on a simple principle: <strong className="text-white">We don't promise what we can't deliver.</strong> Every project—whether for a bootstrapped startup or a Fortune 500 company—is executed with the same rigor, attention to detail, and commitment to measurable results.
+            </p>
+
+            <div className="space-y-6 mt-8">
               {timeline.map((t, idx) => (
                 <div key={idx} className="flex gap-4 items-start">
-                  <div className="flex-none w-12 h-12 rounded-full bg-gray-900/40 flex items-center justify-center text-2xl">{t.icon}</div>
+                  <div className="flex-none w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 flex items-center justify-center text-2xl">{t.icon}</div>
                   <div>
                     <h4 className="text-lg font-bold text-white">{t.title}</h4>
                     <p className="text-gray-400 text-sm mt-1">{t.desc}</p>

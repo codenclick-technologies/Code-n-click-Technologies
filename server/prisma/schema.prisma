@@ -121,16 +121,22 @@ enum AttendanceStatus {
 // ============================================
 
 model User {
-  id                 String     @id @default(uuid())
-  name               String
-  email              String     @unique
-  passwordHash       String     @map("password_hash")
-  role               Role       @default(EMPLOYEE)
-  status             UserStatus @default(ACTIVE)
-  mustChangePassword Boolean    @default(false) @map("must_change_password")
-  lastLoginAt        DateTime?  @map("last_login_at")
-  createdAt          DateTime   @default(now()) @map("created_at")
-  updatedAt          DateTime   @updatedAt @map("updated_at")
+  id                   String     @id @default(uuid())
+  name                 String
+  email                String     @unique
+  passwordHash         String     @map("password_hash")
+  role                 Role       @default(EMPLOYEE)
+  status               UserStatus @default(ACTIVE)
+  mustChangePassword   Boolean    @default(false) @map("must_change_password")
+  lastLoginAt          DateTime?  @map("last_login_at")
+  
+  // Account Lockout Fields (Security Enhancement)
+  failedLoginAttempts  Int        @default(0) @map("failed_login_attempts")
+  lockedUntil          DateTime?  @map("locked_until")
+  lastFailedLoginAt    DateTime?  @map("last_failed_login_at")
+  
+  createdAt            DateTime   @default(now()) @map("created_at")
+  updatedAt            DateTime   @updatedAt @map("updated_at")
 
   // Relations
   employeeProfile     EmployeeProfile?

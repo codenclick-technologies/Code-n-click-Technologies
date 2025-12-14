@@ -43,6 +43,7 @@ const Navbar = () => {
         { name: 'SEO', path: '/services/seo' },
       ]
     },
+    { name: 'Portfolio', path: '/portfolio', icon: Briefcase },
     { name: 'Resources', path: '/resources', icon: BookOpen },
     { name: 'Careers', path: '/careers', icon: Users },
     { name: 'Contact Us', path: '/contact', icon: Phone },

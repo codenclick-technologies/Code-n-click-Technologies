@@ -1,7 +1,13 @@
 User-agent: *
 Allow: /
 Disallow: /dashboard/
-Disallow: /admin/
-Disallow: /api/
+Disallow: /login
+Disallow: /change-password
+Disallow: /forgot-password
+Disallow: /reset-password
 
-Sitemap: https://codenclick.com/sitemap.xml
+# Sitemap location
+Sitemap: https://codenclick.in/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1

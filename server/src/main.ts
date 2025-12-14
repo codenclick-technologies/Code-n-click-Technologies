@@ -13,13 +13,41 @@ async function bootstrap() {
   // Global prefix
   app.setGlobalPrefix(configService.get('API_PREFIX') || 'api');
 
-  // Security
-  app.use(helmet());
+  // Enhanced Security with Stricter CSP
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'"],
+          styleSrc: ["'self'", "'unsafe-inline'"], // Needed for some CSS frameworks
+          imgSrc: ["'self'", 'data:', 'https:', 'blob:'], // Allow external images
+          fontSrc: ["'self'", 'data:'],
+          connectSrc: ["'self'"], // API connections
+          frameSrc: ["'none'"],
+          objectSrc: ["'none'"],
+          upgradeInsecureRequests: [],
+        },
+      },
+      crossOriginEmbedderPolicy: false, // Required for Cloudinary
+      hsts: {
+        maxAge: 31536000, // 1 year
+        includeSubDomains: true,
+        preload: true,
+      },
+      referrerPolicy: {
+        policy: 'strict-origin-when-cross-origin',
+      },
+    }),
+  );
 
-  // CORS
+  // CORS - Fixed configuration for proper preflight handling
   app.enableCors({
-    origin: configService.get('CORS_ORIGIN') || 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'http://localhost:3000'],
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    exposedHeaders: ['Authorization'],
   });
 
   // Validation

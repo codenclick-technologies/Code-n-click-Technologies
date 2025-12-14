@@ -15,9 +15,10 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <SEO 
-        title="Home"
-        description="Code-n-Click Technologies provides top-notch web development, SaaS solutions, and digital marketing services to grow your business."
-        keywords="web development, saas, digital marketing, seo, graphic design"
+        title="Best Software Development & Digital Marketing Agency in India"
+        description="Code-n-Click Technologies is a leading software development and digital marketing agency in India. We specialize in web development, SaaS solutions, mobile apps, SEO, Google Ads, Meta Ads, and graphic design services. Transform your business with our expert team."
+        keywords="software development company India, web development services, SaaS development, mobile app development, digital marketing agency, SEO services India, Google Ads management, Meta Ads, Facebook Ads, graphic design services, UI UX design, custom software development, enterprise solutions, startup development, ecommerce development, React development, Node.js development"
+        canonical="/"
       >
         <script type="application/ld+json">
           {`

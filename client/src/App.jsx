@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import ErrorBoundary from './components/utils/ErrorBoundary';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ScrollToTop from './components/utils/ScrollToTop';
+import SmoothScroll from './components/utils/SmoothScroll';
 
 import Home from './pages/Home';
 import Login from './pages/Auth/Login';
@@ -37,6 +39,9 @@ import MetaAds from './pages/Services/MetaAds';
 import GoogleAds from './pages/Services/GoogleAds';
 import GraphicDesign from './pages/Services/GraphicDesign';
 import SEO from './pages/Services/SEO';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import Portfolio from './pages/Portfolio';
 
 function App() {
   return (
@@ -55,6 +60,7 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-gray-950 text-white transition-colors duration-300 flex flex-col">
       <ScrollToTop />
+      <SmoothScroll />
 
       {!isDashboard && <Navbar />}
       <main className="flex-grow">
@@ -82,6 +88,9 @@ function AppContent() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/:id" element={<ResourceDetail />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
           
           {/* Employee Routes */}
           <Route 
