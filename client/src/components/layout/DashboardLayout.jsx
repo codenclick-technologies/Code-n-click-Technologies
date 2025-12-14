@@ -90,7 +90,10 @@ const DashboardLayout = ({ children, role, activeTab, onTabChange }) => {
       {/* Sidebar */}
       <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0`}>
         <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200 dark:border-gray-700">
-          <span className="text-xl font-bold text-gray-800 dark:text-white">CNC Dashboard</span>
+          <Link to="/" className="flex items-center gap-3">
+            <img src="/dashboard-logo.png" alt="CNC" className="h-8 w-auto" />
+            <span className="text-xl font-bold text-gray-800 dark:text-white">Code'n'Click</span>
+          </Link>
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-gray-500">
             <X size={24} />
           </button>
