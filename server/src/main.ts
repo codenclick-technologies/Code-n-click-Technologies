@@ -46,6 +46,8 @@ async function bootstrap() {
     origin: [
       'http://localhost:5173',
       'http://localhost:3000',
+      'https://codenclick.in',
+      'https://www.codenclick.in',
       /\.vercel\.app$/, // Allow all Vercel subdomains (Frontend)
     ],
     credentials: true,
