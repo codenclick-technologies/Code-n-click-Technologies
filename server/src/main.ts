@@ -43,7 +43,11 @@ async function bootstrap() {
 
   // CORS - Fixed configuration for proper preflight handling
   app.enableCors({
-    origin: ['http://localhost:5173', 'http://localhost:3000'],
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:3000',
+      /\.vercel\.app$/, // Allow all Vercel subdomains (Frontend)
+    ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
