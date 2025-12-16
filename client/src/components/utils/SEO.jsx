@@ -23,7 +23,7 @@ const SEO = ({
       {/* Standard Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
+      <meta name="keywords" content={keywords || "GMB Expert Delhi, GMB Consultant Faridabad, SEO Services, Digital Marketing Services, Web Development, SaaS Solutions, Software Company Faridabad"} />
       <meta name="author" content={author} />
       <link rel="canonical" href={fullCanonical} />
 
@@ -44,23 +44,36 @@ const SEO = ({
 
       {/* Structural Data (JSON-LD) */}
       <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": siteName,
-          "url": domain,
-          "logo": `${domain}/logo.png`,
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+91-9876543210", // Updated placeholder to match Home
-            "contactType": "customer service"
+        {JSON.stringify([
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": siteName,
+            "url": domain,
+            "logo": `${domain}/logo.png`,
+            "sameAs": [
+              "https://www.facebook.com/codenclick",
+              "https://twitter.com/codenclick",
+              "https://www.linkedin.com/company/code-n-click"
+            ]
           },
-          "sameAs": [
-            "https://www.facebook.com/codenclick",
-            "https://twitter.com/codenclick",
-            "https://www.linkedin.com/company/code-n-click"
-          ]
-        })}
+          {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": siteName,
+            "image": `${domain}/logo.png`,
+            "description": "Leading software development and digital marketing agency in Faridabad offering GMB Expert services, SEO consultation, and web solutions.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Faridabad",
+              "addressRegion": "Haryana",
+              "addressCountry": "IN"
+            },
+            "priceRange": "$$",
+            "url": domain,
+            "telephone": "+91-9876543210"
+          }
+        ])}
       </script>
       {children}
     </Helmet>
