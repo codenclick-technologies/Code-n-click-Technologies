@@ -23,10 +23,28 @@ export class ContactService {
         });
     }
 
+    async getUnreadCount() {
+        return this.prisma.contactSubmission.count({
+            where: { status: 'NEW' },
+        });
+    }
+
     async markAsRead(id: string) {
         return this.prisma.contactSubmission.update({
             where: { id },
             data: { status: 'READ' },
+        });
+    }
+
+    async delete(id: string) {
+        return this.prisma.contactSubmission.delete({
+            where: { id },
+        });
+    }
+
+    async bulkDelete(ids: string[]) {
+        return this.prisma.contactSubmission.deleteMany({
+            where: { id: { in: ids } },
         });
     }
 }

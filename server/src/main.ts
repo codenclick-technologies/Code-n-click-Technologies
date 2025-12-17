@@ -43,17 +43,19 @@ async function bootstrap() {
 
   // CORS - Fixed configuration for proper preflight handling
   app.enableCors({
-    origin: [
-      'http://localhost:5173',
-      'http://localhost:3000',
-      'https://codenclick.in',
-      'https://www.codenclick.in',
-      /\.vercel\.app$/, // Allow all Vercel subdomains (Frontend)
-    ],
+    origin: process.env.NODE_ENV === 'production'
+      ? [
+        'https://codenclick.in',
+        'https://www.codenclick.in',
+        /\.vercel\.app$/, // Allow all Vercel subdomains
+      ]
+      : true, // Allow all origins in development
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
     exposedHeaders: ['Authorization'],
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   });
 
   // Validation

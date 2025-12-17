@@ -15,6 +15,17 @@ export class EmployeesService {
   constructor(private prisma: PrismaService) { }
 
   async create(createEmployeeDto: CreateEmployeeDto) {
+    // Check if employee profile already exists for this user
+    if (createEmployeeDto.userId) {
+      const existingProfile = await this.prisma.employeeProfile.findUnique({
+        where: { userId: createEmployeeDto.userId },
+      });
+
+      if (existingProfile) {
+        throw new Error('Employee profile already exists for this user');
+      }
+    }
+
     const employee = await this.prisma.employeeProfile.create({
       data: createEmployeeDto,
       include: {

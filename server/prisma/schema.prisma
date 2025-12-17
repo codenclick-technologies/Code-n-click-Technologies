@@ -482,17 +482,41 @@ model ContactSubmission {
 // RESOURCES CMS
 // ============================================
 
-model Resource {
-  id        String   @id @default(uuid())
-  title     String
-  content   String   @db.Text
-  thumbnail String?
-  category  String
-  author    String
-  status    String   @default("PUBLISHED") // DRAFT, PUBLISHED, ARCHIVED
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+enum ResourceStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
 
+model Resource {
+  id              String         @id @default(uuid())
+  title           String
+  slug            String         @unique // SEO-friendly URL
+  content         String         @db.Text
+  excerpt         String?        @db.Text // Short description for cards
+  thumbnail       String?
+  category        String
+  tags            String[]       @default([]) // Array of tags
+  author          String
+  authorId        String?        @map("author_id") // Future: link to User
+  status          ResourceStatus @default(DRAFT)
+  views           Int            @default(0)
+  
+  // SEO Fields
+  metaTitle       String?        @map("meta_title")
+  metaDescription String?        @map("meta_description")
+  metaKeywords    String[]       @default([]) @map("meta_keywords")
+  
+  // Publishing
+  publishedAt     DateTime?      @map("published_at")
+  
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+
+  @@index([slug])
+  @@index([status])
+  @@index([category])
+  @@index([publishedAt])
   @@map("resources")
 }
 
