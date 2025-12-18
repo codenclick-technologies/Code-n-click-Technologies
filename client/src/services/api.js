@@ -1,5 +1,5 @@
 // API Configuration and Base Service
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://code-n-click-backendn-lleygvxs8-codenclick-technologys-projects.vercel.app/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
 class ApiService {
     constructor() {
@@ -416,23 +416,50 @@ export const payrollAPI = {
 
 export const contactAPI = {
     submit: async (data) => {
-        const api = new ApiService();
-        return api.post('/contact', data);
+        // Public endpoint - no auth required
+        const response = await fetch(`${API_BASE_URL}/contact`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || 'Failed to send message');
+        }
+
+        return result;
     },
     getAll: async () => {
         const api = new ApiService();
         return api.get('/contact');
     },
+    getUnreadCount: async () => {
+        const api = new ApiService();
+        return api.get('/contact/unread-count');
+    },
     markAsRead: async (id) => {
         const api = new ApiService();
         return api.patch(`/contact/${id}/read`);
+    },
+    delete: async (id) => {
+        const api = new ApiService();
+        return api.delete(`/contact/${id}`);
+    },
+    bulkDelete: async (ids) => {
+        const api = new ApiService();
+        return api.post('/contact/bulk-delete', { ids });
     }
 };
 
 export const resourcesAPI = {
-    getAll: async (params) => {
+    getAll: async (params = {}) => {
         const api = new ApiService();
-        return api.get('/resources', { params });
+        const queryString = new URLSearchParams(params).toString();
+        return api.get(`/resources${queryString ? `?${queryString}` : ''}`);
     },
     getOne: async (id) => {
         const api = new ApiService();
@@ -449,6 +476,22 @@ export const resourcesAPI = {
     delete: async (id) => {
         const api = new ApiService();
         return api.delete(`/resources/${id}`);
+    },
+    getBySlug: async (slug) => {
+        const api = new ApiService();
+        return api.get(`/resources/slug/${slug}`);
+    },
+    publish: async (id) => {
+        const api = new ApiService();
+        return api.patch(`/resources/${id}/publish`);
+    },
+    unpublish: async (id) => {
+        const api = new ApiService();
+        return api.patch(`/resources/${id}/unpublish`);
+    },
+    incrementViews: async (id) => {
+        const api = new ApiService();
+        return api.post(`/resources/${id}/view`);
     },
 };
 
