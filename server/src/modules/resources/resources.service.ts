@@ -8,8 +8,8 @@ export class ResourcesService {
     constructor(private prisma: PrismaService) { }
 
     async create(data: any) {
-        // Generate slug from title
-        const baseSlug = generateSlug(data.title);
+        // Generate slug from title or use provided slug
+        const baseSlug = data.slug ? generateSlug(data.slug) : generateSlug(data.title);
 
         // Check for existing slugs
         const existingResources = await this.prisma.resource.findMany({
@@ -76,20 +76,22 @@ export class ResourcesService {
     }
 
     async update(id: string, data: any) {
-        // If title changed, regenerate slug
-        if (data.title) {
+        // If title or slug changed, regenerate slug
+        if (data.title || data.slug) {
             const resource = await this.findOne(id);
-            if (data.title !== resource.title) {
-                const baseSlug = generateSlug(data.title);
+            const newBaseSlug = data.slug ? generateSlug(data.slug) : generateSlug(data.title || resource.title);
+
+            // Only update if the slug effectively changes or is explicitly requested
+            if (data.slug || (data.title && data.title !== resource.title)) {
                 const existingResources = await this.prisma.resource.findMany({
                     where: {
-                        slug: { startsWith: baseSlug },
+                        slug: { startsWith: newBaseSlug },
                         NOT: { id }
                     },
                     select: { slug: true },
                 });
                 const existingSlugs = existingResources.map(r => r.slug);
-                data.slug = ensureUniqueSlug(baseSlug, existingSlugs);
+                data.slug = ensureUniqueSlug(newBaseSlug, existingSlugs);
             }
         }
 

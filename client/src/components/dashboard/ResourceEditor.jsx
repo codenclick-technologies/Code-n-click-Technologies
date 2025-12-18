@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 import { X, Save, Eye, Image as ImageIcon, Upload } from 'lucide-react';
 import { resourcesAPI } from '../../services/api';
 
 const ResourceEditor = ({ resource, onClose }) => {
   const [formData, setFormData] = useState({
     title: '',
+    slug: '',
     content: '',
     excerpt: '',
     category: '',
@@ -21,11 +22,13 @@ const ResourceEditor = ({ resource, onClose }) => {
   const [keywordInput, setKeywordInput] = useState('');
   const [saving, setSaving] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [isSlugEdited, setIsSlugEdited] = useState(false);
 
   useEffect(() => {
     if (resource) {
       setFormData({
         title: resource.title || '',
+        slug: resource.slug || '',
         content: resource.content || '',
         excerpt: resource.excerpt || '',
         category: resource.category || '',
@@ -36,8 +39,20 @@ const ResourceEditor = ({ resource, onClose }) => {
         metaDescription: resource.metaDescription || '',
         metaKeywords: resource.metaKeywords || [],
       });
+      setIsSlugEdited(!!resource.slug);
     }
   }, [resource]);
+
+  // Auto-generate slug from title if not manually edited
+  useEffect(() => {
+    if (!isSlugEdited && formData.title) {
+        const generatedSlug = formData.title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)+/g, '');
+        setFormData(prev => ({ ...prev, slug: generatedSlug }));
+    }
+  }, [formData.title, isSlugEdited]);
 
   const quillModules = {
     toolbar: [
@@ -179,6 +194,26 @@ const ResourceEditor = ({ resource, onClose }) => {
                 className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
                 placeholder="Enter resource title..."
               />
+            </div>
+
+            {/* Slug */}
+             <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Slug (URL)
+              </label>
+              <div className="flex items-center gap-2">
+                  <span className="text-gray-500 text-sm">codenclick.in/resources/</span>
+                  <input
+                    type="text"
+                    value={formData.slug}
+                    onChange={(e) => {
+                        handleChange('slug', e.target.value);
+                        setIsSlugEdited(true);
+                    }}
+                    className="flex-1 bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 transition-colors text-sm font-mono"
+                    placeholder="url-slug"
+                  />
+              </div>
             </div>
 
             {/* Excerpt */}
