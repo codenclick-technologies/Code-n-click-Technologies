@@ -1,3 +1,4 @@
+import 'reflect-metadata'; // Required for NestJS
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppModule } from '../server/src/app.module';
@@ -71,9 +72,28 @@ const createNestServer = async (expressInstance: any) => {
 };
 
 export default async (req: any, res: any) => {
-    if (!(server as any)._isInit) { // Custom property check to avoid re-init
-        await createNestServer(server);
-        (server as any)._isInit = true;
+    // 1. Simple Health Check (Bypasses NestJS)
+    if (req.url === '/api/health_check_plain' || req.query.health === 'true') {
+        return res.status(200).json({
+            status: 'ok',
+            timestamp: new Date().toISOString(),
+            message: 'Vercel Function is alive. NestJS not loaded for this request.'
+        });
     }
-    server(req, res);
+
+    // 2. Load NestJS
+    try {
+        if (!(server as any)._isInit) {
+            await createNestServer(server);
+            (server as any)._isInit = true;
+        }
+        server(req, res);
+    } catch (error: any) {
+        console.error('Serverless Function Error:', error);
+        res.status(500).json({
+            message: 'Internal Server Error',
+            error: error.message,
+            stack: error.stack,
+        });
+    }
 };
