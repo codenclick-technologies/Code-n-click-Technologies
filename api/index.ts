@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
-import { AppModule } from '../src/app.module';
+import { AppModule } from '../server/src/app.module';
 import { ValidationPipe } from '@nestjs/common';
 
 declare const require: any;
@@ -16,8 +16,6 @@ const createNestServer = async (expressInstance: any) => {
     );
 
     // Global prefix
-    // Note: On Vercel, the path usually comes as /api/... so we might not need this if we rely on file routing,
-    // but to keep consistent with local dev (localhost:3000/api), let's set it.
     app.setGlobalPrefix('api');
 
     // Enhanced Security with Stricter CSP
