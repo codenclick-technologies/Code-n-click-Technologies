@@ -99,7 +99,7 @@ const Hero = () => {
                 >
                   <Zap size={16} className="text-blue-400 group-hover:text-blue-300 transition-colors" />
                 </motion.div>
-                <span className="text-sm font-semibold text-blue-300 tracking-widest uppercase group-hover:text-blue-200 transition-colors">Innovative Solutions</span>
+                <span className="text-sm font-semibold text-blue-300 tracking-widest uppercase group-hover:text-blue-200 transition-colors">Top Agency in Faridabad & Delhi NCR</span>
               </div>
             </motion.div>
 
@@ -120,7 +120,7 @@ const Hero = () => {
             {/* Subheading */}
             <motion.div variants={itemVariants}>
               <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl font-light">
-                Unlock unprecedented growth with our cutting-edge digital solutions. We combine AI-driven innovation with enterprise-grade reliability to deliver results that matter.
+                Unlock unprecedented growth with our cutting-edge digital solutions. Leading the digital revolution in Faridabad, Delhi NCR & beyond.
               </p>
             </motion.div>
 

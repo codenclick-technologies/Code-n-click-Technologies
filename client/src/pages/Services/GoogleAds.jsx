@@ -102,7 +102,7 @@ const GoogleAds = () => {
       <Helmet>
         <title>Google Ads Services (PPC) | Code'N'Click</title>
         <meta name="description" content="Expert Google Ads management. We create high-ROI search, display, and shopping campaigns to drive qualified traffic and sales." />
-        <meta name="keywords" content="google ads, ppc management, search advertising, display ads, google shopping, sem, pay per click" />
+        <meta name="keywords" content="Best Google Ads Agency Delhi, Best Google Ads Agency Faridabad, Premium PPC Services Delhi, Premium PPC Services Faridabad, Top Google Ads Company Delhi, No1 PPC Management Faridabad, google ads Delhi, google ads Faridabad, ppc management Delhi, ppc management Faridabad, search advertising Delhi, search advertising Faridabad, display ads, google shopping, sem services Delhi, sem services Faridabad, pay per click advertising" />
         <script type="application/ld+json">
           {`
             {

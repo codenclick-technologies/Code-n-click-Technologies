@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { Search, BookOpen, Video, FileText, ArrowRight, Tag, Mail, Zap, TrendingUp, Code2 } from 'lucide-react';
+import { Search, BookOpen, Video, FileText, ArrowRight, Tag, Mail, Zap, TrendingUp, Code2, Clock } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 import SpotlightCard from '../components/ui/SpotlightCard';
 
@@ -21,25 +21,30 @@ const Resources = () => {
   const fetchResources = async () => {
     try {
       const response = await resourcesAPI.getAll({ status: 'PUBLISHED' });
-      setResources(response || []);
+      console.log('Resources API Response:', response);
+      console.log('Is Array?:', Array.isArray(response));
+      console.log('Response length:', response?.length);
+      setResources(Array.isArray(response) ? response : []);
     } catch (error) {
       console.error('Error fetching resources:', error);
+      setResources([]);
     } finally {
       setLoading(false);
     }
   };
 
-  const filteredResources = resources.filter(r => 
-    r.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    r.content.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredResources = resources.filter(r => {
+    const titleMatch = r.title?.toLowerCase().includes(searchTerm.toLowerCase()) || false;
+    const contentMatch = r.content?.toLowerCase().includes(searchTerm.toLowerCase()) || false;
+    return titleMatch || contentMatch;
+  });
 
   return (
     <div className="min-h-screen bg-gray-950 bg-noise pt-32 pb-20">
       <Helmet>
         <title>Resources, Guides & Insights | Code'N'Click</title>
         <meta name="description" content="Explore our library of articles, guides, and videos on web development, SEO, SaaS growth, and digital marketing. Stay ahead with expert insights." />
-        <meta name="keywords" content="web development blog, seo guides, saas metrics, digital marketing trends, react tutorials, next.js performance" />
+        <meta name="keywords" content="web development blog Delhi, web development blog Faridabad, seo guides Delhi, seo guides Faridabad, saas metrics, digital marketing trends Delhi, digital marketing trends Faridabad, react tutorials, next.js performance, tech resources" />
       </Helmet>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -88,48 +93,80 @@ const Resources = () => {
              <div className="col-span-3 text-center py-20">
                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
              </div>
-          ) : filteredResources.map((item) => (
-            <motion.div 
+          ) : filteredResources.length === 0 ? (
+            <div className="col-span-3 text-center py-20">
+              <BookOpen size={48} className="mx-auto text-gray-500 mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-2">No Resources Found</h3>
+              <p className="text-gray-400">
+                {searchTerm ? 'Try adjusting your search term' : 'Check back soon for new content!'}
+              </p>
+              <p className="text-gray-500 mt-4 text-sm">
+                Total resources: {resources.length} | Filtered: {filteredResources.length}
+              </p>
+            </div>
+          ) : 
+            filteredResources.map((item) => (
+            <div 
               key={item.id} 
-              variants={fadeInUp} 
-              className="md:col-span-1 cursor-pointer"
-              onClick={() => navigate(`/resources/${item.id}`)}
+              className="md:col-span-1"
             >
-              <SpotlightCard className="h-full p-8 group relative overflow-hidden flex flex-col">
-                {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                
-                {item.thumbnail && (
-                  <img src={item.thumbnail} alt={item.title} className="w-full h-48 object-cover rounded-xl mb-6 opacity-80 group-hover:opacity-100 transition-opacity" />
-                )}
-
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="p-3 rounded-xl bg-white/10 text-white backdrop-blur-sm border border-white/5">
-                      <FileText size={24} />
+              <div 
+                onClick={() => navigate(`/resources/${item.id}`)}
+                className="group h-full bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:border-blue-500/50 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 hover:scale-[1.02] cursor-pointer"
+              >
+                {/* Image Section */}
+                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-900/20 to-purple-900/20">
+                  {item.thumbnail ? (
+                    <img 
+                      src={item.thumbnail} 
+                      alt={item.title} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <FileText size={64} className="text-blue-400/30" />
                     </div>
-                    <span className="text-xs font-medium px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10 backdrop-blur-sm">
+                  )}
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent" />
+                  
+                  {/* Category Badge */}
+                  <div className="absolute top-4 right-4">
+                    <span className="px-4 py-1.5 rounded-full bg-blue-600/90 backdrop-blur-md text-white text-xs font-bold uppercase tracking-wider shadow-lg">
                       {item.category}
                     </span>
                   </div>
-                  
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-200 transition-colors line-clamp-2">
+                </div>
+
+                {/* Content Section */}
+                <div className="p-6 space-y-4">
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2 min-h-[56px]">
                     {item.title}
                   </h3>
-                  <div className="text-gray-400 mb-6 flex-grow line-clamp-3" dangerouslySetInnerHTML={{ __html: item.content }} />
-                  
-                  <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                    <span className="text-sm text-gray-500 flex items-center gap-2">
-                      <Tag size={14} /> {new Date(item.updatedAt).toLocaleDateString()}
-                    </span>
-                    <button className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-blue-600 transition-colors">
-                      <ArrowRight size={18} />
-                    </button>
+
+                  {/* Excerpt - Plain text only, no HTML */}
+                  <p className="text-gray-400 text-sm line-clamp-3 leading-relaxed">
+                    {item.content ? item.content.replace(/<[^>]*>/g, '').substring(0, 120) + '...' : 'Click to read more'}
+                  </p>
+
+                  {/* Footer */}
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-700/50">
+                    <div className="flex items-center gap-2 text-gray-500 text-xs">
+                      <Clock size={14} />
+                      <span>{new Date(item.updatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-blue-400 font-medium text-sm group-hover:gap-3 transition-all">
+                      <span>Read More</span>
+                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
                 </div>
-              </SpotlightCard>
-            </motion.div>
-          ))}
+              </div>
+            </div>
+          ))
+          }
         </motion.div>
 
         {/* Newsletter Section */}

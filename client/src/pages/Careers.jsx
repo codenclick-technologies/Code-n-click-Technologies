@@ -143,7 +143,7 @@ const Careers = () => {
       <Helmet>
         <title>Careers at Code'N'Click | Join Our Team</title>
         <meta name="description" content="Join the Code'N'Click team. We are hiring developers, designers, and marketers. Check out our open positions and benefits." />
-        <meta name="keywords" content="tech jobs, web developer careers, ui/ux jobs, remote work, digital agency careers" />
+        <meta name="keywords" content="tech jobs Delhi, tech jobs Faridabad, web developer careers Delhi, web developer careers Faridabad, ui/ux jobs Delhi, ui/ux jobs Faridabad, remote work, digital agency careers Delhi, digital agency careers Faridabad, IT jobs" />
       </Helmet>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

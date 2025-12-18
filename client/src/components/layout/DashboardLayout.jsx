@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { contactAPI } from '../../services/api';
 import { 
   LayoutDashboard, 
   CheckSquare, 
@@ -25,6 +26,7 @@ const DashboardLayout = ({ children, role, activeTab, onTabChange }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
+  const [unreadCount, setUnreadCount] = React.useState(0);
 
   const getLinks = (role) => {
     const common = [{ name: 'Overview', path: `/dashboard/${role?.toLowerCase()}`, icon: LayoutDashboard }];
@@ -45,7 +47,7 @@ const DashboardLayout = ({ children, role, activeTab, onTabChange }) => {
           { name: 'Attendance', path: '/dashboard/hr/attendance', icon: Calendar },
           // { name: 'Payroll', path: '/dashboard/hr/payroll', icon: DollarSign },
           { name: 'Policies', path: '/dashboard/hr/policies', icon: FileText },
-          { name: 'Messages', path: '/dashboard/hr/messages', icon: Mail },
+          { name: 'Messages', path: '/dashboard/hr/messages', icon: Mail, badge: unreadCount },
           { name: 'Resources', path: '/dashboard/hr/resources', icon: BookOpen },
         ];
       case 'manager':
@@ -53,7 +55,7 @@ const DashboardLayout = ({ children, role, activeTab, onTabChange }) => {
           ...common,
           { name: 'Team', path: '/dashboard/manager/team', icon: Users },
           { name: 'Meetings', path: '/dashboard/manager/meetings', icon: Briefcase },
-          { name: 'Messages', path: '/dashboard/manager/messages', icon: Mail },
+          { name: 'Messages', path: '/dashboard/manager/messages', icon: Mail, badge: unreadCount },
           { name: 'Resources', path: '/dashboard/manager/resources', icon: BookOpen },
         ];
       case 'owner':
@@ -61,13 +63,32 @@ const DashboardLayout = ({ children, role, activeTab, onTabChange }) => {
           ...common,
           { name: 'All Data', path: '/dashboard/owner/data', icon: Settings },
           { name: 'Employees', path: '/dashboard/owner/employees', icon: Users },
-          { name: 'Messages', path: '/dashboard/owner/messages', icon: Mail },
+          { name: 'Messages', path: '/dashboard/owner/messages', icon: Mail, badge: unreadCount },
           { name: 'Resources', path: '/dashboard/owner/resources', icon: BookOpen },
         ];
       default:
         return common;
     }
   };
+
+  // Fetch unread count for authorized roles
+  useEffect(() => {
+    const fetchUnreadCount = async () => {
+      if (['hr', 'manager', 'owner'].includes(role?.toLowerCase())) {
+        try {
+          const count = await contactAPI.getUnreadCount();
+          setUnreadCount(count);
+        } catch (error) {
+          console.error('Error fetching unread count:', error);
+        }
+      }
+    };
+
+    fetchUnreadCount();
+    // Poll every 30 seconds
+    const interval = setInterval(fetchUnreadCount, 30000);
+    return () => clearInterval(interval);
+  }, [role]);
 
   const links = getLinks(role);
 
@@ -105,10 +126,17 @@ const DashboardLayout = ({ children, role, activeTab, onTabChange }) => {
               <button
                 key={link.path}
                 onClick={() => handleNavigation(link)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${isActive ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-medium' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'}`}
+                className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl transition-colors ${isActive ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-medium' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'}`}
               >
-                <link.icon size={20} />
-                {link.name}
+                <div className="flex items-center gap-3">
+                  <link.icon size={20} />
+                  {link.name}
+                </div>
+                {link.badge > 0 && (
+                  <span className="px-2 py-0.5 bg-blue-600 text-white text-xs font-bold rounded-full min-w-[20px] text-center">
+                    {link.badge}
+                  </span>
+                )}
               </button>
             );
           })}

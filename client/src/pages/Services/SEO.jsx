@@ -102,7 +102,7 @@ const SEO = () => {
       <SEOHead
         title="SEO Services (Search Engine Optimization)"
         description="Expert SEO services. We help businesses rank higher on Google, drive organic traffic, and increase revenue with data-driven strategies."
-        keywords="seo services, search engine optimization, technical seo, link building, local seo, seo audit, content marketing"
+        keywords="Best SEO Services Delhi, Best SEO Services Faridabad, Premium SEO Company Delhi, Premium SEO Company Faridabad, No1 SEO Agency Delhi, Top SEO Consultant Faridabad, search engine optimization Delhi, search engine optimization Faridabad, technical seo, link building Delhi, link building Faridabad, local seo Delhi, local seo Faridabad, seo audit, content marketing Delhi, content marketing Faridabad"
         canonical="/services/seo"
       >
         <script type="application/ld+json">

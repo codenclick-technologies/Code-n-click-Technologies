@@ -73,3 +73,5 @@ coverage
 
 # Misc
 .eslintcache
+.vercel
+.env*.local

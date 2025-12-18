@@ -9,7 +9,7 @@ import { fadeInUp, staggerContainer } from '../utils/animations';
 import SpotlightCard from '../components/ui/SpotlightCard';
 
 const team = [
-  { name: 'Lokender Chauhan', role: 'Founder &amp; CTO', bio: 'Leads product &amp; engineering. Passionate about performant web experiences.', bioLong: 'Lokender leads engineering and product. He focuses on performance, scalable architectures, and developer experience. Previously built SaaS platforms and large-scale React apps.', avatar: '🧑‍💻', email: 'lokender@codenclick.com' },
+  { name: 'Lokender Chauhan', role: 'Founder & CTO', bio: 'Leads product &amp; engineering. Passionate about performant web experiences.', bioLong: 'Lokender leads engineering and product. He focuses on performance, scalable architectures, and developer experience. Previously built SaaS platforms and large-scale React apps.', avatar: '🧑‍💻', email: 'lokender@codenclick.com' },
   { name: 'Himanshu Sharma', role: 'Head of Growth', bio: 'Growth strategist focused on paid &amp; organic acquisition.', bioLong: 'Himanshu specializes in growth strategies combining paid channels and organic funnels. He builds repeatable acquisition systems and analytics stacks.', avatar: '🧑‍💼', email: 'himanshu@codenclick.com', skills: ['Paid acquisition','Analytics','Funnel optimization'] },
   { name: 'Jitender Saini', role: 'Team Lead', bio: 'Design systems and product leadership specialist.', bioLong: 'Jitender leads cross-functional teams, design systems and product delivery. He bridges design and engineering to ship high-quality products.', avatar: '👨‍💼', email: 'jitender@codenclick.com', skills: ['Design systems','Product leadership','UX'] },
 ];

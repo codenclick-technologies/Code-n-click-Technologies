@@ -1,36 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import ReactQuill from 'react-quill-new';
-import 'react-quill-new/dist/quill.snow.css';
-import { Plus, Edit2, Trash2, Image, Save, X } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import ApiService from '../../services/api';
-
-const api = new ApiService();
+import { Plus, Edit2, Trash2, Eye, EyeOff, Search, Filter, X } from 'lucide-react';
+import { resourcesAPI } from '../../services/api';
+import ResourceEditor from './ResourceEditor';
 
 const ResourcesContent = () => {
-  const { user } = useAuth();
   const [resources, setResources] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [editingId, setEditingId] = useState(null);
-  
-  const [formData, setFormData] = useState({
-    title: '',
-    content: '',
-    category: 'Blog',
-    thumbnail: '',
-    status: 'PUBLISHED'
-  });
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('ALL');
+  const [showEditor, setShowEditor] = useState(false);
+  const [editingResource, setEditingResource] = useState(null);
+  const [deleteConfirm, setDeleteConfirm] = useState(null);
 
   useEffect(() => {
     fetchResources();
-  }, []);
+  }, [statusFilter]);
 
   const fetchResources = async () => {
     try {
       setLoading(true);
-      const response = await api.get('/resources');
-      setResources(response || []);
+      const params = statusFilter !== 'ALL' ? { status: statusFilter } : {};
+      const data = await resourcesAPI.getAll(params);
+      setResources(data || []);
     } catch (error) {
       console.error('Error fetching resources:', error);
     } finally {
@@ -38,197 +29,256 @@ const ResourcesContent = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      if (editingId) {
-        await api.patch(`/resources/${editingId}`, { ...formData, author: user.name });
-      } else {
-        await api.post('/resources', { ...formData, author: user.name });
-      }
-      fetchResources();
-      setShowModal(false);
-      resetForm();
-    } catch (error) {
-      console.error('Error saving resource:', error);
-      alert('Failed to save resource');
-    }
-  };
-
-  const handleDelete = async (id) => {
-    if (confirm('Are you sure you want to delete this resource?')) {
-      try {
-        await api.delete(`/resources/${id}`);
-        fetchResources();
-      } catch (error) {
-        console.error('Error deleting resource:', error);
-      }
-    }
+  const handleCreate = () => {
+    setEditingResource(null);
+    setShowEditor(true);
   };
 
   const handleEdit = (resource) => {
-    setEditingId(resource.id);
-    setFormData({
-      title: resource.title,
-      content: resource.content,
-      category: resource.category,
-      thumbnail: resource.thumbnail || '',
-      status: resource.status
-    });
-    setShowModal(true);
+    setEditingResource(resource);
+    setShowEditor(true);
   };
 
-  const resetForm = () => {
-    setEditingId(null);
-    setFormData({
-      title: '',
-      content: '',
-      category: 'Blog',
-      thumbnail: '',
-      status: 'PUBLISHED'
-    });
+  const handleDelete = async (id) => {
+    try {
+      await resourcesAPI.delete(id);
+      fetchResources();
+      setDeleteConfirm(null);
+    } catch (error) {
+      console.error('Error deleting resource:', error);
+      alert('Failed to delete resource');
+    }
   };
 
-  const modules = {
-    toolbar: [
-      [{ 'header': [1, 2, 3, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      ['link', 'image'],
-      ['clean']
-    ],
+  const handlePublish = async (id) => {
+    try {
+      await resourcesAPI.publish(id);
+      fetchResources();
+    } catch (error) {
+      console.error('Error publishing resource:', error);
+      alert('Failed to publish resource');
+    }
   };
+
+  const handleUnpublish = async (id) => {
+    try {
+      await resourcesAPI.unpublish(id);
+      fetchResources();
+    } catch (error) {
+      console.error('Error unpublishing resource:', error);
+      alert('Failed to unpublish resource');
+    }
+  };
+
+  const handleEditorClose = (shouldRefresh) => {
+    setShowEditor(false);
+    setEditingResource(null);
+    if (shouldRefresh) {
+      fetchResources();
+    }
+  };
+
+  const filteredResources = resources.filter(r =>
+    r.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    r.category?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const getStatusBadge = (status) => {
+    const styles = {
+      PUBLISHED: 'bg-green-900/30 text-green-400 border-green-500/30',
+      DRAFT: 'bg-yellow-900/30 text-yellow-400 border-yellow-500/30',
+      ARCHIVED: 'bg-gray-900/30 text-gray-400 border-gray-500/30',
+    };
+    return styles[status] || styles.DRAFT;
+  };
+
+  if (showEditor) {
+    return (
+      <ResourceEditor
+        resource={editingResource}
+        onClose={handleEditorClose}
+      />
+    );
+  }
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
+    <div className="p-6">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Resources CMS</h2>
-          <p className="text-gray-500">Manage blog posts and resources</p>
+          <h1 className="text-3xl font-bold text-white mb-2">Manage Resources</h1>
+          <p className="text-gray-400">Create and manage blog posts and articles</p>
         </div>
-        <button 
-          onClick={() => { resetForm(); setShowModal(true); }}
-          className="px-4 py-2 bg-blue-600 text-white rounded-xl flex items-center gap-2 hover:bg-blue-700 transition-colors"
+        <button
+          onClick={handleCreate}
+          className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
         >
-          <Plus size={20} /> Create New
+          <Plus size={20} />
+          Create New
         </button>
       </div>
 
-      {/* List View */}
-      <div className="grid gap-4">
-        {resources.map((resource) => (
-          <div key={resource.id} className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 flex justify-between items-center">
-            <div className="flex items-center gap-4">
-              {resource.thumbnail && (
-                <img src={resource.thumbnail} alt="" className="w-16 h-16 object-cover rounded-lg" />
-              )}
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white">{resource.title}</h3>
-                <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">{resource.category}</span>
-                  <span>•</span>
-                  <span>{new Date(resource.updatedAt).toLocaleDateString()}</span>
-                  <span>•</span>
-                  <span className={`px-2 py-0.5 rounded text-xs ${resource.status === 'PUBLISHED' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
-                    {resource.status}
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <button onClick={() => handleEdit(resource)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg">
-                <Edit2 size={18} />
-              </button>
-              <button onClick={() => handleDelete(resource.id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg">
-                <Trash2 size={18} />
-              </button>
-            </div>
+      {/* Filters */}
+      <div className="bg-gray-800/50 rounded-xl p-4 mb-6 flex flex-wrap items-center gap-4">
+        {/* Search */}
+        <div className="flex-1 min-w-[300px]">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+            <input
+              type="text"
+              placeholder="Search by title or category..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full bg-gray-900 border border-gray-700 rounded-lg pl-10 pr-4 py-2 text-white focus:outline-none focus:border-blue-500 transition-colors"
+            />
           </div>
-        ))}
+        </div>
+
+        {/* Status Filter */}
+        <div className="flex items-center gap-2">
+          <Filter size={20} className="text-gray-400" />
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 transition-colors"
+          >
+            <option value="ALL">All Status</option>
+            <option value="PUBLISHED">Published</option>
+            <option value="DRAFT">Draft</option>
+            <option value="ARCHIVED">Archived</option>
+          </select>
+        </div>
+
+        {/* Results Count */}
+        <div className="text-gray-400 text-sm">
+          {filteredResources.length} resource{filteredResources.length !== 1 ? 's' : ''}
+        </div>
       </div>
 
-      {/* Editor Modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white dark:bg-gray-800 z-10">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                {editingId ? 'Edit Resource' : 'Create Resource'}
-              </h3>
-              <button onClick={() => setShowModal(false)} className="text-gray-500 hover:text-gray-700">
-                <X size={24} />
+      {/* Resources Table */}
+      {loading ? (
+        <div className="flex items-center justify-center py-20">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+        </div>
+      ) : filteredResources.length === 0 ? (
+        <div className="text-center py-20">
+          <p className="text-gray-400 text-lg mb-4">No resources found</p>
+          <button
+            onClick={handleCreate}
+            className="text-blue-400 hover:text-blue-300 font-medium"
+          >
+            Create your first resource
+          </button>
+        </div>
+      ) : (
+        <div className="bg-gray-800/50 rounded-xl overflow-hidden">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-gray-700">
+                <th className="text-left p-4 text-gray-400 font-medium">Title</th>
+                <th className="text-left p-4 text-gray-400 font-medium">Category</th>
+                <th className="text-left p-4 text-gray-400 font-medium">Status</th>
+                <th className="text-left p-4 text-gray-400 font-medium">Views</th>
+                <th className="text-left p-4 text-gray-400 font-medium">Updated</th>
+                <th className="text-right p-4 text-gray-400 font-medium">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredResources.map((resource) => (
+                <tr key={resource.id} className="border-b border-gray-700/50 hover:bg-gray-700/30 transition-colors">
+                  <td className="p-4">
+                    <div className="flex items-center gap-3">
+                      {resource.thumbnail && (
+                        <img
+                          src={resource.thumbnail}
+                          alt={resource.title}
+                          className="w-12 h-12 object-cover rounded-lg"
+                        />
+                      )}
+                      <div>
+                        <div className="text-white font-medium line-clamp-1">{resource.title}</div>
+                        <div className="text-gray-500 text-sm line-clamp-1">{resource.slug}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="p-4">
+                    <span className="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm border border-blue-500/30">
+                      {resource.category}
+                    </span>
+                  </td>
+                  <td className="p-4">
+                    <span className={`px-3 py-1 rounded-full text-sm border ${getStatusBadge(resource.status)}`}>
+                      {resource.status}
+                    </span>
+                  </td>
+                  <td className="p-4 text-gray-400">{resource.views || 0}</td>
+                  <td className="p-4 text-gray-400 text-sm">
+                    {new Date(resource.updatedAt).toLocaleDateString()}
+                  </td>
+                  <td className="p-4">
+                    <div className="flex items-center justify-end gap-2">
+                      {resource.status === 'DRAFT' ? (
+                        <button
+                          onClick={() => handlePublish(resource.id)}
+                          className="p-2 text-green-400 hover:bg-green-900/30 rounded-lg transition-colors"
+                          title="Publish"
+                        >
+                          <Eye size={18} />
+                        </button>
+                      ) : resource.status === 'PUBLISHED' ? (
+                        <button
+                          onClick={() => handleUnpublish(resource.id)}
+                          className="p-2 text-yellow-400 hover:bg-yellow-900/30 rounded-lg transition-colors"
+                          title="Unpublish"
+                        >
+                          <EyeOff size={18} />
+                        </button>
+                      ) : null}
+                      <button
+                        onClick={() => handleEdit(resource)}
+                        className="p-2 text-blue-400 hover:bg-blue-900/30 rounded-lg transition-colors"
+                        title="Edit"
+                      >
+                        <Edit2 size={18} />
+                      </button>
+                      <button
+                        onClick={() => setDeleteConfirm(resource.id)}
+                        className="p-2 text-red-400 hover:bg-red-900/30 rounded-lg transition-colors"
+                        title="Delete"
+                      >
+                        <Trash2 size={18} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-gray-800 rounded-xl p-6 max-w-md w-full mx-4 border border-gray-700">
+            <h3 className="text-xl font-bold text-white mb-4">Confirm Delete</h3>
+            <p className="text-gray-400 mb-6">
+              Are you sure you want to delete this resource? This action cannot be undone.
+            </p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setDeleteConfirm(null)}
+                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => handleDelete(deleteConfirm)}
+                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+              >
+                Delete
               </button>
             </div>
-            
-            <form onSubmit={handleSubmit} className="p-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
-                  <input 
-                    type="text" 
-                    required
-                    value={formData.title}
-                    onChange={(e) => setFormData({...formData, title: e.target.value})}
-                    className="w-full px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
-                  <select 
-                    value={formData.category}
-                    onChange={(e) => setFormData({...formData, category: e.target.value})}
-                    className="w-full px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
-                  >
-                    <option>Blog</option>
-                    <option>Case Study</option>
-                    <option>Tutorial</option>
-                    <option>News</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Thumbnail URL</label>
-                <div className="flex gap-2">
-                  <input 
-                    type="url" 
-                    value={formData.thumbnail}
-                    onChange={(e) => setFormData({...formData, thumbnail: e.target.value})}
-                    placeholder="https://example.com/image.jpg"
-                    className="flex-1 px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Content</label>
-                <div className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
-                  <ReactQuill 
-                    theme="snow"
-                    value={formData.content}
-                    onChange={(content) => setFormData({...formData, content})}
-                    modules={modules}
-                    className="h-64 mb-12 text-gray-900 dark:text-white"
-                  />
-                </div>
-              </div>
-
-              <div className="flex justify-end gap-4 pt-4">
-                <button 
-                  type="button"
-                  onClick={() => setShowModal(false)}
-                  className="px-6 py-2 text-gray-600 hover:bg-gray-100 rounded-xl transition-colors"
-                >
-                  Cancel
-                </button>
-                <button 
-                  type="submit"
-                  className="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors flex items-center gap-2"
-                >
-                  <Save size={20} /> Save Resource
-                </button>
-              </div>
-            </form>
           </div>
         </div>
       )}

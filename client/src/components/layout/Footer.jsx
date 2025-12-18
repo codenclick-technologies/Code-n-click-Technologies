@@ -20,7 +20,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-gray-400 leading-relaxed">
-              Transforming digital landscapes with cutting-edge technology and premium design. We build the future of the web.
+              Transforming digital landscapes in Faridabad, Delhi, and beyond with cutting-edge technology and premium design.
             </p>
             <div className="flex gap-4">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (

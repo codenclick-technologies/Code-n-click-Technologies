@@ -50,13 +50,7 @@ const createNestServer = async (expressInstance: any) => {
 
     // CORS - Allow Vercel Frontend
     app.enableCors({
-        origin: [
-            'http://localhost:5173',
-            'http://localhost:3000',
-            'https://codenclick.in',
-            'https://www.codenclick.in',
-            /\.vercel\.app$/, // Allow all Vercel subdomains
-        ],
+        origin: true, // Allow all origins dynamically
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],

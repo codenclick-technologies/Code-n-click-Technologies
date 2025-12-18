@@ -15,9 +15,9 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <SEO 
-        title="Best Software Development & Digital Marketing Agency in India"
-        description="Code-n-Click Technologies is a leading software development and digital marketing agency in India. We specialize in web development, SaaS solutions, mobile apps, SEO, Google Ads, Meta Ads, and graphic design services. Transform your business with our expert team."
-        keywords="software development company India, web development services, SaaS development, mobile app development, digital marketing agency, SEO services India, Google Ads management, Meta Ads, Facebook Ads, graphic design services, UI UX design, custom software development, enterprise solutions, startup development, ecommerce development, React development, Node.js development"
+        title="Best Software Development & Digital Marketing Agency in Faridabad"
+        description="No.1 Digital Marketing Agency in Delhi & Faridabad - Code-n-Click Technologies. We are the best and premium IT company specializing in web development, SaaS solutions, mobile apps, SEO, Google Ads, Meta Ads, and graphic design services. Transform your business with our expert team."
+        keywords="No1 Digital Marketing Agency Delhi, No1 Digital Marketing Agency Faridabad, Best Digital Marketing Agency Delhi, Best Digital Marketing Agency Faridabad, Premium Digital Marketing Services Delhi, Premium Digital Marketing Services Faridabad, Top Software Development Company Delhi, Top Software Development Company Faridabad, Best Web Development Company Delhi, Best Web Development Company Faridabad, Premium SEO Services Delhi, Premium SEO Services Faridabad, Best IT Company Delhi NCR, Top IT Company Faridabad, software development company, web development services, SaaS development, mobile app development, Google Ads management, Meta Ads, graphic design services"
         canonical="/"
       >
 

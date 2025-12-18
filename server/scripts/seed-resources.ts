@@ -151,7 +151,7 @@ async function main() {
 
   for (const resource of resources) {
     const createdResource = await prisma.resource.create({
-      data: resource,
+      data: resource as any,
     });
     console.log(`Created resource with id: ${createdResource.id}`);
   }

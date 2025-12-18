@@ -23,7 +23,7 @@ const SEO = ({
       {/* Standard Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords || "GMB Expert Delhi, GMB Consultant Faridabad, SEO Services, Digital Marketing Services, Web Development, SaaS Solutions, Software Company Faridabad"} />
+      <meta name="keywords" content={keywords || "No1 Digital Marketing Agency Delhi, No1 Digital Marketing Agency Faridabad, Best Digital Marketing Agency Delhi, Best Digital Marketing Agency Faridabad, Premium Digital Marketing Services Delhi, Premium Digital Marketing Services Faridabad, Top Software Company Delhi, Top Software Company Faridabad, GMB Expert Delhi, GMB Expert Faridabad, GMB Consultant Delhi, GMB Consultant Faridabad, SEO Services Delhi, SEO Services Faridabad, Web Development Delhi, Web Development Faridabad, SaaS Solutions Delhi, SaaS Solutions Faridabad, Premium IT Services, Best Web Development Company Delhi, Best Web Development Company Faridabad"} />
       <meta name="author" content={author} />
       <link rel="canonical" href={fullCanonical} />
 

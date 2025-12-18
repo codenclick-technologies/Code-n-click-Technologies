@@ -1,12 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle, AlertCircle } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 import SpotlightCard from '../components/ui/SpotlightCard';
-
+import { contactAPI } from '../services/api';
 import SEO from '../components/utils/SEO';
 
 const Contact = () => {
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState({ type: '', message: '' });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus({ type: '', message: '' });
+
+    const formData = new FormData(e.target);
+    const data = {
+      firstName: formData.get('firstName'),
+      lastName: formData.get('lastName'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      message: formData.get('message')
+    };
+
+    try {
+      await contactAPI.submit(data);
+      setStatus({
+        type: 'success',
+        message: '✅ Message sent successfully! We\'ll get back to you soon.'
+      });
+      e.target.reset();
+      
+      // Auto-hide success message after 5 seconds
+      setTimeout(() => {
+        setStatus({ type: '', message: '' });
+      }, 5000);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setStatus({
+        type: 'error',
+        message: `❌ Failed to send message: ${error.message || 'Please try again later.'}`
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-950 pt-32 pb-20 px-4 sm:px-6 lg:px-8">
       <SEO 
@@ -73,25 +113,19 @@ const Contact = () => {
             variants={fadeInUp}
             className="glass-panel p-8 md:p-10 rounded-3xl border border-white/10"
           >
-            <form className="space-y-6" onSubmit={async (e) => {
-              e.preventDefault();
-              const formData = new FormData(e.target);
-              const data = {
-                firstName: formData.get('firstName'),
-                lastName: formData.get('lastName'),
-                email: formData.get('email'),
-                subject: formData.get('subject'),
-                message: formData.get('message')
-              };
-              try {
-                await import('../services/api').then(module => module.contactAPI.submit(data));
-                alert('Message sent successfully!');
-                e.target.reset();
-              } catch (error) {
-                console.error('Error sending message:', error);
-                alert('Failed to send message.');
-              }
-            }}>
+            {/* Status Message */}
+            {status.message && (
+              <div className={`mb-6 p-4 rounded-xl flex items-center gap-3 ${
+                status.type === 'success' 
+                  ? 'bg-green-500/10 border border-green-500/30 text-green-400' 
+                  : 'bg-red-500/10 border border-red-500/30 text-red-400'
+              }`}>
+                {status.type === 'success' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
+                <span>{status.message}</span>
+              </div>
+            )}
+
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-400">First Name</label>
@@ -122,8 +156,21 @@ const Contact = () => {
                 <textarea name="message" required rows="4" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="Tell us about your project..." />
               </div>
 
-              <button type="submit" className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg shadow-lg hover:shadow-blue-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2">
-                Send Message <Send size={20} />
+              <button 
+                type="submit" 
+                disabled={loading}
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg shadow-lg hover:shadow-blue-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                {loading ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message <Send size={20} />
+                  </>
+                )}
               </button>
             </form>
           </motion.div>
