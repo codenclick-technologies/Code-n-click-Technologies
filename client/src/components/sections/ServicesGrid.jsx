@@ -128,25 +128,6 @@ const ServiceCard = ({ service }) => {
         </SpotlightCard>
       </div>
 
-      <style jsx>{`
-        @keyframes gradient-shift {
-          0%, 100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-        }
-        
-        @keyframes shine {
-          0% {
-            background-position: -200% -200%;
-          }
-          100% {
-            background-position: 200% 200%;
-          }
-        }
-      `}</style>
     </motion.div>
   );
 };
