@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { AuthProvider } from './context/AuthContext';
 import ErrorBoundary from './components/utils/ErrorBoundary';
 import Navbar from './components/layout/Navbar';
@@ -71,6 +72,7 @@ function AppContent() {
     <div className="min-h-screen bg-gray-950 text-white transition-colors duration-300 flex flex-col">
       <ScrollToTop />
       <SmoothScroll />
+      <Analytics />
 
       {!isDashboard && <Navbar />}
       <main className="flex-grow">
