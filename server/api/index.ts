@@ -9,19 +9,33 @@ let cachedApp: any;
 
 export const createServer = async (expressInstance: any) => {
     if (!cachedApp) {
-        const app = await NestFactory.create(
-            AppModule,
-            new ExpressAdapter(expressInstance),
-        );
-        setupApp(app);
-        await app.init();
-        cachedApp = app;
+        try {
+            const app = await NestFactory.create(
+                AppModule,
+                new ExpressAdapter(expressInstance),
+            );
+            setupApp(app);
+            await app.init();
+            cachedApp = app;
+        } catch (error) {
+            console.error('NestJS initialization failed:', error);
+            throw error;
+        }
     }
     return cachedApp;
 };
 
 // Vercel serverless function entry point
 export default async (req: any, res: any) => {
-    await createServer(server);
-    server(req, res);
+    try {
+        await createServer(server);
+        server(req, res);
+    } catch (err: any) {
+        res.status(500).json({
+            statusCode: 500,
+            message: 'Internal Server Error during initialization',
+            error: err.message,
+            stack: err.stack,
+        });
+    }
 };
