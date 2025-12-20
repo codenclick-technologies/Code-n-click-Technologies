@@ -1,12 +1,9 @@
 {
     "version": 2,
-    "public": true,
-    "cleanUrls": true,
-    "framework": "vite",
     "rewrites": [
         {
-            "source": "/api/(.*)",
-            "destination": "https://server-sepia-alpha.vercel.app/api/$1"
+            "source": "/api/:path*",
+            "destination": "https://server-sepia-alpha.vercel.app/api/:path*"
         },
         {
             "source": "/(.*)",
