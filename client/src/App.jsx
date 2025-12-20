@@ -6,6 +6,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ScrollToTop from './components/utils/ScrollToTop';
 import SmoothScroll from './components/utils/SmoothScroll';
+import { Analytics } from '@vercel/analytics/react';
 
 // Critical Routes (eager load)
 import Home from './pages/Home';
@@ -69,6 +70,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white transition-colors duration-300 flex flex-col">
+      <Analytics />
       <ScrollToTop />
       <SmoothScroll />
 

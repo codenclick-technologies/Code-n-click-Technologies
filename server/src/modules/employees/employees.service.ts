@@ -12,7 +12,7 @@ import {
 
 @Injectable()
 export class EmployeesService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async create(createEmployeeDto: CreateEmployeeDto) {
     // Check if employee profile already exists for this user

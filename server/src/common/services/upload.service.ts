@@ -16,14 +16,17 @@ export class UploadService {
 
   constructor(private configService: ConfigService) {
     this.storageType = this.configService.get('STORAGE_TYPE') || 'local';
-    this.uploadPath = this.configService.get('UPLOAD_PATH') || path.join('/tmp', 'uploads');
+    this.uploadPath =
+      this.configService.get('UPLOAD_PATH') || path.join('/tmp', 'uploads');
 
     if (this.storageType === 's3') {
       this.s3Client = new S3Client({
         region: this.configService.get<string>('AWS_REGION'),
         credentials: {
-          accessKeyId: this.configService.get<string>('AWS_ACCESS_KEY_ID') || '',
-          secretAccessKey: this.configService.get<string>('AWS_SECRET_ACCESS_KEY') || '',
+          accessKeyId:
+            this.configService.get<string>('AWS_ACCESS_KEY_ID') || '',
+          secretAccessKey:
+            this.configService.get<string>('AWS_SECRET_ACCESS_KEY') || '',
         },
       });
     } else {

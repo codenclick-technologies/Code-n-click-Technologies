@@ -13,7 +13,7 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
     const { email, password, ...rest } = createUserDto;
@@ -49,7 +49,11 @@ export class UsersService {
     });
 
     // Auto-create employee profile for non-owner roles
-    if (createUserDto.role === 'EMPLOYEE' || createUserDto.role === 'HR' || createUserDto.role === 'MANAGER') {
+    if (
+      createUserDto.role === 'EMPLOYEE' ||
+      createUserDto.role === 'HR' ||
+      createUserDto.role === 'MANAGER'
+    ) {
       await this.prisma.employeeProfile.create({
         data: {
           userId: user.id,

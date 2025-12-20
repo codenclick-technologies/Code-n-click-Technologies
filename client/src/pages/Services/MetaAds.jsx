@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '../../components/utils/SEO';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -99,10 +99,12 @@ const MetaAds = () => {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
-      <Helmet>
-        <title>Meta Ads Services (Facebook & Instagram) | Code'N'Click</title>
-        <meta name="description" content="Expert Meta Ads management. We create high-converting Facebook and Instagram ad campaigns to scale your business and maximize ROAS." />
-        <meta name="keywords" content="Best Meta Ads Agency Delhi, Best Meta Ads Agency Faridabad, Premium Facebook Ads Services Delhi, Premium Instagram Ads Services Faridabad, Top Social Media Marketing Delhi, No1 Meta Ads Expert Faridabad, meta ads Delhi, meta ads Faridabad, facebook ads Delhi, facebook ads Faridabad, instagram ads Delhi, instagram ads Faridabad, social media marketing Delhi, social media marketing Faridabad, paid social advertising, ad creative, retargeting campaigns" />
+      <SEOHead
+        title="Meta Ads Services (Facebook & Instagram) | Code'N'Click"
+        description="Expert Meta Ads management. We create high-converting Facebook and Instagram ad campaigns to scale your business and maximize ROAS."
+        keywords="Best Meta Ads Agency Delhi, Best Meta Ads Agency Faridabad, Premium Facebook Ads Services Delhi, Premium Instagram Ads Services Faridabad, Top Social Media Marketing Delhi, No1 Meta Ads Expert Faridabad, meta ads Delhi, meta ads Faridabad, facebook ads Delhi, facebook ads Faridabad, instagram ads Delhi, instagram ads Faridabad, social media marketing Delhi, social media marketing Faridabad, paid social advertising, ad creative, retargeting campaigns"
+        canonical="/services/meta-ads"
+      >
         <script type="application/ld+json">
           {`
             {
@@ -111,18 +113,18 @@ const MetaAds = () => {
               "serviceType": "Social Media Advertising",
               "provider": {
                 "@type": "Organization",
-                "name": "Code'N'Click"
+                "name": "Code-n-Click Technologies"
               },
               "description": "Creative-first ad campaigns on Facebook and Instagram designed to drive conversions and LTV.",
               "offers": {
                 "@type": "Offer",
-                "priceCurrency": "USD",
+                "priceCurrency": "INR",
                 "price": "Custom Quote"
               }
             }
           `}
         </script>
-      </Helmet>
+      </SEOHead>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">

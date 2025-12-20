@@ -27,7 +27,6 @@ import { ContactModule } from './modules/contact/contact.module';
 import { ResourcesModule } from './modules/resources/resources.module';
 import { MeetingsModule } from './modules/meetings/meetings.module';
 
-
 @Module({
   imports: [
     // Configuration
@@ -61,7 +60,6 @@ import { MeetingsModule } from './modules/meetings/meetings.module';
     ContactModule,
     ResourcesModule,
     MeetingsModule,
-
   ],
   providers: [
     PrismaService,
@@ -89,4 +87,4 @@ import { MeetingsModule } from './modules/meetings/meetings.module';
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}

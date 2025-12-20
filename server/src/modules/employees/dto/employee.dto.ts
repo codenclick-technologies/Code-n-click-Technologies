@@ -56,7 +56,7 @@ export class CreateEmployeeDto {
   salary?: number;
 }
 
-export class UpdateEmployeeDto extends PartialType(CreateEmployeeDto) { }
+export class UpdateEmployeeDto extends PartialType(CreateEmployeeDto) {}
 
 export class QueryEmployeesDto {
   @ApiPropertyOptional()

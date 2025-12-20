@@ -4,8 +4,8 @@ import { MeetingsController } from './meetings.controller';
 import { PrismaService } from '../../config/prisma.service';
 
 @Module({
-    controllers: [MeetingsController],
-    providers: [MeetingsService, PrismaService],
-    exports: [MeetingsService],
+  controllers: [MeetingsController],
+  providers: [MeetingsService, PrismaService],
+  exports: [MeetingsService],
 })
-export class MeetingsModule { }
+export class MeetingsModule {}

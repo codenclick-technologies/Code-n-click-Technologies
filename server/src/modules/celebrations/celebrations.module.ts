@@ -4,7 +4,7 @@ import { CelebrationsController } from './celebrations.controller';
 import { PrismaService } from '../../config/prisma.service';
 
 @Module({
-    controllers: [CelebrationsController],
-    providers: [CelebrationsService, PrismaService],
+  controllers: [CelebrationsController],
+  providers: [CelebrationsService, PrismaService],
 })
-export class CelebrationsModule { }
+export class CelebrationsModule {}

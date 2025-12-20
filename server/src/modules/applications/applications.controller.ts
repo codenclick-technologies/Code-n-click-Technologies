@@ -32,7 +32,7 @@ import { Role } from '@prisma/client';
 @ApiTags('Applications')
 @Controller('applications')
 export class ApplicationsController {
-  constructor(private readonly applicationsService: ApplicationsService) { }
+  constructor(private readonly applicationsService: ApplicationsService) {}
 
   // Public endpoint - Apply to job
   @Post('jobs/:jobId/apply')

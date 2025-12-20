@@ -4,7 +4,7 @@ import { ContactService } from './contact.service';
 import { PrismaService } from '../../config/prisma.service';
 
 @Module({
-    controllers: [ContactController],
-    providers: [ContactService, PrismaService],
+  controllers: [ContactController],
+  providers: [ContactService, PrismaService],
 })
-export class ContactModule { }
+export class ContactModule {}

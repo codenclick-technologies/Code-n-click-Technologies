@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '../../components/utils/SEO';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -101,10 +101,12 @@ const SaasDevelopment = () => {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
-      <Helmet>
-        <title>SaaS Development Services | Code'N'Click</title>
-        <meta name="description" content="Expert SaaS development services. We build scalable, secure, and high-performance cloud applications for startups and enterprises." />
-        <meta name="keywords" content="saas development Delhi, saas development Faridabad, cloud application Delhi, cloud application Faridabad, multi-tenant architecture, microservices Delhi, aws services, node.js development, enterprise software Delhi, enterprise software Faridabad" />
+      <SEOHead
+        title="SaaS Development Services"
+        description="Expert SaaS development services. We build scalable, secure, and high-performance cloud applications for startups and enterprises."
+        keywords="saas development Delhi, saas development Faridabad, cloud application Delhi, cloud application Faridabad, multi-tenant architecture, microservices Delhi, aws services, node.js development, enterprise software Delhi, enterprise software Faridabad"
+        canonical="/services/saas-development"
+      >
         <script type="application/ld+json">
           {`
             {
@@ -113,18 +115,18 @@ const SaasDevelopment = () => {
               "serviceType": "SaaS Development",
               "provider": {
                 "@type": "Organization",
-                "name": "Code'N'Click"
+                "name": "Code-n-Click Technologies"
               },
               "description": "Build reliable, scalable SaaS products designed for growth, retention, and efficient operations.",
               "offers": {
                 "@type": "Offer",
-                "priceCurrency": "USD",
+                "priceCurrency": "INR",
                 "price": "Custom Quote"
               }
             }
           `}
         </script>
-      </Helmet>
+      </SEOHead>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">

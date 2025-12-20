@@ -1,6 +1,5 @@
 // API Configuration and Base Service
-const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:10000/api');
-
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 class ApiService {
     constructor() {
         this.baseURL = API_BASE_URL;

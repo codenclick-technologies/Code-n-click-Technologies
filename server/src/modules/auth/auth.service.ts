@@ -31,7 +31,7 @@ export class AuthService {
     private prisma: PrismaService,
     private jwtService: JwtService,
     private configService: ConfigService,
-  ) { }
+  ) {}
 
   /**
    * Admin-only user creation (NO PUBLIC REGISTRATION)
@@ -484,10 +484,18 @@ export class AuthService {
    * Generate access and refresh tokens
    */
   private async generateTokens(userId: string, email: string, role: Role) {
-    const jwtExpiresIn = String(this.configService.get('JWT_EXPIRES_IN') || '15m').replace(/['"\s]/g, '');
-    const refreshExpiresIn = String(this.configService.get('JWT_REFRESH_EXPIRES_IN') || '7d').replace(/['"\s]/g, '');
+    const jwtExpiresIn = String(
+      this.configService.get('JWT_EXPIRES_IN') || '15m',
+    ).replace(/['"\s]/g, '');
+    const refreshExpiresIn = String(
+      this.configService.get('JWT_REFRESH_EXPIRES_IN') || '7d',
+    ).replace(/['"\s]/g, '');
 
-    console.log('Generating Tokens with Expiry:', { jwtExpiresIn, refreshExpiresIn, rawJwt: this.configService.get('JWT_EXPIRES_IN') });
+    console.log('Generating Tokens with Expiry:', {
+      jwtExpiresIn,
+      refreshExpiresIn,
+      rawJwt: this.configService.get('JWT_EXPIRES_IN'),
+    });
 
     const [accessToken, refreshToken] = await Promise.all([
       // Access token

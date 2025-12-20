@@ -71,7 +71,7 @@ const SEO = ({
             },
             "priceRange": "$$",
             "url": domain,
-            "telephone": "+91-9876543210"
+            "telephone": "+91 8700198968"
           }
         ])}
       </script>

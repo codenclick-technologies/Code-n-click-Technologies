@@ -22,7 +22,7 @@ import { Role } from '@prisma/client';
 @ApiTags('Jobs')
 @Controller('jobs')
 export class JobsController {
-  constructor(private readonly jobsService: JobsService) { }
+  constructor(private readonly jobsService: JobsService) {}
 
   // Public endpoints
   @Public()

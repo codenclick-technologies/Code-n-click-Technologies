@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '../../components/utils/SEO';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -99,10 +99,12 @@ const GraphicDesign = () => {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
-      <Helmet>
-        <title>Graphic Design Services | Code'N'Click</title>
-        <meta name="description" content="Professional graphic design services. We create stunning brand identities, UI/UX designs, and marketing materials that captivate your audience." />
-        <meta name="keywords" content="Best Graphic Design Company Delhi, Best Graphic Design Company Faridabad, Premium Branding Services Delhi, Premium Branding Services Faridabad, Top Logo Designer Delhi, Top UI/UX Design Agency Faridabad, graphic design Delhi, graphic design Faridabad, branding Delhi, branding Faridabad, logo design Delhi, logo design Faridabad, ui/ux design Delhi, ui/ux design Faridabad, web design, marketing materials, visual identity design" />
+      <SEOHead
+        title="Graphic Design Services | Code'N'Click"
+        description="Professional graphic design services. We create stunning brand identities, UI/UX designs, and marketing materials that captivate your audience."
+        keywords="Best Graphic Design Company Delhi, Best Graphic Design Company Faridabad, Premium Branding Services Delhi, Premium Branding Services Faridabad, Top Logo Designer Delhi, Top UI/UX Design Agency Faridabad, graphic design Delhi, graphic design Faridabad, branding Delhi, branding Faridabad, logo design Delhi, logo design Faridabad, ui/ux design Delhi, ui/ux design Faridabad, web design, marketing materials, visual identity design"
+        canonical="/services/graphic-design"
+      >
         <script type="application/ld+json">
           {`
             {
@@ -111,18 +113,18 @@ const GraphicDesign = () => {
               "serviceType": "Graphic Design",
               "provider": {
                 "@type": "Organization",
-                "name": "Code'N'Click"
+                "name": "Code-n-Click Technologies"
               },
               "description": "Visual systems and brand assets that resonate with your audience and scale across channels.",
               "offers": {
                 "@type": "Offer",
-                "priceCurrency": "USD",
+                "priceCurrency": "INR",
                 "price": "Custom Quote"
               }
             }
           `}
         </script>
-      </Helmet>
+      </SEOHead>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">

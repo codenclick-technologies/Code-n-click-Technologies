@@ -37,7 +37,7 @@ import { Public } from '../../common/decorators/public.decorator';
 @ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   // ============================================
   // PUBLIC ENDPOINTS

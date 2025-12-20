@@ -27,7 +27,7 @@ import { Role } from '@prisma/client';
 @UseGuards(JwtAuthGuard, RolesGuard)
 @ApiBearerAuth()
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
   @Post()
   @Roles(Role.OWNER, Role.HR, Role.MANAGER)

@@ -37,9 +37,10 @@ const Contact = () => {
             }, 5000);
         } catch (error) {
             console.error('Error sending message:', error);
+            const errorMessage = error.response?.data?.message || error.message || 'Please try again later.';
             setStatus({
                 type: 'error',
-                message: `❌ Failed to send message: ${error.message || 'Please try again later.'}`
+                message: `❌ Failed to send message: ${errorMessage}`
             });
         } finally {
             setLoading(false);

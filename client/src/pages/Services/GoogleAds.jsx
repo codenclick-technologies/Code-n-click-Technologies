@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '../../components/utils/SEO';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -99,10 +99,12 @@ const GoogleAds = () => {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
-      <Helmet>
-        <title>Google Ads Services (PPC) | Code'N'Click</title>
-        <meta name="description" content="Expert Google Ads management. We create high-ROI search, display, and shopping campaigns to drive qualified traffic and sales." />
-        <meta name="keywords" content="Best Google Ads Agency Delhi, Best Google Ads Agency Faridabad, Premium PPC Services Delhi, Premium PPC Services Faridabad, Top Google Ads Company Delhi, No1 PPC Management Faridabad, google ads Delhi, google ads Faridabad, ppc management Delhi, ppc management Faridabad, search advertising Delhi, search advertising Faridabad, display ads, google shopping, sem services Delhi, sem services Faridabad, pay per click advertising" />
+      <SEOHead
+        title="Google Ads Services (PPC)"
+        description="Expert Google Ads management. We create high-ROI search, display, and shopping campaigns to drive qualified traffic and sales."
+        keywords="Best Google Ads Agency Delhi, Best Google Ads Agency Faridabad, Premium PPC Services Delhi, Premium PPC Services Faridabad, Top Google Ads Company Delhi, No1 PPC Management Faridabad, google ads Delhi, google ads Faridabad, ppc management Delhi, ppc management Faridabad, search advertising Delhi, search advertising Faridabad, display ads, google shopping, sem services Delhi, sem services Faridabad, pay per click advertising"
+        canonical="/services/google-ads"
+      >
         <script type="application/ld+json">
           {`
             {
@@ -111,18 +113,18 @@ const GoogleAds = () => {
               "serviceType": "PPC Advertising",
               "provider": {
                 "@type": "Organization",
-                "name": "Code'N'Click"
+                "name": "Code-n-Click Technologies"
               },
               "description": "Capture high-intent users with targeted search and display campaigns optimized for ROI.",
               "offers": {
                 "@type": "Offer",
-                "priceCurrency": "USD",
+                "priceCurrency": "INR",
                 "price": "Custom Quote"
               }
             }
           `}
         </script>
-      </Helmet>
+      </SEOHead>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">

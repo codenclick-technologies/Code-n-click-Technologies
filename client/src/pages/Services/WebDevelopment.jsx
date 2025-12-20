@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '../../components/utils/SEO';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -102,10 +102,12 @@ const WebDevelopment = () => {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
-      <Helmet>
-        <title>Professional Web Development Services | Code'N'Click</title>
-        <meta name="description" content="Expert web development services. We build high-performance, SEO-optimized websites and web applications using React, Next.js, and modern technologies." />
-        <meta name="keywords" content="Best Web Development Company Delhi, Best Web Development Company Faridabad, Premium Web Development Services Delhi, Premium Web Development Services Faridabad, No1 Web Developer Delhi, Top Web Development Agency Faridabad, custom web apps Delhi, custom web apps Faridabad, react development, next.js, seo services Delhi, seo services Faridabad, pwa development, e-commerce Delhi, e-commerce Faridabad, frontend backend development" />
+      <SEOHead
+        title="Professional Web Development Services | Code'N'Click"
+        description="Expert web development services. We build high-performance, SEO-optimized websites and web applications using React, Next.js, and modern technologies."
+        keywords="Best Web Development Company Delhi, Best Web Development Company Faridabad, Premium Web Development Services Delhi, Premium Web Development Services Faridabad, No1 Web Developer Delhi, Top Web Development Agency Faridabad, custom web apps Delhi, custom web apps Faridabad, react development, next.js, seo services Delhi, seo services Faridabad, pwa development, e-commerce Delhi, e-commerce Faridabad, frontend backend development"
+        canonical="/services/web-development"
+      >
         <script type="application/ld+json">
           {`
             {
@@ -114,18 +116,18 @@ const WebDevelopment = () => {
               "serviceType": "Web Development",
               "provider": {
                 "@type": "Organization",
-                "name": "Code'N'Click"
+                "name": "Code-n-Click Technologies"
               },
               "description": "Custom, high-performance websites and web apps built for speed, accessibility and conversions.",
               "offers": {
                 "@type": "Offer",
-                "priceCurrency": "USD",
+                "priceCurrency": "INR",
                 "price": "Custom Quote"
               }
             }
           `}
         </script>
-      </Helmet>
+      </SEOHead>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">

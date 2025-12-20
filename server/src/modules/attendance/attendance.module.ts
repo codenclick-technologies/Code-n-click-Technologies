@@ -4,8 +4,8 @@ import { AttendanceController } from './attendance.controller';
 import { PrismaService } from '../../config/prisma.service';
 
 @Module({
-    controllers: [AttendanceController],
-    providers: [AttendanceService, PrismaService],
-    exports: [AttendanceService],
+  controllers: [AttendanceController],
+  providers: [AttendanceService, PrismaService],
+  exports: [AttendanceService],
 })
-export class AttendanceModule { }
+export class AttendanceModule {}

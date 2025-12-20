@@ -3,48 +3,48 @@ import { PrismaService } from '../../config/prisma.service';
 
 @Injectable()
 export class ContactService {
-    constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
-    async create(data: any) {
-        return this.prisma.contactSubmission.create({
-            data: {
-                firstName: data.firstName,
-                lastName: data.lastName,
-                email: data.email,
-                subject: data.subject,
-                message: data.message,
-            },
-        });
-    }
+  async create(data: any) {
+    return this.prisma.contactSubmission.create({
+      data: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        subject: data.subject,
+        message: data.message,
+      },
+    });
+  }
 
-    async findAll() {
-        return this.prisma.contactSubmission.findMany({
-            orderBy: { createdAt: 'desc' },
-        });
-    }
+  async findAll() {
+    return this.prisma.contactSubmission.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+  }
 
-    async getUnreadCount() {
-        return this.prisma.contactSubmission.count({
-            where: { status: 'NEW' },
-        });
-    }
+  async getUnreadCount() {
+    return this.prisma.contactSubmission.count({
+      where: { status: 'NEW' },
+    });
+  }
 
-    async markAsRead(id: string) {
-        return this.prisma.contactSubmission.update({
-            where: { id },
-            data: { status: 'READ' },
-        });
-    }
+  async markAsRead(id: string) {
+    return this.prisma.contactSubmission.update({
+      where: { id },
+      data: { status: 'READ' },
+    });
+  }
 
-    async delete(id: string) {
-        return this.prisma.contactSubmission.delete({
-            where: { id },
-        });
-    }
+  async delete(id: string) {
+    return this.prisma.contactSubmission.delete({
+      where: { id },
+    });
+  }
 
-    async bulkDelete(ids: string[]) {
-        return this.prisma.contactSubmission.deleteMany({
-            where: { id: { in: ids } },
-        });
-    }
+  async bulkDelete(ids: string[]) {
+    return this.prisma.contactSubmission.deleteMany({
+      where: { id: { in: ids } },
+    });
+  }
 }
