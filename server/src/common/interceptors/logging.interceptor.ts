@@ -24,7 +24,12 @@ export class LoggingInterceptor implements NestInterceptor {
     this.logger.log(`➡️  ${method} ${url}`);
 
     if (Object.keys(body || {}).length > 0) {
-      this.logger.debug(`Body: ${JSON.stringify(body)}`);
+      const bodyString = JSON.stringify(body);
+      if (bodyString.length > 1000) {
+        this.logger.debug(`Body: ${bodyString.substring(0, 1000)}... [truncated]`);
+      } else {
+        this.logger.debug(`Body: ${bodyString}`);
+      }
     }
 
     return next.handle().pipe(

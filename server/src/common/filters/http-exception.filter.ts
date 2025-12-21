@@ -7,6 +7,8 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Response } from 'express';
+import * as fs from 'fs';
+import * as path from 'path';
 
 /**
  * Global HTTP Exception Filter
@@ -45,6 +47,25 @@ export class HttpExceptionFilter implements ExceptionFilter {
       `${request.method} ${request.url}`,
       exception instanceof Error ? exception.stack : exception,
     );
+
+    // Detailed debug logging to a file we can read
+    const errorLog = {
+      timestamp: new Date().toISOString(),
+      path: request.url,
+      method: request.method,
+      status,
+      message,
+      error,
+      stack: exception instanceof Error ? exception.stack : 'No stack trace',
+      body: request.body,
+    };
+
+    try {
+      const logPath = path.join(process.cwd(), 'error_debug.log');
+      fs.appendFileSync(logPath, JSON.stringify(errorLog, null, 2) + '\n---\n');
+    } catch (e) {
+      this.logger.error('Failed to write to error_debug.log', e.stack);
+    }
 
     // Send response
     response.status(status).json({

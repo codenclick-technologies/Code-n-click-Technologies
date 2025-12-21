@@ -2,8 +2,10 @@ import {
   Injectable,
   BadRequestException,
   InternalServerErrorException,
+  Inject,
 } from '@nestjs/common';
 import { v2 as cloudinary } from 'cloudinary';
+import { CLOUDINARY } from '../providers/cloudinary.provider';
 import * as streamifier from 'streamifier';
 
 /**
@@ -12,6 +14,8 @@ import * as streamifier from 'streamifier';
  */
 @Injectable()
 export class UploadService {
+  constructor(@Inject(CLOUDINARY) private cloudinaryProvider: any) { }
+
   // Security Configuration
   private readonly ALLOWED_MIME_TYPES = [
     'application/pdf',
@@ -20,9 +24,10 @@ export class UploadService {
     'image/jpeg',
     'image/png',
     'image/webp',
+    'image/gif',
   ];
 
-  private readonly MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+  private readonly MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
   private readonly ALLOWED_EXTENSIONS = [
     'pdf',
     'doc',
@@ -31,6 +36,7 @@ export class UploadService {
     'jpeg',
     'png',
     'webp',
+    'gif',
   ];
 
   /**

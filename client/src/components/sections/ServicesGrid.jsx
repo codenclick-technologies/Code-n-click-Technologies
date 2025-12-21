@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Code, Server, Globe, BarChart, PenTool, Search, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -58,15 +58,10 @@ const services = [
 
 const ServiceCard = ({ service }) => {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
-  const rectRef = useRef(null);
-
-  const handleMouseEnter = (e) => {
-    rectRef.current = e.currentTarget.getBoundingClientRect();
-  };
 
   const handleMouseMove = (e) => {
-    if (!rectRef.current) return;
-    const rect = rectRef.current;
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
@@ -78,14 +73,12 @@ const ServiceCard = ({ service }) => {
 
   const handleMouseLeave = () => {
     setRotation({ x: 0, y: 0 });
-    rectRef.current = null;
   };
 
   return (
     <motion.div 
       variants={fadeInUp} 
       className="relative h-full group perspective"
-      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{

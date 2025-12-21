@@ -21,9 +21,6 @@ const Resources = () => {
   const fetchResources = async () => {
     try {
       const response = await resourcesAPI.getAll({ status: 'PUBLISHED' });
-      console.log('Resources API Response:', response);
-      console.log('Is Array?:', Array.isArray(response));
-      console.log('Response length:', response?.length);
       setResources(Array.isArray(response) ? response : []);
     } catch (error) {
       console.error('Error fetching resources:', error);
@@ -47,7 +44,7 @@ const Resources = () => {
         <meta name="keywords" content="web development blog Delhi, web development blog Faridabad, seo guides Delhi, seo guides Faridabad, saas metrics, digital marketing trends Delhi, digital marketing trends Faridabad, react tutorials, next.js performance, tech resources" />
       </Helmet>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-[95%] max-w-7xl mx-auto px-6 sm:px-8">
         {/* Header */}
         <motion.div 
           initial="hidden"
@@ -60,15 +57,15 @@ const Resources = () => {
             <span>Knowledge Hub</span>
           </motion.div>
           
-          <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-extrabold text-white mb-6">
+          <motion.h1 variants={fadeInUp} className="text-6xl md:text-8xl font-black text-white mb-8 tracking-tighter">
             Insights for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Builders</span>
           </motion.h1>
-          <motion.p variants={fadeInUp} className="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+          <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto mb-12 font-medium leading-relaxed">
             Deep dives, tutorials, and industry reports to help you build better products and grow your business.
           </motion.p>
 
           {/* Search Bar */}
-          <motion.div variants={fadeInUp} className="max-w-xl mx-auto relative group">
+          <motion.div variants={fadeInUp} className="max-w-3xl mx-auto relative group">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="text-gray-500 group-focus-within:text-blue-400 transition-colors" size={20} />
             </div>
@@ -83,12 +80,7 @@ const Resources = () => {
         </motion.div>
 
         {/* Bento Grid */}
-        <motion.div 
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
           {loading ? (
              <div className="col-span-3 text-center py-20">
                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
@@ -105,69 +97,91 @@ const Resources = () => {
               </p>
             </div>
           ) : 
-            filteredResources.map((item) => (
-            <div 
+            filteredResources.map((item, index) => (
+            <motion.div 
               key={item.id} 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="md:col-span-1"
             >
-              <div 
-                onClick={() => navigate(`/resources/${item.id}`)}
-                className="group h-full bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:border-blue-500/50 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 hover:scale-[1.02] cursor-pointer"
+              <SpotlightCard 
+                className={`group h-full cursor-pointer transition-all duration-500 hover:scale-[1.02] ${
+                  item.content?.startsWith('__CODE_BLOG__') 
+                    ? 'hover:border-purple-500/50' 
+                    : 'hover:border-blue-500/50'
+                }`}
               >
-                {/* Image Section */}
-                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-900/20 to-purple-900/20">
-                  {item.thumbnail ? (
-                    <img 
-                      src={item.thumbnail} 
-                      alt={item.title} 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <FileText size={64} className="text-blue-400/30" />
-                    </div>
-                  )}
-                  
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent" />
-                  
-                  {/* Category Badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className="px-4 py-1.5 rounded-full bg-blue-600/90 backdrop-blur-md text-white text-xs font-bold uppercase tracking-wider shadow-lg">
-                      {item.category}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content Section */}
-                <div className="p-6 space-y-4">
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2 min-h-[56px]">
-                    {item.title}
-                  </h3>
-
-                  {/* Excerpt - Plain text only, no HTML */}
-                  <p className="text-gray-400 text-sm line-clamp-3 leading-relaxed">
-                    {item.content ? item.content.replace(/<[^>]*>/g, '').substring(0, 120) + '...' : 'Click to read more'}
-                  </p>
-
-                  {/* Footer */}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-700/50">
-                    <div className="flex items-center gap-2 text-gray-500 text-xs">
-                      <Clock size={14} />
-                      <span>{new Date(item.updatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-blue-400 font-medium text-sm group-hover:gap-3 transition-all">
-                      <span>Read More</span>
-                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <div 
+                  onClick={() => navigate(`/resources/${item.id}`)}
+                  className="h-full flex flex-col"
+                >
+                  {/* Image Section */}
+                  <div className="relative h-56 overflow-hidden">
+                    {item.thumbnail ? (
+                      <img 
+                        src={item.thumbnail} 
+                        alt={item.title} 
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-blue-900/20 to-purple-900/20 flex items-center justify-center">
+                        <FileText size={64} className="text-blue-400/20" />
+                      </div>
+                    )}
+                    
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-60" />
+                    
+                    {/* Category Badge */}
+                    <div className="absolute top-4 right-4 flex flex-col gap-2 items-end">
+                      <span className="px-3 py-1 rounded-lg bg-blue-600/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl border border-white/10">
+                        {item.category}
+                      </span>
+                      {item.content?.startsWith('__CODE_BLOG__') && (
+                        <span className="px-3 py-1 rounded-lg bg-purple-600/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl border border-white/10 flex items-center gap-1">
+                          <Zap size={10} fill="currentColor" />
+                          Interactive
+                        </span>
+                      )}
                     </div>
                   </div>
+
+                  {/* Content Section */}
+                  <div className="p-8 flex-1 flex flex-col">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-px w-8 bg-blue-500/50"></div>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{new Date(item.updatedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+                    </div>
+
+                    <h3 className="text-2xl font-black text-white group-hover:text-blue-400 transition-colors line-clamp-2 mb-4 leading-tight tracking-tight">
+                      {item.title}
+                    </h3>
+
+                    <p className="text-gray-400 text-sm line-clamp-3 leading-relaxed mb-8 flex-1">
+                      {item.excerpt || (item.content?.startsWith('__CODE_BLOG__') 
+                        ? 'Explore this interactive code experiment and tutorial.' 
+                        : item.content?.replace(/<[^>]*>/g, '').substring(0, 120))}
+                    </p>
+
+                    {/* Footer */}
+                    <div className="flex items-center justify-between pt-6 border-t border-white/5">
+                      <div className="flex items-center gap-2 text-gray-500 text-[10px] font-bold uppercase tracking-widest">
+                        <Clock size={12} className="text-blue-500/50" />
+                        <span>Read Detail</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-blue-400 font-bold text-xs group-hover:gap-3 transition-all uppercase tracking-widest bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/20">
+                        <span>Open Insight</span>
+                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </SpotlightCard>
+            </motion.div>
           ))
           }
-        </motion.div>
+        </div>
 
         {/* Newsletter Section */}
         <motion.section 

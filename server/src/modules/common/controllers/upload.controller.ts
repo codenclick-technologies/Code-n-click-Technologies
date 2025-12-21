@@ -22,7 +22,7 @@ import { JwtAuthGuard } from '../../../common/guards/jwt-auth.guard';
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class UploadController {
-  constructor(private readonly uploadService: UploadService) {}
+  constructor(private readonly uploadService: UploadService) { }
 
   @Post()
   @ApiOperation({ summary: 'Upload a file' })
@@ -42,11 +42,20 @@ export class UploadController {
       },
     },
   })
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FileInterceptor('file', {
+    limits: {
+      fileSize: 50 * 1024 * 1024, // 50MB
+    },
+  }))
   async uploadFile(
     @UploadedFile() file: Express.Multer.File,
     @Body('folder') folder: string = 'general',
   ) {
+    console.log('Upload request received:', {
+      filename: file?.originalname,
+      size: file?.size,
+      folder
+    });
     const url = await this.uploadService.uploadFile(file, folder);
     return { url };
   }

@@ -1,6 +1,7 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
+import { json, urlencoded } from 'express';
 import helmet from 'helmet';
 
 export function setupApp(app: INestApplication) {

@@ -101,14 +101,53 @@ class ApiService {
     }
 
     async uploadFile(endpoint, formData) {
+        const url = `${this.baseURL}${endpoint}`;
         const token = localStorage.getItem('cnc_access_token');
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        let response;
+        try {
+            response = await fetch(url, {
+                method: 'POST',
+                headers,
+                body: formData,
+            });
+        } catch (fetchError) {
+            console.warn('[ApiService] Upload fetch failed/aborted. Attempting token refresh as fallback...', fetchError);
+            try {
+                // If the fetch failed (likely aborted by server due to 401 on large body),
+                // try to refresh and retry once.
+                await this.handleTokenRefresh();
+                const newToken = localStorage.getItem('cnc_access_token');
+                const newHeaders = newToken ? { Authorization: `Bearer ${newToken}` } : {};
+                response = await fetch(url, {
+                    method: 'POST',
+                    headers: newHeaders,
+                    body: formData,
+                });
+            } catch (retryError) {
+                console.error('[ApiService] Upload retry failed:', retryError);
+                throw new Error('Connection lost or session expired. Please try again.');
+            }
+        }
 
-        const response = await fetch(`${this.baseURL}${endpoint}`, {
-            method: 'POST',
-            headers,
-            body: formData,
-        });
+        // Handle 401 Unauthorized - Attempt Token Refresh (for successful small requests that return 401)
+        if (response.status === 401) {
+            try {
+                await this.handleTokenRefresh();
+                const newToken = localStorage.getItem('cnc_access_token');
+                const newHeaders = newToken ? { Authorization: `Bearer ${newToken}` } : {};
+
+                response = await fetch(`${this.baseURL}${endpoint}`, {
+                    method: 'POST',
+                    headers: newHeaders,
+                    body: formData,
+                });
+            } catch (refreshError) {
+                this.clearAuth();
+                window.location.href = '/login';
+                throw new Error('Session expired. Please login again.');
+            }
+        }
 
         const data = await response.json();
 

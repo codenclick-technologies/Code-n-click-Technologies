@@ -66,8 +66,6 @@ const EmployeeDashboard = () => {
         attendanceAPI.getTodayStatus(),
         attendanceAPI.getMyRecords({ month: new Date().getMonth() + 1, year: new Date().getFullYear() })
       ]);
-      console.log('fetchAttendanceData: status', statusRes.data);
-      console.log('fetchAttendanceData: status', statusRes);
       setAttendanceStatus(statusRes);
       setAttendanceRecords(recordsRes || []);
     } catch (error) {

@@ -10,15 +10,8 @@ const TiltCard = ({ children, className = '' }) => {
   const mouseX = useSpring(x, { stiffness: 500, damping: 100 });
   const mouseY = useSpring(y, { stiffness: 500, damping: 100 });
 
-  const rectRef = useRef(null);
-
-  function onMouseEnter(e) {
-    rectRef.current = e.currentTarget.getBoundingClientRect();
-  }
-
-  function onMouseMove({ clientX, clientY }) {
-    if (!rectRef.current) return;
-    const { left, top, width, height } = rectRef.current;
+  function onMouseMove({ currentTarget, clientX, clientY }) {
+    const { left, top, width, height } = currentTarget.getBoundingClientRect();
     const xPct = (clientX - left) / width - 0.5;
     const yPct = (clientY - top) / height - 0.5;
     
@@ -29,7 +22,6 @@ const TiltCard = ({ children, className = '' }) => {
   function onMouseLeave() {
     x.set(0);
     y.set(0);
-    rectRef.current = null;
   }
 
   const rotateX = useMotionTemplate`${mouseY.get() * -20}deg`;
@@ -38,7 +30,6 @@ const TiltCard = ({ children, className = '' }) => {
   return (
     <motion.div
       ref={ref}
-      onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       style={{

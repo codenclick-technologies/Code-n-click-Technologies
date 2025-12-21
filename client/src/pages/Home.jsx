@@ -2,12 +2,12 @@ import React from 'react';
 import Hero from '../components/sections/Hero';
 
 
-const ServicesGrid = React.lazy(() => import('../components/sections/ServicesGrid'));
-const WhyChooseUs = React.lazy(() => import('../components/sections/WhyChooseUs'));
-const StatsSection = React.lazy(() => import('../components/sections/StatsSection'));
-const ProcessSection = React.lazy(() => import('../components/sections/ProcessSection'));
-const TestimonialsSection = React.lazy(() => import('../components/sections/TestimonialsSection'));
-const CTASection = React.lazy(() => import('../components/sections/CTASection'));
+import ServicesGrid from '../components/sections/ServicesGrid';
+import WhyChooseUs from '../components/sections/WhyChooseUs';
+import StatsSection from '../components/sections/StatsSection';
+import ProcessSection from '../components/sections/ProcessSection';
+import TestimonialsSection from '../components/sections/TestimonialsSection';
+import CTASection from '../components/sections/CTASection';
 
 import SEO from '../components/utils/SEO';
 
@@ -25,14 +25,12 @@ const Home = () => {
       <Hero />
 
 
-      <React.Suspense fallback={<div className="h-96 bg-gray-950" />}>
-        <ServicesGrid />
-        <WhyChooseUs />
-        <StatsSection />
-        <ProcessSection />
-        <TestimonialsSection />
-        <CTASection />
-      </React.Suspense>
+      <ServicesGrid />
+      <WhyChooseUs />
+      <StatsSection />
+      <ProcessSection />
+      <TestimonialsSection />
+      <CTASection />
     </div>
   );
 };

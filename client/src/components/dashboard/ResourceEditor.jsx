@@ -1,14 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import ReactQuill from 'react-quill-new';
+import ReactQuill, { Quill } from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
-import { X, Save, Eye, Image as ImageIcon, Upload } from 'lucide-react';
-import { resourcesAPI } from '../../services/api';
+import { X, Save, Eye, Image as ImageIcon, Upload, Code2, FileText, Layout } from 'lucide-react';
+import ApiService, { resourcesAPI } from '../../services/api';
+import { useRef, useMemo, useCallback } from 'react';
+
+// Custom Font & Size whitelists for Quill
+const Size = Quill.import('attributors/style/size');
+Size.whitelist = ['12px', '14px', '16px', '18px', '20px', '24px', '32px', '48px', '64px'];
+Quill.register(Size, true);
+
+const Font = Quill.import('attributors/style/font');
+Font.whitelist = ['serif', 'sans-serif', 'monospace', 'inter', 'roboto', 'outfit', 'playfair'];
+Quill.register(Font, true);
+
+// Custom Style Blots - Safely register to avoid console clutter
+try {
+  const Inline = Quill.import('blots/inline');
+  class GradientTextBlot extends Inline {
+    static create(value) {
+      let node = super.create();
+      node.setAttribute('class', 'text-gradient-animate');
+      return node;
+    }
+  }
+  GradientTextBlot.blotName = 'gradient-text';
+  GradientTextBlot.tagName = 'span';
+  
+  // Quill 2.x expects formats in the 'formats/' namespace
+  Quill.register('formats/gradient-text', GradientTextBlot, true);
+} catch (e) {
+  // Silent fallback
+}
 
 const ResourceEditor = ({ resource, onClose }) => {
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
     content: '',
+    contentType: 'rich-text', // 'rich-text' or 'code-blog'
+    codeBlog: {
+      html: '',
+      css: '',
+      js: '',
+    },
     excerpt: '',
     category: '',
     tags: [],
@@ -21,15 +56,32 @@ const ResourceEditor = ({ resource, onClose }) => {
   const [tagInput, setTagInput] = useState('');
   const [keywordInput, setKeywordInput] = useState('');
   const [saving, setSaving] = useState(false);
+  const [uploadingThumbnail, setUploadingThumbnail] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [isSlugEdited, setIsSlugEdited] = useState(false);
 
   useEffect(() => {
     if (resource) {
+      let contentType = 'rich-text';
+      let codeBlog = { html: '', css: '', js: '' };
+      let content = resource.content || '';
+
+      if (content.startsWith('__CODE_BLOG__')) {
+        contentType = 'code-blog';
+        try {
+          codeBlog = JSON.parse(content.replace('__CODE_BLOG__', ''));
+          content = ''; // So ReactQuill doesn't show the JSON
+        } catch (e) {
+          // Silent parse failure
+        }
+      }
+
       setFormData({
         title: resource.title || '',
         slug: resource.slug || '',
-        content: resource.content || '',
+        content: content,
+        contentType: contentType,
+        codeBlog: codeBlog,
         excerpt: resource.excerpt || '',
         category: resource.category || '',
         tags: resource.tags || [],
@@ -54,19 +106,100 @@ const ResourceEditor = ({ resource, onClose }) => {
     }
   }, [formData.title, isSlugEdited]);
 
-  const quillModules = {
-    toolbar: [
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      [{ 'color': [] }, { 'background': [] }],
-      ['link', 'image', 'code-block'],
-      ['clean']
-    ],
-  };
+  const quillRef = useRef(null);
+
+  const imageHandler = useCallback(() => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files[0];
+      if (file) {
+        if (file.size > 10 * 1024 * 1024) {
+          alert('File is too large. Max 10MB allowed.');
+          return;
+        }
+        try {
+          const api = new ApiService();
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('folder', 'resources_content');
+
+          const response = await api.uploadFile('/upload', formData);
+          
+          const quill = quillRef.current.getEditor();
+          quill.focus();
+          const range = quill.getSelection();
+          const index = range ? range.index : quill.getLength();
+          
+          quill.insertEmbed(index, 'image', response.url);
+          quill.setSelection(index + 1);
+        } catch (error) {
+          alert(`Upload failed: ${error.message || 'Network error or server timeout. Please check your connection.'}`);
+        }
+      }
+    };
+  }, []);
+
+  const quillModules = useMemo(() => ({
+    toolbar: {
+      container: [
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ 'font': Font.whitelist }],
+        [{ 'size': Size.whitelist }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],
+        [{ 'align': [] }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'indent': '-1' }, { 'indent': '+1' }],
+        ['blockquote', 'code-block', 'table'],
+        ['link', 'image', 'video'],
+        [{ 'gradient': 'Gradient' }],
+        ['clean']
+      ],
+      handlers: {
+        image: imageHandler,
+        gradient: function() {
+          const quill = this.quill;
+          const range = quill.getSelection();
+          if (range) {
+            const format = quill.getFormat(range);
+            quill.format('gradient-text', !format['gradient-text']);
+          }
+        }
+      }
+    },
+    table: true,
+    clipboard: {
+      matchVisual: false,
+    }
+  }), []);
+
+  const quillFormats = [
+    'header', 'font', 'size',
+    'bold', 'italic', 'underline', 'strike',
+    'color', 'background',
+    'script', 'align', 'list', 'indent',
+    'blockquote', 'code-block', 'table',
+    'link', 'image', 'video',
+    'gradient-text'
+  ];
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleCodeChange = (type, value) => {
+    setFormData(prev => ({
+      ...prev,
+      codeBlog: {
+        ...prev.codeBlog,
+        [type]: value
+      }
+    }));
   };
 
   const handleAddTag = () => {
@@ -103,16 +236,68 @@ const ResourceEditor = ({ resource, onClose }) => {
     }));
   };
 
+  const handleThumbnailUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File is too large. Max 5MB allowed.');
+      return;
+    }
+
+    try {
+      setUploadingThumbnail(true);
+      const api = new ApiService();
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('folder', 'resources');
+
+      const response = await api.uploadFile('/upload', formData);
+      handleChange('thumbnail', response.url);
+    } catch (error) {
+      console.error('Upload failed:', error);
+      alert('Failed to upload image. Please try again.');
+    } finally {
+      setUploadingThumbnail(false);
+    }
+  };
+
   const handleSave = async (publish = false) => {
-    if (!formData.title || !formData.content || !formData.category) {
-      alert('Please fill in title, content, and category');
+    if (!formData.title || !formData.category) {
+      alert('Please fill in title and category');
+      return;
+    }
+
+    if (formData.contentType === 'rich-text' && !formData.content) {
+      alert('Please fill in content');
+      return;
+    }
+
+    if (formData.contentType === 'code-blog' && !formData.codeBlog.html) {
+      alert('Please provide HTML for the code blog');
       return;
     }
 
     try {
       setSaving(true);
+      
+      let finalContent = formData.content;
+      if (formData.contentType === 'code-blog') {
+        finalContent = '__CODE_BLOG__' + JSON.stringify(formData.codeBlog);
+      }
+
       const data = {
-        ...formData,
+        title: formData.title,
+        slug: formData.slug,
+        content: finalContent,
+        excerpt: formData.excerpt,
+        category: formData.category,
+        tags: formData.tags,
+        thumbnail: formData.thumbnail,
+        author: formData.author,
+        metaTitle: formData.metaTitle,
+        metaDescription: formData.metaDescription,
+        metaKeywords: formData.metaKeywords,
         status: publish ? 'PUBLISHED' : 'DRAFT',
       };
 
@@ -124,7 +309,6 @@ const ResourceEditor = ({ resource, onClose }) => {
 
       onClose(true); // Refresh list
     } catch (error) {
-      console.error('Error saving resource:', error);
       alert('Failed to save resource');
     } finally {
       setSaving(false);
@@ -132,8 +316,10 @@ const ResourceEditor = ({ resource, onClose }) => {
   };
 
   if (showPreview) {
+    const isCodeBlog = formData.contentType === 'code-blog';
+    
     return (
-      <div className="min-h-screen bg-gray-950 p-6">
+      <div className="min-h-screen bg-gray-950 p-6 overflow-y-auto">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-white">Preview</h2>
@@ -146,17 +332,42 @@ const ResourceEditor = ({ resource, onClose }) => {
           </div>
           
           {formData.thumbnail && (
-            <img src={formData.thumbnail} alt={formData.title} className="w-full h-64 object-cover rounded-xl mb-6" />
+            <img src={formData.thumbnail} alt={formData.title} className="w-full h-64 object-cover rounded-xl mb-6 shadow-2xl" />
           )}
           
-          <div className="bg-gray-800/50 rounded-xl p-8">
-            <span className="px-3 py-1 bg-blue-600 text-white rounded-full text-sm">{formData.category}</span>
+          <div className="bg-gray-800/50 rounded-xl p-8 shadow-xl">
+            <span className="px-3 py-1 bg-blue-600 text-white rounded-full text-sm font-semibold uppercase tracking-wider">{formData.category}</span>
             <h1 className="text-4xl font-bold text-white mt-4 mb-4">{formData.title || 'Untitled'}</h1>
-            <p className="text-gray-400 mb-6">{formData.excerpt}</p>
-            <div 
-              className="prose prose-invert prose-lg max-w-none"
-              dangerouslySetInnerHTML={{ __html: formData.content }}
-            />
+            <p className="text-gray-400 mb-6 italic">{formData.excerpt}</p>
+            
+            {isCodeBlog ? (
+              <div className="bg-gray-900 rounded-lg p-1 border border-gray-700 min-h-[400px]">
+                {/* Code Blog Rendering in Preview */}
+                <iframe
+                  title="Code Blog Preview"
+                  srcDoc={`
+                    <html>
+                      <head>
+                        <style>
+                          body { margin: 0; padding: 20px; font-family: sans-serif; color: #fff; background: transparent; }
+                          ${formData.codeBlog.css}
+                        </style>
+                      </head>
+                      <body>
+                        ${formData.codeBlog.html}
+                        <script>${formData.codeBlog.js}</script>
+                      </body>
+                    </html>
+                  `}
+                  className="w-full h-full min-h-[400px] border-none"
+                />
+              </div>
+            ) : (
+              <div 
+                className="prose prose-invert prose-lg max-w-none"
+                dangerouslySetInnerHTML={{ __html: formData.content }}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -230,20 +441,153 @@ const ResourceEditor = ({ resource, onClose }) => {
               />
             </div>
 
+            {/* Content Type Toggle */}
+            <div className="bg-gray-800/50 p-4 rounded-xl border border-gray-700/50">
+              <label className="block text-sm font-medium text-gray-300 mb-3">
+                Resource Type
+              </label>
+              <div className="flex p-1 bg-gray-900 rounded-lg w-fit border border-gray-700">
+                <button
+                  type="button"
+                  onClick={() => handleChange('contentType', 'rich-text')}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                    formData.contentType === 'rich-text'
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  <FileText size={16} />
+                  Rich Text
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleChange('contentType', 'code-blog')}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                    formData.contentType === 'code-blog'
+                      ? 'bg-purple-600 text-white shadow-lg'
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  <Code2 size={16} />
+                  Code Blog
+                </button>
+              </div>
+            </div>
+
             {/* Content Editor */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
-                Content *
+                {formData.contentType === 'rich-text' ? 'Content *' : 'Code Editor *'}
               </label>
-              <div className="bg-white rounded-lg overflow-hidden">
-                <ReactQuill
-                  theme="snow"
-                  value={formData.content}
-                  onChange={(value) => handleChange('content', value)}
-                  modules={quillModules}
-                  className="h-96"
-                />
-              </div>
+              
+              {formData.contentType === 'rich-text' ? (
+                <div className="bg-white rounded-lg overflow-hidden ring-1 ring-gray-700">
+                  <style>{`
+                    .ql-editor {
+                      min-height: 450px;
+                      color: #000;
+                      font-size: 16px;
+                      font-family: 'Inter', sans-serif;
+                    }
+                    .ql-editor.ql-blank::before {
+                      color: rgba(0,0,0,0.3);
+                    }
+                    .ql-toolbar {
+                      background: #f8fafc;
+                      border-color: #e2e8f0 !important;
+                      border-top-left-radius: 8px;
+                      border-top-right-radius: 8px;
+                      position: sticky;
+                      top: 0;
+                      z-index: 10;
+                    }
+                    .ql-container {
+                      border-color: #e2e8f0 !important;
+                      border-bottom-left-radius: 8px;
+                      border-bottom-right-radius: 8px;
+                    }
+                    /* Custom styles for fonts */
+                    .ql-font-outfit { font-family: 'Outfit', sans-serif; }
+                    .ql-font-roboto { font-family: 'Roboto', sans-serif; }
+                    .ql-font-playfair { font-family: 'Playfair Display', serif; }
+                    
+                    /* Gradient Text Animation */
+                    .text-gradient-animate {
+                      background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
+                      background-size: 200% auto;
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;
+                      animation: gradient 3s linear infinite;
+                      font-weight: bold;
+                      display: inline-block;
+                    }
+                    @keyframes gradient {
+                      0% { background-position: 0% 50%; }
+                      100% { background-position: 200% 50%; }
+                    }
+                    /* Custom toolbar icon for gradient */
+                    .ql-gradient {
+                      width: 28px !important;
+                      color: #3b82f6 !important;
+                      font-weight: bold !important;
+                    }
+                    .ql-gradient::after {
+                      content: 'G';
+                      font-family: inherit;
+                    }
+                  `}</style>
+                  <ReactQuill
+                    ref={quillRef}
+                    theme="snow"
+                    value={formData.content}
+                    onChange={(value) => handleChange('content', value)}
+                    modules={quillModules}
+                    formats={quillFormats}
+                    placeholder="Write your amazing story here..."
+                  />
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-blue-400 text-xs font-bold uppercase">
+                        <Code2 size={14} /> HTML
+                      </div>
+                      <textarea
+                        value={formData.codeBlog.html}
+                        onChange={(e) => handleCodeChange('html', e.target.value)}
+                        className="w-full h-64 bg-gray-900 border border-gray-700 rounded-lg p-4 text-gray-300 font-mono text-sm focus:outline-none focus:border-blue-500"
+                        placeholder="<div>Hello World</div>"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-purple-400 text-xs font-bold uppercase">
+                        <Layout size={14} /> CSS
+                      </div>
+                      <textarea
+                        value={formData.codeBlog.css}
+                        onChange={(e) => handleCodeChange('css', e.target.value)}
+                        className="w-full h-64 bg-gray-900 border border-gray-700 rounded-lg p-4 text-gray-300 font-mono text-sm focus:outline-none focus:border-purple-500"
+                        placeholder=".container { color: blue; }"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-yellow-400 text-xs font-bold uppercase">
+                      <Code2 size={14} /> JavaScript
+                    </div>
+                    <textarea
+                      value={formData.codeBlog.js}
+                      onChange={(e) => handleCodeChange('js', e.target.value)}
+                      className="w-full h-48 bg-gray-900 border border-gray-700 rounded-lg p-4 text-gray-300 font-mono text-sm focus:outline-none focus:border-yellow-500"
+                      placeholder="console.log('Hello!');"
+                    />
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    Your code will be rendered inside an encapsulated container on the detail page.
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* SEO Section */}
@@ -340,23 +684,67 @@ const ResourceEditor = ({ resource, onClose }) => {
             </div>
 
             {/* Thumbnail */}
-            <div className="bg-gray-800/50 rounded-xl p-4">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Thumbnail URL
-              </label>
-              <input
-                type="text"
-                value={formData.thumbnail}
-                onChange={(e) => handleChange('thumbnail', e.target.value)}
-                className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 mb-2"
-                placeholder="https://..."
-              />
+            <div className="bg-gray-800/50 rounded-xl p-4 space-y-4">
+              <div className="flex items-center justify-between">
+                <label className="block text-sm font-medium text-gray-300">
+                  Thumbnail
+                </label>
+                <span className="text-[10px] text-gray-500 font-medium bg-gray-900 px-2 py-0.5 rounded-full border border-gray-700">
+                  1200 x 630 px recommended
+                </span>
+              </div>
+              
+              <div className="flex flex-col gap-3">
+                <div className="relative group">
+                  <input
+                    type="text"
+                    value={formData.thumbnail}
+                    onChange={(e) => handleChange('thumbnail', e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 text-sm"
+                    placeholder="Enter image URL or upload below..."
+                  />
+                  <ImageIcon size={16} className="absolute right-3 top-2.5 text-gray-600 group-focus-within:text-blue-500 transition-colors" />
+                </div>
+
+                <div className="relative">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleThumbnailUpload}
+                    className="hidden"
+                    id="thumbnail-upload"
+                    disabled={uploadingThumbnail}
+                  />
+                  <label
+                    htmlFor="thumbnail-upload"
+                    className={`flex items-center justify-center gap-2 w-full py-3 border-2 border-dashed border-gray-700 rounded-lg cursor-pointer hover:border-blue-500/50 hover:bg-blue-500/5 transition-all group ${uploadingThumbnail ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  >
+                    {uploadingThumbnail ? (
+                      <div className="flex items-center gap-2 text-gray-400">
+                        <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent animate-spin rounded-full" />
+                        <span className="text-sm">Uploading...</span>
+                      </div>
+                    ) : (
+                      <>
+                        <Upload size={18} className="text-gray-500 group-hover:text-blue-400" />
+                        <span className="text-sm text-gray-400 group-hover:text-gray-200">Upload Image File</span>
+                      </>
+                    )}
+                  </label>
+                </div>
+              </div>
+
               {formData.thumbnail && (
-                <img
-                  src={formData.thumbnail}
-                  alt="Thumbnail preview"
-                  className="w-full h-40 object-cover rounded-lg"
-                />
+                <div className="relative mt-4 rounded-lg overflow-hidden border border-gray-700 shadow-lg group">
+                  <img
+                    src={formData.thumbnail}
+                    alt="Thumbnail preview"
+                    className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                    <span className="text-[10px] text-white/80 font-mono truncate">{formData.thumbnail}</span>
+                  </div>
+                </div>
               )}
             </div>
 

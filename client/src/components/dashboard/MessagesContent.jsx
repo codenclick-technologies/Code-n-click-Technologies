@@ -21,7 +21,6 @@ const MessagesContent = () => {
     try {
       setLoading(true);
       const response = await contactAPI.getAll();
-      console.log('Contact messages response:', response);
       setMessages(Array.isArray(response) ? response : []);
     } catch (error) {
       console.error('Error fetching messages:', error);
