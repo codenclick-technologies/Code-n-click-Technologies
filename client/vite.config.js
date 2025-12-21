@@ -24,5 +24,15 @@ export default defineConfig({
   },
   build: {
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['lucide-react', 'framer-motion'],
+        },
+      },
+    },
+    cssCodeSplit: true, // Enable CSS code splitting
+    chunkSizeWarningLimit: 1000,
   },
 });
