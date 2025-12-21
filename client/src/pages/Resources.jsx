@@ -51,7 +51,7 @@ const Resources = () => {
         <meta name="keywords" content="web development blog Delhi, web development blog Faridabad, seo guides Delhi, seo guides Faridabad, saas metrics, digital marketing trends Delhi, digital marketing trends Faridabad, react tutorials, next.js performance, tech resources" />
       </Helmet>
 
-      <div className="w-[95%] max-w-7xl mx-auto px-6 sm:px-8">
+      <div className="w-full md:w-[95%] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div 
           initial="hidden"
@@ -64,22 +64,22 @@ const Resources = () => {
             <span>Knowledge Hub</span>
           </motion.div>
           
-          <motion.h1 variants={fadeInUp} className="text-6xl md:text-8xl font-black text-white mb-8 tracking-tighter">
+          <motion.h1 variants={fadeInUp} className="text-4xl sm:text-6xl md:text-8xl font-black text-white mb-6 md:mb-8 tracking-tighter leading-tight">
             Insights for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Builders</span>
           </motion.h1>
-          <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto mb-12 font-medium leading-relaxed">
+          <motion.p variants={fadeInUp} className="text-lg md:text-2xl text-gray-400 max-w-4xl mx-auto mb-8 md:mb-12 font-medium leading-relaxed px-4">
             Deep dives, tutorials, and industry reports to help you build better products and grow your business.
           </motion.p>
 
           {/* Search Bar */}
-          <motion.div variants={fadeInUp} className="max-w-3xl mx-auto relative group">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+          <motion.div variants={fadeInUp} className="max-w-3xl mx-auto relative group px-2 md:px-0">
+            <div className="absolute inset-y-0 left-2 md:left-0 pl-4 flex items-center pointer-events-none">
               <Search className="text-gray-500 group-focus-within:text-blue-400 transition-colors" size={20} />
             </div>
             <input 
               type="text" 
-              placeholder="Search by topic, keyword, or title..." 
-              className="w-full bg-white/5 border border-white/10 rounded-full py-4 pl-12 pr-4 text-white focus:outline-none focus:border-blue-500 focus:bg-white/10 transition-all shadow-lg shadow-black/20"
+              placeholder="Search by topic..." 
+              className="w-full bg-white/5 border border-white/10 rounded-full py-3 md:py-4 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white/10 transition-all shadow-lg shadow-black/20 text-sm md:text-base"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -199,21 +199,21 @@ const Resources = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/40 to-purple-900/40 backdrop-blur-xl" />
           <div className="absolute inset-0 bg-noise opacity-20" />
-          <div className="relative z-10 p-12 md:p-20 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-blue-500/20 text-blue-400 mb-8">
-              <Mail className="w-8 h-8" />
+          <div className="relative z-10 p-8 md:p-20 text-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-blue-500/20 text-blue-400 mb-6 md:mb-8">
+              <Mail className="w-6 h-6 md:w-8 md:h-8" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay Ahead of the Curve</h2>
-            <p className="text-gray-300 max-w-2xl mx-auto mb-8 text-lg">
+            <h2 className="text-2xl md:text-4xl font-bold mb-4">Stay Ahead of the Curve</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto mb-8 text-base md:text-lg">
               Join 5,000+ developers and founders getting the latest insights on tech, growth, and design delivered to their inbox weekly.
             </p>
             <form className="max-w-md mx-auto flex flex-col sm:flex-row gap-4" onSubmit={(e) => e.preventDefault()}>
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="flex-grow bg-black/30 border border-white/10 rounded-full px-6 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                className="flex-grow bg-black/30 border border-white/10 rounded-full px-6 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors w-full"
               />
-              <button className="px-8 py-3 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20">
+              <button className="px-8 py-3 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 w-full sm:w-auto">
                 Subscribe
               </button>
             </form>
