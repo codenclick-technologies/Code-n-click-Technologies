@@ -9,7 +9,7 @@ import { generateSlug, ensureUniqueSlug } from '../../common/utils/slug.util';
 
 @Injectable()
 export class ResourcesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(data: any) {
     // Generate slug from title or use provided slug
@@ -41,6 +41,7 @@ export class ResourcesService {
         metaTitle: data.metaTitle || data.title,
         metaDescription: data.metaDescription,
         metaKeywords: data.metaKeywords || [],
+        publishedAt: data.publishedAt ? new Date(data.publishedAt) : new Date(),
       },
     });
   }
@@ -53,6 +54,13 @@ export class ResourcesService {
     if (category) where.category = category;
     if (tags) where.tags = { hasSome: Array.isArray(tags) ? tags : [tags] };
 
+    // Scheduling Logic:
+    // If status is PUBLISHED, only show posts where publishedAt <= NOW,
+    // unless 'includeFuture' is explicitly set to true (e.g., for admin preview).
+    if (status === 'PUBLISHED' && query.includeFuture !== 'true') {
+      where.publishedAt = { lte: new Date() };
+    }
+
     if (search) {
       where.OR = [
         { title: { contains: search, mode: 'insensitive' } },
@@ -61,10 +69,38 @@ export class ResourcesService {
       ];
     }
 
-    return this.prisma.resource.findMany({
+    const result = await this.prisma.resource.findMany({
       where,
       orderBy: { publishedAt: 'desc' },
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        // content: false, // Exclude heavy content
+        excerpt: true,
+        thumbnail: true,
+        category: true,
+        tags: true,
+        author: true,
+        authorId: true,
+        status: true,
+        views: true,
+        publishedAt: true,
+        createdAt: true,
+        updatedAt: true,
+        // SEO Metadata - keeping as it's lightweight
+        metaTitle: true,
+        metaDescription: true,
+        metaKeywords: true,
+      }
     });
+
+    // If 'returnContent' param is passed, we might want to support it, 
+    // but for now, for the list view, we strictly return everything EXCEPT content.
+    // If a specific client needs content in list, we could add a query param.
+    // But standard practice is list = no content.
+
+    return result;
   }
 
   async findOne(id: string) {
@@ -108,6 +144,7 @@ export class ResourcesService {
       data: {
         ...data,
         updatedAt: new Date(),
+        publishedAt: data.publishedAt ? new Date(data.publishedAt) : undefined,
       },
     });
   }

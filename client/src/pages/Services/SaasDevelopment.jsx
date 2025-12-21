@@ -1,5 +1,6 @@
 import React from 'react';
 import SEOHead from '../../components/utils/SEO';
+import Breadcrumbs from '../../components/utils/Breadcrumbs';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -18,6 +19,11 @@ import {
 } from 'lucide-react';
 
 const SaasDevelopment = () => {
+  const breadcrumbItems = [
+    { label: 'Services', path: '/services' },
+    { label: 'SaaS Development', path: '/services/saas-development' }
+  ];
+
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -115,7 +121,7 @@ const SaasDevelopment = () => {
               "serviceType": "SaaS Development",
               "provider": {
                 "@type": "Organization",
-                "name": "Codenclick Technologies"
+                "name": "Code-n-Click Technologies"
               },
               "description": "Build reliable, scalable SaaS products designed for growth, retention, and efficient operations.",
               "offers": {
@@ -126,7 +132,46 @@ const SaasDevelopment = () => {
             }
           `}
         </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How do you handle data security?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Security is paramount. We implement industry-standard practices including encryption at rest and in transit, secure authentication (OAuth/SSO), role-based access control, and regular security audits."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can you help with legacy system migration?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, we specialize in modernizing legacy applications. We can help you migrate to a cloud-native architecture, improve performance, and reduce technical debt with minimal downtime."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Do you offer post-launch support?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Absolutely. We offer various support and maintenance packages to ensure your SaaS platform remains secure, up-to-date, and performs optimally as you scale."
+                  }
+                }
+              ]
+            }
+          `}
+        </script>
       </SEOHead>
+
+      {/* Breadcrumbs */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4 absolute top-0 left-0 right-0 z-20">
+         <Breadcrumbs items={breadcrumbItems} />
+      </div>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">

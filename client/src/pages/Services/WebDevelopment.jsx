@@ -1,5 +1,4 @@
 import React from 'react';
-import SEOHead from '../../components/utils/SEO';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -17,8 +16,15 @@ import {
   Shield,
   Cpu
 } from 'lucide-react';
+import SEOHead from '../../components/utils/SEO';
+import Breadcrumbs from '../../components/utils/Breadcrumbs';
 
 const WebDevelopment = () => {
+  const breadcrumbItems = [
+    { label: 'Services', path: '/services' },
+    { label: 'Web Development', path: '/services/web-development' }
+  ];
+
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -103,7 +109,7 @@ const WebDevelopment = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
       <SEOHead
-        title="Professional Web Development Services | Codenclick"
+        title="Professional Web Development Services | Code'N'Click"
         description="Expert web development services. We build high-performance, SEO-optimized websites and web applications using React, Next.js, and modern technologies."
         keywords="Best Web Development Company Delhi, Best Web Development Company Faridabad, Premium Web Development Services Delhi, Premium Web Development Services Faridabad, No1 Web Developer Delhi, Top Web Development Agency Faridabad, custom web apps Delhi, custom web apps Faridabad, react development, next.js, seo services Delhi, seo services Faridabad, pwa development, e-commerce Delhi, e-commerce Faridabad, frontend backend development"
         canonical="/services/web-development"
@@ -116,7 +122,7 @@ const WebDevelopment = () => {
               "serviceType": "Web Development",
               "provider": {
                 "@type": "Organization",
-                "name": "Codenclick Technologies"
+                "name": "Code-n-Click Technologies"
               },
               "description": "Custom, high-performance websites and web apps built for speed, accessibility and conversions.",
               "offers": {
@@ -127,7 +133,46 @@ const WebDevelopment = () => {
             }
           `}
         </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How long does a typical project take?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Timelines vary based on complexity. A standard marketing site can take 3-6 weeks, while complex web applications or SaaS platforms typically range from 3-6 months. We provide detailed timelines during the discovery phase."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Do you optimize for SEO?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Absolutely. We build with SEO in mind from day one. This includes semantic HTML, fast load times, mobile responsiveness, and structured data implementation. We also offer ongoing SEO services post-launch."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Will my website be mobile-friendly?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. We take a mobile-first approach to design and development. Your site will look and perform beautifully on all devices, from smartphones to large desktop monitors."
+                  }
+                }
+              ]
+            }
+          `}
+        </script>
       </SEOHead>
+
+      {/* Breadcrumbs */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4 absolute top-0 left-0 right-0 z-20">
+         <Breadcrumbs items={breadcrumbItems} />
+      </div>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">

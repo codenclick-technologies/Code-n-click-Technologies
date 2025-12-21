@@ -52,6 +52,7 @@ const ResourceEditor = ({ resource, onClose }) => {
     metaTitle: '',
     metaDescription: '',
     metaKeywords: [],
+    publishedAt: '',
   });
   const [tagInput, setTagInput] = useState('');
   const [keywordInput, setKeywordInput] = useState('');
@@ -90,6 +91,7 @@ const ResourceEditor = ({ resource, onClose }) => {
         metaTitle: resource.metaTitle || '',
         metaDescription: resource.metaDescription || '',
         metaKeywords: resource.metaKeywords || [],
+        publishedAt: resource.publishedAt ? new Date(resource.publishedAt).toISOString().slice(0, 16) : '',
       });
       setIsSlugEdited(!!resource.slug);
     }
@@ -331,6 +333,7 @@ const ResourceEditor = ({ resource, onClose }) => {
         metaTitle: formData.metaTitle,
         metaDescription: formData.metaDescription,
         metaKeywords: formData.metaKeywords,
+        publishedAt: formData.publishedAt ? new Date(formData.publishedAt).toISOString() : new Date(),
         status: publish ? 'PUBLISHED' : 'DRAFT',
       };
 
@@ -714,6 +717,22 @@ const ResourceEditor = ({ resource, onClose }) => {
                 <Eye size={18} />
                 Preview
               </button>
+            </div>
+
+            {/* Published Date (Scheduler) */}
+            <div className="bg-gray-800/50 rounded-xl p-4">
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                 Publish Date & Time
+              </label>
+              <input
+                type="datetime-local"
+                value={formData.publishedAt}
+                onChange={(e) => handleChange('publishedAt', e.target.value)}
+                className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 placeholder-gray-500"
+              />
+              <p className="text-xs text-gray-500 mt-2">
+                Leave empty to publish immediately. Set a future date to schedule.
+              </p>
             </div>
 
             {/* Thumbnail */}

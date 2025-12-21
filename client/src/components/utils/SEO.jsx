@@ -69,6 +69,49 @@ const SEO = ({
               "addressRegion": "Haryana",
               "addressCountry": "IN"
             },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "28.4089",
+              "longitude": "77.3178"
+            },
+            "areaServed": [
+              {
+                "@type": "City",
+                "name": "Faridabad"
+              },
+              {
+                "@type": "City",
+                "name": "Delhi"
+              },
+              {
+                "@type": "City",
+                "name": "Noida"
+              },
+              {
+                "@type": "City",
+                "name": "Gurugram"
+              }
+            ],
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+              ],
+              "opens": "09:00",
+              "closes": "19:00"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+91 8700198968",
+              "contactType": "customer service",
+              "areaServed": "IN",
+              "availableLanguage": ["en", "hi"]
+            },
             "priceRange": "$$",
             "url": domain,
             "telephone": "+91 8700198968"

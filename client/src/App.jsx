@@ -102,7 +102,7 @@ function AppContent() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/resources" element={<Resources />} />
-            <Route path="/resources/:id" element={<ResourceDetail />} />
+            <Route path="/resources/:slug" element={<ResourceDetail />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />

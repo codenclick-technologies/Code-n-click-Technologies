@@ -171,8 +171,8 @@ const ResourcesContent = () => {
           </button>
         </div>
       ) : (
-        <div className="bg-gray-800/50 rounded-xl overflow-hidden">
-          <table className="w-full">
+        <div className="bg-gray-800/50 rounded-xl overflow-hidden overflow-x-auto border border-gray-700/50">
+          <table className="w-full min-w-[1000px]">
             <thead>
               <tr className="border-b border-gray-700">
                 <th className="text-left p-4 text-gray-400 font-medium">Title</th>

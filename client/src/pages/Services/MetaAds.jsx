@@ -1,5 +1,6 @@
 import React from 'react';
 import SEOHead from '../../components/utils/SEO';
+import Breadcrumbs from '../../components/utils/Breadcrumbs';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -18,6 +19,11 @@ import {
 } from 'lucide-react';
 
 const MetaAds = () => {
+  const breadcrumbItems = [
+    { label: 'Services', path: '/services' },
+    { label: 'Meta Ads', path: '/services/meta-ads' }
+  ];
+
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -100,7 +106,7 @@ const MetaAds = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
       <SEOHead
-        title="Meta Ads Services (Facebook & Instagram) | Codenclick"
+        title="Meta Ads Services (Facebook & Instagram) | Code'N'Click"
         description="Expert Meta Ads management. We create high-converting Facebook and Instagram ad campaigns to scale your business and maximize ROAS."
         keywords="Best Meta Ads Agency Delhi, Best Meta Ads Agency Faridabad, Premium Facebook Ads Services Delhi, Premium Instagram Ads Services Faridabad, Top Social Media Marketing Delhi, No1 Meta Ads Expert Faridabad, meta ads Delhi, meta ads Faridabad, facebook ads Delhi, facebook ads Faridabad, instagram ads Delhi, instagram ads Faridabad, social media marketing Delhi, social media marketing Faridabad, paid social advertising, ad creative, retargeting campaigns"
         canonical="/services/meta-ads"
@@ -113,7 +119,7 @@ const MetaAds = () => {
               "serviceType": "Social Media Advertising",
               "provider": {
                 "@type": "Organization",
-                "name": "Codenclick Technologies"
+                "name": "Code-n-Click Technologies"
               },
               "description": "Creative-first ad campaigns on Facebook and Instagram designed to drive conversions and LTV.",
               "offers": {
@@ -124,7 +130,46 @@ const MetaAds = () => {
             }
           `}
         </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "What is the minimum budget to start?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "There is no fixed minimum. We recommend a budget that aligns with your specific business goals and industry competition. We can help you determine the optimal spend during our initial consultation."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Do you create the ad creatives?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! We have a team of designers and copywriters who create high-performing images, videos, and ad copy tailored to your brand and audience."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How long does it take to see results?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "While some campaigns generate leads immediately, it typically takes 2-4 weeks to gather enough data to fully optimize the account and stabilize performance."
+                  }
+                }
+              ]
+            }
+          `}
+        </script>
       </SEOHead>
+
+      {/* Breadcrumbs */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4 absolute top-0 left-0 right-0 z-20">
+         <Breadcrumbs items={breadcrumbItems} />
+      </div>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -311,7 +356,7 @@ const MetaAds = () => {
                 </span>
               </summary>
               <div className="px-6 pb-6 text-gray-400">
-                We generally recommend a minimum ad spend of $1,500/month to generate sufficient data for optimization. However, this can vary based on your industry and goals.
+                There is no fixed minimum. We recommend a budget that aligns with your specific business goals and industry competition. We can help you determine the optimal spend during our initial consultation.
               </div>
             </details>
             <details className="group bg-gray-900/30 border border-gray-800 rounded-xl overflow-hidden transition-all duration-300 hover:border-pink-500/30">

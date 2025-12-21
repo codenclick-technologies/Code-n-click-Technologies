@@ -1,5 +1,6 @@
 import React from 'react';
 import SEOHead from '../../components/utils/SEO';
+import Breadcrumbs from '../../components/utils/Breadcrumbs';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -18,6 +19,11 @@ import {
 } from 'lucide-react';
 
 const GraphicDesign = () => {
+  const breadcrumbItems = [
+    { label: 'Services', path: '/services' },
+    { label: 'Graphic Design', path: '/services/graphic-design' }
+  ];
+
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -100,7 +106,7 @@ const GraphicDesign = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
       <SEOHead
-        title="Graphic Design Services | Codenclick"
+        title="Graphic Design Services | Code'N'Click"
         description="Professional graphic design services. We create stunning brand identities, UI/UX designs, and marketing materials that captivate your audience."
         keywords="Best Graphic Design Company Delhi, Best Graphic Design Company Faridabad, Premium Branding Services Delhi, Premium Branding Services Faridabad, Top Logo Designer Delhi, Top UI/UX Design Agency Faridabad, graphic design Delhi, graphic design Faridabad, branding Delhi, branding Faridabad, logo design Delhi, logo design Faridabad, ui/ux design Delhi, ui/ux design Faridabad, web design, marketing materials, visual identity design"
         canonical="/services/graphic-design"
@@ -113,7 +119,7 @@ const GraphicDesign = () => {
               "serviceType": "Graphic Design",
               "provider": {
                 "@type": "Organization",
-                "name": "Codenclick Technologies"
+                "name": "Code-n-Click Technologies"
               },
               "description": "Visual systems and brand assets that resonate with your audience and scale across channels.",
               "offers": {
@@ -124,7 +130,46 @@ const GraphicDesign = () => {
             }
           `}
         </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How many revisions do I get?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We typically include 3 rounds of revisions in our standard packages. This ensures we can refine the design to your satisfaction without getting stuck in endless loops."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What file formats will I receive?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You will receive all necessary formats, including AI/EPS (vector source files), PDF, JPG, and PNG (transparent background) for digital use."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Do you do logo redesigns?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! Whether you need a subtle refresh or a complete rebrand, we can modernize your existing logo while retaining its core identity."
+                  }
+                }
+              ]
+            }
+          `}
+        </script>
       </SEOHead>
+
+      {/* Breadcrumbs */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4 absolute top-0 left-0 right-0 z-20">
+         <Breadcrumbs items={breadcrumbItems} />
+      </div>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">

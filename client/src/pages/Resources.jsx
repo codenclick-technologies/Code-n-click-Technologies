@@ -30,11 +30,18 @@ const Resources = () => {
     }
   };
 
-  const filteredResources = resources.filter(r => {
-    const titleMatch = r.title?.toLowerCase().includes(searchTerm.toLowerCase()) || false;
-    const contentMatch = r.content?.toLowerCase().includes(searchTerm.toLowerCase()) || false;
-    return titleMatch || contentMatch;
-  });
+  const filteredResources = React.useMemo(() => {
+    return resources.filter(r => {
+      const lowerSearch = searchTerm.toLowerCase();
+      const titleMatch = r.title?.toLowerCase().includes(lowerSearch) || false;
+      const categoryMatch = r.category?.toLowerCase().includes(lowerSearch) || false;
+      const tagsMatch = r.tags?.some(tag => tag.toLowerCase().includes(lowerSearch)) || false;
+      // Excerpt match is better than full content match for performance
+      const excerptMatch = r.excerpt?.toLowerCase().includes(lowerSearch) || false;
+      
+      return titleMatch || categoryMatch || tagsMatch || excerptMatch;
+    });
+  }, [resources, searchTerm]);
 
   return (
     <div className="min-h-screen bg-gray-950 bg-noise pt-32 pb-20">
@@ -113,7 +120,7 @@ const Resources = () => {
                 }`}
               >
                 <div 
-                  onClick={() => navigate(`/resources/${item.id}`)}
+                  onClick={() => navigate(`/resources/${item.slug}`)}
                   className="h-full flex flex-col"
                 >
                   {/* Image Section */}
