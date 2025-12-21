@@ -59,4 +59,33 @@ export class UploadController {
     const url = await this.uploadService.uploadFile(file, folder);
     return { url };
   }
+
+  @Post('base64')
+  @ApiOperation({ summary: 'Upload a base64 encoded file' })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          description: 'Base64 data URI',
+        },
+        folder: {
+          type: 'string',
+          default: 'general',
+        },
+      },
+    },
+  })
+  async uploadBase64(
+    @Body('file') base64: string,
+    @Body('folder') folder: string = 'general',
+  ) {
+    if (!base64) {
+      throw new Error('File content is required');
+    }
+    console.log('Base64 upload request received', { folder, sizeEstimate: base64.length });
+    const url = await this.uploadService.uploadBase64(base64, folder);
+    return { url };
+  }
 }

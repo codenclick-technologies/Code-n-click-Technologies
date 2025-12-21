@@ -140,4 +140,37 @@ export class UploadService {
       // Don't throw - deletion failures shouldn't block operations
     }
   }
+
+  /**
+   * Uploads base64 encoded image to Cloudinary
+   * @param base64 - The base64 string
+   * @param folder - The folder to upload to
+   */
+  async uploadBase64(base64: string, folder: string = 'general'): Promise<string> {
+    if (!base64) throw new BadRequestException('No base64 data provided');
+
+    // Basic validation of base64 string
+    if (!base64.match(/^data:image\/(png|jpg|jpeg|gif|webp);base64,/)) {
+      throw new BadRequestException('Invalid image format. Must be base64 encoded image.');
+    }
+
+    return new Promise((resolve, reject) => {
+      cloudinary.uploader.upload(
+        base64,
+        {
+          folder: `code-n-click/${folder}`,
+          resource_type: 'image',
+          public_id: `file_${Date.now()}_${Math.random().toString(36).substring(7)}`,
+        },
+        (error, result) => {
+          if (error || !result) {
+            console.error('Cloudinary base64 upload error:', error);
+            const errorMessage = error?.message || 'Base64 upload failed';
+            return reject(new InternalServerErrorException(errorMessage));
+          }
+          resolve(result.secure_url);
+        }
+      );
+    });
+  }
 }

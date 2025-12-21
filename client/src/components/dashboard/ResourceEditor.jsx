@@ -108,6 +108,16 @@ const ResourceEditor = ({ resource, onClose }) => {
 
   const quillRef = useRef(null);
 
+  // Helper to convert file to base64
+  const fileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   const imageHandler = useCallback(() => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
@@ -117,26 +127,49 @@ const ResourceEditor = ({ resource, onClose }) => {
     input.onchange = async () => {
       const file = input.files[0];
       if (file) {
-        if (file.size > 10 * 1024 * 1024) {
-          alert('File is too large. Max 10MB allowed.');
+        if (file.size > 50 * 1024 * 1024) {
+          alert('File is too large. Max 50MB allowed.');
           return;
         }
+
         try {
           const api = new ApiService();
-          const formData = new FormData();
-          formData.append('file', file);
-          formData.append('folder', 'resources_content');
+          let uploadedUrl = null;
 
-          const response = await api.uploadFile('/upload', formData);
+          // Strategy 1: Standard Binary Upload
+          try {
+             const formData = new FormData();
+             formData.append('file', file);
+             formData.append('folder', 'resources_content');
+             const response = await api.uploadFile('/upload', formData);
+             uploadedUrl = response.url;
+          } catch (stdError) {
+             console.warn('Standard upload failed, attempting Base64 fallback...', stdError);
+          }
+
+          // Strategy 2: Base64 Fallback
+          if (!uploadedUrl) {
+            const base64Data = await fileToBase64(file);
+            const response = await api.post('/upload/base64', { 
+              file: base64Data, 
+              folder: 'resources_content' 
+            });
+            uploadedUrl = response.url;
+          }
           
-          const quill = quillRef.current.getEditor();
-          quill.focus();
-          const range = quill.getSelection();
-          const index = range ? range.index : quill.getLength();
-          
-          quill.insertEmbed(index, 'image', response.url);
-          quill.setSelection(index + 1);
+          if (uploadedUrl) {
+            const quill = quillRef.current.getEditor();
+            quill.focus();
+            const range = quill.getSelection();
+            const index = range ? range.index : quill.getLength();
+            quill.insertEmbed(index, 'image', uploadedUrl);
+            quill.setSelection(index + 1);
+          } else {
+             throw new Error('All upload methods failed.');
+          }
+
         } catch (error) {
+          console.error('Editor image upload failed:', error);
           alert(`Upload failed: ${error.message || 'Network error or server timeout. Please check your connection.'}`);
         }
       }
