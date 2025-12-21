@@ -48,28 +48,45 @@ export class ResourcesService {
 
   async findAll(query: any) {
     const { status, search, category, tags } = query;
-    const where: any = {};
+    const where: any = { AND: [] };
 
-    if (status) where.status = status;
-    if (category) where.category = category;
-    if (tags) where.tags = { hasSome: Array.isArray(tags) ? tags : [tags] };
+    if (status) {
+      where.AND.push({ status });
+    }
+
+    if (category) {
+      where.AND.push({ category });
+    }
+
+    if (tags) {
+      where.AND.push({ tags: { hasSome: Array.isArray(tags) ? tags : [tags] } });
+    }
 
     // Scheduling Logic:
     // If status is PUBLISHED, only show posts where publishedAt <= NOW,
-    // unless 'includeFuture' is explicitly set to true (e.g., for admin preview).
+    // unless 'includeFuture' is explicitly set to true.
     if (status === 'PUBLISHED' && query.includeFuture !== 'true') {
-      where.OR = [
-        { publishedAt: { lte: new Date() } },
-        { publishedAt: null }
-      ];
+      where.AND.push({
+        OR: [
+          { publishedAt: { lte: new Date() } },
+          { publishedAt: null }
+        ]
+      });
     }
 
     if (search) {
-      where.OR = [
-        { title: { contains: search, mode: 'insensitive' } },
-        { content: { contains: search, mode: 'insensitive' } },
-        { excerpt: { contains: search, mode: 'insensitive' } },
-      ];
+      where.AND.push({
+        OR: [
+          { title: { contains: search, mode: 'insensitive' } },
+          { content: { contains: search, mode: 'insensitive' } },
+          { excerpt: { contains: search, mode: 'insensitive' } },
+        ]
+      });
+    }
+
+    // Clean up empty AND array if perfectly empty
+    if (where.AND.length === 0) {
+      delete where.AND;
     }
 
     const result = await this.prisma.resource.findMany({
@@ -153,11 +170,20 @@ export class ResourcesService {
   }
 
   async publish(id: string) {
+    const resource = await this.findOne(id);
+    const now = new Date();
+
+    // If resource is already scheduled for the future, keep that date.
+    // Otherwise, set publishedAt to now.
+    const publishedAt = (resource.publishedAt && resource.publishedAt > now)
+      ? undefined
+      : now;
+
     return this.prisma.resource.update({
       where: { id },
       data: {
         status: ResourceStatus.PUBLISHED,
-        publishedAt: new Date(),
+        ...(publishedAt && { publishedAt }),
       },
     });
   }
