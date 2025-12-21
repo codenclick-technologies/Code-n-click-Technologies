@@ -58,7 +58,10 @@ export class ResourcesService {
     // If status is PUBLISHED, only show posts where publishedAt <= NOW,
     // unless 'includeFuture' is explicitly set to true (e.g., for admin preview).
     if (status === 'PUBLISHED' && query.includeFuture !== 'true') {
-      where.publishedAt = { lte: new Date() };
+      where.OR = [
+        { publishedAt: { lte: new Date() } },
+        { publishedAt: null }
+      ];
     }
 
     if (search) {
