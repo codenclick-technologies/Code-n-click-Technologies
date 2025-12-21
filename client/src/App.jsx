@@ -45,6 +45,7 @@ const SEO = lazy(() => import('./pages/Services/SEO'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
 // Loading Component
@@ -232,6 +233,8 @@ function AppContent() {
                 </ProtectedRoute>
               } 
             />
+            {/* 404 Route - Must be last */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>
