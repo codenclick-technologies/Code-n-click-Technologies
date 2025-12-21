@@ -5,7 +5,7 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Calendar, User, Tag, Share2, Clock, Eye, Facebook, Twitter, Linkedin, Link as LinkIcon, Code2, Layout, Zap, Hash } from 'lucide-react';
 import { resourcesAPI } from '../services/api';
 import { fadeInUp } from '../utils/animations';
-import Breadcrumbs from '../components/utils/Breadcrumbs';
+
 
 const ResourceDetail = () => {
   const { slug } = useParams();
@@ -101,10 +101,7 @@ const ResourceDetail = () => {
 
   const readingTime = Math.ceil((resource.content?.replace(/<[^>]*>/g, '').length || 0) / 1000);
 
-  const breadcrumbItems = [
-    { label: 'Resources', path: '/resources' },
-    { label: resource.title, path: `/resources/${slug}` }
-  ];
+
 
   return (
     <div className="min-h-screen bg-gray-950 bg-noise font-sans selection:bg-blue-500/30 selection:text-blue-200">
@@ -151,12 +148,7 @@ const ResourceDetail = () => {
         style={{ scaleX }}
       />
 
-      {/* Breadcrumbs */}
-      <div className="absolute top-36 left-0 right-0 z-40 px-6 sm:px-8 max-w-7xl mx-auto pointer-events-none">
-        <div className="pointer-events-auto inline-block backdrop-blur-md rounded-2xl">
-           <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
+
 
       {/* Hero Section */}
       <div className="relative min-h-[70vh] flex items-end justify-center pb-20 pt-48 overflow-hidden">

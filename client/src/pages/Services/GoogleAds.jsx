@@ -1,6 +1,6 @@
 import React from 'react';
 import SEOHead from '../../components/utils/SEO';
-import Breadcrumbs from '../../components/utils/Breadcrumbs';
+
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -19,10 +19,7 @@ import {
 } from 'lucide-react';
 
 const GoogleAds = () => {
-  const breadcrumbItems = [
-    { label: 'Services', path: '/services' },
-    { label: 'Google Ads', path: '/services/google-ads' }
-  ];
+
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -166,10 +163,7 @@ const GoogleAds = () => {
         </script>
       </SEOHead>
 
-      {/* Breadcrumbs */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4 absolute top-0 left-0 right-0 z-20">
-         <Breadcrumbs items={breadcrumbItems} />
-      </div>
+
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
