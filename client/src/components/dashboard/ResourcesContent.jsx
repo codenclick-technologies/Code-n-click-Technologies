@@ -19,7 +19,11 @@ const ResourcesContent = () => {
   const fetchResources = async () => {
     try {
       setLoading(true);
-      const params = statusFilter !== 'ALL' ? { status: statusFilter } : {};
+      // Always include future posts for the dashboard
+      const params = { 
+        includeFuture: true,
+        ...(statusFilter !== 'ALL' && { status: statusFilter })
+      };
       const data = await resourcesAPI.getAll(params);
       setResources(data || []);
     } catch (error) {
@@ -83,13 +87,28 @@ const ResourcesContent = () => {
     r.category?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const getStatusBadge = (status) => {
+  const isScheduled = (resource) => {
+    return resource.status === 'PUBLISHED' && 
+           resource.publishedAt && 
+           new Date(resource.publishedAt) > new Date();
+  };
+
+  const getDisplayStatus = (resource) => {
+    if (isScheduled(resource)) return 'SCHEDULED';
+    return resource.status;
+  };
+
+  const getStatusBadge = (resource) => {
+    if (isScheduled(resource)) {
+      return 'bg-purple-900/30 text-purple-400 border-purple-500/30';
+    }
+    
     const styles = {
       PUBLISHED: 'bg-green-900/30 text-green-400 border-green-500/30',
       DRAFT: 'bg-yellow-900/30 text-yellow-400 border-yellow-500/30',
       ARCHIVED: 'bg-gray-900/30 text-gray-400 border-gray-500/30',
     };
-    return styles[status] || styles.DRAFT;
+    return styles[resource.status] || styles.DRAFT;
   };
 
   if (showEditor) {
@@ -179,7 +198,7 @@ const ResourcesContent = () => {
                 <th className="text-left p-4 text-gray-400 font-medium">Category</th>
                 <th className="text-left p-4 text-gray-400 font-medium">Status</th>
                 <th className="text-left p-4 text-gray-400 font-medium">Views</th>
-                <th className="text-left p-4 text-gray-400 font-medium">Updated</th>
+                <th className="text-left p-4 text-gray-400 font-medium">Published At</th>
                 <th className="text-right p-4 text-gray-400 font-medium">Actions</th>
               </tr>
             </thead>
@@ -207,13 +226,24 @@ const ResourcesContent = () => {
                     </span>
                   </td>
                   <td className="p-4">
-                    <span className={`px-3 py-1 rounded-full text-sm border ${getStatusBadge(resource.status)}`}>
-                      {resource.status}
+                    <span className={`px-3 py-1 rounded-full text-sm border ${getStatusBadge(resource)}`}>
+                      {getDisplayStatus(resource)}
                     </span>
                   </td>
                   <td className="p-4 text-gray-400">{resource.views || 0}</td>
                   <td className="p-4 text-gray-400 text-sm">
-                    {new Date(resource.updatedAt).toLocaleDateString()}
+                    {resource.publishedAt ? (
+                      <div className="flex flex-col">
+                        <span className="text-white">
+                          {new Date(resource.publishedAt).toLocaleDateString()}
+                        </span>
+                        <span className="text-xs text-gray-500">
+                          {new Date(resource.publishedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-gray-600 italic">Not set</span>
+                    )}
                   </td>
                   <td className="p-4">
                     <div className="flex items-center justify-end gap-2">
