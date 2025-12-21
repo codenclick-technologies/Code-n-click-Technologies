@@ -119,7 +119,11 @@ const ServiceCard = ({ service }) => {
               <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-2">{service.title}</h3>
               <p className="text-sm text-gray-400 mb-6 leading-relaxed flex-1">{service.description}</p>
               <div>
-                <Link to={service.link} className="inline-flex items-center text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors uppercase tracking-wider group-hover:gap-3 gap-2 transition-all">
+                <Link 
+                  to={service.link} 
+                  className="inline-flex items-center text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors uppercase tracking-wider group-hover:gap-3 gap-2 transition-all"
+                  aria-label={`Learn more about ${service.title}`}
+                >
                   Learn More <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>

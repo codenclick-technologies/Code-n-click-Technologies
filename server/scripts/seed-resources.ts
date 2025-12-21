@@ -6,7 +6,7 @@ const resources = [
   {
     title: 'The Future of Web Development: Top Trends for 2025',
     category: 'Web Development',
-    author: 'Code-n-Click Team',
+    author: 'Codenclick Team',
     thumbnail: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     content: `
       <h2>Introduction</h2>
@@ -22,7 +22,7 @@ const resources = [
       <p>With <strong>WebGPU</strong> becoming widely supported, the web is ready for high-performance 3D graphics and compute tasks. This opens the door for immersive <strong>metaverse experiences</strong>, advanced data visualization, and browser-based gaming without the need for plugins.</p>
       
       <h3>Conclusion</h3>
-      <p>To rank higher and engage users, adopting these technologies is crucial. At <strong>Code-n-Click Technologies</strong>, we specialize in building future-proof web applications that leverage these cutting-edge trends.</p>
+      <p>To rank higher and engage users, adopting these technologies is crucial. At <strong>Codenclick Technologies</strong>, we specialize in building future-proof web applications that leverage these cutting-edge trends.</p>
     `,
     status: 'PUBLISHED'
   },

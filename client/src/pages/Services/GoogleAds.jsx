@@ -113,7 +113,7 @@ const GoogleAds = () => {
               "serviceType": "PPC Advertising",
               "provider": {
                 "@type": "Organization",
-                "name": "Code-n-Click Technologies"
+                "name": "Codenclick Technologies"
               },
               "description": "Capture high-intent users with targeted search and display campaigns optimized for ROI.",
               "offers": {

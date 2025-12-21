@@ -222,6 +222,7 @@ const Services = () => {
                 <Link 
                   to={service.link}
                   className={`inline-flex items-center text-${service.color}-400 font-semibold group-hover:translate-x-1 transition-transform relative z-10`}
+                  aria-label={`Learn more about ${service.title}`}
                 >
                   Learn More <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>

@@ -103,7 +103,7 @@ const WebDevelopment = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
       <SEOHead
-        title="Professional Web Development Services | Code'N'Click"
+        title="Professional Web Development Services | Codenclick"
         description="Expert web development services. We build high-performance, SEO-optimized websites and web applications using React, Next.js, and modern technologies."
         keywords="Best Web Development Company Delhi, Best Web Development Company Faridabad, Premium Web Development Services Delhi, Premium Web Development Services Faridabad, No1 Web Developer Delhi, Top Web Development Agency Faridabad, custom web apps Delhi, custom web apps Faridabad, react development, next.js, seo services Delhi, seo services Faridabad, pwa development, e-commerce Delhi, e-commerce Faridabad, frontend backend development"
         canonical="/services/web-development"
@@ -116,7 +116,7 @@ const WebDevelopment = () => {
               "serviceType": "Web Development",
               "provider": {
                 "@type": "Organization",
-                "name": "Code-n-Click Technologies"
+                "name": "Codenclick Technologies"
               },
               "description": "Custom, high-performance websites and web apps built for speed, accessibility and conversions.",
               "offers": {

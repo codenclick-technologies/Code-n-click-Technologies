@@ -100,7 +100,7 @@ const GraphicDesign = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
       <SEOHead
-        title="Graphic Design Services | Code'N'Click"
+        title="Graphic Design Services | Codenclick"
         description="Professional graphic design services. We create stunning brand identities, UI/UX designs, and marketing materials that captivate your audience."
         keywords="Best Graphic Design Company Delhi, Best Graphic Design Company Faridabad, Premium Branding Services Delhi, Premium Branding Services Faridabad, Top Logo Designer Delhi, Top UI/UX Design Agency Faridabad, graphic design Delhi, graphic design Faridabad, branding Delhi, branding Faridabad, logo design Delhi, logo design Faridabad, ui/ux design Delhi, ui/ux design Faridabad, web design, marketing materials, visual identity design"
         canonical="/services/graphic-design"
@@ -113,7 +113,7 @@ const GraphicDesign = () => {
               "serviceType": "Graphic Design",
               "provider": {
                 "@type": "Organization",
-                "name": "Code-n-Click Technologies"
+                "name": "Codenclick Technologies"
               },
               "description": "Visual systems and brand assets that resonate with your audience and scale across channels.",
               "offers": {

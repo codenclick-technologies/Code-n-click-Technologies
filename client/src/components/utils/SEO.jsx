@@ -9,10 +9,10 @@ const SEO = ({
   canonical, 
   type = 'website', 
   imageUrl = '/og-image.jpg', // Default OG image path
-  author = 'code-n-click Technologies',
+  author = 'Codenclick Technologies',
   children
 }) => {
-  const siteName = 'Code-n-Click Technologies';
+  const siteName = 'Codenclick Technologies';
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const domain = 'https://codenclick.in';
   const fullCanonical = canonical ? `${domain}${canonical}` : domain;

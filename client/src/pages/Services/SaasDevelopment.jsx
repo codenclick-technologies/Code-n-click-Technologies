@@ -115,7 +115,7 @@ const SaasDevelopment = () => {
               "serviceType": "SaaS Development",
               "provider": {
                 "@type": "Organization",
-                "name": "Code-n-Click Technologies"
+                "name": "Codenclick Technologies"
               },
               "description": "Build reliable, scalable SaaS products designed for growth, retention, and efficient operations.",
               "offers": {

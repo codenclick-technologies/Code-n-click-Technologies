@@ -6,7 +6,7 @@ const SEOGuide = () => {
     <>
       <SEO 
         title="SEO & Marketing Guide"
-        description="Complete guide for ranking Code-n-Click Technologies website"
+        description="Complete guide for ranking Codenclick Technologies website"
         canonical="/seo-guide"
       />
       <div className="min-h-screen bg-gray-950 text-white p-8">

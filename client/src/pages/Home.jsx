@@ -15,9 +15,9 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <SEO 
-        title="Best Software Development & Digital Marketing Agency in Faridabad"
-        description="No.1 Digital Marketing Agency in Delhi & Faridabad - Code-n-Click Technologies. We are the best and premium IT company specializing in web development, SaaS solutions, mobile apps, SEO, Google Ads, Meta Ads, and graphic design services. Transform your business with our expert team."
-        keywords="No1 Digital Marketing Agency Delhi, No1 Digital Marketing Agency Faridabad, Best Digital Marketing Agency Delhi, Best Digital Marketing Agency Faridabad, Premium Digital Marketing Services Delhi, Premium Digital Marketing Services Faridabad, Top Software Development Company Delhi, Top Software Development Company Faridabad, Best Web Development Company Delhi, Best Web Development Company Faridabad, Premium SEO Services Delhi, Premium SEO Services Faridabad, Best IT Company Delhi NCR, Top IT Company Faridabad, software development company, web development services, SaaS development, mobile app development, Google Ads management, Meta Ads, graphic design services"
+        title="No.1 Web Development & Digital Marketing Agency in Faridabad, Delhi NCR"
+        description="Codenclick Technologies is the Best IT Company in Faridabad & Delhi. We provide Premium Web Development, SaaS, SEO, Google/Meta Ads & Graphics. #1 Digital Agency for Business Growth."
+        keywords="No1 Digital Marketing Agency Delhi, No1 Digital Marketing Agency Faridabad, Best Digital Marketing Agency Delhi, Best Digital Marketing Agency Faridabad, Premium Digital Marketing Services Delhi, Premium Digital Marketing Services Faridabad, Top Software Development Company Delhi, Top Software Development Company Faridabad, Best Web Development Company Delhi, Best Web Development Company Faridabad, Premium SEO Services Delhi, Premium SEO Services Faridabad, Best IT Company Delhi NCR, Top IT Company Faridabad, Custom Software Development, SaaS Solutions India, Meta Ads Expert Delhi, Google Ads Consultant Faridabad"
         canonical="/"
       >
 

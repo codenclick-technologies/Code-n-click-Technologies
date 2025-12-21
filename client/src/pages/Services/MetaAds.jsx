@@ -100,7 +100,7 @@ const MetaAds = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
       <SEOHead
-        title="Meta Ads Services (Facebook & Instagram) | Code'N'Click"
+        title="Meta Ads Services (Facebook & Instagram) | Codenclick"
         description="Expert Meta Ads management. We create high-converting Facebook and Instagram ad campaigns to scale your business and maximize ROAS."
         keywords="Best Meta Ads Agency Delhi, Best Meta Ads Agency Faridabad, Premium Facebook Ads Services Delhi, Premium Instagram Ads Services Faridabad, Top Social Media Marketing Delhi, No1 Meta Ads Expert Faridabad, meta ads Delhi, meta ads Faridabad, facebook ads Delhi, facebook ads Faridabad, instagram ads Delhi, instagram ads Faridabad, social media marketing Delhi, social media marketing Faridabad, paid social advertising, ad creative, retargeting campaigns"
         canonical="/services/meta-ads"
@@ -113,7 +113,7 @@ const MetaAds = () => {
               "serviceType": "Social Media Advertising",
               "provider": {
                 "@type": "Organization",
-                "name": "Code-n-Click Technologies"
+                "name": "Codenclick Technologies"
               },
               "description": "Creative-first ad campaigns on Facebook and Instagram designed to drive conversions and LTV.",
               "offers": {
