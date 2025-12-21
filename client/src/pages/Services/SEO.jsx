@@ -24,14 +24,6 @@ const SEO = () => {
     transition: { duration: 0.6 }
   };
 
-  const stagger = {
-    animate: {
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
   const services = [
     {
       icon: <Settings className="w-8 h-8 text-green-400" />,
@@ -98,37 +90,17 @@ const SEO = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
+    <div className="min-h-screen bg-[#030014] text-white overflow-hidden">
       <SEOHead
-        title="SEO Services (Search Engine Optimization)"
+        title="SEO Services (Search Engine Optimization) | Code'N'Click"
         description="Expert SEO services. We help businesses rank higher on Google, drive organic traffic, and increase revenue with data-driven strategies."
-        keywords="Best SEO Services Delhi, Best SEO Services Faridabad, Premium SEO Company Delhi, Premium SEO Company Faridabad, No1 SEO Agency Delhi, Top SEO Consultant Faridabad, search engine optimization Delhi, search engine optimization Faridabad, technical seo, link building Delhi, link building Faridabad, local seo Delhi, local seo Faridabad, seo audit, content marketing Delhi, content marketing Faridabad"
+        keywords="Best SEO Services Delhi, Best SEO Services Faridabad, Premium SEO Company Delhi, Premium SEO Company Faridabad, No1 SEO Agency Delhi"
         canonical="/services/seo"
-      >
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "Service",
-              "serviceType": "Search Engine Optimization",
-              "provider": {
-                "@type": "Organization",
-                "name": "Code'N'Click"
-              },
-              "description": "Technical SEO, content strategy, and link-building to increase organic visibility and qualified traffic.",
-              "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                "price": "Custom Quote"
-              }
-            }
-          `}
-        </script>
-      </SEOHead>
+      />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-green-900/20 via-gray-950 to-gray-950 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-green-900/20 via-[#030014] to-[#030014] pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
            <div className="absolute top-20 right-10 w-72 h-72 bg-green-500/10 rounded-full blur-3xl animate-pulse" />
            <div className="absolute bottom-20 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -139,7 +111,7 @@ const SEO = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-900/30 border border-green-500/30 text-green-400 text-sm font-medium mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-green-500/30 text-green-400 text-sm font-medium mb-8"
           >
             <TrendingUp className="w-4 h-4" />
             <span>Dominate Search Results</span>
@@ -165,198 +137,153 @@ const SEO = () => {
             in front of customers who are actively looking for you.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Link 
-              to="/contact" 
-              className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-green-600 rounded-full hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 focus:ring-offset-gray-900"
-            >
-              Get a Free SEO Audit
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <Link to="/contact" className="w-full sm:w-auto px-8 py-4 bg-green-600 hover:bg-green-500 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-green-500/25 flex items-center justify-center gap-2">
+              Get Free Audit <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link 
-              to="/services" 
-              className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-gray-300 transition-all duration-200 bg-gray-800/50 border border-gray-700 rounded-full hover:bg-gray-800 hover:text-white backdrop-blur-sm"
-            >
+            <Link to="/services" className="w-full sm:w-auto px-8 py-4 glass-button text-white rounded-xl font-bold flex items-center justify-center gap-2">
               View All Services
             </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* Tech Stack */}
-      <section className="py-10 border-y border-gray-800/50 bg-gray-900/30 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-gray-500 text-sm font-semibold uppercase tracking-wider mb-8">SEO Toolset</p>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-             {techStack.map((tech, index) => (
-               <div key={index} className="flex items-center gap-2">
-                 <span className="text-lg font-semibold text-gray-300">{tech.name}</span>
-               </div>
-             ))}
-          </div>
-        </div>
-      </section>
-
       {/* Services Grid */}
-      <section className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Complete SEO Solutions</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">A holistic approach to organic growth that covers every ranking factor.</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">SEO Solutions</h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              A holistic approach to organic growth covering technical, on-page, and authority.
+            </p>
           </div>
 
-          <motion.div 
-            variants={stagger}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
-                variants={fadeIn}
-                className="group p-8 rounded-2xl bg-gray-900/50 border border-gray-800 hover:border-green-500/50 hover:bg-gray-800/50 transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="glass-panel glass-card-shine p-8 rounded-3xl border border-white/10 group"
               >
-                <div className="mb-6 p-3 rounded-xl bg-gray-950 inline-block border border-gray-800 group-hover:border-green-500/30 group-hover:scale-110 transition-all duration-300">
+                <div className="mb-6 p-4 rounded-2xl bg-white/5 w-fit group-hover:bg-green-500/20 transition-colors">
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-3 group-hover:text-green-400 transition-colors">{service.title}</h3>
-                <p className="text-gray-400 leading-relaxed">
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-gray-400">
                   {service.description}
                 </p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-24 bg-gray-900/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      {/* Tech Stack */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">SEO Toolset</h2>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-4">
+            {techStack.map((tech, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ scale: 1.05 }}
+                className="glass-button px-6 py-3 rounded-full flex items-center gap-3 text-gray-300 hover:text-white border border-white/5"
+              >
+                <LineChart className="w-4 h-4 text-green-400" />
+                <span className="font-semibold">{tech.name}</span>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-gray-400">{tech.category}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+       {/* Process Section */}
+       <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Sustainable Growth</h2>
-              <p className="text-gray-400 mb-8 text-lg">
-                SEO isn't a one-time fix; it's a long-term strategy. Our process ensures consistent improvement over time.
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Sustainable Growth</h2>
+              <p className="text-xl text-gray-400 mb-8">
+                SEO isn't a one-time fix; it's a long-term compound interest for your business.
               </p>
               <div className="space-y-8">
                 {processSteps.map((step, index) => (
-                  <motion.div 
+                  <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.2 }}
                     className="flex gap-6"
                   >
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-900/20 border border-green-500/30 flex items-center justify-center text-green-400 font-bold">
-                      {step.number}
-                    </div>
+                    <div className="text-5xl font-bold text-white/10">{step.number}</div>
                     <div>
-                      <h4 className="text-xl font-bold mb-2">{step.title}</h4>
-                      <p className="text-gray-400">{step.description}</p>
+                      <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+                      <p className="text-gray-400 leading-relaxed">{step.description}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
             </div>
+            
             <div className="relative">
               <div className="absolute inset-0 bg-green-500/20 blur-3xl rounded-full" />
-              <div className="relative rounded-2xl border border-gray-800 bg-gray-950/80 backdrop-blur-xl p-8 shadow-2xl">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-900/50 border border-gray-800">
-                    <Zap className="w-6 h-6 text-yellow-400" />
-                    <div>
-                      <div className="font-semibold">Speed Optimized</div>
-                      <div className="text-sm text-gray-400">Core Web Vitals ready</div>
+              <div className="glass-panel p-8 rounded-3xl border border-white/10 relative z-10">
+                 <div className="space-y-6">
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
+                       <Zap className="text-yellow-400" />
+                       <span className="text-gray-300 font-medium">Core Web Vitals Optimized</span>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-900/50 border border-gray-800">
-                    <CheckCircle2 className="w-6 h-6 text-blue-400" />
-                    <div>
-                      <div className="font-semibold">White Hat Tactics</div>
-                      <div className="text-sm text-gray-400">Safe, long-term results</div>
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
+                       <CheckCircle2 className="text-green-400" />
+                       <span className="text-gray-300 font-medium">100% White Hat Tactics</span>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-900/50 border border-gray-800">
-                    <Award className="w-6 h-6 text-purple-400" />
-                    <div>
-                      <div className="font-semibold">Proven Results</div>
-                      <div className="text-sm text-gray-400">Track record of #1 rankings</div>
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
+                       <Award className="text-purple-400" />
+                       <span className="text-gray-300 font-medium">Proven Ranking Track Record</span>
                     </div>
-                  </div>
-                </div>
+                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            <details className="group bg-gray-900/30 border border-gray-800 rounded-xl overflow-hidden transition-all duration-300 hover:border-green-500/30">
-              <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold text-lg">
-                How long does SEO take?
-                <span className="transition-transform group-open:rotate-180">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                </span>
-              </summary>
-              <div className="px-6 pb-6 text-gray-400">
-                SEO is a marathon, not a sprint. While some technical fixes can show immediate results, significant ranking improvements typically take 3-6 months depending on competition.
-              </div>
-            </details>
-            <details className="group bg-gray-900/30 border border-gray-800 rounded-xl overflow-hidden transition-all duration-300 hover:border-green-500/30">
-              <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold text-lg">
-                Do you guarantee #1 rankings?
-                <span className="transition-transform group-open:rotate-180">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                </span>
-              </summary>
-              <div className="px-6 pb-6 text-gray-400">
-                No ethical SEO agency can guarantee specific rankings because search algorithms are constantly changing. However, we guarantee a proven process that has consistently delivered results for our clients.
-              </div>
-            </details>
-            <details className="group bg-gray-900/30 border border-gray-800 rounded-xl overflow-hidden transition-all duration-300 hover:border-green-500/30">
-              <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold text-lg">
-                What is included in an SEO audit?
-                <span className="transition-transform group-open:rotate-180">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                </span>
-              </summary>
-              <div className="px-6 pb-6 text-gray-400">
-                Our audit covers technical health (speed, mobile, indexing), on-page optimization (content, keywords), off-page factors (backlinks), and competitor analysis.
-              </div>
-            </details>
+      {/* CTA Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto glass-panel rounded-[3rem] p-12 text-center relative overflow-hidden border border-white/10">
+          <div className="absolute inset-0 bg-gradient-to-r from-green-600/20 to-emerald-600/20" />
+          <div className="relative z-10">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Scale?</h2>
+            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              Build a custom SEO strategy that drives real business growth.
+            </p>
+            <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-xl font-bold hover:scale-105 transition-transform">
+              Start Your Growth Journey <ArrowRight className="w-5 h-5" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-green-600/10" />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Outrank the Competition?</h2>
-          <p className="text-xl text-gray-400 mb-10">
-            Let's build a custom SEO strategy that drives real business growth.
-          </p>
-          <Link 
-            to="/contact" 
-            className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-green-600 rounded-full hover:bg-green-700 hover:scale-105 shadow-lg shadow-green-600/30"
-          >
-            Start Your Growth Journey
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
-        </div>
-      </section>
     </div>
   );
 };

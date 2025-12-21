@@ -1,16 +1,22 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { AuthProvider } from './context/AuthContext';
 import ErrorBoundary from './components/utils/ErrorBoundary';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ScrollToTop from './components/utils/ScrollToTop';
 import SmoothScroll from './components/utils/SmoothScroll';
+import CustomCursor from './components/common/CustomCursor';
+import Preloader from './components/common/Preloader';
 import { Analytics } from '@vercel/analytics/react';
 
 // Critical Routes (eager load)
 import Home from './pages/Home';
 import ThirdPartyLoader from './components/utils/ThirdPartyLoader';
+import HolidayBanner from './components/common/HolidayBanner';
+import HolidayEffects from './components/common/HolidayEffects';
+import { checkHoliday } from './data/holidayConfig';
 
 // Lazy Loaded Routes
 const Login = lazy(() => import('./pages/Auth/Login'));
@@ -72,17 +78,47 @@ function AppContent() {
   const location = useLocation();
   const isDashboard = location.pathname.startsWith('/dashboard');
 
+  const [activeHoliday, setActiveHoliday] = React.useState(null);
+
+  // Check for Holidays (Indian Calendar Support)
+  React.useEffect(() => {
+    const checkDate = () => {
+      const today = new Date();
+      // NOTE: System time is used here. 
+      const date = today.getDate();
+      const month = today.getMonth() + 1;
+      const year = today.getFullYear();
+
+      // Check against fixed and variable Indian calendar dates
+      const holiday = checkHoliday(date, month, year);
+      
+      // FOR DEBUGGING ONLY: Uncomment next line to test specific dates
+      // const holiday = checkHoliday(25, 12, 2025); // Test Christmas
+      
+      setActiveHoliday(holiday);
+    };
+    checkDate();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-950 text-white transition-colors duration-300 flex flex-col">
+      <Preloader />
+      <CustomCursor />
       <ThirdPartyLoader />
       <Analytics />
       <ScrollToTop />
       <SmoothScroll />
 
-      {!isDashboard && <Navbar />}
+      {/* Premium Noise Overlay */}
+      <div className="fixed inset-0 z-[1] pointer-events-none bg-noise opacity-[0.03] mix-blend-overlay" />
+
+      {activeHoliday && <HolidayBanner holiday={activeHoliday} />}
+      {activeHoliday && <HolidayEffects type={activeHoliday.type} />}
+      {!isDashboard && <Navbar isBannerVisible={!!activeHoliday} />}
       <main className="flex-grow">
         <Suspense fallback={<Loading />}>
-          <Routes>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/change-password" element={<ChangePassword />} />
@@ -243,7 +279,8 @@ function AppContent() {
             />
             {/* 404 Route - Must be last */}
             <Route path="*" element={<NotFound />} />
-          </Routes>
+            </Routes>
+          </AnimatePresence>
         </Suspense>
       </main>
       {!isDashboard && <Footer />}

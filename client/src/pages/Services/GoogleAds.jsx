@@ -1,6 +1,5 @@
 import React from 'react';
 import SEOHead from '../../components/utils/SEO';
-
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -12,27 +11,16 @@ import {
   ArrowRight,
   TrendingUp,
   MousePointer,
-  Globe,
-  PieChart,
   RefreshCw,
-  Award
+  CheckCircle2,
+  Zap
 } from 'lucide-react';
 
 const GoogleAds = () => {
-
-
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 }
-  };
-
-  const stagger = {
-    animate: {
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
   };
 
   const services = [
@@ -101,73 +89,17 @@ const GoogleAds = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
+    <div className="min-h-screen bg-[#030014] text-white overflow-hidden">
       <SEOHead
-        title="Google Ads Services (PPC)"
+        title="Google Ads Services (PPC) | Code'N'Click"
         description="Expert Google Ads management. We create high-ROI search, display, and shopping campaigns to drive qualified traffic and sales."
-        keywords="Best Google Ads Agency Delhi, Best Google Ads Agency Faridabad, Premium PPC Services Delhi, Premium PPC Services Faridabad, Top Google Ads Company Delhi, No1 PPC Management Faridabad, google ads Delhi, google ads Faridabad, ppc management Delhi, ppc management Faridabad, search advertising Delhi, search advertising Faridabad, display ads, google shopping, sem services Delhi, sem services Faridabad, pay per click advertising"
+        keywords="Best Google Ads Agency Delhi, Best Google Ads Agency Faridabad, Premium PPC Services Delhi, Premium PPC Services Faridabad, Top Google Ads Company Delhi, No1 PPC Management Faridabad"
         canonical="/services/google-ads"
-      >
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "Service",
-              "serviceType": "PPC Advertising",
-              "provider": {
-                "@type": "Organization",
-                "name": "Code-n-Click Technologies"
-              },
-              "description": "Capture high-intent users with targeted search and display campaigns optimized for ROI.",
-              "offers": {
-                "@type": "Offer",
-                "priceCurrency": "INR",
-                "price": "Custom Quote"
-              }
-            }
-          `}
-        </script>
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": [
-                {
-                  "@type": "Question",
-                  "name": "How much does Google Ads cost?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "You set your own budget. You can start small and scale up. We charge a management fee based on your ad spend, ensuring our incentives are aligned with your growth."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "What is a good Quality Score?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Quality Score is a diagnostic tool meant to give you a sense of how well your ad quality compares to other advertisers. A score of 7-10 is considered good and can lower your cost per click."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "Do I need a landing page?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Highly recommended. Sending traffic to a dedicated landing page that matches the ad's intent significantly increases conversion rates compared to sending traffic to your homepage."
-                  }
-                }
-              ]
-            }
-          `}
-        </script>
-      </SEOHead>
-
-
+      />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-yellow-900/20 via-gray-950 to-gray-950 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-yellow-900/20 via-[#030014] to-[#030014] pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
            <div className="absolute top-20 right-10 w-72 h-72 bg-yellow-500/10 rounded-full blur-3xl animate-pulse" />
            <div className="absolute bottom-20 left-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -178,7 +110,7 @@ const GoogleAds = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-900/30 border border-yellow-500/30 text-yellow-400 text-sm font-medium mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-yellow-500/30 text-yellow-400 text-sm font-medium mb-8"
           >
             <MousePointer className="w-4 h-4" />
             <span>Pay Only For Results</span>
@@ -200,202 +132,156 @@ const GoogleAds = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed"
           >
-            Get in front of customers exactly when they are searching for what you offer. 
-            We manage your Google Ads to maximize visibility and ROI.
+             Skip the wait. Get your business in front of customers exactly when they are searching for what you offer.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Link 
-              to="/contact" 
-              className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-yellow-600 rounded-full hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-600 focus:ring-offset-gray-900"
-            >
-              Get a Free Audit
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <Link to="/contact" className="w-full sm:w-auto px-8 py-4 bg-yellow-600 hover:bg-yellow-500 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-yellow-500/25 flex items-center justify-center gap-2">
+              Start PPC Campaign <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link 
-              to="/services" 
-              className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-gray-300 transition-all duration-200 bg-gray-800/50 border border-gray-700 rounded-full hover:bg-gray-800 hover:text-white backdrop-blur-sm"
-            >
-              View All Services
+            <Link to="/portfolio" className="w-full sm:w-auto px-8 py-4 glass-button text-white rounded-xl font-bold flex items-center justify-center gap-2">
+              Success Stories
             </Link>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Tech Stack */}
-      <section className="py-10 border-y border-gray-800/50 bg-gray-900/30 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-gray-500 text-sm font-semibold uppercase tracking-wider mb-8">Google Partner Ecosystem</p>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-             {techStack.map((tech, index) => (
-               <div key={index} className="flex items-center gap-2">
-                 <span className="text-lg font-semibold text-gray-300">{tech.name}</span>
-               </div>
-             ))}
-          </div>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Comprehensive PPC Management</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">We handle everything from keyword research to landing page optimization.</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">PPC Solutions</h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              From Search to Shopping, we master every Google Ads channel.
+            </p>
           </div>
 
-          <motion.div 
-            variants={stagger}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
-                variants={fadeIn}
-                className="group p-8 rounded-2xl bg-gray-900/50 border border-gray-800 hover:border-yellow-500/50 hover:bg-gray-800/50 transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="glass-panel glass-card-shine p-8 rounded-3xl border border-white/10 group"
               >
-                <div className="mb-6 p-3 rounded-xl bg-gray-950 inline-block border border-gray-800 group-hover:border-yellow-500/30 group-hover:scale-110 transition-all duration-300">
+                <div className="mb-6 p-4 rounded-2xl bg-white/5 w-fit group-hover:bg-yellow-500/20 transition-colors">
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-3 group-hover:text-yellow-400 transition-colors">{service.title}</h3>
-                <p className="text-gray-400 leading-relaxed">
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-yellow-400 transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-gray-400">
                   {service.description}
                 </p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-24 bg-gray-900/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      {/* Tech Stack */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">PPC Tools</h2>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-4">
+            {techStack.map((tech, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ scale: 1.05 }}
+                className="glass-button px-6 py-3 rounded-full flex items-center gap-3 text-gray-300 hover:text-white border border-white/5"
+              >
+                <Zap className="w-4 h-4 text-yellow-400" />
+                <span className="font-semibold">{tech.name}</span>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-gray-400">{tech.category}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+       {/* Process Section */}
+       <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Data-Driven Results</h2>
-              <p className="text-gray-400 mb-8 text-lg">
-                We don't guess; we test. Our scientific approach to PPC ensures your budget is always working hard for you.
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Campaign Strategy</h2>
+              <p className="text-xl text-gray-400 mb-8">
+                Strict optimization to lowering your CPA and increasing conversions.
               </p>
               <div className="space-y-8">
                 {processSteps.map((step, index) => (
-                  <motion.div 
+                  <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.2 }}
                     className="flex gap-6"
                   >
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-yellow-900/20 border border-yellow-500/30 flex items-center justify-center text-yellow-400 font-bold">
-                      {step.number}
-                    </div>
+                    <div className="text-5xl font-bold text-white/10">{step.number}</div>
                     <div>
-                      <h4 className="text-xl font-bold mb-2">{step.title}</h4>
-                      <p className="text-gray-400">{step.description}</p>
+                      <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+                      <p className="text-gray-400 leading-relaxed">{step.description}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
             </div>
+            
             <div className="relative">
               <div className="absolute inset-0 bg-yellow-500/20 blur-3xl rounded-full" />
-              <div className="relative rounded-2xl border border-gray-800 bg-gray-950/80 backdrop-blur-xl p-8 shadow-2xl">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-900/50 border border-gray-800">
-                    <Target className="w-6 h-6 text-red-400" />
-                    <div>
-                      <div className="font-semibold">Precise Targeting</div>
-                      <div className="text-sm text-gray-400">Right person, right time</div>
+              <div className="glass-panel p-8 rounded-3xl border border-white/10 relative z-10">
+                 <div className="space-y-6">
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
+                       <CheckCircle2 className="text-green-400" />
+                       <span className="text-gray-300 font-medium">9-10/10 Quality Scores</span>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-900/50 border border-gray-800">
-                    <PieChart className="w-6 h-6 text-blue-400" />
-                    <div>
-                      <div className="font-semibold">Transparent Reporting</div>
-                      <div className="text-sm text-gray-400">Live dashboards & insights</div>
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
+                       <CheckCircle2 className="text-green-400" />
+                       <span className="text-gray-300 font-medium">Conversion Tracking Setup</span>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-900/50 border border-gray-800">
-                    <Award className="w-6 h-6 text-green-400" />
-                    <div>
-                      <div className="font-semibold">Certified Experts</div>
-                      <div className="text-sm text-gray-400">Google Partner status</div>
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
+                       <CheckCircle2 className="text-green-400" />
+                       <span className="text-gray-300 font-medium">A/B Testing Landing Pages</span>
                     </div>
-                  </div>
-                </div>
+                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            <details className="group bg-gray-900/30 border border-gray-800 rounded-xl overflow-hidden transition-all duration-300 hover:border-yellow-500/30">
-              <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold text-lg">
-                How much does Google Ads cost?
-                <span className="transition-transform group-open:rotate-180">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                </span>
-              </summary>
-              <div className="px-6 pb-6 text-gray-400">
-                You set your own budget. You can start small and scale up. We charge a management fee based on your ad spend, ensuring our incentives are aligned with your growth.
-              </div>
-            </details>
-            <details className="group bg-gray-900/30 border border-gray-800 rounded-xl overflow-hidden transition-all duration-300 hover:border-yellow-500/30">
-              <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold text-lg">
-                What is a good Quality Score?
-                <span className="transition-transform group-open:rotate-180">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                </span>
-              </summary>
-              <div className="px-6 pb-6 text-gray-400">
-                Quality Score is a diagnostic tool meant to give you a sense of how well your ad quality compares to other advertisers. A score of 7-10 is considered good and can lower your cost per click.
-              </div>
-            </details>
-            <details className="group bg-gray-900/30 border border-gray-800 rounded-xl overflow-hidden transition-all duration-300 hover:border-yellow-500/30">
-              <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold text-lg">
-                Do I need a landing page?
-                <span className="transition-transform group-open:rotate-180">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                </span>
-              </summary>
-              <div className="px-6 pb-6 text-gray-400">
-                Highly recommended. Sending traffic to a dedicated landing page that matches the ad's intent significantly increases conversion rates compared to sending traffic to your homepage.
-              </div>
-            </details>
+      {/* CTA Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto glass-panel rounded-[3rem] p-12 text-center relative overflow-hidden border border-white/10">
+          <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-orange-600/20" />
+          <div className="relative z-10">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Maximize Your Budget</h2>
+            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              Stop wasting money on irrelevant clicks. Get high-quality leads today.
+            </p>
+            <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-xl font-bold hover:scale-105 transition-transform">
+              Book PPC Audit <ArrowRight className="w-5 h-5" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-yellow-600/10" />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Dominate Search?</h2>
-          <p className="text-xl text-gray-400 mb-10">
-            Get a free audit of your current campaigns or a strategy session for a new launch.
-          </p>
-          <Link 
-            to="/contact" 
-            className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-yellow-600 rounded-full hover:bg-yellow-700 hover:scale-105 shadow-lg shadow-yellow-600/30"
-          >
-            Claim Your Free Audit
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
-        </div>
-      </section>
     </div>
   );
 };

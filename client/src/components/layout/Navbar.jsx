@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Sun, Moon, Briefcase, Phone, Info, BookOpen, Users } from 'lucide-react';
 
-const Navbar = () => {
+const Navbar = ({ isBannerVisible }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false);
@@ -59,7 +59,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 transition-all duration-300 rounded-full border border-white/10 ${isScrolled ? 'bg-gray-900/80 backdrop-blur-xl shadow-2xl py-2' : 'bg-transparent py-4'}`}>
+    <nav className={`fixed left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 transition-all duration-300 rounded-full border border-white/10 ${isBannerVisible && !isScrolled ? 'top-14' : 'top-4'} ${isScrolled ? 'bg-gray-900/80 backdrop-blur-xl shadow-2xl py-2' : 'bg-transparent py-4'}`}>
       <div className="px-6 sm:px-8">
         <div className="flex items-center justify-between h-14">
           {/* Logo */}

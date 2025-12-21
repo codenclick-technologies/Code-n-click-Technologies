@@ -1,53 +1,89 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { 
+  Instagram, 
+  Linkedin, 
+  Twitter, 
+  Facebook, 
+  Mail, 
+  MapPin, 
+  Phone, 
+  Heart 
+} from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
+  const footerLinks = {
+    services: [
+      { name: 'Web Development', href: '/services/web-development' },
+      { name: 'SaaS Development', href: '/services/saas-development' },
+      { name: 'Graphic Design', href: '/services/graphic-design' },
+      { name: 'SEO Services', href: '/services/seo' },
+      { name: 'Meta Ads', href: '/services/meta-ads' },
+      { name: 'Google Ads', href: '/services/google-ads' }
+    ],
+    company: [
+      { name: 'About Us', href: '/about' },
+      { name: 'Portfolio', href: '/portfolio' },
+      { name: 'Careers', href: '/careers' },
+      { name: 'Contact', href: '/contact' },
+      { name: 'Resources', href: '/resources' }
+    ],
+    legal: [
+      { name: 'Privacy Policy', href: '/privacy' },
+      { name: 'Terms of Service', href: '/terms' }
+    ]
+  };
+
   return (
-    <footer className="bg-gray-950 border-t border-white/10 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-12">
+    <footer className="relative bg-[#030014] text-white pt-20 pb-10 overflow-hidden border-t border-white/5">
+      {/* Background Gradients */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          
           {/* Brand Column */}
           <div className="space-y-6">
-            <Link to="/" className="flex items-center gap-2">
-              <img 
-                src="/logo.png" 
-                alt="Code-n-Click" 
-                className="h-16 w-auto" 
-                width="711" 
-                height="351"
-                loading="lazy"
-              />
-            </Link>
-            <p className="text-gray-400 leading-relaxed">
-              Transforming digital landscapes in Faridabad, Delhi, and beyond with cutting-edge technology and premium design.
-            </p>
-            <div className="flex gap-4">
-              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (
-                <a 
-                  key={index} 
-                  href="#" 
-                  aria-label={`Visit our ${['Facebook', 'Twitter', 'Instagram', 'LinkedIn'][index]} page`}
-                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white transition-all duration-300"
-                >
-                  <Icon size={18} />
+             <Link to="/" className="block">
+                <img 
+                  src="/brand-full.png" 
+                  alt="CODENCLICK TECHNOLOGIES" 
+                  className="h-14 w-auto object-contain"
+                />
+             </Link>
+             <p className="text-gray-400 leading-relaxed">
+               Transforming ideas into digital reality. We build award-winning websites and high-performance marketing campaigns.
+             </p>
+             <div className="flex gap-4">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-pink-600/20 hover:text-pink-500 transition-colors">
+                  <Instagram className="w-5 h-5" />
                 </a>
-              ))}
-            </div>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-blue-600/20 hover:text-blue-500 transition-colors">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-sky-600/20 hover:text-sky-500 transition-colors">
+                  <Twitter className="w-5 h-5" />
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-blue-700/20 hover:text-blue-600 transition-colors">
+                  <Facebook className="w-5 h-5" />
+                </a>
+             </div>
           </div>
 
           {/* Services Column */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6">Services</h3>
+            <h3 className="text-lg font-bold mb-6 text-white">Services</h3>
             <ul className="space-y-4">
-              {['Web Development', 'Meta Ads', 'Google Ads', 'Graphic Design', 'SEO'].map((item) => (
-                <li key={item}>
-                  <Link 
-                    to={`/services/${item.toLowerCase().replace(' ', '-')}`}
-                    className="text-gray-400 hover:text-blue-400 transition-colors flex items-center gap-2 group"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    {item}
+              {footerLinks.services.map((link) => (
+                <li key={link.name}>
+                  <Link to={link.href} className="text-gray-400 hover:text-blue-400 transition-colors flex items-center gap-2 group">
+                    <span className="w-1 h-1 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    {link.name}
                   </Link>
                 </li>
               ))}
@@ -56,21 +92,13 @@ const Footer = () => {
 
           {/* Company Column */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6">Company</h3>
+            <h3 className="text-lg font-bold mb-6 text-white">Company</h3>
             <ul className="space-y-4">
-              {[
-                { name: 'About Us', path: '/about' },
-                { name: 'Careers', path: '/careers' },
-                { name: 'Resources', path: '/resources' },
-                { name: 'Contact Us', path: '/contact' },
-                { name: 'Privacy Policy', path: '/privacy' }
-              ].map((item) => (
-                <li key={item.name}>
-                  <Link 
-                    to={item.path}
-                    className="text-gray-400 hover:text-blue-400 transition-colors"
-                  >
-                    {item.name}
+              {footerLinks.company.map((link) => (
+                <li key={link.name}>
+                  <Link to={link.href} className="text-gray-400 hover:text-purple-400 transition-colors flex items-center gap-2 group">
+                    <span className="w-1 h-1 rounded-full bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    {link.name}
                   </Link>
                 </li>
               ))}
@@ -79,46 +107,52 @@ const Footer = () => {
 
           {/* Contact Column */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6">Contact</h3>
+            <h3 className="text-lg font-bold mb-6 text-white">Contact</h3>
             <ul className="space-y-6">
-              <li className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center text-blue-500 flex-shrink-0">
-                  <MapPin size={20} />
+              <li className="flex gap-4">
+                <div className="mt-1 p-2 rounded-lg bg-white/5 h-fit">
+                  <MapPin className="w-5 h-5 text-blue-400" />
                 </div>
-                <div>
-                  <p className="text-white font-medium">Headquarters</p>
-                  <p className="text-gray-400 text-sm">Sector-2 Faridabad</p>
-                </div>
+                <span className="text-gray-400">
+                  Sec 2 Faridabad
+                </span>
               </li>
-              <li className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-purple-600/10 flex items-center justify-center text-purple-500 flex-shrink-0">
-                  <Phone size={20} />
+              <li className="flex gap-4">
+                <div className="mt-1 p-2 rounded-lg bg-white/5 h-fit">
+                  <Mail className="w-5 h-5 text-purple-400" />
                 </div>
-                <div>
-                  <p className="text-white font-medium">Phone</p>
-                  <p className="text-gray-400 text-sm">+91 8700198968</p>
-                </div>
+                <a href="mailto:codenclicktechnologies@gmail.com" className="text-gray-400 hover:text-white transition-colors break-all">
+                  codenclicktechnologies@gmail.com
+                </a>
               </li>
-              <li className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-pink-600/10 flex items-center justify-center text-pink-500 flex-shrink-0">
-                  <Mail size={20} />
+              <li className="flex gap-4">
+                <div className="mt-1 p-2 rounded-lg bg-white/5 h-fit">
+                  <Phone className="w-5 h-5 text-pink-400" />
                 </div>
-                <div>
-                  <p className="text-white font-medium">Email</p>
-                  <p className="text-gray-400 text-sm">codenclicktechnologies@gmail.com</p>
-                </div>
+                <a href="tel:+918700198968" className="text-gray-400 hover:text-white transition-colors">
+                  +91-870019-8968
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Code'n'Click Technologies. All rights reserved.
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-500 text-sm">
+            © {currentYear} Codenclick Technologies. All rights reserved.
           </p>
-          <div className="flex items-center gap-8">
-            <Link to="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</Link>
-            <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</Link>
+          <div className="flex flex-wrap justify-center gap-8">
+             {footerLinks.legal.map((link) => (
+               <Link key={link.name} to={link.href} className="text-sm text-gray-500 hover:text-white transition-colors">
+                 {link.name}
+               </Link>
+             ))}
+          </div>
+          <div className="flex items-center gap-1 text-sm text-gray-600">
+             <span>Made with</span>
+             <Heart className="w-3 h-3 text-red-500 fill-red-500 animate-pulse" />
+             <span>in India</span>
           </div>
         </div>
       </div>
