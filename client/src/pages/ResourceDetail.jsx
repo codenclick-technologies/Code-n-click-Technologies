@@ -247,17 +247,17 @@ const ResourceDetail = () => {
                   className="
                     prose prose-xl prose-invert max-w-none
                     prose-headings:font-serif prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-white
-                    prose-h1:text-4xl prose-h1:mb-8
-                    prose-h2:text-3xl prose-h2:text-blue-100 prose-h2:mt-16 prose-h2:mb-6
-                    prose-h3:text-2xl prose-h3:text-gray-100 prose-h3:mt-12
-                    prose-p:text-gray-300 prose-p:leading-8 prose-p:font-light prose-p:mb-8
-                    prose-a:text-blue-400 prose-a:no-underline hover:prose-a:text-blue-300 hover:prose-a:underline
-                    prose-strong:text-white prose-strong:font-semibold
-                    prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-500/5 prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:font-serif prose-blockquote:text-xl prose-blockquote:text-blue-200
-                    prose-ul:list-disc prose-ul:pl-6 prose-ul:text-gray-300
-                    prose-li:marker:text-blue-500 prose-li:mb-2
-                    prose-img:rounded-2xl prose-img:shadow-2xl prose-img:border prose-img:border-gray-800 prose-img:my-10
-                    prose-hr:border-gray-800 prose-hr:my-12
+                    prose-h1:text-5xl prose-h1:mb-8 prose-h1:leading-tight
+                    prose-h2:text-3xl prose-h2:text-blue-200 prose-h2:mt-16 prose-h2:mb-6 prose-h2:border-b prose-h2:border-blue-500/20 prose-h2:pb-4
+                    prose-h3:text-2xl prose-h3:text-purple-200 prose-h3:mt-12 prose-h3:mb-4
+                    prose-p:text-gray-200 prose-p:leading-8 prose-p:font-light prose-p:mb-6
+                    prose-a:text-blue-400 prose-a:no-underline prose-a:font-medium hover:prose-a:text-blue-300 hover:prose-a:underline
+                    prose-strong:text-blue-400 prose-strong:font-bold
+                    prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-900/10 prose-blockquote:py-4 prose-blockquote:px-8 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-blockquote:font-serif prose-blockquote:text-xl prose-blockquote:text-blue-100 prose-blockquote:shadow-inner
+                    prose-ul:list-disc prose-ul:pl-6 prose-ul:text-gray-200 prose-ul:space-y-2
+                    prose-li:marker:text-blue-500
+                    prose-img:rounded-3xl prose-img:shadow-2xl prose-img:border prose-img:border-gray-800 prose-img:my-12 prose-img:w-full
+                    prose-hr:border-gray-800 prose-hr:my-16
                   "
                   dangerouslySetInnerHTML={{ __html: resource.content }}
                 />
