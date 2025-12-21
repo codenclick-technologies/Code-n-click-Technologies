@@ -46,6 +46,8 @@ const SEO = lazy(() => import('./pages/Services/SEO'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
+const ServiceLocation = lazy(() => import('./pages/ServiceLocation'));
+const CostEstimator = lazy(() => import('./pages/Tools/CostEstimator'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
@@ -96,6 +98,9 @@ function AppContent() {
             <Route path="/services/graphic-design" element={<GraphicDesign />} />
             <Route path="/services/seo" element={<SEO />} />
 
+            {/* Programmatic SEO Route: /services/web-development/in/delhi */}
+            <Route path="/services/:service/in/:city" element={<ServiceLocation />} />
+
             {/* Dynamic fallback for legacy service detail pages */}
             <Route path="/services/:id" element={<ServiceDetail />} />
 
@@ -105,6 +110,7 @@ function AppContent() {
             <Route path="/resources/:slug" element={<ResourceDetail />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/tools/website-cost-estimator" element={<CostEstimator />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             

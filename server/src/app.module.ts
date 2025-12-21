@@ -26,6 +26,7 @@ import { PayrollModule } from './modules/payroll/payroll.module';
 import { ContactModule } from './modules/contact/contact.module';
 import { ResourcesModule } from './modules/resources/resources.module';
 import { MeetingsModule } from './modules/meetings/meetings.module';
+import { SeoModule } from './modules/seo/seo.module';
 
 @Module({
   imports: [
@@ -60,6 +61,7 @@ import { MeetingsModule } from './modules/meetings/meetings.module';
     ContactModule,
     ResourcesModule,
     MeetingsModule,
+    SeoModule,
   ],
   providers: [
     PrismaService,
@@ -87,4 +89,4 @@ import { MeetingsModule } from './modules/meetings/meetings.module';
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }

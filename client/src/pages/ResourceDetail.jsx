@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import SEO from '../components/utils/SEO';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Calendar, User, Tag, Share2, Clock, Eye, Facebook, Twitter, Linkedin, Link as LinkIcon, Code2, Layout, Zap, Hash } from 'lucide-react';
 import { resourcesAPI } from '../services/api';
 import { fadeInUp } from '../utils/animations';
+import ArticleAudioPlayer from '../components/utils/ArticleAudioPlayer';
 
 
 const ResourceDetail = () => {
@@ -105,22 +107,21 @@ const ResourceDetail = () => {
 
   return (
     <div className="min-h-screen bg-gray-950 bg-noise font-sans selection:bg-blue-500/30 selection:text-blue-200">
-      <Helmet>
-        <title>{resource.title} | Code'N'Click Resources</title>
-        <meta name="description" content={resource.content?.replace(/<[^>]*>/g, '').substring(0, 160)} />
-        <meta property="og:title" content={resource.title} />
-        <meta property="og:description" content={resource.content?.replace(/<[^>]*>/g, '').substring(0, 160)} />
-        <meta property="og:image" content={resource.thumbnail} />
-        <meta property="og:url" content={shareUrl} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO 
+        title={resource.title}
+        description={resource.content?.replace(/<[^>]*>/g, '').substring(0, 160)}
+        imageUrl={resource.thumbnail}
+        type="article"
+        author={resource.author}
+        keywords={resource.tags?.join(', ') || resource.category}
+        schemas={[
+          {
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             "headline": resource.title,
-            "image": resource.thumbnail || "https://codenclick.com/default-og.png",
+            "image": resource.thumbnail || "https://codenclick.in/default-og.png",
             "author": {
-              "@type": "Organization",
+              "@type": "Person",
               "name": resource.author || "Codenclick Team"
             },
             "publisher": {
@@ -128,19 +129,20 @@ const ResourceDetail = () => {
               "name": "Codenclick Technologies",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://codenclick.com/logo.png"
+                "url": "https://codenclick.in/logo.png"
               }
             },
             "datePublished": resource.publishedAt || resource.createdAt,
             "dateModified": resource.updatedAt,
-            "description": resource.content?.replace(/<[^>]*>/g, '').substring(0, 160),
+            "articleBody": resource.content?.replace(/<[^>]*>/g, '').substring(0, 5000), // Truncate if necessary
             "mainEntityOfPage": {
               "@type": "WebPage",
               "@id": shareUrl
             }
-          })}
-        </script>
-      </Helmet>
+          },
+          ...(resource.autoSchema ? [resource.autoSchema] : [])
+        ]}
+      />
 
       {/* Reading Progress Bar */}
       <motion.div
@@ -227,6 +229,9 @@ const ResourceDetail = () => {
                animate={{ opacity: 1, y: 0 }}
                transition={{ delay: 0.2 }}
             >
+              {/* Feature: Audio Player */}
+              <ArticleAudioPlayer title={resource.title} content={resource.content || ''} />
+
               {resource.content?.startsWith('__CODE_BLOG__') ? (
                   // ... Code Blog Rendering (Simplified reuse)
                  <div className="prose prose-invert max-w-none text-center py-20">

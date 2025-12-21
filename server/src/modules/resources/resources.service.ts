@@ -6,10 +6,79 @@ import {
 import { PrismaService } from '../../config/prisma.service';
 import { ResourceStatus } from '@prisma/client';
 import { generateSlug, ensureUniqueSlug } from '../../common/utils/slug.util';
+import { IndexNowService } from '../seo/indexnow.service';
 
 @Injectable()
 export class ResourcesService {
-  constructor(private prisma: PrismaService) { }
+  constructor(
+    private prisma: PrismaService,
+    private indexNowService: IndexNowService
+  ) { }
+
+  // 100x SEO Strategy: The "Money Map"
+  // These keywords will be AUTO-LINKED in every single blog post.
+  private readonly KEYWORD_MAP = {
+    'Web Development': '/services/web-development',
+    'Website Design': '/services/web-development',
+    'SaaS': '/services/saas-development',
+    'Software': '/services/saas-development',
+    'SEO': '/services/seo',
+    'Search Engine Optimization': '/services/seo',
+    'Meta Ads': '/services/meta-ads',
+    'Facebook Ads': '/services/meta-ads',
+    'Google Ads': '/services/google-ads',
+    'PPC': '/services/google-ads',
+    'Graphic Design': '/services/graphic-design',
+    'Logo Design': '/services/graphic-design'
+  };
+
+  private autoLinkContent(content: string): string {
+    if (!content) return content;
+
+    let linkedContent = content;
+    // Iterate through our money keywords
+    Object.entries(this.KEYWORD_MAP).forEach(([keyword, url]) => {
+      // Regex to find keyword:
+      // 1. Case insensitive (i)
+      // 2. Global (g) - find all occurrences? No, usually just the first one is better for SEO to avoid spamminess. 
+      // Let's stick to replacing the FIRST occurrence to look natural.
+      // 3. Ensure it's not already inside a link (complex, but simple boundary checks help)
+
+      const regex = new RegExp(`\\b(${keyword})\\b(?![^<]*>|[^<>]*<\/a>)`, 'i');
+
+      // Replace matching keyword with an internal link
+      linkedContent = linkedContent.replace(regex, `<a href="${url}" class="text-blue-600 hover:underline font-medium" title="Learn more about ${keyword}">$1</a>`);
+    });
+
+    return linkedContent;
+  }
+
+  private generateFAQSchema(content: string): any[] {
+    if (!content) return [];
+
+    const faqs: any[] = [];
+    // Regex to find H2 questions: <h2>What is SEO?</h2>
+    // We look for text ending in '?' inside h2
+    const regex = /<h2[^>]*>(.*?\?)<\/h2>[\s\S]*?(?:<p>(.*?)<\/p>)/gi;
+
+    let match;
+    while ((match = regex.exec(content)) !== null) {
+      const question = match[1].replace(/<[^>]+>/g, ''); // strip tags just in case
+      const answer = match[2].replace(/<[^>]+>/g, ''); // get first paragraph answer
+
+      if (question && answer) {
+        faqs.push({
+          "@type": "Question",
+          "name": question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": answer
+          }
+        });
+      }
+    }
+    return faqs;
+  }
 
   async create(data: any) {
     // Generate slug from title or use provided slug
@@ -144,6 +213,23 @@ export class ResourcesService {
       throw new NotFoundException('Resource not found');
     }
 
+    // 100x SEO: Auto-inject internal links before serving
+    // This creates the "Neural Network" of content
+    if (resource.content) {
+      resource.content = this.autoLinkContent(resource.content);
+
+      // 100x SEO: Auto-generate FAQ Schema
+      const generatedFaqs = this.generateFAQSchema(resource.content);
+      if (generatedFaqs.length > 0) {
+        // Append to existing resource so frontend can render json-ld
+        (resource as any).autoSchema = {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": generatedFaqs
+        };
+      }
+    }
+
     return resource;
   }
 
@@ -189,13 +275,20 @@ export class ResourcesService {
       ? undefined
       : now;
 
-    return this.prisma.resource.update({
+    const updatedResource = await this.prisma.resource.update({
       where: { id },
       data: {
         status: ResourceStatus.PUBLISHED,
         ...(publishedAt && { publishedAt }),
       },
     });
+
+    if (updatedResource.status === 'PUBLISHED') {
+      const url = `https://codenclick.in/resources/${updatedResource.slug}`;
+      this.indexNowService.submitUrl(url);
+    }
+
+    return updatedResource;
   }
 
   async unpublish(id: string) {

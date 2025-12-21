@@ -110,61 +110,54 @@ const WebDevelopment = () => {
         description="Expert web development services. We build high-performance, SEO-optimized websites and web applications using React, Next.js, and modern technologies."
         keywords="Best Web Development Company Delhi, Best Web Development Company Faridabad, Premium Web Development Services Delhi, Premium Web Development Services Faridabad, No1 Web Developer Delhi, Top Web Development Agency Faridabad, custom web apps Delhi, custom web apps Faridabad, react development, next.js, seo services Delhi, seo services Faridabad, pwa development, e-commerce Delhi, e-commerce Faridabad, frontend backend development"
         canonical="/services/web-development"
-      >
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "Service",
-              "serviceType": "Web Development",
-              "provider": {
-                "@type": "Organization",
-                "name": "Code-n-Click Technologies"
-              },
-              "description": "Custom, high-performance websites and web apps built for speed, accessibility and conversions.",
-              "offers": {
-                "@type": "Offer",
-                "priceCurrency": "INR",
-                "price": "Custom Quote"
-              }
+        schemas={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "serviceType": "Web Development",
+            "provider": {
+              "@type": "Organization",
+              "name": "Code-n-Click Technologies"
+            },
+            "description": "Custom, high-performance websites and web apps built for speed, accessibility and conversions.",
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "INR",
+              "price": "Custom Quote"
             }
-          `}
-        </script>
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": [
-                {
-                  "@type": "Question",
-                  "name": "How long does a typical project take?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Timelines vary based on complexity. A standard marketing site can take 3-6 weeks, while complex web applications or SaaS platforms typically range from 3-6 months. We provide detailed timelines during the discovery phase."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "Do you optimize for SEO?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Absolutely. We build with SEO in mind from day one. This includes semantic HTML, fast load times, mobile responsiveness, and structured data implementation. We also offer ongoing SEO services post-launch."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "Will my website be mobile-friendly?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes. We take a mobile-first approach to design and development. Your site will look and perform beautifully on all devices, from smartphones to large desktop monitors."
-                  }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How long does a typical project take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Timelines vary based on complexity. A standard marketing site can take 3-6 weeks, while complex web applications or SaaS platforms typically range from 3-6 months. We provide detailed timelines during the discovery phase."
                 }
-              ]
-            }
-          `}
-        </script>
-      </SEOHead>
+              },
+              {
+                "@type": "Question",
+                "name": "Do you optimize for SEO?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Absolutely. We build with SEO in mind from day one. This includes semantic HTML, fast load times, mobile responsiveness, and structured data implementation. We also offer ongoing SEO services post-launch."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Will my website be mobile-friendly?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. We take a mobile-first approach to design and development. Your site will look and perform beautifully on all devices, from smartphones to large desktop monitors."
+                }
+              }
+            ]
+          }
+        ]}
+      />
 
 
 

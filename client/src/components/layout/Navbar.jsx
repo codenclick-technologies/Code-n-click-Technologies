@@ -44,6 +44,14 @@ const Navbar = () => {
         { name: 'SEO', path: '/services/seo' },
       ]
     },
+    { 
+      name: 'Tools', 
+      path: '/tools', 
+      icon: Briefcase,
+      dropdown: [
+        { name: 'Website Cost Estimator', path: '/tools/website-cost-estimator' },
+      ]
+    },
     { name: 'Portfolio', path: '/portfolio', icon: Briefcase },
     { name: 'Resources', path: '/resources', icon: BookOpen },
     { name: 'Careers', path: '/careers', icon: Users },
