@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactQuill, { Quill } from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
-import { X, Save, Eye, Image as ImageIcon, Upload, Code2, FileText, Layout } from 'lucide-react';
+import { X, Save, Eye, Image as ImageIcon, Upload, Code2, FileText, Layout, Calendar } from 'lucide-react';
 import ApiService, { resourcesAPI } from '../../services/api';
 import { useRef, useMemo, useCallback } from 'react';
 
@@ -724,14 +724,29 @@ const ResourceEditor = ({ resource, onClose }) => {
               <label className="block text-sm font-medium text-gray-300 mb-2">
                  Publish Date & Time
               </label>
-              <input
-                type="datetime-local"
-                value={formData.publishedAt}
-                onChange={(e) => handleChange('publishedAt', e.target.value)}
-                className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 placeholder-gray-500"
-              />
+              <div className="relative group">
+                <input
+                  type="datetime-local"
+                  value={formData.publishedAt}
+                  onChange={(e) => handleChange('publishedAt', e.target.value)}
+                  className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 pl-10 text-white focus:outline-none focus:border-blue-500 placeholder-gray-500 [color-scheme:dark] transition-colors"
+                  placeholder="Select date and time"
+                />
+                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none group-focus-within:text-blue-500 transition-colors" size={18} />
+                {formData.publishedAt && (
+                  <button
+                    onClick={() => handleChange('publishedAt', '')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-red-400 transition-colors"
+                    title="Clear schedule"
+                  >
+                    <X size={16} />
+                  </button>
+                )}
+              </div>
               <p className="text-xs text-gray-500 mt-2">
-                Leave empty to publish immediately. Set a future date to schedule.
+                {formData.publishedAt 
+                  ? `Scheduled for: ${new Date(formData.publishedAt).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })}`
+                  : 'Leave empty to publish immediately.'}
               </p>
             </div>
 

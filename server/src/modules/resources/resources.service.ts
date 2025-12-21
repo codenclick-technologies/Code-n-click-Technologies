@@ -133,7 +133,17 @@ export class ResourcesService {
     const resource = await this.prisma.resource.findUnique({
       where: { slug },
     });
+
     if (!resource) throw new NotFoundException('Resource not found');
+
+    // Security Check: Hide Drafts and Scheduled posts from public access
+    const isPublished = resource.status === ResourceStatus.PUBLISHED;
+    const isLive = !resource.publishedAt || resource.publishedAt <= new Date();
+
+    if (!isPublished || !isLive) {
+      throw new NotFoundException('Resource not found');
+    }
+
     return resource;
   }
 
