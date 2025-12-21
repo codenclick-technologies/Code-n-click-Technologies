@@ -10,9 +10,10 @@ import { Analytics } from '@vercel/analytics/react';
 
 // Critical Routes (eager load)
 import Home from './pages/Home';
-import Login from './pages/Auth/Login';
+import ThirdPartyLoader from './components/utils/ThirdPartyLoader';
 
 // Lazy Loaded Routes
+const Login = lazy(() => import('./pages/Auth/Login'));
 const ChangePassword = lazy(() => import('./pages/Auth/ChangePassword'));
 const ForgotPassword = lazy(() => import('./pages/Auth/ForgotPassword'));
 const ResetPassword = lazy(() => import('./pages/Auth/ResetPassword'));
@@ -71,6 +72,7 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white transition-colors duration-300 flex flex-col">
+      <ThirdPartyLoader />
       <Analytics />
       <ScrollToTop />
       <SmoothScroll />
