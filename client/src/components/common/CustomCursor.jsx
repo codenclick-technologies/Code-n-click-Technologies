@@ -21,19 +21,18 @@ const CustomCursor = () => {
       mouse.x.set(clientX);
       mouse.y.set(clientY);
       
-      // Check if hovering over a clickable element
+      // Check if hovering over a clickable element (OPTIMIZED)
       const target = e.target;
-      if (
-        window.getComputedStyle(target).cursor === 'pointer' ||
-        target.tagName === 'A' ||
+      const isClickable = 
+        target.tagName === 'A' || 
         target.tagName === 'BUTTON' ||
-        target.closest('a') ||
-        target.closest('button')
-      ) {
-        setIsPointer(true);
-      } else {
-        setIsPointer(false);
-      }
+        target.closest('a') || 
+        target.closest('button') ||
+        target.closest('[role="button"]') ||
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA';
+
+      setIsPointer(!!isClickable);
     };
 
     window.addEventListener('mousemove', manageMouseMove);
