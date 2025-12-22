@@ -90,10 +90,10 @@ function AppContent() {
       const year = today.getFullYear();
 
       // Check against fixed and variable Indian calendar dates
-      const holiday = checkHoliday(date, month, year);
+      // const holiday = checkHoliday(date, month, year);
       
       // FOR DEBUGGING ONLY: Uncomment next line to test specific dates
-      // const holiday = checkHoliday(25, 12, 2025); // Test Christmas
+      const holiday = checkHoliday(25, 12, 2025); // Test Christmas
       
       setActiveHoliday(holiday);
     };
