@@ -7,7 +7,7 @@ const Preloader = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2800); // Extended slightly for the logo reveal
+    }, 2000); // Set to exactly 2 seconds
 
     return () => clearTimeout(timer);
   }, []);
@@ -61,7 +61,7 @@ const Preloader = () => {
                     <motion.h1
                         initial={{ y: 50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1, delay: 0.5, ease: [0.76, 0, 0.24, 1] }}
+                        transition={{ duration: 1, delay: 0.2, ease: [0.76, 0, 0.24, 1] }}
                         className="text-4xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#00c6ff] via-[#0072ff] to-[#9D50BB]"
                     >
                         CODENCLICK
@@ -72,7 +72,7 @@ const Preloader = () => {
                     <motion.p
                         initial={{ y: 30, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+                        transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
                         className="text-sm md:text-base text-blue-400 font-medium tracking-[0.3em] uppercase"
                     >
                         Technologies
@@ -85,13 +85,13 @@ const Preloader = () => {
                className="mt-12 w-64 h-[2px] bg-white/10 rounded-full overflow-hidden"
                initial={{ opacity: 0 }}
                animate={{ opacity: 1 }}
-               transition={{ delay: 1 }}
+               transition={{ delay: 0.5 }}
             >
                <motion.div 
                  className="h-full bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600"
                  initial={{ width: "0%", x: "-100%" }}
                  animate={{ width: "100%", x: "0%" }}
-                 transition={{ duration: 1.5, delay: 1, ease: "easeInOut" }}
+                 transition={{ duration: 1.0, delay: 0.5, ease: "easeInOut" }}
                />
             </motion.div>
 
