@@ -39,7 +39,7 @@ const Hero = () => {
       <div className="absolute inset-0 overflow-hidden">
         {/* Top-left blue gradient blob */}
         <motion.div
-          className="absolute -top-40 -left-40 w-80 h-80 bg-blue-600/30 rounded-full blur-3xl"
+          className="absolute -top-40 -left-40 w-80 h-80 bg-blue-600/30 rounded-full blur-3xl will-change-transform translate-z-0"
           animate={{
             x: [0, 30, 0],
             y: [0, -30, 0],
@@ -49,7 +49,7 @@ const Hero = () => {
         
         {/* Bottom-right purple gradient blob */}
         <motion.div
-          className="absolute -bottom-40 -right-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"
+          className="absolute -bottom-40 -right-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl will-change-transform translate-z-0"
           animate={{
             x: [0, -40, 0],
             y: [0, 40, 0],
@@ -59,7 +59,7 @@ const Hero = () => {
 
         {/* Center cyan gradient */}
         <motion.div
-          className="absolute top-1/2 right-1/4 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl"
+          className="absolute top-1/2 right-1/4 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl will-change-transform translate-z-0"
           animate={{
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.5, 0.3],
