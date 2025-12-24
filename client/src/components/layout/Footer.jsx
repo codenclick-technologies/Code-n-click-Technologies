@@ -60,16 +60,16 @@ const Footer = () => {
                Transforming ideas into digital reality. We build award-winning websites and high-performance marketing campaigns.
              </p>
              <div className="flex gap-4">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-pink-600/20 hover:text-pink-500 transition-colors">
+                <a href="https://www.instagram.com/codenclick.in/" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-pink-600/20 hover:text-pink-500 transition-colors">
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-blue-600/20 hover:text-blue-500 transition-colors">
+                <a href="https://www.linkedin.com/in/codenclick-technologies/" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-blue-600/20 hover:text-blue-500 transition-colors">
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-sky-600/20 hover:text-sky-500 transition-colors">
+                <a href="https://twitter.com/codenclick" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-sky-600/20 hover:text-sky-500 transition-colors">
                   <Twitter className="w-5 h-5" />
                 </a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-blue-700/20 hover:text-blue-600 transition-colors">
+                <a href="https://www.facebook.com/codenclick" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-blue-700/20 hover:text-blue-600 transition-colors">
                   <Facebook className="w-5 h-5" />
                 </a>
              </div>

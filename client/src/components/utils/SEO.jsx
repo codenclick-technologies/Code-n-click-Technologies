@@ -13,7 +13,7 @@ const SEO = ({
   schemas = [],
   children
 }) => {
-  const siteName = 'Code-n-Click Technologies';
+  const siteName = 'Codenclick Technologies';
   const domain = 'https://codenclick.in';
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const fullCanonical = canonical 
@@ -31,7 +31,8 @@ const SEO = ({
       "sameAs": [
         "https://www.facebook.com/codenclick",
         "https://twitter.com/codenclick",
-        "https://www.linkedin.com/company/code-n-click"
+        "https://www.linkedin.com/in/codenclick-technologies/",
+        "https://www.instagram.com/codenclick.in/"
       ]
     },
     {
