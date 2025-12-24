@@ -196,9 +196,9 @@ const Hero = () => {
             variants={floatVariants} 
             className="relative h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px] order-2 lg:order-2 flex items-center justify-center"
           >
-            {/* Animated background orbs */}
+            {/* Animated background orbs - Optimized */}
             <motion.div
-              className="absolute top-1/4 left-1/4 w-40 h-40 bg-gradient-to-br from-blue-500/40 to-transparent rounded-full blur-3xl"
+              className="absolute top-1/4 left-1/4 w-40 h-40 bg-gradient-to-br from-blue-500/40 to-transparent rounded-full blur-3xl will-change-transform translate-z-0"
               animate={{
                 x: [0, 40, 0],
                 y: [0, -30, 0],
@@ -207,7 +207,7 @@ const Hero = () => {
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
             />
             <motion.div
-              className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-gradient-to-tl from-purple-500/30 to-transparent rounded-full blur-3xl"
+              className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-gradient-to-tl from-purple-500/30 to-transparent rounded-full blur-3xl will-change-transform translate-z-0"
               animate={{
                 x: [0, -40, 0],
                 y: [0, 30, 0],
@@ -216,7 +216,7 @@ const Hero = () => {
               transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
             />
             <motion.div
-              className="absolute top-1/2 right-1/3 w-32 h-32 bg-gradient-to-br from-cyan-500/30 to-transparent rounded-full blur-3xl"
+              className="absolute top-1/2 right-1/3 w-32 h-32 bg-gradient-to-br from-cyan-500/30 to-transparent rounded-full blur-3xl will-change-transform translate-z-0"
               animate={{
                 scale: [1, 1.1, 1],
                 opacity: [0.3, 0.6, 0.3],
@@ -231,15 +231,9 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
-              {/* Animated gradient border */}
+              {/* Static gradient border for performance */}
               <div
-                className="absolute inset-0 rounded-3xl"
-                style={{
-                  background: 'linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6)',
-                  backgroundSize: '300% 100%',
-                }}
-                animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+                className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500"
               />
 
               {/* Inner content */}
@@ -260,17 +254,11 @@ const Hero = () => {
                   
                   {/* Header section */}
                   <div className="space-y-2">
-                    <motion.h2
-                      className="text-2xl sm:text-3xl font-black text-white"
-                      animate={{ 
-                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                      }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    >
-                      <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent bg-300% animate-pulse">
+                    <h2 className="text-2xl sm:text-3xl font-black text-white">
+                      <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">
                         Our Services
                       </span>
-                    </motion.h2>
+                    </h2>
                     <p className="text-xs sm:text-sm text-gray-400 font-medium">What we deliver for your success</p>
                   </div>
 
@@ -290,11 +278,11 @@ const Hero = () => {
                         initial={{ opacity: 0, scale: 0.85 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: svc.delay, duration: 0.35 }}
-                        whileHover={{ scale: 1.08, y: -8 }}
+                        whileHover={{ scale: 1.05 }} // Reduced scale to be subtle
                         onClick={() => window.location.href = '/services'}
                       >
                         <div className={`relative rounded-xl sm:rounded-2xl p-2.5 sm:p-3 md:p-4 bg-gradient-to-br ${svc.color} opacity-6 group-hover/serv:opacity-20 transition-all duration-300 border border-white/8 group-hover/serv:border-white/40 h-24 sm:h-28 md:h-32 flex flex-col items-center justify-center gap-1 sm:gap-2 cursor-pointer overflow-hidden`}>
-                          <motion.div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 opacity-0 group-hover/serv:opacity-100 transition-opacity duration-300" animate={{ x: ['-100%', '100%'] }} transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }} />
+                          {/* Removed heavy infinite animation, simple hover glow remains via group-hover opacity */}
                           <div className="relative z-10 flex flex-col items-center text-center gap-0.5 sm:gap-1">
                             <span className="text-xs sm:text-sm font-semibold text-white leading-tight">{svc.label}</span>
                             <span className="text-[10px] sm:text-[11px] text-white/60 leading-tight">{svc.desc}</span>
@@ -328,17 +316,9 @@ const Hero = () => {
                   </motion.div>
                 </div>
 
-                {/* Corner decorations */}
-                <motion.div
-                  className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-blue-500/30 rounded-tl-3xl"
-                  animate={{ opacity: [0.3, 0.8, 0.3] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                />
-                <motion.div
-                  className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-cyan-500/30 rounded-br-3xl"
-                  animate={{ opacity: [0.3, 0.8, 0.3] }}
-                  transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-                />
+                {/* Corner decorations - Static */}
+                <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-blue-500/30 rounded-tl-3xl opacity-50" />
+                <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-cyan-500/30 rounded-br-3xl opacity-50" />
               </div>
             </motion.div>
 
@@ -365,23 +345,7 @@ const Hero = () => {
               🚀 Production Ready
             </motion.div>
 
-            {/* Pulse effect rings */}
-            <motion.div
-              className="absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2 rounded-3xl border border-blue-500/20"
-              animate={{
-                scale: [1, 1.1, 1],
-                opacity: [0.5, 0.2, 0.5],
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-            />
-            <motion.div
-              className="absolute top-1/2 left-1/2 w-5/6 h-5/6 -translate-x-1/2 -translate-y-1/2 rounded-3xl border border-cyan-500/10"
-              animate={{
-                scale: [1.05, 1.15, 1.05],
-                opacity: [0.3, 0.1, 0.3],
-              }}
-              transition={{ duration: 4, repeat: Infinity, delay: 0.2 }}
-            />
+            {/* Pulse effect rings - REMOVED */}
           </motion.div>
         </motion.div>
       </div>

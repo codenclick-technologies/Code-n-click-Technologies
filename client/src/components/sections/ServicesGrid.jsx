@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Server, Globe, BarChart, PenTool, Search, ArrowRight } from 'lucide-react';
+import { Code, Server, Globe, BarChart, PenTool, Search, ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { fadeInUp, staggerContainer } from '../../utils/animations';
-import SpotlightCard from '../ui/SpotlightCard';
 
 const services = [
   {
@@ -11,153 +10,153 @@ const services = [
     title: 'Web Development',
     description: 'Custom, high-performance websites built with React, Next.js, and 3D technologies.',
     link: '/services/web-development',
-    color: 'text-blue-500',
-    bg: 'bg-blue-50 dark:bg-blue-900/20'
+    gradient: 'from-blue-500 to-cyan-500',
+    shadow: 'shadow-blue-500/20'
   },
   {
     icon: Server,
     title: 'SaaS Development',
     description: 'Reliable, scalable SaaS products with multi-tenant architecture and enterprise-grade infrastructure.',
     link: '/services/saas-development',
-    color: 'text-cyan-500',
-    bg: 'bg-cyan-50 dark:bg-cyan-900/20'
+    gradient: 'from-purple-500 to-pink-500',
+    shadow: 'shadow-purple-500/20'
   },
   {
     icon: Globe,
     title: 'Meta Ads',
     description: 'Targeted Facebook and Instagram ad campaigns to skyrocket your ROI.',
     link: '/services/meta-ads',
-    color: 'text-purple-500',
-    bg: 'bg-purple-50 dark:bg-purple-900/20'
+    gradient: 'from-pink-500 to-red-500',
+    shadow: 'shadow-pink-500/20'
   },
   {
     icon: BarChart,
     title: 'Google Ads',
     description: 'Strategic PPC campaigns to capture high-intent traffic and leads.',
     link: '/services/google-ads',
-    color: 'text-green-500',
-    bg: 'bg-green-50 dark:bg-green-900/20'
+    gradient: 'from-yellow-400 to-orange-500',
+    shadow: 'shadow-yellow-500/20'
   },
   {
     icon: PenTool,
     title: 'Graphic Design',
     description: 'Stunning visuals and branding that tell your story and captivate audiences.',
     link: '/services/graphic-design',
-    color: 'text-pink-500',
-    bg: 'bg-pink-50 dark:bg-pink-900/20'
+    gradient: 'from-indigo-500 to-blue-500',
+    shadow: 'shadow-indigo-500/20'
   },
   {
     icon: Search,
     title: 'SEO',
     description: 'Data-driven SEO strategies to rank higher and drive organic growth.',
     link: '/services/seo',
-    color: 'text-orange-500',
-    bg: 'bg-orange-50 dark:bg-orange-900/20'
+    gradient: 'from-green-500 to-emerald-500',
+    shadow: 'shadow-green-500/20'
   }
 ];
 
 const ServiceCard = ({ service }) => {
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -10;
-    const rotateY = ((x - centerX) / centerX) * 10;
-    setRotation({ x: rotateX, y: rotateY });
-  };
-
-  const handleMouseLeave = () => {
-    setRotation({ x: 0, y: 0 });
-  };
-
   return (
     <motion.div 
       variants={fadeInUp} 
-      className="relative h-full group perspective"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        perspective: '1000px',
-        transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
-        transition: 'transform 0.1s ease-out'
-      }}
+      className="group relative h-full"
     >
-      {/* Animated glass reflection border */}
-      <div className="relative rounded-3xl p-[2px] h-full overflow-hidden">
-        {/* Animated gradient border */}
-        <div 
-          className="absolute inset-0 rounded-3xl opacity-75"
-          style={{
-            background: 'linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6)',
-            backgroundSize: '300% 100%',
-            animation: 'gradient-shift 3s ease infinite'
-          }}
-        />
+      {/* Card Background & Border */}
+      <div className="relative h-full rounded-3xl p-[1px] overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2">
+        {/* Animated Gradient Border (Hidden by default, shows on hover) */}
+        <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${service.gradient}`} />
         
-        {/* Glass reflection effect */}
-        <div 
-          className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          style={{
-            background: 'linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)',
-            backgroundSize: '200% 200%',
-            animation: 'shine 2s ease-in-out infinite'
-          }}
-        />
-        
-        {/* Content */}
-        <SpotlightCard className="h-60 p-6 relative z-10">
-          <div className="flex items-start gap-4 h-full">
-            <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${service.bg} ${service.color} shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-              <service.icon size={20} className="text-white/95" />
+        {/* Static Low-Opacity Border */}
+        <div className="absolute inset-0 bg-white/10 opacity-100 group-hover:opacity-0 transition-opacity duration-500" />
+
+        {/* Inner Card Content */}
+        <div className="relative h-full bg-gray-950/90 backdrop-blur-xl rounded-[23px] p-8 flex flex-col overflow-hidden">
+          
+          {/* Subtle Ambient Glow Effect inside card */}
+          <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-20 blur-3xl transition-opacity duration-500 rounded-full`} />
+          
+          {/* Icon Section */}
+          <div className="relative mb-6">
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br ${service.gradient} text-white shadow-lg ${service.shadow} transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+              <service.icon size={26} className="text-white" />
             </div>
-            <div className="flex-1 flex flex-col">
-              <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-2">{service.title}</h3>
-              <p className="text-sm text-gray-400 mb-6 leading-relaxed flex-1">{service.description}</p>
-              <div>
-                <Link 
-                  to={service.link} 
-                  className="inline-flex items-center text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors uppercase tracking-wider group-hover:gap-3 gap-2 transition-all"
-                  aria-label={`Learn more about ${service.title}`}
-                >
-                  Learn More <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
+            {/* Sparkle Decoration */}
+            <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+               <Sparkles size={16} className="text-yellow-300 animate-pulse" />
             </div>
           </div>
-        </SpotlightCard>
-      </div>
 
+          {/* Text Content */}
+          <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 transition-colors">
+            {service.title}
+          </h3>
+          
+          <p className="text-gray-400 leading-relaxed mb-8 flex-grow">
+            {service.description}
+          </p>
+
+          {/* Button / Link */}
+          <Link 
+            to={service.link}
+            className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-white/70 group-hover:text-white transition-colors"
+          >
+            Learn More
+            <span className={`flex items-center justify-center w-8 h-8 rounded-full bg-white/5 group-hover:bg-gradient-to-r ${service.gradient} transition-all duration-300 group-hover:translate-x-2`}>
+              <ArrowRight size={14} className="text-white" />
+            </span>
+          </Link>
+
+          {/* Bottom Gradient Line */}
+          <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+        </div>
+      </div>
     </motion.div>
   );
 };
 
 const ServicesGrid = () => {
   return (
-    <section className="py-20 bg-gray-950 relative z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+    <section className="py-24 bg-gray-950 relative overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/10 to-transparent" />
+          <div className="absolute bottom-1/4 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/10 to-transparent" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-20">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold uppercase tracking-widest mb-6"
+          >
+            <Sparkles size={14} />
+            Our Expertise
+          </motion.div>
+          
           <motion.h2 
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight"
           >
-            Our Expertise
+            Digital Solutions for <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400">
+              Modern Business
+            </span>
           </motion.h2>
+          
           <motion.p 
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+            className="text-xl text-gray-400 max-w-2xl mx-auto font-light"
           >
-            Comprehensive digital solutions tailored to your business goals.
+            We blend creativity with technical excellence to deliver products that stand out.
           </motion.p>
         </div>
 
@@ -166,7 +165,7 @@ const ServicesGrid = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {services.map((service, index) => (
             <ServiceCard key={service.title} service={service} />
