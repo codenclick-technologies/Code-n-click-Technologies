@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle, AlertCircle, Clock, Globe } from 'lucide-react';
 import { fadeInUp, staggerContainer, scaleIn } from '../utils/animations';
 import SpotlightCard from '../components/ui/SpotlightCard';
+import FAQSection from '../components/sections/FAQSection';
 import { contactAPI } from '../services/api';
 import SEO from '../components/utils/SEO';
 
@@ -266,6 +267,8 @@ const Contact = () => {
                     </div>
                 </motion.div>
             </div>
+            
+            <FAQSection />
         </div>
     );
 };

@@ -1,5 +1,4 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '../components/utils/SEO';
 import { Shield } from 'lucide-react';
 
 const PrivacyPolicy = () => {
@@ -7,11 +6,11 @@ const PrivacyPolicy = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Privacy Policy | Codenclick Technologies</title>
-        <meta name="description" content="Learn how Codenclick Technologies collects, uses, and protects your personal information. Our privacy policy outlines our commitment to data security and transparency." />
-        <meta name="robots" content="index, follow" />
-      </Helmet>
+      <SEOHead
+        title="Privacy Policy | Codenclick Technologies"
+        description="Learn how Codenclick Technologies collects, uses, and protects your personal information. Our privacy policy outlines our commitment to data security and transparency."
+        canonical="/privacy"
+      />
 
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-24 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

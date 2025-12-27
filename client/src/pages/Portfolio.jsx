@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '../components/utils/SEO';
 import { ExternalLink, Github, X, Code, TrendingUp, Palette, Sparkles, Check, Globe, ArrowRight } from 'lucide-react';
 import Footer from '../components/layout/Footer';
 
@@ -110,10 +110,11 @@ const Portfolio = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Portfolio - Premium Work | Codenclick Technologies</title>
-        <meta name="description" content="Explore our premium portfolio of web development, SaaS, and brand design projects." />
-      </Helmet>
+      <SEOHead
+        title="Portfolio - Premium Work | Codenclick Technologies"
+        description="Explore our premium portfolio of web development, SaaS, and brand design projects."
+        canonical="/portfolio"
+      />
 
       {/* Main Container */}
       <div className="min-h-screen pt-24 pb-20 relative overflow-hidden" ref={containerRef}>

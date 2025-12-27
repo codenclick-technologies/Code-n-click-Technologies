@@ -84,6 +84,14 @@ const Resources = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </motion.div>
+
+          {/* SEO Content Block */}
+          <motion.div variants={fadeInUp} className="mt-12 max-w-4xl mx-auto text-center">
+            <h2 className="text-2xl font-bold text-white mb-4">Your Go-To Source for Tech Insights & Digital Marketing Strategies</h2>
+            <p className="text-gray-400 leading-relaxed">
+              Welcome to the Codenclick Knowledge Hub. Here, we share our expertise on everything from <strong>Web Development trends</strong> and <strong>SaaS architecture</strong> to <strong>advanced SEO techniques</strong> and <strong>Performance Marketing</strong>. Whether you are a business owner looking to understand the digital landscape or a developer seeking code tutorials, our curated resources are designed to empower you. Stay updated with the latest in technology and business growth.
+            </p>
+          </motion.div>
         </motion.div>
 
         {/* Bento Grid */}

@@ -24,7 +24,7 @@ const About = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden pt-32 px-4 sm:px-6 lg:px-8">
       <SEO 
-        title="About Us - Leading Software Development & Digital Marketing Company"
+        title="About Codenclick | Premium Software & Marketing Agency"
         description="Codenclick Technologies is India's premier software development and digital marketing agency. We combine cutting-edge technology with creative strategies to deliver measurable business growth. From web development to digital marketing, we're your partner in digital transformation."
         keywords="about code-n-click, software development company, digital agency India, custom software solutions, web development team, digital marketing experts"
       />
@@ -72,10 +72,18 @@ const About = () => {
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:col-span-2">
             <h2 className="text-3xl font-bold text-white mb-4">Who We Are</h2>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Founded with a vision to bridge the gap between technology and business growth, <strong className="text-white">Codenclick Technologies</strong> has emerged as a trusted partner for businesses seeking digital transformation. We are more than just a service provider—we are strategic partners invested in your success.
+              Founded with a vision to bridge the gap between technology and business growth, <strong className="text-white">Codenclick Technologies</strong> has emerged as a trusted partner for businesses seeking digital transformation. Based in Faridabad, we are more than just a service provider—we are your creative and technical co-founders.
             </p>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Our expertise spans <strong className="text-white">custom software development, web and mobile applications, SaaS platforms, digital marketing, SEO, and brand design</strong>. Whether you're a startup looking to build your MVP or an enterprise seeking to modernize legacy systems, we bring the technical prowess and creative thinking to make it happen.
+              Our expertise spans <strong className="text-white">custom software development, high-performance web applications, SaaS platforms, and data-driven digital marketing</strong>. Whether you're a startup looking to build your MVP or an enterprise seeking to modernize legacy systems, we bring the technical prowess and creative thinking to make it happen. We specialize in MERN stack development, Next.js applications, and comprehensive SEO strategies that put your business on the map.
+            </p>
+            
+            <h3 className="text-2xl font-bold text-white mb-4 mt-8">Our Journey & Philosophy</h3>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+                Since our inception, we have been driven by a singular mission: to deliver <strong className="text-white">"Code that Clicks"</strong> with your business goals. We believe that great software is not just about writing clean lines of code, but about creating intuitive user experiences that convert visitors into loyal customers. Our holistic approach combines engineering excellence with marketing insights, ensuring that what we build is not only functional but also marketable.
+            </p>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+                We pride ourselves on our transparency and agility. Unlike traditional agencies that work in silos, we function as an extension of your team. Our agile development process keeps you in the loop, ensuring that the final product aligns perfectly with your vision.
             </p>
 
             <h3 className="text-2xl font-bold text-white mb-4 mt-8">Our Commitment</h3>

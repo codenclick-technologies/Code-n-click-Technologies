@@ -190,6 +190,23 @@ const Careers = () => {
           ))}
         </motion.div>
 
+        {/* Culture & Growth - SEO Content */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="max-w-4xl mx-auto text-center mb-20"
+        >
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Build Your Career with the Best Technology Company in Faridabad</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+            At <strong>Codenclick Technologies</strong>, we don't just offer jobs; we build careers. As a premier <strong>software development company in Delhi NCR</strong>, we provide an environment where innovation thrives. Whether you are a Junior React Developer looking for mentorship or a Senior Backend Engineer seeking complex challenges, our diverse projects in SaaS, E-commerce, and Artificial Intelligence provide the perfect playground for growth.
+          </p>
+          <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+            We value <strong>continuous learning</strong> and <strong>work-life balance</strong>. Our collaborative culture ensures that every team member's voice is heard. Join us to work on cutting-edge technologies like Next.js, Node.js, and Cloud Computing, and help us deliver world-class digital solutions to clients globally.
+          </p>
+        </motion.div>
+
         {/* Search and Filters */}
         <div className="max-w-4xl mx-auto mb-12">
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">

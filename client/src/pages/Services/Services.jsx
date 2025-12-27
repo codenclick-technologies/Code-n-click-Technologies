@@ -132,6 +132,7 @@ const Services = () => {
         title="Digital Services | Web, SaaS, Marketing & Design"
         description="Comprehensive digital services tailored for growth. FROM custom web & SaaS development to performance marketing. Premium quality, guaranteed results."
         keywords="web development, saas development, digital marketing, seo services, graphic design, google ads, meta ads"
+        canonical="/services"
       />
 
       {/* Premium Hero Section */}

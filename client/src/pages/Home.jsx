@@ -8,6 +8,7 @@ import StatsSection from '../components/sections/StatsSection';
 import ProcessSection from '../components/sections/ProcessSection';
 import TestimonialsSection from '../components/sections/TestimonialsSection';
 import CTASection from '../components/sections/CTASection';
+import SEOContentSection from '../components/sections/SEOContentSection';
 
 import SEO from '../components/utils/SEO';
 
@@ -30,6 +31,7 @@ const Home = () => {
       <StatsSection />
       <ProcessSection />
       <TestimonialsSection />
+      <SEOContentSection />
       <CTASection />
     </div>
   );

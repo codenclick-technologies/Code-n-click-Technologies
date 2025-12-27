@@ -1,5 +1,4 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEOHead from '../components/utils/SEO';
 import { Scale } from 'lucide-react';
 
 const TermsOfService = () => {
@@ -7,11 +6,11 @@ const TermsOfService = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Terms of Service | Codenclick Technologies</title>
-        <meta name="description" content="Read the Terms of Service for Codenclick Technologies' IT and digital marketing services. Understand your rights and responsibilities when using our services." />
-        <meta name="robots" content="index, follow" />
-      </Helmet>
+      <SEOHead
+        title="Terms of Service | Codenclick Technologies"
+        description="Read the Terms of Service for Codenclick Technologies' IT and digital marketing services. Understand your rights and responsibilities when using our services."
+        canonical="/terms"
+      />
 
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-24 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
