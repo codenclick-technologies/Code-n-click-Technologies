@@ -31,7 +31,7 @@ const Contact = () => {
                 message: '✅ Message sent successfully! We\'ll get back to you soon.'
             });
             e.target.reset();
-            
+
             setTimeout(() => {
                 setStatus({ type: '', message: '' });
             }, 5000);
@@ -55,14 +55,14 @@ const Contact = () => {
                 <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-purple-600/10 blur-[120px] rounded-full" />
             </div>
 
-            <SEO 
+            <SEO
                 title="Contact Us | Code'N'Click Technologies"
                 description="Get in touch with Code'N'Click Technologies. We are ready to start your next digital project. Call, email, or visit us in Faridabad."
                 keywords="contact us, hire developers, web development agency, faridabad, digital marketing inquiry"
             />
 
             <div className="max-w-7xl mx-auto relative z-10">
-                <motion.div 
+                <motion.div
                     initial="hidden"
                     animate="visible"
                     variants={staggerContainer}
@@ -76,13 +76,13 @@ const Contact = () => {
                             </span>
                         </motion.div>
                         <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
-                            Let's Build Something <br />
+                            Enough Strategy. <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
-                                Extraordinary
+                                Let's Execute.
                             </span>
                         </motion.h1>
                         <motion.p variants={fadeInUp} className="text-xl text-gray-400">
-                            Have a vision? We have the expertise. Let's collaborate to turn your ideas into digital reality.
+                            You have a vision. We have the engineering team to build it. No fluff, just results.
                         </motion.p>
                     </div>
 
@@ -154,7 +154,7 @@ const Contact = () => {
 
                         {/* Form Column */}
                         <div className="lg:col-span-7">
-                            <motion.div 
+                            <motion.div
                                 variants={scaleIn}
                                 className="relative group"
                             >
@@ -162,14 +162,13 @@ const Contact = () => {
                                 <div className="relative bg-[#0A0A0A] p-8 md:p-12 rounded-[28px] border border-white/10 shadow-2xl">
                                     {/* Status Message */}
                                     {status.message && (
-                                        <motion.div 
+                                        <motion.div
                                             initial={{ opacity: 0, y: -20 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            className={`mb-8 p-5 rounded-2xl flex items-center gap-4 ${
-                                                status.type === 'success' 
-                                                    ? 'bg-green-500/10 border border-green-500/20 text-green-400' 
+                                            className={`mb-8 p-5 rounded-2xl flex items-center gap-4 ${status.type === 'success'
+                                                    ? 'bg-green-500/10 border border-green-500/20 text-green-400'
                                                     : 'bg-red-500/10 border border-red-500/20 text-red-400'
-                                            }`}
+                                                }`}
                                         >
                                             {status.type === 'success' ? <CheckCircle size={24} /> : <AlertCircle size={24} />}
                                             <span className="font-medium">{status.message}</span>
@@ -180,42 +179,42 @@ const Contact = () => {
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                             <div className="space-y-2.5">
                                                 <label className="text-sm font-semibold text-gray-300 ml-1">First Name</label>
-                                                <input 
-                                                    name="firstName" 
-                                                    type="text" 
-                                                    required 
-                                                    className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 placeholder:text-gray-600" 
-                                                    placeholder="John" 
+                                                <input
+                                                    name="firstName"
+                                                    type="text"
+                                                    required
+                                                    className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 placeholder:text-gray-600"
+                                                    placeholder="John"
                                                 />
                                             </div>
                                             <div className="space-y-2.5">
                                                 <label className="text-sm font-semibold text-gray-300 ml-1">Last Name</label>
-                                                <input 
-                                                    name="lastName" 
-                                                    type="text" 
-                                                    required 
-                                                    className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 placeholder:text-gray-600" 
-                                                    placeholder="Doe" 
+                                                <input
+                                                    name="lastName"
+                                                    type="text"
+                                                    required
+                                                    className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 placeholder:text-gray-600"
+                                                    placeholder="Doe"
                                                 />
                                             </div>
                                         </div>
 
                                         <div className="space-y-2.5">
                                             <label className="text-sm font-semibold text-gray-300 ml-1">Email Address</label>
-                                            <input 
-                                                name="email" 
-                                                type="email" 
-                                                required 
-                                                className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 placeholder:text-gray-600" 
-                                                placeholder="john@example.com" 
+                                            <input
+                                                name="email"
+                                                type="email"
+                                                required
+                                                className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 placeholder:text-gray-600"
+                                                placeholder="john@example.com"
                                             />
                                         </div>
 
                                         <div className="space-y-2.5">
                                             <label className="text-sm font-semibold text-gray-300 ml-1">Subject</label>
                                             <div className="relative">
-                                                <select 
-                                                    name="subject" 
+                                                <select
+                                                    name="subject"
                                                     className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 appearance-none cursor-pointer"
                                                 >
                                                     <option className="bg-[#0A0A0A]" value="General Inquiry">General Inquiry</option>
@@ -231,17 +230,17 @@ const Contact = () => {
 
                                         <div className="space-y-2.5">
                                             <label className="text-sm font-semibold text-gray-300 ml-1">Your Message</label>
-                                            <textarea 
-                                                name="message" 
-                                                required 
-                                                rows="5" 
-                                                className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 placeholder:text-gray-600 resize-none" 
-                                                placeholder="Tell us about your project or inquiry..." 
+                                            <textarea
+                                                name="message"
+                                                required
+                                                rows="5"
+                                                className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 placeholder:text-gray-600 resize-none"
+                                                placeholder="Tell us about your project or inquiry..."
                                             />
                                         </div>
 
-                                        <button 
-                                            type="submit" 
+                                        <button
+                                            type="submit"
                                             disabled={loading}
                                             className="w-full group relative overflow-hidden py-5 rounded-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-[length:200%_auto] text-white font-bold text-xl shadow-xl hover:shadow-blue-500/30 transition-all duration-500 hover:bg-right disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                                         >

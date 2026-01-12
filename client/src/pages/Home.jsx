@@ -14,10 +14,10 @@ import SEO from '../components/utils/SEO';
 const Home = () => {
   return (
     <div className="min-h-screen">
-      <SEO 
-        title="No.1 Web Development & Digital Marketing Agency in Faridabad, Delhi NCR"
-        description="Codenclick Technologies is the Best IT Company in Faridabad & Delhi. We provide Premium Web Development, SaaS, SEO, Google/Meta Ads & Graphics. #1 Digital Agency for Business Growth."
-        keywords="No1 Digital Marketing Agency Delhi, No1 Digital Marketing Agency Faridabad, Best Digital Marketing Agency Delhi, Best Digital Marketing Agency Faridabad, Premium Digital Marketing Services Delhi, Premium Digital Marketing Services Faridabad, Top Software Development Company Delhi, Top Software Development Company Faridabad, Best Web Development Company Delhi, Best Web Development Company Faridabad, Premium SEO Services Delhi, Premium SEO Services Faridabad, Best IT Company Delhi NCR, Top IT Company Faridabad, Custom Software Development, SaaS Solutions India, Meta Ads Expert Delhi, Google Ads Consultant Faridabad"
+      <SEO
+        title="Your Partner in Digital Growth | Web Development & Marketing Experts"
+        description="We don't just build websites; we build businesses. From custom software to ROI-focused digital marketing, Codenclick Technologies is your partner in scaling up. Based in Faridabad & Delhi NCR, serving the world."
+        keywords="Digital Growth Partner, Custom Web Solutions, ROI Marketing, Business Scaling Experts, Codenclick Technologies, Web Development Faridabad, Digital Agency Delhi"
         canonical="/"
       >
 

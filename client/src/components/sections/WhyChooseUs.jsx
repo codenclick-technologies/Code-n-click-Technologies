@@ -7,26 +7,26 @@ const WhyChooseUs = () => {
   const reasons = [
     {
       icon: TrendingUp,
-      title: 'Proven Results',
-      description: 'Average ROI increase of 340% for our clients within 6 months. Data-driven strategies backed by 50+ successful campaigns.',
+      title: 'We Speak ROI, Not Just Code',
+      description: 'Pretty code is useless if it doesn\'t sell. We focus on metrics that matter to you: leads, sales, and user retention.',
       color: 'from-blue-500 to-cyan-400'
     },
     {
       icon: Zap,
-      title: 'Lightning Fast Delivery',
-      description: 'Agile development cycles with weekly sprints. Your project goes live 40% faster with our optimized processes.',
+      title: 'Speed Is A Feature',
+      description: 'Your customers won\'t wait, and neither should you. We build optimized, lightning-fast platforms that keep users engaged.',
       color: 'from-yellow-500 to-orange-400'
     },
     {
       icon: Shield,
-      title: 'Enterprise Security',
-      description: 'ISO 27001 certified infrastructure. GDPR & SOC 2 compliant. Your data is protected with military-grade encryption.',
+      title: 'Peace of Mind Security',
+      description: 'Sleep soundly knowing your data and your customers\' data is protected by enterprise-grade security protocols.',
       color: 'from-green-500 to-emerald-400'
     },
     {
       icon: Users,
-      title: '24/7 Dedicated Support',
-      description: 'Round-the-clock monitoring and technical support. Average response time under 15 minutes for critical issues.',
+      title: 'Partners, Not Vendors',
+      description: 'We don\'t disappear after launch. We stick around to help you potential technical hurdles and scale as you grow.',
       color: 'from-pink-500 to-red-400'
     },
   ];
@@ -66,10 +66,10 @@ const WhyChooseUs = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
-            Why Industry Leaders Choose Us
+            Why Fast-Growing Brands Partner With Us
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            We combine cutting-edge technology with strategic expertise to deliver measurable business impact. Our <Link to="/services" className="font-bold hover:opacity-80 transition-opacity">comprehensive services</Link> have helped <Link to="/portfolio" className="font-bold hover:opacity-80 transition-opacity">200+ successful companies</Link> achieve their goals.
+            We combine technical excellence with business savvy. Our <Link to="/services" className="font-bold hover:opacity-80 transition-opacity">solutions</Link> have helped <Link to="/portfolio" className="font-bold hover:opacity-80 transition-opacity">founders like you</Link> scale from idea to exit.
           </p>
         </motion.div>
 

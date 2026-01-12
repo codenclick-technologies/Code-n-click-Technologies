@@ -120,16 +120,20 @@ const Hero = () => {
             {/* Subheading */}
             <motion.div variants={itemVariants}>
               <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl font-light">
-                Unlock unprecedented growth with our cutting-edge <Link to="/services/web-development" className="font-bold hover:opacity-80 transition-opacity">web development</Link>, <Link to="/services/saas-development" className="font-bold hover:opacity-80 transition-opacity">SaaS solutions</Link>, and <Link to="/services/seo" className="font-bold hover:opacity-80 transition-opacity">SEO services</Link>. Leading the digital revolution in Faridabad, Delhi NCR & beyond.
+                We bridge the gap between "just another website" and <span className="text-white font-medium">a digital engine that drives revenue</span>.
+                Whether you need a <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 transition-colors border-b border-blue-500/30 hover:border-blue-400">high-performance platform</Link>,
+                a <Link to="/services/saas-development" className="text-blue-400 hover:text-blue-300 transition-colors border-b border-blue-500/30 hover:border-blue-400">scalable SaaS product</Link>, or
+                <Link to="/services/seo" className="text-blue-400 hover:text-blue-300 transition-colors border-b border-blue-500/30 hover:border-blue-400">visibility that dominates search results</Link>,
+                we are the team that gets it done.
               </p>
             </motion.div>
 
             {/* Feature bullets */}
             <motion.div variants={itemVariants} className="space-y-3 py-4">
               {[
-                { icon: Rocket, text: 'Lightning-fast deployment & scaling' },
-                { icon: Shield, text: 'Enterprise security & compliance' },
-                { icon: Zap, text: '24/7 dedicated support team' },
+                { icon: Rocket, text: 'We launch fast, but we never rush quality.' },
+                { icon: Shield, text: 'Enterprise-grade security is our standard.' },
+                { icon: Zap, text: 'Support that feels like an extension of your team.' },
               ].map((item, idx) => (
                 <motion.div
                   key={idx}

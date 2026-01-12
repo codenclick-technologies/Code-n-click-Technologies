@@ -78,10 +78,10 @@ const TestimonialsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
-            What Our Clients Say
+            Don't Just Take Our Word For It
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Real results from real businesses. See how we've helped companies like yours achieve exponential growth.
+            We let our results do the talking. Here's what ambitious founders and leaders have to say about partnering with us.
           </p>
         </motion.div>
 

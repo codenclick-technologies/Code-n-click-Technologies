@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import {
   Briefcase, Heart, Zap, Coffee, ArrowRight, Check,
   MapPin, Clock, DollarSign, Search, Filter, X,
@@ -162,10 +163,11 @@ const Careers = () => {
             We're Hiring
           </motion.div>
           <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 dark:from-white dark:via-blue-400 dark:to-white bg-clip-text text-transparent mb-6">
-            Join the Revolution
+            Do The Best Work <br />
+            of Your Life.
           </motion.h1>
           <motion.p variants={fadeInUp} className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Build the future with us. Join our team working on cutting-edge <Link to="/services/web-development" className="font-bold hover:opacity-80 transition-opacity">web development</Link>, <Link to="/services/saas-development" className="font-bold hover:opacity-80 transition-opacity">SaaS platforms</Link>, and <Link to="/services/seo" className="font-bold hover:opacity-80 transition-opacity">SEO solutions</Link>. Learn more <Link to="/about" className="font-bold hover:opacity-80 transition-opacity">about our company culture</Link>.
+            We don't hire employees; we hire owners. If you want to build world-class <Link to="/services/web-development" className="font-bold hover:opacity-80 transition-opacity">tech products</Link> and grow faster than you thought possible, you belong here.
           </motion.p>
         </motion.div>
 

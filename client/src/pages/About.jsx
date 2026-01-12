@@ -10,8 +10,8 @@ import SpotlightCard from '../components/ui/SpotlightCard';
 
 const team = [
   { name: 'Lokender Chauhan', role: 'Founder & CTO', bio: 'Leads product &amp; engineering. Passionate about performant web experiences.', bioLong: 'Lokender leads engineering and product. He focuses on performance, scalable architectures, and developer experience. Previously built SaaS platforms and large-scale React apps.', avatar: '🧑‍💻', email: 'lokender@codenclick.com' },
-  { name: 'Himanshu Sharma', role: 'Head of Growth', bio: 'Growth strategist focused on paid &amp; organic acquisition.', bioLong: 'Himanshu specializes in growth strategies combining paid channels and organic funnels. He builds repeatable acquisition systems and analytics stacks.', avatar: '🧑‍💼', email: 'himanshu@codenclick.com', skills: ['Paid acquisition','Analytics','Funnel optimization'] },
-  { name: 'Jitender Saini', role: 'Team Lead', bio: 'Design systems and product leadership specialist.', bioLong: 'Jitender leads cross-functional teams, design systems and product delivery. He bridges design and engineering to ship high-quality products.', avatar: '👨‍💼', email: 'jitender@codenclick.com', skills: ['Design systems','Product leadership','UX'] },
+  { name: 'Himanshu Sharma', role: 'Head of Growth', bio: 'Growth strategist focused on paid &amp; organic acquisition.', bioLong: 'Himanshu specializes in growth strategies combining paid channels and organic funnels. He builds repeatable acquisition systems and analytics stacks.', avatar: '🧑‍💼', email: 'himanshu@codenclick.com', skills: ['Paid acquisition', 'Analytics', 'Funnel optimization'] },
+  { name: 'Jitender Saini', role: 'Team Lead', bio: 'Design systems and product leadership specialist.', bioLong: 'Jitender leads cross-functional teams, design systems and product delivery. He bridges design and engineering to ship high-quality products.', avatar: '👨‍💼', email: 'jitender@codenclick.com', skills: ['Design systems', 'Product leadership', 'UX'] },
 ];
 
 const timeline = [
@@ -23,14 +23,14 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-hidden pt-32 px-4 sm:px-6 lg:px-8">
-      <SEO 
+      <SEO
         title="About Us - Leading Software Development & Digital Marketing Company"
         description="Codenclick Technologies is India's premier software development and digital marketing agency. We combine cutting-edge technology with creative strategies to deliver measurable business growth. From web development to digital marketing, we're your partner in digital transformation."
         keywords="about code-n-click, software development company, digital agency India, custom software solutions, web development team, digital marketing experts"
       />
-      
+
       <div className="max-w-7xl mx-auto">
-        <motion.section 
+        <motion.section
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -38,13 +38,14 @@ const About = () => {
           className="text-center mb-20"
         >
           <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-gray-400">
-            Transforming Ideas into Digital Success
+            We Don't Just Write Code. <br />
+            <span className="text-blue-500">We Engineer Growth.</span>
           </motion.h1>
           <motion.p variants={fadeInUp} className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-4">
-            We are <strong className="text-white">Codenclick Technologies</strong> — a technology-driven software development and digital marketing agency based in India, dedicated to helping businesses thrive in the digital era.
+            Codenclick Technologies is a team of builders, strategists, and problem solvers. We exist for one reason: to help ambitious businesses win in the digital age.
           </motion.p>
           <motion.p variants={fadeInUp} className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Our multidisciplinary team of expert developers, creative designers, and strategic marketers combine innovation with execution to deliver solutions that drive real, measurable business growth.
+            Forget agency bloat and buzzwords. We deliver lean, mean, high-performance digital products that look great and work even better.
           </motion.p>
         </motion.section>
 
@@ -70,17 +71,17 @@ const About = () => {
         {/* Mission + Timeline */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-16">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:col-span-2">
-            <h2 className="text-3xl font-bold text-white mb-4">Who We Are</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">Our Story</h2>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Founded with a vision to bridge the gap between technology and business growth, <strong className="text-white">Codenclick Technologies</strong> has emerged as a trusted partner for businesses seeking digital transformation. We are more than just a service provider—we are strategic partners invested in your success.
+              We started <strong className="text-white">Codenclick Technologies</strong> because we were tired of seeing businesses get burned by "digital agencies" that overpromised and underdelivered. We wanted to build a company that actually cared about the outcome, not just the invoice.
             </p>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Our expertise spans <strong className="text-white">custom software development, web and mobile applications, SaaS platforms, digital marketing, SEO, and brand design</strong>. Whether you're a startup looking to build your MVP or an enterprise seeking to modernize legacy systems, we bring the technical prowess and creative thinking to make it happen.
+              Today, we are a team of obsessives. Obsessed with clean code, obsessed with conversion rates, and obsessed with helping you win. From <strong className="text-white">custom software that runs your business</strong> to <strong className="text-white">marketing strategies that grow it</strong>, we are the engine room of your digital success.
             </p>
 
-            <h3 className="text-2xl font-bold text-white mb-4 mt-8">Our Commitment</h3>
+            <h3 className="text-2xl font-bold text-white mb-4 mt-8">The Codenclick Promise</h3>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              We built our reputation on a simple principle: <strong className="text-white">We don't promise what we can't deliver.</strong> Every project—whether for a bootstrapped startup or a Fortune 500 company—is executed with the same rigor, attention to detail, and commitment to measurable results.
+              <strong className="text-white">We play long games.</strong> We aren't here for a quick buck. We want to be the partner you call ten years from now when you're launching your IPO. That means total transparency, zero technical debt, and results that you can take to the bank.
             </p>
 
             <div className="space-y-6 mt-8">
@@ -97,20 +98,20 @@ const About = () => {
           </motion.div>
 
           <motion.aside initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-2xl bg-gradient-to-br from-gray-900/60 to-gray-950/80 p-6">
-            <h3 className="text-lg font-bold text-white mb-3">What Drives Us</h3>
+            <h3 className="text-lg font-bold text-white mb-3">Our Mantra</h3>
             <ul className="text-gray-400 space-y-3 text-sm">
-              <li>✓ Building products that matter</li>
-              <li>✓ Creating lasting impact</li>
-              <li>✓ Growing with ambitious partners</li>
-              <li>✓ Delivering with integrity</li>
+              <li>✓ Code that scales</li>
+              <li>✓ Designs that convert</li>
+              <li>✓ Marketing that delivers ROI</li>
+              <li>✓ Partnerships that last</li>
             </ul>
-            <a href="/contact" className="inline-block mt-6 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-semibold">Let's Build Together</a>
+            <a href="/contact" className="inline-block mt-6 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-semibold">Start construction</a>
           </motion.aside>
         </div>
 
         {/* Team */}
         <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16">
-          <motion.h2 variants={fadeInUp} className="text-3xl font-bold text-white mb-6">Meet the team</motion.h2>
+          <motion.h2 variants={fadeInUp} className="text-3xl font-bold text-white mb-6">The Builders</motion.h2>
           <motion.div variants={staggerContainer} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {team.map((member, idx) => (
               <motion.div key={idx} variants={fadeInUp} className="group">
@@ -140,10 +141,10 @@ const About = () => {
             {[{
               title: 'Innovation',
               desc: 'Continuously iterate and experiment to find better solutions.'
-            },{
+            }, {
               title: 'Integrity',
               desc: 'Transparent communication and trust-based relationships.'
-            },{
+            }, {
               title: 'Excellence',
               desc: 'Deliver craftsmanship in code, design, and strategy.'
             }].map((v, i) => (

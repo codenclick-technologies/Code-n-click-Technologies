@@ -9,7 +9,7 @@ const services = [
   {
     icon: Code,
     title: 'Web Development',
-    description: 'Custom, high-performance websites built with React, Next.js, and 3D technologies.',
+    description: 'We build fast, secure, and scalable websites that turn visitors into customers. Powered by React & Next.js.',
     link: '/services/web-development',
     color: 'text-blue-500',
     bg: 'bg-blue-50 dark:bg-blue-900/20'
@@ -17,7 +17,7 @@ const services = [
   {
     icon: Server,
     title: 'SaaS Development',
-    description: 'Reliable, scalable SaaS products with multi-tenant architecture and enterprise-grade infrastructure.',
+    description: 'Turn your complex idea into a seamless product. We handle the heavy lifting so you can focus on scaling.',
     link: '/services/saas-development',
     color: 'text-cyan-500',
     bg: 'bg-cyan-50 dark:bg-cyan-900/20'
@@ -25,7 +25,7 @@ const services = [
   {
     icon: Globe,
     title: 'Meta Ads',
-    description: 'Targeted Facebook and Instagram ad campaigns to skyrocket your ROI.',
+    description: 'Stop burning money on ads that don\'t convert. We build targeted campaigns that bring you qualified leads.',
     link: '/services/meta-ads',
     color: 'text-purple-500',
     bg: 'bg-purple-50 dark:bg-purple-900/20'
@@ -33,7 +33,7 @@ const services = [
   {
     icon: BarChart,
     title: 'Google Ads',
-    description: 'Strategic PPC campaigns to capture high-intent traffic and leads.',
+    description: 'Be found exactly when your customers are looking for you. High-intent traffic that drives real sales.',
     link: '/services/google-ads',
     color: 'text-green-500',
     bg: 'bg-green-50 dark:bg-green-900/20'
@@ -41,7 +41,7 @@ const services = [
   {
     icon: PenTool,
     title: 'Graphic Design',
-    description: 'Stunning visuals and branding that tell your story and captivate audiences.',
+    description: 'First impressions matter. We create visual identities that make your brand impossible to ignore.',
     link: '/services/graphic-design',
     color: 'text-pink-500',
     bg: 'bg-pink-50 dark:bg-pink-900/20'
@@ -49,7 +49,7 @@ const services = [
   {
     icon: Search,
     title: 'SEO',
-    description: 'Data-driven SEO strategies to rank higher and drive organic growth.',
+    description: 'Long-term growth without the ad spend. We help you dominate search results and build lasting authority.',
     link: '/services/seo',
     color: 'text-orange-500',
     bg: 'bg-orange-50 dark:bg-orange-900/20'
@@ -76,8 +76,8 @@ const ServiceCard = ({ service }) => {
   };
 
   return (
-    <motion.div 
-      variants={fadeInUp} 
+    <motion.div
+      variants={fadeInUp}
       className="relative h-full group perspective"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -90,7 +90,7 @@ const ServiceCard = ({ service }) => {
       {/* Animated glass reflection border */}
       <div className="relative rounded-3xl p-[2px] h-full overflow-hidden">
         {/* Animated gradient border */}
-        <div 
+        <div
           className="absolute inset-0 rounded-3xl opacity-75"
           style={{
             background: 'linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6)',
@@ -98,9 +98,9 @@ const ServiceCard = ({ service }) => {
             animation: 'gradient-shift 3s ease infinite'
           }}
         />
-        
+
         {/* Glass reflection effect */}
-        <div 
+        <div
           className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{
             background: 'linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)',
@@ -108,7 +108,7 @@ const ServiceCard = ({ service }) => {
             animation: 'shine 2s ease-in-out infinite'
           }}
         />
-        
+
         {/* Content */}
         <SpotlightCard className="h-60 p-6 relative z-10">
           <div className="flex items-start gap-4 h-full">
@@ -119,8 +119,8 @@ const ServiceCard = ({ service }) => {
               <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-2">{service.title}</h3>
               <p className="text-sm text-gray-400 mb-6 leading-relaxed flex-1">{service.description}</p>
               <div>
-                <Link 
-                  to={service.link} 
+                <Link
+                  to={service.link}
                   className="inline-flex items-center text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors uppercase tracking-wider group-hover:gap-3 gap-2 transition-all"
                   aria-label={`Learn more about ${service.title}`}
                 >
@@ -141,7 +141,7 @@ const ServicesGrid = () => {
     <section className="py-20 bg-gray-950 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <motion.h2 
+          <motion.h2
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -150,7 +150,7 @@ const ServicesGrid = () => {
           >
             Our Expertise
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -161,7 +161,7 @@ const ServicesGrid = () => {
           </motion.p>
         </div>
 
-        <motion.div 
+        <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"

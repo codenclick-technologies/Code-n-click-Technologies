@@ -6,35 +6,35 @@ const ProcessSection = () => {
   const steps = [
     {
       number: '01',
-      title: 'Discovery & Strategy',
-      description: 'Deep-dive analysis of your business goals, market position, and target audience. We develop a comprehensive roadmap aligned with your objectives.',
+      title: 'We Listen & Learn',
+      description: 'First, we shut up and listen. We analyze your goals, your competition, and your audience to build a strategy that actually fits.',
       icon: Lightbulb,
       color: 'from-blue-500 to-cyan-400',
-      details: ['Market analysis', 'Competitor research', 'Goal alignment', 'Budget planning']
+      details: ['Deep-dive Workshops', 'Market Analysis', 'Technical Feasibility', 'Clear Roadmap']
     },
     {
       number: '02',
-      title: 'Design & Planning',
-      description: 'Wireframing, prototyping, and user experience design. Every pixel is optimized for conversion and engagement.',
+      title: 'We Design for Humans',
+      description: 'We prototype user experiences that feel intuitive and look stunning. We validate designs before writing a single line of code.',
       icon: Cog,
       color: 'from-purple-500 to-pink-400',
-      details: ['UI/UX design', 'Prototyping', 'Accessibility audit', 'Performance planning']
+      details: ['User Flow Mapping', 'High-Fidelity Prototypes', 'Accessibility First', 'Brand Alignment']
     },
     {
       number: '03',
-      title: 'Development & Build',
-      description: 'Agile development with weekly sprints, code reviews, and continuous integration. State-of-the-art tech stack for maximum performance.',
+      title: 'We Build to Scale',
+      description: 'Our engineers build robust, clean code. We use modern stacks that ensure your product is fast, secure, and ready to grow.',
       icon: Rocket,
       color: 'from-orange-500 to-red-400',
-      details: ['Backend development', 'Frontend engineering', 'API integration', 'Testing & QA']
+      details: ['Clean Code Standards', 'Weekly Sprints', 'Rigorous Testing', 'Seamless Integration']
     },
     {
       number: '04',
-      title: 'Launch & Optimize',
-      description: 'Seamless deployment with zero downtime. Post-launch monitoring, analytics setup, and continuous optimization for growth.',
+      title: 'We Launch & Grow',
+      description: 'Launch is just Day 1. We help you monitor performance, optimize based on data, and iterate for continuous improvement.',
       icon: BarChart3,
       color: 'from-green-500 to-emerald-400',
-      details: ['Deployment', 'Analytics setup', 'SEO optimization', 'Performance tuning']
+      details: ['Zero-Downtime Deploy', 'Real-time Analytics', 'Growth Hacking', 'Ongoing Support']
     },
   ];
 
@@ -56,10 +56,10 @@ const ProcessSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
-            Our Proven Process
+            From Idea to Impact
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            A structured, transparent approach that delivers exceptional results from day one. We keep you informed at every stage.
+            Transparency is our default setting. You'll never have to wonder "what's happening now?" with our clear, collaborative process.
           </p>
         </motion.div>
 
