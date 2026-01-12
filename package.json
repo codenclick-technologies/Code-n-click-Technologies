@@ -1,0 +1,18 @@
+{
+  "name": "codenclick-technologies",
+  "author": "Codenclick Technologies",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "dev": "cd client && npm run dev",
+    "preview": "cd client && npm run preview"
+  },
+  "dependencies": {
+    "vite": "^7.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "typescript": "^5.7.3"
+  }
+}

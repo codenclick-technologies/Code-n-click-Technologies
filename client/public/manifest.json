@@ -1,0 +1,26 @@
+{
+    "short_name": "Codenclick",
+    "name": "Codenclick  Technologies",
+    "description": "Leading software development and digital marketing agency",
+    "icons": [
+        {
+            "src": "faviconimage.png",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "faviconimage.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "faviconimage.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#0f172a",
+    "display": "standalone",
+    "theme_color": "#0EA5E9"
+}
