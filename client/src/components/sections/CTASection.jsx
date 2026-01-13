@@ -4,7 +4,7 @@ import { ArrowRight, Zap, Lock, Headphones } from 'lucide-react';
 
 const CTASection = () => {
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gray-950 overflow-hidden">
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#020205] overflow-hidden">
       {/* Decorative SVG flourish */}
       <svg className="absolute left-0 -top-20 w-full h-40 opacity-10 pointer-events-none" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
         <path d="M0 96L80 112C160 128 320 160 480 176C640 192 800 192 960 176C1120 160 1280 128 1360 112L1440 96V0H1360C1280 0 1120 0 960 0C800 0 640 0 480 0C320 0 160 0 80 0H0V96Z" fill="url(#grad)" />

@@ -94,7 +94,7 @@ const WebDevelopment = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#030014] text-white overflow-hidden">
+    <div className="min-h-screen bg-[#020205] text-white overflow-hidden">
       <SEOHead
         title="Best Web Development Company in Faridabad | Code'N'Click"
         description="Top-rated web development company in Faridabad. We build high-performance, SEO-optimized websites and web apps using React & Next.js to grow your local business."
@@ -104,7 +104,7 @@ const WebDevelopment = () => {
 
       {/* 1. H1 - Main Service Title */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-[#030014] to-[#030014] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-[#020205] to-[#020205] pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -148,7 +148,7 @@ const WebDevelopment = () => {
       </section>
 
       {/* 2. Intro Section (Pain Point -> Solution -> Trust) */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/5 border-y border-white/5">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#020205]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">Is Your Website Costing You Revenue?</h2>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
@@ -418,50 +418,104 @@ const WebDevelopment = () => {
         </div>
       </section>
 
-      {/* 9. Pricing (H2) */}
+      {/* 9. Recommended Tech Stacks (H2) */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Transparent Investment</h2>
-            <p className="text-xl text-gray-400">No hidden fees. Just clear value.</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Recommended Tech Stacks</h2>
+            <p className="text-xl text-gray-400">Choose the right technology foundation for your project's success</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Starter */}
             <div className="glass-panel p-8 rounded-3xl border border-white/10 flex flex-col hover:border-blue-500/50 transition-colors">
               <h3 className="text-xl font-bold text-white mb-2">Starter</h3>
-              <p className="text-4xl font-bold text-blue-400 mb-6">$999<span className="text-sm text-gray-400 font-normal">/project</span></p>
-              <ul className="space-y-4 mb-8 flex-1 text-gray-300">
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> 5 Custom Pages</li>
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> Mobile Responsive</li>
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> Basic SEO Setup</li>
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> Contact Form</li>
-              </ul>
+              <p className="text-sm text-gray-400 mb-6">Perfect for small businesses & landing pages</p>
+              
+              <div className="mb-6 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
+                <h4 className="text-blue-400 font-bold mb-2 flex items-center gap-2">
+                  <CheckCircle2 size={18} /> Recommended Stack
+                </h4>
+                <p className="text-sm text-gray-300">HTML5 + CSS3 + Vanilla JavaScript</p>
+              </div>
+
+              <div className="space-y-3 mb-6 flex-1">
+                <h5 className="text-white font-semibold text-sm">Why This Stack?</h5>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Lightning-fast load times (under 1 second)</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> SEO-friendly with clean semantic HTML</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Low hosting costs (works on any server)</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Easy to maintain and update</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Perfect for brochure sites & portfolios</li>
+                </ul>
+              </div>
+
+              <div className="mb-6 p-3 rounded-lg bg-white/5 border border-white/5">
+                <p className="text-xs text-gray-400">Best For: Local businesses, personal portfolios, simple landing pages</p>
+              </div>
+
               <Link to="/contact" className="w-full py-3 rounded-xl border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white transition-all text-center font-bold">Get Started</Link>
             </div>
+
             {/* Growth */}
             <div className="glass-panel p-8 rounded-3xl border border-blue-500 relative transform scale-105 shadow-2xl shadow-blue-900/20 flex flex-col">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-bold">Most Popular</div>
               <h3 className="text-xl font-bold text-white mb-2">Growth</h3>
-              <p className="text-4xl font-bold text-blue-400 mb-6">$2,499<span className="text-sm text-gray-400 font-normal">/project</span></p>
-              <ul className="space-y-4 mb-8 flex-1 text-gray-300">
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> 10+ Custom Pages</li>
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> CMS Integration (admin panel)</li>
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> Advanced SEO Schema</li>
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> Blog Functionality</li>
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> 1 Month Support</li>
-              </ul>
+              <p className="text-sm text-gray-400 mb-6">For growing businesses with dynamic content</p>
+              
+              <div className="mb-6 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
+                <h4 className="text-blue-400 font-bold mb-2 flex items-center gap-2">
+                  <CheckCircle2 size={18} /> Recommended Stack
+                </h4>
+                <p className="text-sm text-gray-300">React + Next.js + Node.js + MongoDB</p>
+              </div>
+
+              <div className="space-y-3 mb-6 flex-1">
+                <h5 className="text-white font-semibold text-sm">Why This Stack?</h5>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Server-side rendering for excellent SEO</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Dynamic content management with CMS</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Scalable architecture for future growth</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Fast page transitions & smooth UX</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Built-in blog & content features</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> API-ready for third-party integrations</li>
+                </ul>
+              </div>
+
+              <div className="mb-6 p-3 rounded-lg bg-white/5 border border-white/5">
+                <p className="text-xs text-gray-400">Best For: E-commerce stores, content-heavy sites, business platforms, blogs</p>
+              </div>
+
               <Link to="/contact" className="w-full py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-500 transition-all text-center font-bold">Choose Growth</Link>
             </div>
+
             {/* Enterprise */}
             <div className="glass-panel p-8 rounded-3xl border border-white/10 flex flex-col hover:border-purple-500/50 transition-colors">
               <h3 className="text-xl font-bold text-white mb-2">Enterprise</h3>
-              <p className="text-4xl font-bold text-purple-400 mb-6">Custom<span className="text-sm text-gray-400 font-normal">/quote</span></p>
-              <ul className="space-y-4 mb-8 flex-1 text-gray-300">
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> Custom Web Application</li>
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> SaaS / E-commerce Features</li>
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> API Integrations</li>
-                <li className="flex gap-2"><CheckCircle2 size={18} className="text-green-400" /> Priority Support</li>
-              </ul>
+              <p className="text-sm text-gray-400 mb-6">For complex applications & high-traffic platforms</p>
+              
+              <div className="mb-6 p-4 rounded-xl bg-purple-500/10 border border-purple-500/20">
+                <h4 className="text-purple-400 font-bold mb-2 flex items-center gap-2">
+                  <CheckCircle2 size={18} /> Recommended Stack
+                </h4>
+                <p className="text-sm text-gray-300">React + Next.js + Node.js + PostgreSQL + AWS</p>
+              </div>
+
+              <div className="space-y-3 mb-6 flex-1">
+                <h5 className="text-white font-semibold text-sm">Why This Stack?</h5>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Enterprise-grade security & compliance</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Handles millions of users seamlessly</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Advanced database with ACID compliance</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Cloud infrastructure for 99.99% uptime</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Microservices architecture support</li>
+                  <li className="flex gap-2"><CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" /> Real-time features & WebSocket support</li>
+                </ul>
+              </div>
+
+              <div className="mb-6 p-3 rounded-lg bg-white/5 border border-white/5">
+                <p className="text-xs text-gray-400">Best For: SaaS platforms, enterprise portals, fintech apps, high-traffic sites</p>
+              </div>
+
               <Link to="/contact" className="w-full py-3 rounded-xl border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white transition-all text-center font-bold">Talk to Expert</Link>
             </div>
           </div>

@@ -114,7 +114,7 @@ const Services = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white overflow-hidden">
+    <div className="min-h-screen bg-[#020205] text-white overflow-hidden">
       <SEO 
         title="Digital Services | Web, SaaS, Marketing & Design"
         description="Comprehensive digital services tailored for growth. From custom web and SaaS development to performance marketing and SEO, we build solutions that scale."
@@ -137,7 +137,7 @@ const Services = () => {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-gray-950 to-gray-950 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-[#020205] to-[#020205] pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
            <div className="absolute top-20 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
            <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -212,7 +212,7 @@ const Services = () => {
                 className="group relative p-8 rounded-2xl bg-gray-900/50 border border-gray-800 hover:bg-gray-800/50 transition-all duration-300 overflow-hidden"
               >
                 <div className={`absolute inset-0 bg-${service.color}-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                <div className={`mb-6 p-3 rounded-xl bg-gray-950 inline-block border border-gray-800 group-hover:border-${service.color}-500/30 group-hover:scale-110 transition-all duration-300 relative z-10`}>
+                <div className={`mb-6 p-3 rounded-xl bg-[#020205] inline-block border border-gray-800 group-hover:border-${service.color}-500/30 group-hover:scale-110 transition-all duration-300 relative z-10`}>
                   {service.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-3 relative z-10">{service.title}</h3>
@@ -273,7 +273,7 @@ const Services = () => {
             </div>
             <div className="relative">
               <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
-              <div className="relative rounded-2xl border border-gray-800 bg-gray-950/80 backdrop-blur-xl p-8 shadow-2xl">
+              <div className="relative rounded-2xl border border-gray-800 bg-[#020205]/80 backdrop-blur-xl p-8 shadow-2xl">
                  {/* Abstract visual representation of process/trust */}
                  <div className="space-y-4">
                     {[1, 2, 3].map((i) => (

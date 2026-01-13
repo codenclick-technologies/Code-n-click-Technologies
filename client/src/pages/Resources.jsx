@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { Search, BookOpen, Video, FileText, ArrowRight, Tag, Mail, Zap, TrendingUp, Code2, Clock } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 import SpotlightCard from '../components/ui/SpotlightCard';
@@ -44,7 +45,7 @@ const Resources = () => {
   }, [resources, searchTerm]);
 
   return (
-    <div className="min-h-screen bg-gray-950 bg-noise pt-32 pb-20">
+    <div className="min-h-screen bg-[#020205] bg-noise pt-32 pb-20">
       <Helmet>
         <title>Resources, Guides & Insights | Code'N'Click</title>
         <meta name="description" content="Explore our library of articles, guides, and videos on web development, SEO, SaaS growth, and digital marketing. Stay ahead with expert insights." />
@@ -68,7 +69,7 @@ const Resources = () => {
             Insights for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Builders</span>
           </motion.h1>
           <motion.p variants={fadeInUp} className="text-lg md:text-2xl text-gray-400 max-w-4xl mx-auto mb-8 md:mb-12 font-medium leading-relaxed px-4">
-            Deep dives, tutorials, and industry reports to help you build better products and grow your business.
+            Deep dives, tutorials, and industry reports to help you build better products and grow your business. Learn about <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 underline">modern web development</Link>, <Link to="/services/seo" className="text-green-400 hover:text-green-300 underline">SEO best practices</Link>, <Link to="/services/saas-development" className="text-purple-400 hover:text-purple-300 underline">SaaS growth strategies</Link>, and <Link to="/services/google-ads" className="text-yellow-400 hover:text-yellow-300 underline">performance marketing</Link>. Want to work with us? <Link to="/contact" className="text-cyan-400 hover:text-cyan-300 underline font-semibold">Get in touch</Link> or explore our <Link to="/services" className="text-blue-400 hover:text-blue-300 underline">full range of services</Link>.
           </motion.p>
 
           {/* Search Bar */}

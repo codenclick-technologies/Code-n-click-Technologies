@@ -86,7 +86,7 @@ const GraphicDesign = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#030014] text-white overflow-hidden">
+    <div className="min-h-screen bg-[#020205] text-white overflow-hidden">
       <SEOHead
         title="Best Graphic Design Company in Faridabad | Code'N'Click"
         description="Top graphic design agency in Faridabad. We create stunning logos, branding, and marketing materials for businesses in Delhi NCR to captivate audiences."
@@ -96,7 +96,7 @@ const GraphicDesign = () => {
 
       {/* 1. H1 - Main Service Title */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-900/20 via-[#030014] to-[#030014] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-900/20 via-[#020205] to-[#020205] pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -140,7 +140,7 @@ const GraphicDesign = () => {
       </section>
 
       {/* 2. Intro Section (Pain Point -> Solution -> Trust) */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/5 border-y border-white/5">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#020205]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">Ugly Design is Costing You Sales</h2>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">

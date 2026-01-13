@@ -38,7 +38,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-[#030014] text-white pt-20 pb-10 overflow-hidden border-t border-white/5">
+    <footer className="relative bg-[#020205] text-white pt-20 pb-10 overflow-hidden border-t border-white/5">
       {/* Background Gradients */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
       <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />

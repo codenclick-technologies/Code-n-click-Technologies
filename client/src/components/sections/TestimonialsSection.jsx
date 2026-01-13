@@ -64,7 +64,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gray-950 overflow-hidden">
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#020205] overflow-hidden">
       {/* Gradient background */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-gradient-to-br from-cyan-600/10 to-blue-600/10 rounded-full filter blur-3xl -z-10" />
 

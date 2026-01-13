@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import SEO from '../components/utils/SEO';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -22,7 +23,7 @@ const About = () => {
   const [selected, setSelected] = useState(null);
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white overflow-hidden pt-32 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#020205] text-white overflow-hidden pt-32 px-4 sm:px-6 lg:px-8">
       <SEO
         title="About Us - Leading Software Development & Digital Marketing Company"
         description="Codenclick Technologies is India's premier software development and digital marketing agency. We combine cutting-edge technology with creative strategies to deliver measurable business growth. From web development to digital marketing, we're your partner in digital transformation."
@@ -73,15 +74,24 @@ const About = () => {
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:col-span-2">
             <h2 className="text-3xl font-bold text-white mb-4">Our Story</h2>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              We started <strong className="text-white">Codenclick Technologies</strong> because we were tired of seeing businesses get burned by "digital agencies" that overpromised and underdelivered. We wanted to build a company that actually cared about the outcome, not just the invoice.
+              We started <strong className="text-white">Codenclick Technologies</strong> because we were tired of seeing businesses get burned by "digital agencies" that overpromised and underdelivered. We wanted to build a company that actually cared about the outcome, not just the invoice. Based in Faridabad, serving clients across Delhi NCR and beyond, we've built our reputation on delivering real, measurable results.
             </p>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Today, we are a team of obsessives. Obsessed with clean code, obsessed with conversion rates, and obsessed with helping you win. From <strong className="text-white">custom software that runs your business</strong> to <strong className="text-white">marketing strategies that grow it</strong>, we are the engine room of your digital success.
+              Today, we are a team of obsessives. Obsessed with clean code, obsessed with conversion rates, and obsessed with helping you win. From <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 underline">custom web applications that power your business operations</Link> to <Link to="/services/saas-development" className="text-purple-400 hover:text-purple-300 underline">scalable SaaS platforms</Link> that serve thousands of users, we build software that doesn't just work—it excels. Our <Link to="/services/seo" className="text-green-400 hover:text-green-300 underline">SEO strategies</Link> and <Link to="/services/google-ads" className="text-yellow-400 hover:text-yellow-300 underline">performance marketing campaigns</Link> are designed to drive sustainable growth, not vanity metrics.
+            </p>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Whether you need <Link to="/services/graphic-design" className="text-indigo-400 hover:text-indigo-300 underline">stunning brand identity and UI/UX design</Link> that captivates your audience, or <Link to="/services/meta-ads" className="text-pink-400 hover:text-pink-300 underline">data-driven Meta advertising campaigns</Link> that maximize your ROAS, we bring the technical expertise and creative thinking that transforms businesses. Check out our <Link to="/portfolio" className="text-cyan-400 hover:text-cyan-300 underline">portfolio of successful projects</Link> to see how we've helped companies like yours achieve breakthrough results.
             </p>
 
             <h3 className="text-2xl font-bold text-white mb-4 mt-8">The Codenclick Promise</h3>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              <strong className="text-white">We play long games.</strong> We aren't here for a quick buck. We want to be the partner you call ten years from now when you're launching your IPO. That means total transparency, zero technical debt, and results that you can take to the bank.
+              <strong className="text-white">We build for the long haul.</strong> We're not here for quick projects and quick exits. We want to be the partner you trust when you're scaling your business, launching new products, or entering new markets. That means total transparency, zero technical debt, and results that directly impact your bottom line. Every line of code we write, every campaign we launch, every design we create is built with your sustained success in mind. Our clients don't just work with us once—they come back because we deliver.
+            </p>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Our comprehensive <Link to="/services" className="text-blue-400 hover:text-blue-300 underline">suite of digital services</Link> covers everything from initial strategy to ongoing optimization. We don't just hand off a project and disappear—we become an extension of your team, continuously monitoring performance, iterating on what works, and pivoting away from what doesn't. This commitment to partnership, backed by proven results and measurable ROI, is what sets us apart in an industry full of one-and-done vendors.
+            </p>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              <strong className="text-white">Our work speaks for itself.</strong> We've helped businesses increase their revenue by 300%, reduce their customer acquisition costs by 60%, and scale their platforms to serve millions of users. We don't just promise results—we engineer them. From startups finding product-market fit to established enterprises modernizing their tech stack, our track record proves we know how to turn digital investments into business growth.
             </p>
 
             <div className="space-y-6 mt-8">
@@ -159,8 +169,8 @@ const About = () => {
         {/* CTA */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-8">
           <h3 className="text-2xl font-bold text-white mb-4">Ready to build something remarkable?</h3>
-          <p className="text-gray-400 mb-6">Contact us for a free consultation — we'll help you prioritize the highest-impact work.</p>
-          <a href="/contact" className="inline-block px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-semibold">Get in touch</a>
+          <p className="text-gray-400 mb-6">Whether you're a startup looking to launch your MVP or an established business ready to scale, we're here to help. <Link to="/contact" className="text-blue-400 hover:text-blue-300 underline">Contact us for a free consultation</Link> where we'll analyze your current challenges, identify opportunities, and create a roadmap for success. We'll help you prioritize the highest-impact work that delivers real ROI, not just busy work. Join the <Link to="/careers" className="text-purple-400 hover:text-purple-300 underline">growing team of innovators</Link> or explore our <Link to="/resources" className="text-green-400 hover:text-green-300 underline">free resources and insights</Link> to learn more about digital transformation.</p>
+          <Link to="/contact" className="inline-block px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-semibold hover:scale-105 transition-transform">Get in touch</Link>
         </motion.section>
       </div>
       {selected && <TeamProfileModal member={selected} onClose={() => setSelected(null)} />}

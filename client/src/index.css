@@ -10,10 +10,7 @@
   }
 
   body {
-    @apply bg-[#030014] text-white overflow-x-hidden;
-    background-image:
-      radial-gradient(circle at 50% 0%, rgba(120, 119, 198, 0.1) 0%, transparent 60%),
-      radial-gradient(circle at 80% 80%, rgba(76, 29, 149, 0.1) 0%, transparent 40%);
+    @apply bg-[#020205] text-white overflow-x-hidden;
   }
 
   /* Premium Scrollbar */
@@ -143,3 +140,7 @@ html.lenis body {
     background-position: 200% 200%;
   }
 }
+.animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+

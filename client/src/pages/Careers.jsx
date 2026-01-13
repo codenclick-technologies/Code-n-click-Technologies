@@ -140,7 +140,7 @@ const Careers = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 pt-32 pb-20">
+    <div className="min-h-screen bg-[#020205] pt-32 pb-20">
       <Helmet>
         <title>Careers at Code'N'Click | Join Our Team</title>
         <meta name="description" content="Join the Code'N'Click team. We are hiring developers, designers, and marketers. Check out our open positions and benefits." />

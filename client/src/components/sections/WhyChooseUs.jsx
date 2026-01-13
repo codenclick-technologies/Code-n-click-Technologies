@@ -49,7 +49,7 @@ const WhyChooseUs = () => {
   };
 
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 overflow-hidden">
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#020205] overflow-hidden">
       {/* Animated background gradient */}
       <div className="absolute inset-0 bg-grid-white/5 opacity-10" style={{
         backgroundImage: 'linear-gradient(90deg, rgba(59,130,246,0.1) 1px, transparent 1px), linear-gradient(rgba(59,130,246,0.1) 1px, transparent 1px)',

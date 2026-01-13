@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle, AlertCircle, Clock, Globe } from 'lucide-react';
 import { fadeInUp, staggerContainer, scaleIn } from '../utils/animations';
 import SpotlightCard from '../components/ui/SpotlightCard';
@@ -48,7 +49,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#050505] pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="min-h-screen bg-[#020205] pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
             {/* Background Decorations */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full" />
@@ -81,8 +82,8 @@ const Contact = () => {
                                 Let's Execute.
                             </span>
                         </motion.h1>
-                        <motion.p variants={fadeInUp} className="text-xl text-gray-400">
-                            You have a vision. We have the engineering team to build it. No fluff, just results.
+                        <motion.p variants={fadeInUp} className="text-xl text-gray-400 leading-relaxed">
+                            You have a vision. We have the engineering team to build it. Whether you need <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 underline">custom web development</Link>, <Link to="/services/saas-development" className="text-purple-400 hover:text-purple-300 underline">scalable SaaS solutions</Link>, or <Link to="/services/seo" className="text-green-400 hover:text-green-300 underline">SEO strategies that dominate</Link>, we're ready to execute. Our <Link to="/services/google-ads" className="text-yellow-400 hover:text-yellow-300 underline">Google Ads</Link> and <Link to="/services/meta-ads" className="text-pink-400 hover:text-pink-300 underline">Meta Ads specialists</Link> drive real ROI, while our <Link to="/services/graphic-design" className="text-indigo-400 hover:text-indigo-300 underline">design team</Link> creates experiences users love. No fluff, just results. Check our <Link to="/portfolio" className="text-cyan-400 hover:text-cyan-300 underline">portfolio</Link> or learn more <Link to="/about" className="text-blue-400 hover:text-blue-300 underline">about our team</Link>.
                         </motion.p>
                     </div>
 

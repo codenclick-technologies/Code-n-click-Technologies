@@ -60,7 +60,7 @@ const StatsSection = () => {
   };
 
   return (
-    <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 overflow-hidden">
+    <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-[#020205] overflow-hidden">
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/30 rounded-full filter blur-3xl animate-pulse" 
