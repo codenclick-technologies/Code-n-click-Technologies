@@ -195,7 +195,7 @@ const SaasDevelopment = () => {
       </section>
 
       {/* 4. Why This Service Is Important (H2) */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20 text-center">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent text-center">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-16">Why SaaS Is The Future</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
@@ -281,7 +281,7 @@ const SaasDevelopment = () => {
       </section>
 
       {/* 6. Tools / Technologies (H2) */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Cloud Stack</h2>
@@ -355,7 +355,7 @@ const SaasDevelopment = () => {
       </section>
 
       {/* 8. Case Studies / Results (H2) */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Success Stories</h2>
@@ -452,7 +452,7 @@ const SaasDevelopment = () => {
       </section>
 
       {/* 10. FAQs (H2) */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Frequently Asked Questions</h2>

@@ -22,9 +22,15 @@ import { Link } from "react-router-dom";
 // --- Advanced Components (Memoized for Performance) ---
 
 const ParticleVortex = memo(() => {
+  // Adaptive particle count - Extremely low for performance
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+  if (isMobile) return null; // Completely disable on mobile to prevent lag
+  
+  const count = 10;
+
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none translate-z-0">
-      {[...Array(15)].map((_, i) => (
+      {[...Array(count)].map((_, i) => (
         <motion.div
            key={i}
            className="absolute top-1/2 left-1/2 rounded-full border border-blue-500/10 will-change-transform"
@@ -35,7 +41,7 @@ const ParticleVortex = memo(() => {
              y: "-50%",
            }}
            animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
-           transition={{ duration: 60 + i * 5, repeat: Infinity, ease: "linear" }}
+           transition={{ duration: 80 + i * 10, repeat: Infinity, ease: "linear" }}
         />
       ))}
       <div className="absolute inset-0 bg-gradient-to-t from-[#020205] via-transparent to-[#020205]" />
@@ -43,8 +49,12 @@ const ParticleVortex = memo(() => {
   );
 });
 
-const PerspectiveGrid = memo(() => (
-   <div className="absolute inset-0 z-0 pointer-events-none perspective-[1000px] overflow-hidden translate-z-0">
+const PerspectiveGrid = memo(() => {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+  if (isMobile) return null; // Completely disable on mobile
+
+  return (
+    <div className="absolute inset-0 z-0 pointer-events-none perspective-[1000px] overflow-hidden translate-z-0">
         <motion.div 
             className="absolute -bottom-[30%] -left-[50%] w-[200%] h-[100%] origin-bottom will-change-transform"
             style={{ 
@@ -53,12 +63,13 @@ const PerspectiveGrid = memo(() => (
                 backgroundSize: "60px 60px"
             }}
             animate={{ y: [0, 60] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
         >
             <div className="absolute inset-0 bg-gradient-to-t from-blue-950/30 to-[#020205]" />
         </motion.div>
-   </div>
-));
+    </div>
+  );
+});
 
 const HighlightText = ({ text }) => {
     return (
@@ -78,18 +89,28 @@ const Hero = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
+  // Detect if touch device to disable mouse effects
+  const [isTouchDevice, setIsTouchDevice] = React.useState(false);
+  
+  React.useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    
+    // Set initial center position for spotlight
+    mouseX.set(window.innerWidth / 2);
+    mouseY.set(window.innerHeight / 2);
+  }, [mouseX, mouseY]);
+
   const handleMouseMove = (e) => {
-    if (!containerRef.current) return;
-    const { left, top } = containerRef.current.getBoundingClientRect();
-    mouseX.set(e.clientX - left);
-    mouseY.set(e.clientY - top);
+    if (isTouchDevice) return;
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
   };
 
   // Smooth Springs for Interactivity
   const smoothX = useSpring(mouseX, { stiffness: 50, damping: 20 });
   const smoothY = useSpring(mouseY, { stiffness: 50, damping: 20 });
   
-  // Derived Transforms
+  // Derived Transforms - Only calculate if visible (Desktop)
   const rotateX = useTransform(smoothY, [0, window.innerHeight], [5, -5]);
   const rotateY = useTransform(smoothX, [0, window.innerWidth], [-5, 5]);
   
@@ -102,13 +123,17 @@ const Hero = () => {
       <PerspectiveGrid />
       <ParticleVortex />
       
-      {/* Optimized Spotlight */}
-      <motion.div
-          className="absolute inset-0 pointer-events-none opacity-40 z-0 will-change-transform"
-          style={{
-            background: useMotionTemplate`radial-gradient(1000px circle at ${smoothX}px ${smoothY}px, rgba(59, 130, 246, 0.12), transparent 70%)`,
-          }}
-      />
+      {/* Optimized Spotlight - Uses Transform instead of Background property */}
+      {!isTouchDevice && (
+        <motion.div
+            className="absolute -left-[500px] -top-[500px] w-[1000px] h-[1000px] pointer-events-none opacity-40 z-0 will-change-transform"
+            style={{
+              background: "radial-gradient(circle at center, rgba(59, 130, 246, 0.12), transparent 70%)",
+              x: smoothX,
+              y: smoothY,
+            }}
+        />
+      )}
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         
@@ -153,7 +178,7 @@ const Hero = () => {
                transition={{ delay: 0.4, duration: 1 }}
                className="text-lg md:text-xl text-gray-400 max-w-xl leading-relaxed font-light mx-auto lg:mx-0"
             >
-                Partner with a team that actually cares about your success. We build <strong>custom software</strong>, high-performance apps, and websites designed to scale with you and delight your users.
+                Partner with a team that actually cares about your success. We build <Link to="/services/saas-development" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">custom software</Link>, high-performance <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">web applications</Link>, and digital experiences designed to scale with you and delight your users.
             </motion.p>
 
             {/* Buttons */}
@@ -207,7 +232,7 @@ const Hero = () => {
              {/* Main Card */}
              <motion.div 
                 style={{ rotateX, rotateY, z: 100 }}
-                className="relative w-[520px] h-[640px] bg-[#0A0A0A]/90 backdrop-blur-2xl border border-white/10 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col"
+                className="relative w-[520px] h-[640px] bg-[#030303]/90 backdrop-blur-2xl border border-white/10 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col"
              >
                 {/* Glow Effects */}
                 <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
@@ -288,14 +313,14 @@ const Hero = () => {
              {/* Parallax Elements */}
              <motion.div 
                  style={{ x: useTransform(smoothX, [0, window.innerWidth], [20, -20]), y: useTransform(smoothY, [0, window.innerHeight], [20, -20]), z: 50 }}
-                 className="absolute -right-12 top-1/4 p-5 bg-[#111]/90 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl"
+                 className="absolute -right-12 top-1/4 p-5 bg-[#030303]/90 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl"
              >
                  <Users className="text-blue-400" size={32} />
              </motion.div>
 
              <motion.div 
                  style={{ x: useTransform(smoothX, [0, window.innerWidth], [-20, 20]), y: useTransform(smoothY, [0, window.innerHeight], [-20, 20]), z: 150 }}
-                 className="absolute -left-12 bottom-1/3 p-5 bg-[#111]/90 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl"
+                 className="absolute -left-12 bottom-1/3 p-5 bg-[#030303]/90 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl"
              >
                  <Code2 className="text-emerald-400" size={32} />
              </motion.div>
@@ -306,6 +331,7 @@ const Hero = () => {
     </section>
   );
 };
+
 
 export default Hero;
 

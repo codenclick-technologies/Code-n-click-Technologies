@@ -64,9 +64,9 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#020205] overflow-hidden">
-      {/* Gradient background */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-gradient-to-br from-cyan-600/10 to-blue-600/10 rounded-full filter blur-3xl -z-10" />
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-transparent overflow-hidden">
+      {/* Premium Ambience Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -102,11 +102,11 @@ const TestimonialsSection = () => {
             >
               {/* Gradient border */}
               <div className={`absolute inset-0 bg-gradient-to-br ${testimonial.color} rounded-2xl p-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
-                <div className="rounded-2xl bg-gray-950 h-full" />
+                <div className="rounded-2xl bg-[#020205] h-full" />
               </div>
 
               {/* Card */}
-              <div className="relative rounded-2xl bg-gray-900/50 backdrop-blur-sm border border-white/10 group-hover:border-white/30 p-6 h-full transition-all duration-300 flex flex-col">
+              <div className="relative rounded-2xl bg-[#030303]/70 backdrop-blur-md border border-white/10 group-hover:border-white/30 p-6 h-full transition-all duration-300 flex flex-col">
                 {/* Stars */}
                 <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (

@@ -141,7 +141,7 @@ const MetaAds = () => {
       </section>
 
       {/* 2. Intro Section (Pain Point -> Solution -> Trust) */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#020205]">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-transparent">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">Stop Burning Cash on Ads That Don't Convert</h2>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
@@ -175,7 +175,7 @@ const MetaAds = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="glass-panel glass-card-shine p-8 rounded-3xl border border-white/10 group"
+                className="bg-[#0A0A0A] p-8 rounded-3xl border border-white/5 transition-all duration-300 group"
               >
                 <div className="mb-6 p-4 rounded-2xl bg-white/5 w-fit group-hover:bg-pink-500/20 transition-colors">
                   {service.icon}
@@ -193,7 +193,7 @@ const MetaAds = () => {
       </section>
 
       {/* 4. Why This Service Is Important (H2) */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20 text-center">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent text-center">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-16">Why Meta Ads Are Essential</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
@@ -279,7 +279,7 @@ const MetaAds = () => {
       </section>
 
       {/* 6. Tools / Technologies (H2) */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ad Tech Stack</h2>
@@ -343,7 +343,7 @@ const MetaAds = () => {
                 desc: "We believe in earning your business every month. Our results keep you around, not a piece of paper."
               }
             ].map((item, i) => (
-              <div key={i} className="glass-panel p-8 rounded-2xl border border-white/5 hover:border-pink-500/30 transition-colors">
+              <div key={i} className="bg-[#0A0A0A] p-8 rounded-2xl border border-white/5 hover:border-pink-500/30 transition-colors">
                 <div className="w-12 h-12 rounded-full bg-pink-500/10 flex items-center justify-center mb-6">
                   <CheckCircle2 className="text-pink-400" size={24} />
                 </div>
@@ -356,7 +356,7 @@ const MetaAds = () => {
       </section>
 
       {/* 8. Case Studies / Results (H2) */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Recent Wins</h2>
@@ -365,7 +365,7 @@ const MetaAds = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="glass-panel p-8 rounded-3xl border border-white/10">
+            <div className="bg-[#0A0A0A] p-8 rounded-3xl border border-white/5">
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">Fashion Brand</h3>
@@ -388,7 +388,7 @@ const MetaAds = () => {
                 </div>
               </div>
             </div>
-            <div className="glass-panel p-8 rounded-3xl border border-white/10">
+            <div className="bg-[#0A0A0A] p-8 rounded-3xl border border-white/5">
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">B2B Service</h3>
@@ -453,7 +453,7 @@ const MetaAds = () => {
       </section>
 
       {/* 10. FAQs (H2) */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Frequently Asked Questions</h2>

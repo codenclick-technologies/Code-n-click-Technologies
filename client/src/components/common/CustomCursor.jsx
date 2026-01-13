@@ -21,19 +21,16 @@ const CustomCursor = () => {
       mouse.x.set(clientX);
       mouse.y.set(clientY);
       
-      // Check if hovering over a clickable element
+      // Efficient check for clickable elements
       const target = e.target;
-      if (
-        window.getComputedStyle(target).cursor === 'pointer' ||
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON' ||
-        target.closest('a') ||
-        target.closest('button')
-      ) {
-        setIsPointer(true);
-      } else {
-        setIsPointer(false);
-      }
+      const isClickable = 
+        target.tagName === 'A' || 
+        target.tagName === 'BUTTON' || 
+        target.closest('a') || 
+        target.closest('button') ||
+        target.getAttribute('role') === 'button';
+      
+      setIsPointer(isClickable);
     };
 
     window.addEventListener('mousemove', manageMouseMove);

@@ -160,7 +160,7 @@ const Contact = () => {
                                 className="relative group"
                             >
                                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-[32px] blur opacity-20 group-hover:opacity-30 transition duration-1000"></div>
-                                <div className="relative bg-[#0A0A0A] p-8 md:p-12 rounded-[28px] border border-white/10 shadow-2xl">
+                                <div className="relative bg-[#030303] p-8 md:p-12 rounded-[28px] border border-white/10 shadow-2xl">
                                     {/* Status Message */}
                                     {status.message && (
                                         <motion.div
@@ -218,10 +218,10 @@ const Contact = () => {
                                                     name="subject"
                                                     className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 appearance-none cursor-pointer"
                                                 >
-                                                    <option className="bg-[#0A0A0A]" value="General Inquiry">General Inquiry</option>
-                                                    <option className="bg-[#0A0A0A]" value="Project Proposal">Project Proposal</option>
-                                                    <option className="bg-[#0A0A0A]" value="Careers">Careers</option>
-                                                    <option className="bg-[#0A0A0A]" value="Consultation">Free Consultation</option>
+                                                    <option className="bg-[#030303]" value="General Inquiry">General Inquiry</option>
+                                                    <option className="bg-[#030303]" value="Project Proposal">Project Proposal</option>
+                                                    <option className="bg-[#030303]" value="Careers">Careers</option>
+                                                    <option className="bg-[#030303]" value="Consultation">Free Consultation</option>
                                                 </select>
                                                 <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                                                     <MessageSquare size={18} />

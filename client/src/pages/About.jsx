@@ -107,7 +107,7 @@ const About = () => {
             </div>
           </motion.div>
 
-          <motion.aside initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-2xl bg-gradient-to-br from-gray-900/60 to-gray-950/80 p-6">
+          <motion.aside initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-2xl bg-[#050505]/80 backdrop-blur-xl border border-white/5 p-6 shadow-2xl">
             <h3 className="text-lg font-bold text-white mb-3">Our Mantra</h3>
             <ul className="text-gray-400 space-y-3 text-sm">
               <li>✓ Code that scales</li>

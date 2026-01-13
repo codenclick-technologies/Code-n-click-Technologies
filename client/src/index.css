@@ -140,7 +140,41 @@ html.lenis body {
     background-position: 200% 200%;
   }
 }
+
 .animate-pulse-slow {
   animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+/* Butter Smooth Scroll Tweaks */
+.will-change-scroll {
+  will-change: transform;
+}
+
+/* Reduce lag on mobile caused by heavy blurs */
+@media (max-width: 768px) {
+
+  .backdrop-blur-xl,
+  .backdrop-blur-3xl,
+  .backdrop-blur-2xl {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+
+  /* Disable expensive hover blurs on touch */
+  .group:hover .blur-[80px],
+  .group:hover .blur-[120px] {
+    display: none !important;
+  }
+
+  .perspective-grid-animate {
+    display: none !important;
+  }
+}
+
+/* Force Hardware Acceleration for animations */
+.animate-gradient-shift,
+.perspective-grid-animate {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}

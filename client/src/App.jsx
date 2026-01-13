@@ -8,7 +8,6 @@ import Footer from './components/layout/Footer';
 import ScrollToTop from './components/utils/ScrollToTop';
 import SmoothScroll from './components/utils/SmoothScroll';
 import CustomCursor from './components/common/CustomCursor';
-import Preloader from './components/common/Preloader';
 import { Analytics } from '@vercel/analytics/react';
 
 // Critical Routes (eager load)
@@ -59,7 +58,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 
 // Loading Component
 const Loading = () => (
-  <div className="flex items-center justify-center min-h-screen bg-gray-950">
+  <div className="flex items-center justify-center min-h-screen bg-[#020205]">
     <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
@@ -101,8 +100,7 @@ function AppContent() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white transition-colors duration-300 flex flex-col">
-      <Preloader />
+    <div className="min-h-screen bg-[#020205] text-white transition-colors duration-300 flex flex-col">
       <CustomCursor />
       <ThirdPartyLoader />
       <Analytics />
