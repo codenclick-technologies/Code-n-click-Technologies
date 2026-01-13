@@ -53,12 +53,15 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#020205] pt-40 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
+      
       <motion.div 
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
-        className="max-w-md w-full space-y-8 bg-white dark:bg-gray-800 p-10 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700"
+        className="relative max-w-md w-full space-y-8 bg-[#030303]/90 backdrop-blur-3xl p-10 rounded-[2.5rem] shadow-2xl border border-white/10"
       >
         {/* Header */}
         <div>
@@ -68,7 +71,7 @@ const Login = () => {
           <h2 className="mt-6 text-center text-3xl font-extrabold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
             Sign in to your account
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-2 text-center text-sm text-gray-400">
             Access your Code'N'Click dashboard
           </p>
         </div>
@@ -78,7 +81,7 @@ const Login = () => {
           <div className="space-y-4">
             {/* Email/Employee ID Input */}
             <div>
-              <label htmlFor="identifier" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="identifier" className="block text-sm font-medium text-gray-300 mb-2">
                 Email / Employee ID
               </label>
               <div className="relative">
@@ -93,7 +96,7 @@ const Login = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none rounded-xl relative block w-full px-3 py-3.5 pl-11 border border-gray-300 dark:border-gray-600 placeholder-gray-400 text-gray-900 dark:text-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm transition-all"
+                  className="appearance-none rounded-xl relative block w-full px-3 py-3.5 pl-11 border border-white/10 placeholder-gray-500 text-white bg-[#020205] focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent sm:text-sm transition-all"
                   placeholder="Email or Employee ID (e.g., EMP-202512345)"
                 />
               </div>
@@ -101,7 +104,7 @@ const Login = () => {
 
             {/* Password Input */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
                 Password
               </label>
               <div className="relative">
@@ -116,13 +119,13 @@ const Login = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none rounded-xl relative block w-full px-3 py-3.5 pl-11 pr-11 border border-gray-300 dark:border-gray-600 placeholder-gray-400 text-gray-900 dark:text-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm transition-all"
+                  className="appearance-none rounded-xl relative block w-full px-3 py-3.5 pl-11 pr-11 border border-white/10 placeholder-gray-500 text-white bg-[#020205] focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent sm:text-sm transition-all"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition-colors"
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
@@ -134,7 +137,7 @@ const Login = () => {
           <div className="flex items-center justify-end">
             <Link
               to="/forgot-password"
-              className="text-sm font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+              className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
             >
               Forgot your password?
             </Link>
@@ -181,9 +184,9 @@ const Login = () => {
 
         {/* Footer */}
         <div className="text-center">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-gray-400 font-light">
             Don't have an account?{' '}
-            <span className="text-gray-500 dark:text-gray-500">
+            <span className="text-gray-500 font-medium">
               Contact your administrator
             </span>
           </p>

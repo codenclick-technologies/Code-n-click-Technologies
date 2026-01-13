@@ -36,23 +36,26 @@ const ForgotPassword = () => {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
-        <div className="max-w-md w-full">
-          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 text-center">
-            <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle size={40} className="text-green-600 dark:text-green-400" />
+      <div className="min-h-screen bg-[#020205] flex items-center justify-center p-4 pt-40 relative overflow-hidden">
+        {/* Background Ambience */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
+        
+        <div className="max-w-md w-full relative z-10">
+          <div className="bg-[#030303]/90 backdrop-blur-3xl rounded-[2.5rem] shadow-2xl p-10 text-center border border-white/10">
+            <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-500/20">
+              <CheckCircle size={40} className="text-green-400" />
             </div>
             
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-2xl font-bold text-white mb-4 tracking-tight">
               Check Your Email!
             </h2>
             
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
-              We've sent a password reset link to <span className="font-semibold text-gray-900 dark:text-white">{email}</span>
+            <p className="text-gray-400 mb-6 font-light">
+              We've sent a password reset link to <span className="font-semibold text-white">{email}</span>
             </p>
             
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 mb-6">
-              <p className="text-sm text-blue-800 dark:text-blue-300">
+            <div className="bg-blue-500/5 border border-white/5 rounded-2xl p-6 mb-8 text-left">
+              <p className="text-sm text-blue-400 leading-relaxed font-light">
                 <strong>Didn't receive the email?</strong>
                 <br />
                 Check your spam folder or{' '}
@@ -70,7 +73,7 @@ const ForgotPassword = () => {
 
             <Link
               to="/login"
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+              className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors"
             >
               <ArrowLeft size={18} />
               Back to Login
@@ -82,26 +85,28 @@ const ForgotPassword = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
-      <div className="max-w-md w-full">
+    <div className="min-h-screen bg-[#020205] flex items-center justify-center p-4 pt-40 relative overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
+      
+      <div className="max-w-md w-full relative z-10">
         {/* Logo/Brand */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
               <span className="text-2xl font-bold text-white">C</span>
             </div>
-            <span className="text-2xl font-bold text-gray-900 dark:text-white">Code'N'Click</span>
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
             Forgot Password?
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-400 font-light">
             No worries, we'll send you reset instructions
           </p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8">
+        <div className="bg-[#030303]/90 backdrop-blur-3xl rounded-[2.5rem] shadow-2xl p-10 border border-white/10">
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && (
               <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 flex items-start gap-3">
@@ -111,7 +116,7 @@ const ForgotPassword = () => {
             )}
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-semibold text-gray-300 mb-2">
                 Email Address
               </label>
               <div className="relative">
@@ -120,13 +125,13 @@ const ForgotPassword = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none transition-colors"
+                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-white/10 bg-[#020205] text-white focus:border-blue-500/50 focus:outline-none transition-all"
                   placeholder="Enter your email"
                   required
                   disabled={loading}
                 />
               </div>
-              <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              <p className="mt-2 text-xs text-gray-500 font-light">
                 Enter the email associated with your account
               </p>
             </div>
@@ -153,7 +158,7 @@ const ForgotPassword = () => {
           <div className="mt-6 text-center">
             <Link
               to="/login"
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white font-medium transition-colors"
+              className="inline-flex items-center gap-2 text-gray-400 hover:text-white font-medium transition-colors"
             >
               <ArrowLeft size={18} />
               Back to Login
@@ -162,10 +167,10 @@ const ForgotPassword = () => {
         </div>
 
         {/* Help Text */}
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+        <div className="mt-8 text-center">
+          <p className="text-sm text-gray-500 font-light">
             Need help?{' '}
-            <Link to="/contact" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
+            <Link to="/contact" className="text-blue-400 hover:text-blue-300 font-medium">
               Contact Support
             </Link>
           </p>
