@@ -29,7 +29,7 @@ class ApiService {
                     await this.handleTokenRefresh();
                     // Retry original request with new token
                     return this.request(endpoint, { ...options, _retry: true });
-                } catch (refreshErr) {
+                } catch (_refreshErr) {
                     // Refresh failed - clear auth and redirect
                     this.clearAuth();
                     window.location.href = '/login';
