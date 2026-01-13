@@ -21,8 +21,7 @@ class ApiService {
             },
         };
 
-        try {
-            let response = await fetch(url, config);
+        return fetch(url, config).then(async (response) => {
 
             // Handle 401 Unauthorized - Attempt Token Refresh
             if (response.status === 401 && !options._retry) {
@@ -30,7 +29,7 @@ class ApiService {
                     await this.handleTokenRefresh();
                     // Retry original request with new token
                     return this.request(endpoint, { ...options, _retry: true });
-                } catch (refreshError) {
+                } catch (refreshErr) {
                     // Refresh failed - clear auth and redirect
                     this.clearAuth();
                     window.location.href = '/login';
@@ -45,9 +44,7 @@ class ApiService {
             }
 
             return data;
-        } catch (error) {
-            throw error;
-        }
+        });
     }
 
     async handleTokenRefresh() {
@@ -142,7 +139,7 @@ class ApiService {
                     headers: newHeaders,
                     body: formData,
                 });
-            } catch (refreshError) {
+            } catch (refreshErr) {
                 this.clearAuth();
                 window.location.href = '/login';
                 throw new Error('Session expired. Please login again.');
