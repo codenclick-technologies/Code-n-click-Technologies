@@ -10,6 +10,7 @@ import { fadeInUp, staggerContainer } from '../utils/animations';
 import SpotlightCard from '../components/ui/SpotlightCard';
 
 const team = [
+  { name: 'Lokender Chauhan', role: 'Founder & CEO', bio: 'Visionary leader driving digital transformation for global enterprises.', bioLong: 'Lokender is the driving force behind Codenclick. With a deep passion for technology and business growth, he helps clients navigate the digital landscape with clarity and confidence.', avatar: '👔', email: 'lokender@codenclick.in', skills: ['Business Strategy', 'Tech Leadership', 'Enterprise Solutions'] },
   { name: 'Himanshu Sharma', role: 'Head of Growth', bio: 'Growth strategist focused on paid & organic acquisition.', bioLong: 'Himanshu specializes in growth strategies combining paid channels and organic funnels. He builds repeatable acquisition systems and analytics stacks.', avatar: '🧑‍💼', email: 'himanshu@codenclick.com', skills: ['Paid acquisition', 'Analytics', 'Funnel optimization'] },
   { name: 'Jitender Saini', role: 'Team Lead', bio: 'Design systems and product leadership specialist.', bioLong: 'Jitender leads cross-functional teams, design systems and product delivery. He bridges design and engineering to ship high-quality products.', avatar: '👨‍💼', email: 'jitender@codenclick.com', skills: ['Design systems', 'Product leadership', 'UX'] },
 ];

@@ -3,7 +3,7 @@
 Prepared by: Antigravity (Google DeepMind)
 Date: December 2025
 
-This document outlines the "MNC-Grade" SEO architecture implemented for Code-n-Click Technologies. This system is designed to outperform standard agency websites by leveraging programmatic scale, real-time indexing, and interactive engagement tools.
+This document outlines the "MNC-Grade" SEO architecture implemented for Codenclick Technologies. This system is designed to outperform standard agency websites by leveraging programmatic scale, real-time indexing, and interactive engagement tools.
 
 ---
 

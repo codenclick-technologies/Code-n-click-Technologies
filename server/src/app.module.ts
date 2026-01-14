@@ -27,6 +27,7 @@ import { ContactModule } from './modules/contact/contact.module';
 import { ResourcesModule } from './modules/resources/resources.module';
 import { MeetingsModule } from './modules/meetings/meetings.module';
 import { SeoModule } from './modules/seo/seo.module';
+import { ChatbotModule } from './modules/chatbot/chatbot.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { SeoModule } from './modules/seo/seo.module';
       isGlobal: true,
       envFilePath: '.env',
     }),
+
 
     // ThrottlerModule.forRoot([
     //   {
@@ -62,6 +64,7 @@ import { SeoModule } from './modules/seo/seo.module';
     ResourcesModule,
     MeetingsModule,
     SeoModule,
+    ChatbotModule,
   ],
   providers: [
     PrismaService,

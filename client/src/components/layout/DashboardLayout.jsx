@@ -14,7 +14,7 @@ import {
   Briefcase,
   Calendar,
   Cake,
-
+  Sparkles,
   ClipboardList,
   DollarSign,
   Mail,
@@ -48,6 +48,7 @@ const DashboardLayout = ({ children, role, activeTab, onTabChange }) => {
           // { name: 'Payroll', path: '/dashboard/hr/payroll', icon: DollarSign },
           { name: 'Policies', path: '/dashboard/hr/policies', icon: FileText },
           { name: 'Messages', path: '/dashboard/hr/messages', icon: Mail, badge: unreadCount },
+          { name: 'Chat Leads', path: '/dashboard/hr/chat-leads', icon: Sparkles },
           { name: 'Resources', path: '/dashboard/hr/resources', icon: BookOpen },
         ];
       case 'manager':
@@ -56,6 +57,7 @@ const DashboardLayout = ({ children, role, activeTab, onTabChange }) => {
           { name: 'Team', path: '/dashboard/manager/team', icon: Users },
           { name: 'Meetings', path: '/dashboard/manager/meetings', icon: Briefcase },
           { name: 'Messages', path: '/dashboard/manager/messages', icon: Mail, badge: unreadCount },
+          { name: 'Chat Leads', path: '/dashboard/manager/chat-leads', icon: Sparkles },
           { name: 'Resources', path: '/dashboard/manager/resources', icon: BookOpen },
         ];
       case 'owner':
@@ -64,6 +66,7 @@ const DashboardLayout = ({ children, role, activeTab, onTabChange }) => {
           { name: 'All Data', path: '/dashboard/owner/data', icon: Settings },
           { name: 'Employees', path: '/dashboard/owner/employees', icon: Users },
           { name: 'Messages', path: '/dashboard/owner/messages', icon: Mail, badge: unreadCount },
+          { name: 'Chat Leads', path: '/dashboard/owner/chat-leads', icon: Sparkles },
           { name: 'Resources', path: '/dashboard/owner/resources', icon: BookOpen },
         ];
       default:

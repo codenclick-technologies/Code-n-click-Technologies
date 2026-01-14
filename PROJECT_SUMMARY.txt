@@ -1,4 +1,4 @@
-# PROJECT SUMMARY: Code-n-Click Technologies
+# PROJECT SUMMARY: Codenclick Technologies
 
 ## Project Locations
 - **Website (Frontend):** https://www.codenclick.in

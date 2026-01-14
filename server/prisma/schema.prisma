@@ -9,7 +9,7 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 // ============================================
@@ -544,4 +544,24 @@ model Meeting {
   @@index([organizerId])
   @@index([startTime])
   @@map("meetings")
+}
+
+// ============================================
+// CHATBOT LEADS
+// ============================================
+
+model ChatbotLead {
+  id          String   @id @default(uuid())
+  name        String?
+  email       String?
+  phone       String?
+  requirement String?  @db.Text
+  source      String   @default("CHATBOT")
+  status      String   @default("NEW") // NEW, CONTACTED, CONVERTED
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([email])
+  @@index([status])
+  @@map("chatbot_leads")
 }

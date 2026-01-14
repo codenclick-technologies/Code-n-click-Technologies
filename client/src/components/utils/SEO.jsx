@@ -13,7 +13,7 @@ const SEO = ({
   schemas = [],
   children
 }) => {
-  const siteName = 'Code-n-Click Technologies';
+  const siteName = 'Codenclick Technologies';
   const domain = 'https://codenclick.in';
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const fullCanonical = canonical 

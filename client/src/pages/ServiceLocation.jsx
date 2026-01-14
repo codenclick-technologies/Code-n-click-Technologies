@@ -62,7 +62,7 @@ const ServiceLocation = () => {
   }
 
   const pageTitle = `Best ${serviceInfo.title} Company in ${formattedCity} | Top Rated Agency`;
-  const pageDesc = `Looking for the best ${serviceInfo.title} in ${formattedCity}? Code-n-Click Technologies offers premium, results-driven ${serviceInfo.title.toLowerCase()} services tailored for ${formattedCity} businesses. Get a free quote today!`;
+  const pageDesc = `Looking for the best ${serviceInfo.title} in ${formattedCity}? Codenclick Technologies offers premium, results-driven ${serviceInfo.title.toLowerCase()} services tailored for ${formattedCity} businesses. Get a free quote today!`;
 
   return (
     <div className="min-h-screen bg-gray-950 text-white font-sans selection:bg-blue-500/30 selection:text-blue-200">
@@ -78,7 +78,7 @@ const ServiceLocation = () => {
             "serviceType": serviceInfo.title,
             "provider": {
               "@type": "Organization",
-              "name": "Code-n-Click Technologies"
+              "name": "Codenclick Technologies"
             },
             "areaServed": {
               "@type": "City",

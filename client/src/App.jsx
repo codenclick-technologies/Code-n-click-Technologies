@@ -9,6 +9,7 @@ import ScrollToTop from './components/utils/ScrollToTop';
 import SmoothScroll from './components/utils/SmoothScroll';
 import CustomCursor from './components/common/CustomCursor';
 import { Analytics } from '@vercel/analytics/react';
+import Chatbot from './components/chatbot/Chatbot';
 
 // Critical Routes (eager load)
 import Home from './pages/Home';
@@ -34,6 +35,7 @@ const ContactMessages = lazy(() => import('./pages/Dashboards/ContactMessages'))
 const ManageResources = lazy(() => import('./pages/Dashboards/ManageResources'));
 const ManagerDashboard = lazy(() => import('./pages/Dashboards/ManagerDashboard'));
 const OwnerDashboard = lazy(() => import('./pages/Dashboards/OwnerDashboard'));
+const ChatbotLeads = lazy(() => import('./pages/Dashboards/ChatbotLeads'));
 
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 const About = lazy(() => import('./pages/About'));
@@ -224,6 +226,15 @@ function AppContent() {
                 }
               />
 
+              <Route
+                path="/dashboard/hr/chat-leads"
+                element={
+                  <ProtectedRoute allowedRoles={['HR', 'OWNER']}>
+                    <ChatbotLeads />
+                  </ProtectedRoute>
+                }
+              />
+
               {/* Manager Routes */}
               <Route
                 path="/dashboard/manager/*"
@@ -238,6 +249,14 @@ function AppContent() {
                 element={
                   <ProtectedRoute allowedRoles={['MANAGER', 'OWNER']}>
                     <ContactMessages />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/manager/chat-leads"
+                element={
+                  <ProtectedRoute allowedRoles={['MANAGER', 'OWNER']}>
+                    <ChatbotLeads />
                   </ProtectedRoute>
                 }
               />
@@ -275,6 +294,14 @@ function AppContent() {
                   </ProtectedRoute>
                 }
               />
+              <Route
+                path="/dashboard/owner/chat-leads"
+                element={
+                  <ProtectedRoute allowedRoles={['OWNER']}>
+                    <ChatbotLeads />
+                  </ProtectedRoute>
+                }
+              />
               {/* 404 Route - Must be last */}
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -282,6 +309,7 @@ function AppContent() {
         </Suspense>
       </main>
       {!isDashboard && <Footer />}
+      {!isDashboard && <Chatbot />}
     </div>
   );
 }

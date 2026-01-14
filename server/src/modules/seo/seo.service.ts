@@ -22,7 +22,7 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
         // 3. Or a static page
 
         // Default Metadata
-        let title = "Code-n-Click Technologies | Premium Web & App Development";
+        let title = "Codenclick Technologies | Premium Web & App Development";
         let description = "We build high-performance websites and apps. Rated #1 in Delhi NCR.";
         let h1 = "Engineered for Excellence";
 
@@ -35,7 +35,7 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
             const service = parts[2].replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
             const city = parts[4].replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
 
-            title = `Best ${service} Service in ${city} | Code-n-Click`;
+            title = `Best ${service} Service in ${city} | Codenclick`;
             description = `Looking for ${service} in ${city}? We provide top-tier ${service} solutions tailored for your business in ${city}. Get a free quote today.`;
             h1 = `${service} in ${city}`;
         } else if (path.includes('/resources/')) {
@@ -76,11 +76,11 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
                     <h1>${h1}</h1>
                     <p>${description}</p>
                     <hr>
-                    <p><strong>Code-n-Click Technologies</strong> is a premium software development company delivering enterprise-grade solutions.</p>
+                    <p><strong>Codenclick Technologies</strong> is a premium software development company delivering enterprise-grade solutions.</p>
                     <a href="${path}" class="cta">View Full Interactive Experience</a>
                 </main>
                 <footer>
-                    <p>&copy; ${new Date().getFullYear()} Code-n-Click Technologies. All rights reserved.</p>
+                    <p>&copy; ${new Date().getFullYear()} Codenclick Technologies. All rights reserved.</p>
                 </footer>
             </body>
             </html>

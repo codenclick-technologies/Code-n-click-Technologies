@@ -37,7 +37,18 @@ class ApiService {
                 }
             }
 
-            const data = await response.json();
+            let data;
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+                data = await response.json();
+            } else {
+                const text = await response.text();
+                // If response is not OK, use text as error message, otherwise return text
+                if (!response.ok) {
+                    throw new Error(text || `Request failed with status ${response.status}`);
+                }
+                return text; // Return text if successful but not JSON (rare but possible)
+            }
 
             if (!response.ok) {
                 throw new Error(data.message || 'Request failed');
@@ -589,5 +600,17 @@ export const meetingsAPI = {
 
 
 
+
+
+export const chatbotAPI = {
+    chat: async (message, history) => {
+        const api = new ApiService();
+        return api.post('/chatbot/chat', { message, history });
+    },
+    getLeads: async () => {
+        const api = new ApiService();
+        return api.get('/chatbot/leads');
+    }
+};
 
 export default ApiService;
