@@ -1,1 +1,0 @@
-{"statusCode":400,"error":"Bad Request","message":"Expected property name or '}' in JSON at position 1 (line 1 column 2)","timestamp":"2026-01-14T18:16:43.245Z","path":"/api/chatbot/speak"}
