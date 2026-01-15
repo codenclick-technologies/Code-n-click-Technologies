@@ -141,9 +141,17 @@ const Chatbot = () => {
     // Stop any current speech
     synthRef.current.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(text);
+    // Clean markdown formatting before speaking
+    const cleanText = text
+      .replace(/\*\*(.*?)\*\*/g, '$1')  // Remove bold **text**
+      .replace(/\*(.*?)\*/g, '$1')      // Remove italic *text*
+      .replace(/\{\{NAVIGATE:.*?\}\}/g, '')  // Remove navigation commands
+      .replace(/#+\s/g, '')             // Remove markdown headers
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1'); // Remove links [text](url)
+
+    const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.volume = 1;
-    utterance.rate = 1.1; // Slightly faster for natural feel
+    utterance.rate = 0.9; // Slower for better clarity
     utterance.pitch = 1;
 
     // Attempt to pick a good voice
@@ -186,15 +194,21 @@ const Chatbot = () => {
       const historyContext = messages.slice(-10);
       const response = await chatbotAPI.chat(messageText, historyContext);
 
-      // 3. Add AI Response
-      const botMessage = { role: 'assistant', content: response.reply };
+      // Clean markdown from response for display
+      const cleanedReply = response.reply
+        .replace(/\*\*(.*?)\*\*/g, '$1')  // Remove bold **text**
+        .replace(/\*(.*?)\*/g, '$1')      // Remove italic *text*
+        .replace(/\{\{NAVIGATE:.*?\}\}/g, '');  // Remove navigation commands
+
+      // 3. Add AI Response (cleaned)
+      const botMessage = { role: 'assistant', content: cleanedReply };
       setMessages(prev => [...prev, botMessage]);
 
       playSound('message');
 
       // 4. Voice Output (if Voice Mode is ON)
       if (isVoiceMode) {
-        speakText(response.reply);
+        speakText(cleanedReply);
       }
 
       // 5. Check if it was a Lead Capture event (based on backend signal or loose heuristic)
