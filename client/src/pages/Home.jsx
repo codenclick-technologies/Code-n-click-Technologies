@@ -1,5 +1,6 @@
 import React from 'react';
 import Hero from '../components/sections/Hero';
+import GrowthSimulator from '../components/sections/GrowthSimulator';
 
 
 import ServicesGrid from '../components/sections/ServicesGrid';
@@ -23,8 +24,7 @@ const Home = () => {
 
       </SEO>
       <Hero />
-
-
+      <GrowthSimulator />
       <ServicesGrid />
       <WhyChooseUs />
       <StatsSection />
