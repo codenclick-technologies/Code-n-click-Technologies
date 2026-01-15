@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authAPI } from '../services/api';
@@ -38,14 +39,14 @@ export const AuthProvider = ({ children }) => {
       setUser(response.user);
       setMustChangePassword(response.user.mustChangePassword || false);
 
-      return { 
-        success: true, 
-        mustChangePassword: response.user.mustChangePassword 
+      return {
+        success: true,
+        mustChangePassword: response.user.mustChangePassword
       };
     } catch (error) {
-      return { 
-        success: false, 
-        message: error.message || 'Login failed' 
+      return {
+        success: false,
+        message: error.message || 'Login failed'
       };
     }
   };
@@ -62,9 +63,9 @@ export const AuthProvider = ({ children }) => {
 
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        message: error.message || 'Password change failed' 
+      return {
+        success: false,
+        message: error.message || 'Password change failed'
       };
     }
   };
@@ -74,9 +75,9 @@ export const AuthProvider = ({ children }) => {
       const response = await authAPI.forgotPassword(email);
       return { success: true, message: response.message };
     } catch (error) {
-      return { 
-        success: false, 
-        message: error.message || 'Request failed' 
+      return {
+        success: false,
+        message: error.message || 'Request failed'
       };
     }
   };
@@ -86,9 +87,9 @@ export const AuthProvider = ({ children }) => {
       const response = await authAPI.resetPassword(token, newPassword);
       return { success: true, message: response.message };
     } catch (error) {
-      return { 
-        success: false, 
-        message: error.message || 'Password reset failed' 
+      return {
+        success: false,
+        message: error.message || 'Password reset failed'
       };
     }
   };

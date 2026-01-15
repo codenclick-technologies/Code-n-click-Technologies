@@ -1,322 +1,441 @@
-import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { X, MessageCircle, Sparkles, Loader2, Send, Mic, MicOff } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
+import { MessageSquare, Send, X, Loader2, Sparkles, User, Bot, HelpCircle, ChevronRight, Mic, Volume2, VolumeX, Activity } from 'lucide-react';
 import { chatbotAPI } from '../../services/api';
+import MarketingService from '../../services/marketing';
 
 const Chatbot = () => {
-  const navigate = useNavigate();
+  // --- STATE MANAGEMENT ---
   const [isOpen, setIsOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [isListening, setIsListening] = useState(false);
   const [messages, setMessages] = useState([
-    {
-      id: 1,
-      type: 'bot',
-      text: "Hello! I'm your AI assistant. How can I help you today?",
-    }
+    { role: 'assistant', content: 'Hi there! 👋 I am your AI Business Assistant. How can I help you grow your business today?' }
   ]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  // Voice State
+  const [isVoiceMode, setIsVoiceMode] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
+  const location = useLocation();
+
+  // Speech Recognition Reference
   const recognitionRef = useRef(null);
+  const synthRef = useRef(window.speechSynthesis);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  // --- INITIALIZATION ---
 
+  // Proactive Greeting Timer
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    const timer = setTimeout(() => {
+      if (!isOpen && messages.length === 1) {
+        setIsOpen(true);
+        playSound('notification');
+        MarketingService.trackChatInteraction('proactive_open');
+      }
+    }, 10000); // Open after 10 seconds
+    return () => clearTimeout(timer);
+  }, []);
 
-  // Initialize Speech Recognition
+  // Auto-scroll to bottom
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
+
+  // Voice Recognition Setup (Web Speech API)
   useEffect(() => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false;
+      recognitionRef.current.continuous = false; // Stop after one sentence for turn-taking
       recognitionRef.current.interimResults = false;
-      recognitionRef.current.lang = 'en-US'; // Can dynamically change based on user pref or detection
+      recognitionRef.current.lang = 'en-US';
 
-      recognitionRef.current.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        setInput(transcript);
-        setIsListening(false);
-      };
-
-      recognitionRef.current.onerror = (event) => {
-        console.error('Speech recognition error:', event.error);
-        setIsListening(false);
+      recognitionRef.current.onstart = () => {
+        setIsListening(true);
       };
 
       recognitionRef.current.onend = () => {
         setIsListening(false);
+        // If voice mode is on but we just finished getting input, we don't restart immediately
+        // We wait for the bot to reply.
+      };
+
+      recognitionRef.current.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        if (transcript) {
+          setInput(transcript);
+          handleSend(transcript); // Auto-send when voice is detected
+        }
+      };
+
+      recognitionRef.current.onerror = (event) => {
+        console.error("Speech recognition error", event.error);
+        setIsListening(false);
       };
     }
+
+    return () => {
+      if (recognitionRef.current) recognitionRef.current.abort();
+      if (synthRef.current) synthRef.current.cancel();
+    };
   }, []);
 
-  const toggleListening = () => {
-    if (isListening) {
-      recognitionRef.current?.stop();
-      setIsListening(false);
+
+  // --- HANDLERS ---
+
+  const toggleChat = () => {
+    const newState = !isOpen;
+    setIsOpen(newState);
+    if (newState) {
+      setTimeout(() => inputRef.current?.focus(), 100);
+      MarketingService.trackChatInteraction('user_opened_chat');
+    }
+  };
+
+  // Toggle Voice Mode
+  const toggleVoiceMode = () => {
+    if (!recognitionRef.current) {
+      alert("Voice features are not supported in your browser. Please use Chrome or Edge.");
+      return;
+    }
+
+    const newMode = !isVoiceMode;
+    setIsVoiceMode(newMode);
+
+    if (newMode) {
+      // Turn ON Voice
+      MarketingService.trackChatInteraction('voice_mode_enabled');
+      // Speak a welcome message
+      speakText("Voice mode enabled. I am listening.");
+      // Start listening after a short delay
+      setTimeout(() => startListening(), 1500);
     } else {
-      if (recognitionRef.current) {
-        try {
-          recognitionRef.current.start();
-          setIsListening(true);
-        } catch (error) {
-           console.error("Failed to start speech recognition:", error);
-        }
-      } else {
-        alert("Voice input is not supported in this browser. Please use Chrome or Edge.");
+      // Turn OFF Voice
+      stopListening();
+      stopSpeaking();
+      MarketingService.trackChatInteraction('voice_mode_disabled');
+    }
+  };
+
+  const startListening = () => {
+    if (recognitionRef.current && !isListening) {
+      try {
+        recognitionRef.current.start();
+      } catch (e) {
+        console.error("Mic start error:", e);
       }
     }
   };
 
-  // Proactive Greeting: Open after 10 seconds
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!localStorage.getItem('chat_opened')) {
-        setIsOpen(true);
-        localStorage.setItem('chat_opened', 'true');
-      }
-    }, 10000); // 10 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const processResponse = (text) => {
-    // 1. Extract Navigation Command
-    const navMatch = text.match(/{{NAVIGATE:(.*?)}}/);
-    let cleanText = text;
-    
-    if (navMatch) {
-      const path = navMatch[1];
-      cleanText = text.replace(navMatch[0], '').trim();
-      
-      // Execute Navigation after a small delay for effect
-      setTimeout(() => {
-        navigate(path);
-      }, 1500);
-    }
-
-    // 2. Linkify URLs (Simple Regex)
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
-    const parts = cleanText.split(urlRegex);
-    
-    return parts.map((part, i) => {
-        if (part.match(urlRegex)) {
-            return <a key={i} href={part} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline break-all">{part}</a>;
-        }
-        return part;
-    });
+  const stopListening = () => {
+    if (recognitionRef.current) recognitionRef.current.stop();
   };
 
-  const handleSend = async (e) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
+  const speakText = (text) => {
+    if (!synthRef.current) return;
 
-    const userText = input;
-    setInput('');
-    setIsLoading(true);
+    // Stop any current speech
+    synthRef.current.cancel();
 
-    const userMessage = {
-      id: Date.now(),
-      type: 'user',
-      text: userText,
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.volume = 1;
+    utterance.rate = 1.1; // Slightly faster for natural feel
+    utterance.pitch = 1;
+
+    // Attempt to pick a good voice
+    const voices = synthRef.current.getVoices();
+    const preferredVoice = voices.find(v => v.name.includes('Google US English')) || voices.find(v => v.lang === 'en-US');
+    if (preferredVoice) utterance.voice = preferredVoice;
+
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      // If in voice mode, start listening again after speaking
+      if (isVoiceMode) {
+        startListening();
+      }
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    synthRef.current.speak(utterance);
+  };
+
+  const stopSpeaking = () => {
+    if (synthRef.current) {
+      synthRef.current.cancel();
+      setIsSpeaking(false);
+    }
+  }
+
+  const handleSend = async (messageText = input) => {
+    if (!messageText.trim()) return;
+
+    // 1. Add User Message
+    const userMessage = { role: 'user', content: messageText };
+    setMessages(prev => [...prev, userMessage]);
+    setInput('');
+    setLoading(true);
+    stopSpeaking(); // Stop speaking if user interrupts
 
     try {
-      // Prepare history for API
-      const history = messages.map(msg => ({
-        role: msg.type === 'user' ? 'user' : 'assistant',
-        content: msg.text
-      }));
+      // 2. API Call to Backend
+      // We pass the last 10 messages for context
+      const historyContext = messages.slice(-10);
+      const response = await chatbotAPI.chat(messageText, historyContext);
 
-      const response = await chatbotAPI.chat(userText, history);
-      
-      const botMessage = {
-        id: Date.now() + 1,
-        type: 'bot',
-        text: response.reply || "I'm sorry, I couldn't process that request right now.",
-      }; // We store raw text here for history
-      
-      setMessages((prev) => [...prev, botMessage]);
+      // 3. Add AI Response
+      const botMessage = { role: 'assistant', content: response.reply };
+      setMessages(prev => [...prev, botMessage]);
+
+      playSound('message');
+
+      // 4. Voice Output (if Voice Mode is ON)
+      if (isVoiceMode) {
+        speakText(response.reply);
+      }
+
+      // 5. Check if it was a Lead Capture event (based on backend signal or loose heuristic)
+      // For now, we assume if the bot says "Thanks" and we have sufficient turns, it might be a lead.
+      // Ideally, the backend should return a flag `isLeadCapturing: true`.
+      // We will perform a basic check:
+      if (response.reply.toLowerCase().includes("contact") && response.reply.toLowerCase().includes("save")) {
+        MarketingService.trackLeadCaptured();
+      }
+
+      MarketingService.trackChatInteraction('message_sent');
+
     } catch (error) {
-      console.error("Chat error:", error);
-      const errorMessage = {
-        id: Date.now() + 1,
-        type: 'bot',
-        text: "Sorry, something went wrong. Please try again.",
-      };
-      setMessages((prev) => [...prev, errorMessage]);
+      console.error('Chat error:', error);
+      setMessages(prev => [...prev, { role: 'assistant', content: "I'm having trouble connecting right now. Please try again later." }]);
+      if (isVoiceMode) speakText("I am having trouble connecting. Please try again.");
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
-  return (
-    <>
-      {/* Floating Action Button */}
-      <motion.button
-        className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 ${
-          isOpen ? 'bg-red-500 hover:bg-red-600' : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-110'
-        }`}
-        onClick={() => setIsOpen(!isOpen)}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <AnimatePresence mode="wait">
-          {isOpen ? (
-            <motion.div
-              key="close"
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
-            >
-              <X className="w-6 h-6 text-white" />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="chat"
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.5, opacity: 0 }}
-            >
-              <MessageCircle className="w-6 h-6 text-white" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-        
-        {/* Tooltip */}
-        {!isOpen && (
-          <motion.div
-            className="absolute right-full mr-4 bg-white/10 backdrop-blur-md px-4 py-2 rounded-lg text-white text-sm whitespace-nowrap border border-white/10"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : 20 }}
-          >
-            Ask me anything!
-          </motion.div>
-        )}
-      </motion.button>
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
 
-      {/* Chat Window */}
+  const playSound = (type) => {
+    // Simple notification sound logic (optional, for polish)
+    // Could integrate a real Audio object here
+  };
+
+  // --- UI COMPONENTS ---
+
+  const suggestedQuestions = [
+    "What services do you offer?",
+    "How much for a website?",
+    "I need SEO for my business",
+    "Contact sales team"
+  ];
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed bottom-24 right-6 w-[90vw] md:w-[400px] h-[600px] max-h-[80vh] z-50 flex flex-col glass-panel rounded-2xl overflow-hidden shadow-2xl border border-white/10"
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 50, scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="mb-4 w-[350px] md:w-[400px] h-[500px] bg-[#0f0f13]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden ring-1 ring-white/5"
           >
             {/* Header */}
-            <div className="p-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-md border-b border-white/10 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
-                  <Sparkles className="w-5 h-5 text-white animate-pulse" />
+            <div className="p-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-b border-white/10 flex justify-between items-center relative overflow-hidden">
+              {/* Animated Background Glow */}
+              <div className="absolute inset-0 bg-blue-500/10 blur-3xl" />
+
+              <div className="flex items-center gap-3 relative z-10">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg relative">
+                  <Bot className="w-5 h-5 text-white" />
+                  {/* Online Indicator */}
+                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-[#0f0f13] rounded-full">
+                    <span className="absolute w-full h-full bg-green-500 rounded-full animate-ping opacity-75"></span>
+                  </span>
                 </div>
                 <div>
-                  <h3 className="font-bold text-white text-lg">AI Assistant</h3>
-                  <p className="text-xs text-blue-200 flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                    Online • Knows Everything
+                  <h3 className="font-bold text-white text-sm">AI Assistant</h3>
+                  <p className="text-xs text-blue-300 flex items-center gap-1">
+                    <Sparkles className="w-3 h-3" />
+                    Premium Support
                   </p>
                 </div>
               </div>
+
+              <div className="flex gap-2 relative z-10">
+                <button
+                  onClick={toggleVoiceMode}
+                  className={`p-2 rounded-lg transition-all ${isVoiceMode ? 'bg-red-500/20 text-red-500 animate-pulse' : 'bg-white/5 text-gray-400 hover:text-white'}`}
+                  title={isVoiceMode ? "Disable Voice Mode" : "Enable Voice Mode"}
+                >
+                  {isSpeaking ? <Volume2 className="w-4 h-4" /> : isVoiceMode ? <Mic className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+                </button>
+                <button
+                  onClick={toggleChat}
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors text-gray-400 hover:text-white"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
-            {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-              {messages.map((msg) => (
+            {/* Voice Status Indicator (Only Visible in Voice Mode) */}
+            <AnimatePresence>
+              {isVoiceMode && (
                 <motion.div
-                  key={msg.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ height: 0 }}
+                  animate={{ height: '40px' }}
+                  exit={{ height: 0 }}
+                  className="bg-black/40 border-b border-white/5 flex items-center justify-center"
+                >
+                  {isListening ? (
+                    <div className="flex items-center gap-2 text-red-400 text-xs font-bold uppercase tracking-widest">
+                      <div className="flex gap-1 items-end h-4">
+                        <span className="w-1 bg-red-400 h-2 animate-[bounce_1s_infinite]"></span>
+                        <span className="w-1 bg-red-400 h-3 animate-[bounce_1.2s_infinite]"></span>
+                        <span className="w-1 bg-red-400 h-4 animate-[bounce_0.8s_infinite]"></span>
+                        <span className="w-1 bg-red-400 h-2 animate-[bounce_1.1s_infinite]"></span>
+                      </div>
+                      Listening...
+                    </div>
+                  ) : isSpeaking ? (
+                    <div className="flex items-center gap-2 text-green-400 text-xs font-bold uppercase tracking-widest">
+                      <Activity className="w-4 h-4 animate-pulse" />
+                      Speaking...
+                    </div>
+                  ) : (
+                    <span className="text-gray-500 text-xs">Ready</span>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Messages Area */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar bg-black/20">
+              {messages.map((msg, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                  transition={{ duration: 0.3 }}
+                  className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] p-3 rounded-2xl ${
-                      msg.type === 'user'
-                        ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-br-none shadow-lg'
-                        : 'bg-white/10 backdrop-blur-md border border-white/10 text-gray-100 rounded-bl-none shadow-lg'
-                    }`}
+                    className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
+                        ? 'bg-blue-600 text-white rounded-br-none shadow-lg shadow-blue-900/20'
+                        : 'bg-white/10 text-gray-200 rounded-bl-none border border-white/5'
+                      }`}
                   >
-                    <p className="text-sm leading-relaxed whitespace-pre-wrap">{processResponse(msg.text)}</p>
+                    {msg.content}
                   </div>
                 </motion.div>
               ))}
-              
-              {isLoading && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex justify-start"
-                >
-                  <div className="bg-white/5 backdrop-blur-md border border-white/5 px-4 py-3 rounded-2xl rounded-bl-none flex items-center gap-2">
-                    <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />
-                    <span className="text-xs text-gray-400">Thinking...</span>
-                  </div>
-                </motion.div>
-              )}
-              {isListening && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex justify-end"
-                >
-                  <div className="bg-gradient-to-r from-red-500/20 to-red-600/20 border border-red-500/30 px-4 py-3 rounded-2xl rounded-br-none flex items-center gap-2">
-                    <div className="flex gap-1">
-                        <span className="w-1 h-3 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '0ms' }}></span>
-                        <span className="w-1 h-4 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '150ms' }}></span>
-                        <span className="w-1 h-2 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '300ms' }}></span>
+
+              {loading && (
+                <div className="flex justify-start">
+                  <div className="bg-white/5 rounded-2xl rounded-bl-none p-3 border border-white/5 flex items-center gap-2">
+                    <div className="flex space-x-1">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
                     </div>
-                    <span className="text-xs text-red-300">Listening...</span>
                   </div>
-                </motion.div>
+                </div>
               )}
               <div ref={messagesEndRef} />
             </div>
 
+            {/* Suggested Questions (Quick Replies) */}
+            {messages.length < 3 && !loading && (
+              <div className="px-4 pb-2 flex gap-2 overflow-x-auto no-scrollbar">
+                {suggestedQuestions.map((q, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleSend(q)}
+                    className="whitespace-nowrap bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-gray-400 px-3 py-1.5 rounded-full transition-all hover:text-white"
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            )}
+
             {/* Input Area */}
-            <div className="p-4 bg-black/20 backdrop-blur-md border-t border-white/10">
-              <form onSubmit={handleSend} className="relative flex items-center gap-2">
+            <div className="p-4 bg-white/5 border-t border-white/10">
+              <div className="relative flex items-center bg-black/40 border border-white/10 rounded-xl focus-within:border-blue-500/50 focus-within:ring-1 focus-within:ring-blue-500/20 transition-all">
                 <input
+                  ref={inputRef}
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask anything in English or Hinglish..."
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-20 text-sm text-white focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all placeholder:text-gray-500"
+                  onKeyDown={handleKeyPress}
+                  placeholder={isListening ? "Listening..." : "Type a message..."}
+                  className="w-full bg-transparent text-white px-4 py-3 text-sm focus:outline-none placeholder:text-gray-600"
+                  disabled={loading || isListening}
                 />
-                <button
-                  type="button"
-                  onClick={toggleListening}
-                  className={`absolute right-12 p-2 rounded-lg transition-all ${isListening ? 'text-red-500 bg-red-500/10 hover:bg-red-500/20 animate-pulse' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
-                  title="Speak to Chat"
-                >
-                  {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
-                </button>
-                <button
-                  type="submit"
-                  disabled={!input.trim() || isLoading}
-                  className="absolute right-2 p-2 rounded-lg bg-blue-500/20 hover:bg-blue-500 text-blue-400 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
-              </form>
-              <div className="text-center mt-2">
-                <p className="text-[10px] text-gray-500">I may make mistakes. Please verify important info.</p>
+
+                <div className="flex items-center gap-1 pr-2">
+                  <button
+                    onClick={toggleVoiceMode}
+                    className={`p-2 rounded-lg transition-all ${isVoiceMode ? 'text-blue-400 bg-blue-500/10' : 'text-gray-500 hover:text-gray-300'}`}
+                    title="Voice Input"
+                  >
+                    <Mic className="w-4 h-4" />
+                  </button>
+
+                  <button
+                    onClick={() => handleSend()}
+                    disabled={!input.trim() || loading || isListening}
+                    className="p-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-900/20"
+                  >
+                    <Send className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+              <div className="mt-2 text-center">
+                <p className="text-[10px] text-gray-600 flex items-center justify-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                  Powered by Codenclick Engines
+                </p>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+
+      {/* Floating Toggle Button */}
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={toggleChat}
+        className={`w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 relative group ${isOpen
+            ? 'bg-gray-800 text-white'
+            : 'bg-gradient-to-br from-blue-600 to-purple-600 text-white'
+          }`}
+      >
+        <div className="absolute inset-0 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-75 duration-1000" />
+
+        {isOpen ? (
+          <ChevronRight className="w-6 h-6 rotate-90" />
+        ) : (
+          <div className="relative">
+            <MessageSquare className="w-6 h-6" />
+            <span className="absolute -top-1 -right-1 flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+            </span>
+          </div>
+        )}
+      </motion.button>
+    </div>
   );
 };
 

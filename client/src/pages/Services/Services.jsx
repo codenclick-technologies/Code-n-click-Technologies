@@ -1,18 +1,18 @@
-import React, { useMemo, useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import SEO from '../../components/utils/SEO';
-import { motion, useMotionValue, useSpring, useTransform, animate, useInView } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
-  Code2, 
-  Cloud, 
-  Target, 
-  Search, 
-  PenTool, 
-  TrendingUp, 
-  ArrowRight, 
-  ShieldCheck, 
-  Users, 
-  Zap, 
+import {
+  Code2,
+  Cloud,
+  Target,
+  Search,
+  PenTool,
+  TrendingUp,
+  ArrowRight,
+  ShieldCheck,
+  Users,
+  Zap,
   Globe,
   CheckCircle2,
   Award,
@@ -47,34 +47,28 @@ const Counter = ({ value, label, detail, icon: Icon, color, glow }) => {
 
   return (
     <div ref={ref} className="relative group p-8 lg:p-10 rounded-[2.5rem] bg-[#030303]/80 backdrop-blur-2xl border border-white/5 hover:border-white/10 transition-all duration-700 h-full flex flex-col items-center text-center overflow-hidden">
-        {/* Glow Background */}
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-        
-        {/* Icon & Beam */}
-        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${color} p-[1.5px] mb-8 relative z-10 shadow-2xl group-hover:scale-110 transition-transform duration-500`}>
-          <div className="w-full h-full bg-[#0A0A0B] rounded-2xl flex items-center justify-center">
-            <Icon className="w-6 h-6 text-white" />
-          </div>
-          <div className={`absolute -inset-4 blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500`} style={{ backgroundColor: glow }} />
-        </div>
+      {/* Glow Background */}
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
-        <motion.span className="text-5xl lg:text-6xl font-black text-white mb-4 tracking-tighter">
-          {rounded}
-        </motion.span>
-        
-        <h4 className="text-sm font-black uppercase tracking-[0.3em] text-blue-400 mb-4">{label}</h4>
-        <p className="text-sm text-gray-400 leading-relaxed font-light">{detail}</p>
+      {/* Icon & Beam */}
+      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${color} p-[1.5px] mb-8 relative z-10 shadow-2xl group-hover:scale-110 transition-transform duration-500`}>
+        <div className="w-full h-full bg-[#0A0A0B] rounded-2xl flex items-center justify-center">
+          <Icon className="w-6 h-6 text-white" />
+        </div>
+        <div className={`absolute -inset-4 blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500`} style={{ backgroundColor: glow }} />
+      </div>
+
+      <motion.span className="text-5xl lg:text-6xl font-black text-white mb-4 tracking-tighter">
+        {rounded}
+      </motion.span>
+
+      <h4 className="text-sm font-black uppercase tracking-[0.3em] text-blue-400 mb-4">{label}</h4>
+      <p className="text-sm text-gray-400 leading-relaxed font-light">{detail}</p>
     </div>
   );
 };
 
 const Services = () => {
-  const fadeIn = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.6 }
-  };
 
   const services = [
     {
@@ -166,7 +160,7 @@ const Services = () => {
 
   return (
     <div className="min-h-screen bg-[#020205] text-white">
-      <SEO 
+      <SEO
         title="Digital Services | Web, SaaS, Marketing & Design"
         description="Comprehensive digital services tailored for growth. From custom web and SaaS development to performance marketing and SEO, we build solutions that scale."
         keywords="web development, saas development, digital marketing, seo services, graphic design, google ads, meta ads"
@@ -176,21 +170,21 @@ const Services = () => {
       <section className="relative pt-32 pb-16 lg:pt-48 lg:pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Architectural Background */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none opacity-20">
-            <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[140px] animate-pulse" />
-            <div className="absolute bottom-40 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[140px] animate-pulse delay-1000" />
+          <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[140px] animate-pulse" />
+          <div className="absolute bottom-40 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[140px] animate-pulse delay-1000" />
         </div>
-        
+
         {/* Tech Grid Mask */}
-        <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
-             style={{ 
-               backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-               backgroundSize: '100px 100px',
-               maskImage: 'radial-gradient(circle at center, black, transparent 90%)'
-             }} 
+        <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+            backgroundSize: '100px 100px',
+            maskImage: 'radial-gradient(circle at center, black, transparent 90%)'
+          }}
         />
 
         <div className="max-w-7xl mx-auto relative z-10 text-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
@@ -200,7 +194,7 @@ const Services = () => {
             <span>Premium Solutions</span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -210,7 +204,7 @@ const Services = () => {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">Scale Business.</span>
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -256,19 +250,19 @@ const Services = () => {
                     <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-8 shadow-xl group-hover:scale-110 transition-transform duration-500`}>
                       <Icon className="w-7 h-7 text-white" />
                     </div>
-                    
+
                     <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors duration-500">{service.title}</h3>
                     <p className="text-gray-400 leading-relaxed font-light mb-8 group-hover:text-gray-300 transition-colors duration-500">
                       {service.description}
                     </p>
 
                     <div className="mt-auto pt-8 border-t border-white/5 flex flex-wrap gap-2 mb-8">
-                       {service.tags.map(tag => (
-                         <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase font-black tracking-widest text-gray-400 group-hover:text-blue-400 group-hover:border-blue-500/20 transition-all duration-500">{tag}</span>
-                       ))}
+                      {service.tags.map(tag => (
+                        <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] uppercase font-black tracking-widest text-gray-400 group-hover:text-blue-400 group-hover:border-blue-500/20 transition-all duration-500">{tag}</span>
+                      ))}
                     </div>
 
-                    <Link 
+                    <Link
                       to={service.link}
                       className="inline-flex items-center gap-3 text-sm font-black uppercase tracking-widest text-white group-hover:text-blue-400 transition-all duration-500"
                     >
@@ -288,7 +282,7 @@ const Services = () => {
       {/* Elite Process Section */}
       <section className="py-24 relative bg-[#020205] overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none opacity-40" />
-        
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-20 text-balance">
             <h2 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8 tracking-tighter">How We Make <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Magic Happen.</span></h2>
@@ -302,8 +296,8 @@ const Services = () => {
             {process.map((step, index) => {
               const Icon = step.icon;
               return (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -311,11 +305,11 @@ const Services = () => {
                   className="relative group p-8 lg:p-10 rounded-[2.5rem] bg-[#030303]/80 backdrop-blur-2xl border border-white/5 hover:border-white/20 transition-all duration-500 h-full flex flex-col"
                 >
                   <span className="absolute top-6 right-8 text-7xl font-black text-white/[0.03] group-hover:text-white/[0.06] transition-colors pointer-events-none">{step.step}</span>
-                  
+
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-8 shadow-xl group-hover:scale-110 transition-transform duration-500`}>
-                      <Icon className="w-6 h-6 text-white" />
+                    <Icon className="w-6 h-6 text-white" />
                   </div>
-                  
+
                   <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-blue-400 transition-colors duration-500">{step.title}</h3>
                   <p className="text-sm text-gray-400 leading-relaxed font-light mb-4">{step.description}</p>
                 </motion.div>
@@ -328,36 +322,36 @@ const Services = () => {
       {/* Premium CTA Section */}
       <section className="py-24 relative overflow-hidden bg-[#020205]">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-purple-600/10 pointer-events-none" />
-        
+
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <motion.div
-             initial={{ opacity: 0, scale: 0.9 }}
-             whileInView={{ opacity: 1, scale: 1 }}
-             viewport={{ once: true }}
-             className="mb-12 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="mb-12 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20"
           >
-             <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
-             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400">Available for Projects</span>
+            <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400">Available for Projects</span>
           </motion.div>
 
           <h2 className="text-4xl md:text-7xl font-black text-white leading-tight mb-8 tracking-tighter">Ready to Build Something <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Extraordinary?</span></h2>
           <p className="text-xl text-gray-400 mb-12 font-light leading-relaxed">
             Stop waiting for the "perfect time". Let's discuss your vision and turn it into a high-performance reality today.
           </p>
-          
-          <motion.div 
+
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-block relative group/btn px-4"
           >
-             <div className="absolute inset-x-0 inset-y-0 bg-blue-600 blur-2xl opacity-20 group-hover/btn:opacity-40 transition-opacity" />
-             <Link 
-                to="/contact" 
-                className="relative inline-flex items-center justify-center gap-4 px-12 py-6 text-xs font-black uppercase tracking-[0.3em] text-black bg-white rounded-2xl hover:bg-blue-600 hover:text-white transition-all shadow-2xl"
-             >
-                Initiate Project
-                <ArrowUpRight size={18} className="group-hover:rotate-45 transition-transform" />
-             </Link>
+            <div className="absolute inset-x-0 inset-y-0 bg-blue-600 blur-2xl opacity-20 group-hover/btn:opacity-40 transition-opacity" />
+            <Link
+              to="/contact"
+              className="relative inline-flex items-center justify-center gap-4 px-12 py-6 text-xs font-black uppercase tracking-[0.3em] text-black bg-white rounded-2xl hover:bg-blue-600 hover:text-white transition-all shadow-2xl"
+            >
+              Initiate Project
+              <ArrowUpRight size={18} className="group-hover:rotate-45 transition-transform" />
+            </Link>
           </motion.div>
         </div>
       </section>

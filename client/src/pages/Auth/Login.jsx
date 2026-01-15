@@ -21,12 +21,12 @@ const Login = () => {
 
     try {
       const result = await login(email, password);
-      
+
       if (result.success) {
         // Check if user must change password
         if (result.mustChangePassword) {
-          navigate('/change-password', { 
-            state: { firstLogin: true } 
+          navigate('/change-password', {
+            state: { firstLogin: true }
           });
           return;
         }
@@ -45,7 +45,7 @@ const Login = () => {
       } else {
         setError(result.message || 'Login failed');
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred');
     } finally {
       setLoading(false);
@@ -56,8 +56,8 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-[#020205] pt-40 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
-      
-      <motion.div 
+
+      <motion.div
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
@@ -75,7 +75,7 @@ const Login = () => {
             Access your Code'N'Click dashboard
           </p>
         </div>
-        
+
         {/* Form */}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">

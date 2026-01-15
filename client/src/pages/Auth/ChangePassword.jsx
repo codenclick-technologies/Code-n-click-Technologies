@@ -58,10 +58,10 @@ const ChangePassword = () => {
 
     try {
       const result = await changePassword(currentPassword, newPassword);
-      
+
       if (result.success) {
         setSuccess(true);
-        
+
         // Redirect after successful password change
         setTimeout(() => {
           if (isFirstLogin) {
@@ -79,7 +79,7 @@ const ChangePassword = () => {
       } else {
         setError(result.message || 'Password change failed');
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred');
     } finally {
       setLoading(false);
@@ -88,7 +88,7 @@ const ChangePassword = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <motion.div 
+      <motion.div
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
@@ -103,12 +103,12 @@ const ChangePassword = () => {
             {isFirstLogin ? 'Set Your Password' : 'Change Password'}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-            {isFirstLogin 
-              ? 'Please set a new password for your account' 
+            {isFirstLogin
+              ? 'Please set a new password for your account'
               : 'Update your account password'}
           </p>
         </div>
-        
+
         {/* Form */}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">

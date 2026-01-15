@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, Server, Globe, BarChart, PenTool, Search, ArrowRight, Sparkles, Box, Layout, Cpu } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -71,11 +71,11 @@ const ServiceCard = ({ service, index }) => {
       className="group relative h-full"
     >
       <SpotlightCard className="h-full bg-[#030303]/90 backdrop-blur-3xl border border-white/5 group-hover:border-white/20 transition-all duration-700 rounded-[2rem] overflow-hidden flex flex-col shadow-2xl">
-        
+
         <div className={`absolute -top-12 -right-12 w-48 h-48 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 blur-[60px] transition-all duration-700 rounded-full z-0`} />
 
         <div className="p-8 lg:p-10 flex flex-col h-full relative z-10">
-          
+
           <div className="flex items-center justify-between mb-10">
             <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${service.color} p-[1.5px] group-hover:scale-110 transition-transform duration-500 shadow-xl overflow-hidden`}>
               <div className="w-full h-full bg-[#030303] rounded-2xl flex items-center justify-center">
@@ -83,7 +83,7 @@ const ServiceCard = ({ service, index }) => {
               </div>
             </div>
             <div className="px-3 py-1 rounded-full border border-white/5 bg-white/5 text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">
-               {service.tag}
+              {service.tag}
             </div>
           </div>
 
@@ -117,19 +117,19 @@ const ServiceCard = ({ service, index }) => {
 const ServicesGrid = () => {
   return (
     <section className="py-16 lg:py-20 bg-[#020205] relative z-10 overflow-hidden">
-      
+
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none opacity-30" />
-      
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
-           style={{ 
-             backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-             backgroundSize: '40px 40px',
-             maskImage: 'linear-gradient(to bottom, black 50%, transparent)'
-           }} 
+
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+          backgroundSize: '40px 40px',
+          maskImage: 'linear-gradient(to bottom, black 50%, transparent)'
+        }}
       />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
+
         <div className="text-center mb-20 px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -168,19 +168,19 @@ const ServicesGrid = () => {
             <ServiceCard key={service.title} service={service} index={index} />
           ))}
         </div>
-        
-        <motion.div 
-           initial={{ opacity: 0 }}
-           whileInView={{ opacity: 1 }}
-           viewport={{ once: true }}
-           className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-center gap-10 opacity-50 grayscale hover:grayscale-0 transition-all duration-700"
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-center gap-10 opacity-50 grayscale hover:grayscale-0 transition-all duration-700"
         >
-           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">Trusted by modern brands</span>
-           <div className="flex items-center gap-8 text-white font-black text-sm tracking-widest">
-              <span>STARTUPS</span>
-              <span>SCALEUPS</span>
-              <span>ENTERPRISE</span>
-           </div>
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">Trusted by modern brands</span>
+          <div className="flex items-center gap-8 text-white font-black text-sm tracking-widest">
+            <span>STARTUPS</span>
+            <span>SCALEUPS</span>
+            <span>ENTERPRISE</span>
+          </div>
         </motion.div>
       </div>
     </section>

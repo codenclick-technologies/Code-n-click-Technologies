@@ -18,39 +18,39 @@ const ResetPassword = () => {
   const [tokenValid, setTokenValid] = useState(false);
 
   useEffect(() => {
+    const validateToken = async () => {
+      if (!token) {
+        setError('Invalid or missing reset token');
+        setValidatingToken(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/validate-reset-token`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token })
+        });
+
+        if (response.ok) {
+          setTokenValid(true);
+        } else {
+          const data = await response.json();
+          setError(data.message || 'Invalid or expired reset link');
+        }
+      } catch {
+        setError('Failed to validate reset link');
+      } finally {
+        setValidatingToken(false);
+      }
+    };
+
     validateToken();
   }, [token]);
 
-  const validateToken = async () => {
-    if (!token) {
-      setError('Invalid or missing reset token');
-      setValidatingToken(false);
-      return;
-    }
-
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/validate-reset-token`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token })
-      });
-
-      if (response.ok) {
-        setTokenValid(true);
-      } else {
-        const data = await response.json();
-        setError(data.message || 'Invalid or expired reset link');
-      }
-    } catch (err) {
-      setError('Failed to validate reset link');
-    } finally {
-      setValidatingToken(false);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validation
     if (password.length < 8) {
       setError('Password must be at least 8 characters long');
@@ -106,11 +106,11 @@ const ResetPassword = () => {
             <div className="w-20 h-20 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
               <AlertCircle size={40} className="text-red-600 dark:text-red-400" />
             </div>
-            
+
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               Invalid Reset Link
             </h2>
-            
+
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               {error || 'This password reset link is invalid or has expired.'}
             </p>
@@ -135,11 +135,11 @@ const ResetPassword = () => {
             <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle size={40} className="text-green-600 dark:text-green-400" />
             </div>
-            
+
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               Password Reset Successful!
             </h2>
-            
+
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               Your password has been successfully reset. Redirecting to login...
             </p>

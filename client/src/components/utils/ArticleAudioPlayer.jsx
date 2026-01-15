@@ -5,14 +5,8 @@ import { motion } from 'framer-motion';
 const ArticleAudioPlayer = ({ title, content }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [supported, setSupported] = useState(false);
+  const [supported, setSupported] = useState(typeof window !== 'undefined' && 'speechSynthesis' in window);
   const utteranceRef = useRef(null);
-
-  useEffect(() => {
-    if ('speechSynthesis' in window) {
-      setSupported(true);
-    }
-  }, []);
 
   useEffect(() => {
     // Cleanup on unmount
@@ -34,7 +28,7 @@ const ArticleAudioPlayer = ({ title, content }) => {
       const utterance = new SpeechSynthesisUtterance(textToRead);
       utterance.rate = 1.0;
       utterance.pitch = 1.0;
-      
+
       // Try to find a good English voice
       const voices = window.speechSynthesis.getVoices();
       const englishVoice = voices.find(v => v.lang.includes('en-US')) || voices[0];
@@ -67,17 +61,17 @@ const ArticleAudioPlayer = ({ title, content }) => {
 
   return (
     <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 mb-12 flex flex-col md:flex-row items-center gap-6 shadow-xl relative overflow-hidden group">
-        
+
       {/* Background glow */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
 
       <div className="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-600/20 shrink-0 relative">
         {isPlaying ? (
-           <motion.div 
-             animate={{ scale: [1, 1.2, 1] }} 
-             transition={{ repeat: Infinity, duration: 1.5 }}
-             className="absolute inset-0 bg-blue-500 rounded-full opacity-50"
-           />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+            className="absolute inset-0 bg-blue-500 rounded-full opacity-50"
+          />
         ) : null}
         <Volume2 size={28} className="text-white relative z-10" />
       </div>
@@ -89,14 +83,14 @@ const ArticleAudioPlayer = ({ title, content }) => {
 
       <div className="flex items-center gap-3">
         {!isPlaying ? (
-          <button 
+          <button
             onClick={handlePlay}
             className="flex items-center gap-2 px-6 py-3 bg-white text-gray-900 rounded-full font-bold hover:bg-gray-200 transition-all transform hover:scale-105"
           >
             <Play size={18} fill="currentColor" /> {isPaused ? "Resume" : "Play Audio"}
           </button>
         ) : (
-          <button 
+          <button
             onClick={handlePause}
             className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white border border-gray-700 rounded-full font-bold hover:bg-gray-700 transition-all"
           >
@@ -105,7 +99,7 @@ const ArticleAudioPlayer = ({ title, content }) => {
         )}
 
         {(isPlaying || isPaused) && (
-          <button 
+          <button
             onClick={handleStop}
             className="p-3 bg-red-500/10 text-red-500 rounded-full hover:bg-red-500/20 transition-all border border-red-500/20"
             title="Stop Audio"

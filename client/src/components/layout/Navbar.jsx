@@ -6,9 +6,9 @@ import { Menu, X, ChevronDown, Sun, Moon, Briefcase, Phone, Info, BookOpen, User
 const Navbar = ({ isBannerVisible }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  // const [isDark, setIsDark] = useState(false); // Unused
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const location = useLocation();
+  // const location = useLocation(); // Unused
 
   // Handle Scroll
   useEffect(() => {

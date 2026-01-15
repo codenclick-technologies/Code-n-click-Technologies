@@ -29,7 +29,7 @@ class ApiService {
                     await this.handleTokenRefresh();
                     // Retry original request with new token
                     return this.request(endpoint, { ...options, _retry: true });
-                } catch (_refreshErr) {
+                } catch {
                     // Refresh failed - clear auth and redirect
                     this.clearAuth();
                     window.location.href = '/login';
@@ -150,7 +150,7 @@ class ApiService {
                     headers: newHeaders,
                     body: formData,
                 });
-            } catch (refreshErr) {
+            } catch {
                 this.clearAuth();
                 window.location.href = '/login';
                 throw new Error('Session expired. Please login again.');
@@ -610,6 +610,14 @@ export const chatbotAPI = {
     getLeads: async () => {
         const api = new ApiService();
         return api.get('/chatbot/leads');
+    },
+    updateStatus: async (id, status) => {
+        const api = new ApiService();
+        return api.patch(`/chatbot/leads/${id}/status`, { status });
+    },
+    deleteLead: async (id) => {
+        const api = new ApiService();
+        return api.delete(`/chatbot/leads/${id}`);
     }
 };
 
