@@ -161,8 +161,8 @@ html.lenis body {
   }
 
   /* Disable expensive hover blurs on touch */
-  .group:hover .blur-[80px],
-  .group:hover .blur-[120px] {
+  .group:hover .blur-\[80px\],
+  .group:hover .blur-\[120px\] {
     display: none !important;
   }
 

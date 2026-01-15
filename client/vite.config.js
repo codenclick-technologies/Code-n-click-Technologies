@@ -23,7 +23,7 @@ export default defineConfig({
     css: true,
   },
   build: {
-    outDir: '../dist',
+    outDir: 'dist',
     emptyOutDir: true,
     sourcemap: true,
     rollupOptions: {
