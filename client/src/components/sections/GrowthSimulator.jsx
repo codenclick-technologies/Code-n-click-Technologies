@@ -46,13 +46,14 @@ const GrowthSimulator = () => {
   };
 
   const getEstimate = () => {
-    let base = 30000;
-    if (selections.type === 'App') base = 80000;
-    if (selections.type === 'E-commerce') base = 60000;
+    let base = 12000;
+    if (selections.type === 'App') base = 35000;
+    if (selections.type === 'E-commerce') base = 25000;
     
     // Add feature costs
-    if (selections.features.includes('AI/Chatbot')) base += 15000;
-    if (selections.features.includes('Payments')) base += 5000;
+    if (selections.features.includes('AI/Chatbot')) base += 5000;
+    if (selections.features.includes('Payments')) base += 3000;
+    if (selections.features.includes('Admin Dashboard')) base += 4000;
     
     // Format
     return `₹${(base / 1000).toFixed(0)}k - ₹${((base * 1.3) / 1000).toFixed(0)}k`;
