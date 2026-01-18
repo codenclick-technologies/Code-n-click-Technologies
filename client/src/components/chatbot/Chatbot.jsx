@@ -5,6 +5,96 @@ import { MessageSquare, Send, X, Loader2, Sparkles, User, Bot, HelpCircle, Chevr
 import { chatbotAPI } from '../../services/api';
 import MarketingService from '../../services/marketing';
 
+// --- HELPER: Basic Markdown Renderer ---
+const renderMessageContent = (content) => {
+  // 1. Split by newlines to handle paragraphs/lists
+  return content.split('\n').map((line, lineIdx) => {
+    // Check for Headers
+    if (line.startsWith('### ')) {
+      return <h3 key={lineIdx} className="text-md font-bold text-white mt-2 mb-1">{line.replace('### ', '')}</h3>;
+    }
+    if (line.startsWith('## ')) {
+      return <h2 key={lineIdx} className="text-lg font-bold text-white mt-3 mb-2">{line.replace('## ', '')}</h2>;
+    }
+
+    // 2. Parse Bold, Italic, and Links
+    // Split by Bold (**...**), Italic (*...*), and Links ([...](...))
+    // Note: The regex order matters.
+    const parts = line.split(/(\*\*.*?\*\*|\*.*?\*|\[.*?\]\(.*?\))/g);
+    
+    const renderedLine = parts.map((part, partIdx) => {
+      // Bold
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={`${lineIdx}-${partIdx}`} className="font-bold text-blue-300">{part.slice(2, -2)}</strong>;
+      }
+      // Italic (simple check, avoiding accidental match like * list)
+      if (part.startsWith('*') && part.endsWith('*') && part.length > 2 && !part.includes(' ')) { 
+         // Note: basic italic support, strict to avoid bullets
+         return <em key={`${lineIdx}-${partIdx}`} className="italic text-gray-300">{part.slice(1, -1)}</em>;
+      }
+      // Link
+      if (part.startsWith('[') && part.endsWith(')')) {
+        const match = part.match(/\[(.*?)\]\((.*?)\)/);
+        if (match) {
+           return <a key={`${lineIdx}-${partIdx}`} href={match[2]} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline hover:text-blue-300">{match[1]}</a>;
+        }
+      }
+      return part;
+    });
+
+    return (
+      <div key={lineIdx} className={`${line.trim().startsWith('-') ? 'pl-4' : 'min-h-[1.2em]'} mb-1`}>
+        {line.trim().startsWith('-') && <span className="inline-block w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 align-middle"></span>}
+        {renderedLine}
+      </div>
+    );
+  });
+};
+
+// --- COMPONENT: Typewriter Effect for Bot Messages ---
+const Typewriter = ({ text, onComplete, onUpdate }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [isComplete, setIsComplete] = useState(false);
+
+  useEffect(() => {
+    let index = 0;
+    const speed = 10; // Faster typing speed
+    setIsComplete(false);
+    setDisplayedText('');
+
+    const interval = setInterval(() => {
+      if (index < text.length) {
+        setDisplayedText((prev) => prev + text.charAt(index));
+        index++;
+        if (onUpdate) onUpdate(); // Signal parent to scroll
+      } else {
+        clearInterval(interval);
+        setIsComplete(true);
+        if (onComplete) onComplete();
+      }
+    }, speed);
+
+    return () => clearInterval(interval);
+  }, [text]);
+
+  // While typing, we render a partial view. 
+  // To avoid markdown "flicker" (e.g. seeing '**' before it becomes bold), 
+  // we can use a simpler approach: just show text. 
+  // Once complete, we switch to the full Rich Markdown renderer.
+  if (isComplete) {
+     return <div className="animate-fade-in">{renderMessageContent(text)}</div>;
+  }
+
+  // During typing, we use a whitespace-pre-wrap to respect newlines
+  return (
+    <div className="whitespace-pre-wrap leading-relaxed">
+      {displayedText}
+      <span className="inline-block w-1.5 h-4 ml-1 align-middle bg-blue-400 animate-pulse"></span>
+    </div>
+  );
+};
+
+
 const Chatbot = () => {
   // --- STATE MANAGEMENT ---
   const [isOpen, setIsOpen] = useState(false);
@@ -20,11 +110,16 @@ const Chatbot = () => {
 
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
-  const location = useLocation();
 
   // Speech Recognition Reference
   const recognitionRef = useRef(null);
   const synthRef = useRef(window.speechSynthesis);
+
+  // Ref to track voice mode for async callbacks
+  const isVoiceModeRef = useRef(isVoiceMode);
+  useEffect(() => {
+     isVoiceModeRef.current = isVoiceMode;
+  }, [isVoiceMode]);
 
   // --- INITIALIZATION ---
 
@@ -40,10 +135,24 @@ const Chatbot = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Auto-scroll to bottom
+  // Auto-scroll to bottom - Smart Implementation
+  const scrollToBottom = (force = false) => {
+    const container = messagesEndRef.current?.parentElement;
+    if (container) {
+      // Check if user is near bottom (within 100px)
+      const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100;
+      
+      // Scroll if forced (new message start) or if user is already following the conversation
+      if (force || isNearBottom) {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+    // Force scroll on new message arrival
+    scrollToBottom(true);
+  }, [messages, loading]); // Scroll on new message or loading toggle
 
   // Voice Recognition Setup (Web Speech API)
   useEffect(() => {
@@ -99,7 +208,11 @@ const Chatbot = () => {
   // Toggle Voice Mode
   const toggleVoiceMode = () => {
     if (!recognitionRef.current) {
-      alert("Voice features are not supported in your browser. Please use Chrome or Edge.");
+      // Graceful Fallback: specific message in chat instead of annoying alert
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: "**System Notification**: Voice mode is not available in this browser. Please use **Google Chrome**, **Edge**, or **Safari** for voice features." 
+      }]);
       return;
     }
 
@@ -162,8 +275,8 @@ const Chatbot = () => {
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => {
       setIsSpeaking(false);
-      // If in voice mode, start listening again after speaking
-      if (isVoiceMode) {
+      // Use Ref to check current state, not captured state
+      if (isVoiceModeRef.current) {
         startListening();
       }
     };
@@ -194,22 +307,25 @@ const Chatbot = () => {
       const historyContext = messages.slice(-10);
       const response = await chatbotAPI.chat(messageText, historyContext);
 
-      // Clean markdown from response for display
-      const cleanedReply = response.reply
-        .replace(/\*\*(.*?)\*\*/g, '$1')  // Remove bold **text**
-        .replace(/\*(.*?)\*/g, '$1')      // Remove italic *text*
-        .replace(/\{\{NAVIGATE:.*?\}\}/g, '');  // Remove navigation commands
+      // 3. Prepare AI Response for Display (Keep Markdown, Remove System Commands)
+      const displayReply = response.reply.replace(/\{\{NAVIGATE:.*?\}\}/g, '');
 
-      // 3. Add AI Response (cleaned)
-      const botMessage = { role: 'assistant', content: cleanedReply };
+      // 4. Voice Output (Clean Text entirely)
+      const speechText = response.reply
+          .replace(/\*\*(.*?)\*\*/g, '$1')
+          .replace(/\{\{NAVIGATE:.*?\}\}/g, '');
+
+      const botMessage = { role: 'assistant', content: displayReply };
       setMessages(prev => [...prev, botMessage]);
 
       playSound('message');
 
-      // 4. Voice Output (if Voice Mode is ON)
+      // 5. Voice Output (if Voice Mode is ON)
       if (isVoiceMode) {
-        speakText(cleanedReply);
+        speakText(speechText);
       }
+
+      // (Voice already handled above)
 
       // 5. Check if it was a Lead Capture event (based on backend signal or loose heuristic)
       // For now, we assume if the bot says "Thanks" and we have sufficient turns, it might be a lead.
@@ -348,19 +464,25 @@ const Chatbot = () => {
                         : 'bg-white/10 text-gray-200 rounded-bl-none border border-white/5'
                       }`}
                   >
-                    {msg.content}
+                    {/* ONLY animate the LAST message if it is from the assistant */}
+                    {(msg.role === 'assistant' && idx === messages.length - 1 && !loading) ? (
+                        <Typewriter text={msg.content} onComplete={scrollToBottom} onUpdate={scrollToBottom} />
+                    ) : (
+                        renderMessageContent(msg.content)
+                    )}
                   </div>
                 </motion.div>
               ))}
 
               {loading && (
                 <div className="flex justify-start">
-                  <div className="bg-white/5 rounded-2xl rounded-bl-none p-3 border border-white/5 flex items-center gap-2">
+                  <div className="bg-white/5 rounded-2xl rounded-bl-none p-3 border border-white/5 flex items-center gap-3">
                     <div className="flex space-x-1">
-                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                      <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                      <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                      <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce"></div>
                     </div>
+                    <span className="text-xs text-blue-300/80 animate-pulse">Thinking...</span>
                   </div>
                 </div>
               )}

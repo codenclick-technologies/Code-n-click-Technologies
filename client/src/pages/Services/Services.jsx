@@ -161,9 +161,9 @@ const Services = () => {
   return (
     <div className="min-h-screen bg-[#020205] text-white">
       <SEO
-        title="Digital Services | Web, SaaS, Marketing & Design"
-        description="Comprehensive digital services tailored for growth. From custom web and SaaS development to performance marketing and SEO, we build solutions that scale."
-        keywords="web development, saas development, digital marketing, seo services, graphic design, google ads, meta ads"
+        title="Best Digital Marketing & Web Development Services in Delhi NCR"
+        description="Top-rated digital agency in New Delhi. We offer custom web development, SaaS engineering, SEO, and performance marketing to scale your business."
+        keywords="Digital Marketing Agency Delhi, Web Development Company Delhi, SEO Services New Delhi, SaaS Development India, Graphic Design Delhi"
       />
 
       {/* Hero Section */}
@@ -200,8 +200,8 @@ const Services = () => {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-5xl md:text-8xl font-black tracking-tight mb-8 leading-[0.9] text-white"
           >
-            Capabilities that <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">Scale Business.</span>
+            Capabilities Scaling <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">Delhi Businesses.</span>
           </motion.h1>
 
           <motion.p
@@ -210,7 +210,7 @@ const Services = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed font-light"
           >
-            We don't just deliver services; we deliver results. From <Link to="/services/saas-development" className="text-white hover:text-blue-400 transition-colors border-b border-white/20">high-end engineering</Link> to marketing that actually converts—built for real people.
+            We don't just deliver services; we deliver results. A **New Delhi** based agency delivering <Link to="/services/saas-development" className="text-white hover:text-blue-400 transition-colors border-b border-white/20">high-end engineering</Link> and marketing that actually converts.
           </motion.p>
         </div>
       </section>

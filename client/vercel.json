@@ -1,6 +1,16 @@
 {
     "rewrites": [
         {
+            "source": "/case-studies",
+            "destination": "/portfolio",
+            "permanent": true
+        },
+        {
+            "source": "/tools",
+            "destination": "/services",
+            "permanent": true
+        },
+        {
             "source": "/(.*)",
             "destination": "/index.html"
         }

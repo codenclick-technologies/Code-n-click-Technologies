@@ -96,9 +96,9 @@ const WebDevelopment = () => {
   return (
     <div className="min-h-screen bg-[#020205] text-white overflow-hidden">
       <SEOHead
-        title="Best Web Development Company in Faridabad | Code'N'Click"
-        description="Top-rated web development company in Faridabad. We build high-performance, SEO-optimized websites and web apps using React & Next.js to grow your local business."
-        keywords="Best Web Development Company Faridabad, Website Design Company Faridabad, Web Development Agency Delhi NCR, Custom Web App Development Faridabad, React JS Developers Faridabad"
+        title="Best Web Development Company in Delhi | Codenclick Technologies"
+        description="Web Development company in Delhi. We build high-performance, SEO-optimized websites and web apps using React & Next.js to grow your local business."
+        keywords=" Web Development Company Delhi, Website Design Company Delhi, Web Development Agency Delhi NCR, Custom Web App Development Delhi, React JS Developers Delhi"
         canonical="/services/web-development"
       />
 
@@ -128,7 +128,7 @@ const WebDevelopment = () => {
             className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-gray-400"
           >
             Professional Website <br className="hidden md:block" />
-            <span className="text-blue-500">Development in Faridabad</span>
+            <span className="text-blue-500">Development in New Delhi</span>
           </motion.h1>
 
           <motion.div
@@ -155,10 +155,10 @@ const WebDevelopment = () => {
             In today's digital-first world, a slow, outdated, or confusing website isn't just an annoyance—it's a revenue killer. You lose potential customers to competitors every second your site fails to load or engage.
           </p>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            That's where we step in. At <strong>Code'N'Click</strong>, a premier agency based in <strong>Faridabad</strong>, we don't just write code; we engineer digital growth engines. We transform your business vision into a high-performance, secure, and <Link to="/services/seo" className="text-blue-400 hover:underline">SEO-optimized</Link> web platform that builds trust instantly.
+            That's where we step in. At <strong>Codenclick Technologies</strong>, a premier agency based in <strong>New Delhi</strong>, we don't just write code; we engineer digital growth engines. We transform your business vision into a high-performance, secure, and <Link to="/services/seo" className="text-blue-400 hover:underline">SEO-optimized</Link> web platform that builds trust instantly.
           </p>
           <p className="text-blue-400 font-medium text-lg">
-            Over 50+ businesses in Faridabad & Delhi NCR trust us to deliver pixel-perfect code.
+            Over 50+ businesses in Delhi & NCR trust us to deliver pixel-perfect code.
           </p>
         </div>
       </section>
@@ -169,7 +169,7 @@ const WebDevelopment = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">What We Deliver</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              We provide comprehensive web development solutions for startups, SMBs, and enterprises looking to upgrade their digital presence.
+              We provide comprehensive web development solutions for startups, SMBs, and enterprises in **Delhi NCR** looking to upgrade their digital presence.
             </p>
           </div>
 
@@ -316,7 +316,7 @@ const WebDevelopment = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Startups Partner With Us</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Delhi Businesses Choose Us</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -372,7 +372,7 @@ const WebDevelopment = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">E-Commerce Scale-Up</h3>
-                  <p className="text-blue-400">Retail Brand</p>
+                  <p className="text-blue-400">Leading Delhi Retail Brand</p>
                 </div>
                 <Award className="text-yellow-500 w-10 h-10" />
               </div>
@@ -395,7 +395,7 @@ const WebDevelopment = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">SaaS Efficiency</h3>
-                  <p className="text-blue-400">Fintech Startup</p>
+                  <p className="text-blue-400">Gurgaon Fintech Startup</p>
                 </div>
                 <Award className="text-yellow-500 w-10 h-10" />
               </div>

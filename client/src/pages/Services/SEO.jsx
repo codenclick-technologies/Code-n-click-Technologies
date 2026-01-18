@@ -88,9 +88,9 @@ const SEO = () => {
   return (
     <div className="min-h-screen bg-[#020205] text-white overflow-hidden">
       <SEOHead
-        title="Best SEO Services in Faridabad | Code'N'Click"
-        description="Top-rated SEO agency in Faridabad & Delhi NCR. We help business rank #1 on Google, drive organic traffic, and increase revenue with data-driven strategies."
-        keywords="Best SEO Services Faridabad, SEO Company Delhi NCR, Local SEO Agency Faridabad, Ecommerce SEO Services India, Technical SEO Audit Faridabad"
+        title="Best SEO Services in Delhi | Codenclick Technologies"
+        description="Top-rated SEO agency in Delhi. We help business rank #1 on Google, drive organic traffic, and increase revenue with data-driven strategies."
+        keywords="Best SEO Services Delhi, SEO Company Delhi NCR, Local SEO Agency Delhi, Ecommerce SEO Services India, Technical SEO Audit Delhi"
         canonical="/services/seo"
       />
 
@@ -120,7 +120,7 @@ const SEO = () => {
             className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-green-100 to-gray-400"
           >
             Search Engine <br className="hidden md:block" />
-            <span className="text-green-500">Optimization in Faridabad</span>
+            <span className="text-green-500">Optimization in New Delhi</span>
           </motion.h1>
 
           <motion.div
@@ -147,7 +147,7 @@ const SEO = () => {
             Having the best product or service means nothing if you're buried on Page 2 of Google. You are losing thousands of dollars in potential revenue every single day to competitors who simply rank higher.
           </p>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            At <strong>Code'N'Click</strong>, a premier SEO agency in <strong>Faridabad</strong>, we don't guess. We engineer growth. Using battle-tested, white-hat strategies, we help you climb the rankings, capture high-intent traffic, and turn searchers into loyal customers.
+            At <strong>Codenclick Technologies</strong>, a premier SEO agency in <strong>New Delhi</strong>, we don't guess. We engineer growth. Using battle-tested, white-hat strategies, we help you climb the rankings, capture high-intent traffic, and turn searchers into loyal customers.
           </p>
           <p className="text-green-400 font-medium text-lg">
             We build digital real estate for Delhi NCR brands that pays dividends for years.
@@ -161,7 +161,7 @@ const SEO = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">SEO Capabilities</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              A holistic approach to organic growth covering technical, on-page, and authority.
+              A holistic approach to organic growth covering technical, on-page, and authority for **Delhi NCR** businesses.
             </p>
           </div>
 
@@ -309,7 +309,7 @@ const SEO = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Business Leaders Choose Us</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Delhi Brands Trust Us</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               We don't chase algorithms. We chase user experience, and Google follows.
             </p>
@@ -368,7 +368,7 @@ const SEO = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">SaaS Startup</h3>
-                  <p className="text-green-400">B2B Software</p>
+                  <p className="text-green-400">Noida-based B2B Software</p>
                 </div>
                 <Award className="text-yellow-500 w-10 h-10" />
               </div>
@@ -391,7 +391,7 @@ const SEO = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">Legal Firm</h3>
-                  <p className="text-green-400">Local Service</p>
+                  <p className="text-green-400">South Delhi Law Office</p>
                 </div>
                 <Award className="text-yellow-500 w-10 h-10" />
               </div>

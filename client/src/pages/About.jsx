@@ -25,9 +25,9 @@ const About = () => {
   return (
     <div className="min-h-screen bg-[#020205] text-white overflow-hidden pt-32 px-4 sm:px-6 lg:px-8">
       <SEO
-        title="About Us - Leading Software Development & Digital Marketing Company"
-        description="Codenclick Technologies is India's premier software development and digital marketing agency. We combine cutting-edge technology with creative strategies to deliver measurable business growth. From web development to digital marketing, we're your partner in digital transformation."
-        keywords="about code-n-click, software development company, digital agency India, custom software solutions, web development team, digital marketing experts"
+        title="Codenclick Technologies | Best Digital Agency in New Delhi, India"
+        description="Learn about Codenclick Technologies, New Delhi's premier software development and digital marketing agency. We engineer growth for businesses through custom code and data-driven marketing."
+        keywords="About Codenclick Technologies, Best Digital Agency Delhi, Software Company New Delhi, Web Development Team Delhi, Digital Marketing Experts Delhi"
       />
 
       <div className="max-w-7xl mx-auto">
@@ -74,7 +74,7 @@ const About = () => {
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:col-span-2">
             <h2 className="text-3xl font-bold text-white mb-4">Our Story</h2>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              We started <strong className="text-white">Codenclick Technologies</strong> because we were tired of seeing businesses get burned by "digital agencies" that overpromised and underdelivered. We wanted to build a company that actually cared about the outcome, not just the invoice. Based in Faridabad, serving clients across Delhi NCR and beyond, we've built our reputation on delivering real, measurable results.
+              We started <strong className="text-white">Codenclick Technologies</strong> because we were tired of seeing businesses get burned by "digital agencies" that overpromised and underdelivered. We wanted to build a company that actually cared about the outcome, not just the invoice. Based in New Delhi, serving clients across Delhi NCR and beyond, we've built our reputation on delivering real, measurable results.
             </p>
             <p className="text-gray-400 mb-6 leading-relaxed">
               Today, we are a team of obsessives. Obsessed with clean code, obsessed with conversion rates, and obsessed with helping you win. From <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 underline">custom web applications that power your business operations</Link> to <Link to="/services/saas-development" className="text-purple-400 hover:text-purple-300 underline">scalable SaaS platforms</Link> that serve thousands of users, we build software that doesn't just work—it excels. Our <Link to="/services/seo" className="text-green-400 hover:text-green-300 underline">SEO strategies</Link> and <Link to="/services/google-ads" className="text-yellow-400 hover:text-yellow-300 underline">performance marketing campaigns</Link> are designed to drive sustainable growth, not vanity metrics.
@@ -83,7 +83,7 @@ const About = () => {
               Whether you need <Link to="/services/graphic-design" className="text-indigo-400 hover:text-indigo-300 underline">stunning brand identity and UI/UX design</Link> that captivates your audience, or <Link to="/services/meta-ads" className="text-pink-400 hover:text-pink-300 underline">data-driven Meta advertising campaigns</Link> that maximize your ROAS, we bring the technical expertise and creative thinking that transforms businesses. Check out our <Link to="/portfolio" className="text-cyan-400 hover:text-cyan-300 underline">portfolio of successful projects</Link> to see how we've helped companies like yours achieve breakthrough results.
             </p>
 
-            <h3 className="text-2xl font-bold text-white mb-4 mt-8">The Codenclick Promise</h3>
+            <h3 className="text-2xl font-bold text-white mb-4 mt-8">The Codenclick Technologies Promise</h3>
             <p className="text-gray-400 mb-6 leading-relaxed">
               <strong className="text-white">We build for the long haul.</strong> We're not here for quick projects and quick exits. We want to be the partner you trust when you're scaling your business, launching new products, or entering new markets. That means total transparency, zero technical debt, and results that directly impact your bottom line. Every line of code we write, every campaign we launch, every design we create is built with your sustained success in mind. Our clients don't just work with us once—they come back because we deliver.
             </p>

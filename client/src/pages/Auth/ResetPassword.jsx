@@ -165,7 +165,7 @@ const ResetPassword = () => {
             <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
               <span className="text-2xl font-bold text-white">C</span>
             </div>
-            <span className="text-2xl font-bold text-gray-900 dark:text-white">Code'N'Click</span>
+            <span className="text-2xl font-bold text-gray-900 dark:text-white">Codenclick Technologies</span>
           </Link>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             Reset Password

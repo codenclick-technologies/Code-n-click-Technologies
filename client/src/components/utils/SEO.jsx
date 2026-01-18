@@ -15,7 +15,7 @@ const SEO = ({
 }) => {
   const siteName = 'Codenclick Technologies';
   const domain = 'https://codenclick.in';
-  const fullTitle = title ? `${title} | ${siteName}` : siteName;
+  const fullTitle = title && !title.includes(siteName) ? `${title} | ${siteName}` : (title || siteName);
   const fullCanonical = canonical 
     ? (canonical.startsWith('http') ? canonical : `${domain}${canonical.startsWith('/') ? canonical : `/${canonical}`}`)
     : domain + window.location.pathname;
@@ -39,20 +39,20 @@ const SEO = ({
       "@type": "LocalBusiness",
       "name": siteName,
       "image": `${domain}/logo.png`,
-      "description": "Leading software development and digital marketing agency in Faridabad offering GMB Expert services, SEO consultation, and web solutions.",
+      "description": "Leading software development and digital marketing agency in New Delhi offering GMB Expert services, SEO consultation, and web solutions.",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Faridabad",
-        "addressRegion": "Haryana",
+        "addressLocality": "New Delhi",
+        "addressRegion": "Delhi",
         "addressCountry": "IN"
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "28.4089",
-        "longitude": "77.3178"
+        "latitude": "28.6139",
+        "longitude": "77.2090"
       },
       "areaServed": [
-        { "@type": "City", "name": "Faridabad" },
+        { "@type": "City", "name": "New Delhi" },
         { "@type": "City", "name": "Delhi" },
         { "@type": "City", "name": "Noida" },
         { "@type": "City", "name": "Gurugram" }
@@ -84,7 +84,7 @@ const SEO = ({
       {/* Standard Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords || "No1 Digital Marketing Agency Delhi, No1 Digital Marketing Agency Faridabad, Best Digital Marketing Agency Delhi, Best Digital Marketing Agency Faridabad, Premium Digital Marketing Services Delhi, Premium Digital Marketing Services Faridabad, Top Software Company Delhi, Top Software Company Faridabad, GMB Expert Delhi, GMB Expert Faridabad, GMB Consultant Delhi, GMB Consultant Faridabad, SEO Services Delhi, SEO Services Faridabad, Web Development Delhi, Web Development Faridabad, SaaS Solutions Delhi, SaaS Solutions Faridabad, Premium IT Services, Best Web Development Company Delhi, Best Web Development Company Faridabad"} />
+      <meta name="keywords" content={keywords || "No1 Digital Marketing Agency Delhi, Best Digital Marketing Agency Delhi, Premium Digital Marketing Services Delhi, Top Software Company Delhi, GMB Expert Delhi, GMB Consultant Delhi, SEO Services Delhi, Web Development Delhi, SaaS Solutions Delhi, Premium IT Services, Best Web Development Company Delhi"} />
       <meta name="author" content={author} />
       <link rel="canonical" href={fullCanonical} />
 

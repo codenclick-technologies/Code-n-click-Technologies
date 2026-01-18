@@ -89,9 +89,9 @@ const MetaAds = () => {
   return (
     <div className="min-h-screen bg-[#020205] text-white overflow-hidden">
       <SEOHead
-        title="Best Meta Ads Agency in Faridabad | Code'N'Click"
-        description="Top Meta Ads agency in Faridabad. We create high-converting Facebook and Instagram ad campaigns for local businesses in Delhi NCR to maximize ROAS."
-        keywords="Best Meta Ads Agency Faridabad, Facebook Ads Company Delhi, Instagram Marketing Services Faridabad, Lead Generation Agency Delhi NCR, Social Media Marketing Faridabad"
+        title="Best Meta Ads Agency in Delhi | Codenclick Technologies"
+        description="Top Meta Ads agency in Delhi. We create high-converting Facebook and Instagram ad campaigns for local businesses in Delhi NCR to maximize ROAS."
+        keywords="Best Meta Ads Agency Delhi, Facebook Ads Company Delhi, Instagram Marketing Services Delhi, Lead Generation Agency Delhi NCR, Social Media Marketing Delhi"
         canonical="/services/meta-ads"
       />
 
@@ -121,7 +121,7 @@ const MetaAds = () => {
             className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-pink-100 to-gray-400"
           >
             Meta Ads (Facebook/Instagram) <br className="hidden md:block" />
-            <span className="text-pink-500">Management in Faridabad</span>
+            <span className="text-pink-500">Management in New Delhi</span>
           </motion.h1>
 
           <motion.div
@@ -148,10 +148,10 @@ const MetaAds = () => {
             Are your Facebook and Instagram ads eating your budget without bringing in sales? Vanity metrics like "reach" and "likes" don't pay the bills. You need a strategy that targets intent and drives revenue.
           </p>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            At <strong>Code'N'Click</strong>, a leading agency in <strong>Faridabad</strong>, we treat your ad budget like it's our own. We combine scientific testing with scroll-stopping creativity to lower your Customer Acquisition Cost (CAC) and skyrocket your Return On Ad Spend (ROAS).
+            At <strong>Codenclick Technologies</strong>, a leading agency in <strong>New Delhi</strong>, we treat your ad budget like it's our own. We combine scientific testing with scroll-stopping creativity to lower your Customer Acquisition Cost (CAC) and skyrocket your Return On Ad Spend (ROAS).
           </p>
           <p className="text-pink-400 font-medium text-lg">
-            We've managed over $1M+ in ad spend for Faridabad brands, delivering profitable growth.
+            We've managed over $1M+ in ad spend for Delhi brands, delivering profitable growth.
           </p>
         </div>
       </section>
@@ -162,7 +162,7 @@ const MetaAds = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Advertising Solutions</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              From cold awareness to hot retargeting, we handle the full funnel.
+              From cold awareness to hot retargeting, we handle the full funnel for your **Delhi** business.
             </p>
           </div>
 
@@ -310,7 +310,7 @@ const MetaAds = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Brands Scale With Us</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Delhi Brands Scale With Us</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               We treat your ad budget like it's our own money.
             </p>
@@ -369,7 +369,7 @@ const MetaAds = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">Fashion Brand</h3>
-                  <p className="text-pink-400">E-commerce Scale</p>
+                  <p className="text-pink-400">Delhi D2C Scale</p>
                 </div>
                 <Award className="text-yellow-500 w-10 h-10" />
               </div>
@@ -392,7 +392,7 @@ const MetaAds = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">B2B Service</h3>
-                  <p className="text-pink-400">Lead Generation</p>
+                  <p className="text-pink-400">Gurgaon Lead Gen</p>
                 </div>
                 <Award className="text-yellow-500 w-10 h-10" />
               </div>

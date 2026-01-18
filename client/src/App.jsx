@@ -1,11 +1,12 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { AuthProvider } from './context/AuthContext';
 import ErrorBoundary from './components/utils/ErrorBoundary';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ScrollToTop from './components/utils/ScrollToTop';
+import ScrollToTopButton from './components/utils/ScrollToTopButton';
 import SmoothScroll from './components/utils/SmoothScroll';
 import CustomCursor from './components/common/CustomCursor';
 import { Analytics } from '@vercel/analytics/react';
@@ -149,6 +150,10 @@ function AppContent() {
 
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfService />} />
+              
+              {/* Redirects for legacy/broken URLs reported in GSC */}
+              <Route path="/case-studies" element={<Navigate to="/portfolio" replace />} />
+              <Route path="/tools" element={<Navigate to="/services" replace />} />
 
               {/* Employee Routes */}
               <Route
@@ -310,6 +315,7 @@ function AppContent() {
       </main>
       {!isDashboard && <Footer />}
       {!isDashboard && <Chatbot />}
+      {!isDashboard && <ScrollToTopButton />}
     </div>
   );
 }

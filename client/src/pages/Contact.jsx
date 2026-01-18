@@ -57,9 +57,9 @@ const Contact = () => {
             </div>
 
             <SEO
-                title="Contact Us | Code'N'Click Technologies"
-                description="Get in touch with Code'N'Click Technologies. We are ready to start your next digital project. Call, email, or visit us in Faridabad."
-                keywords="contact us, hire developers, web development agency, faridabad, digital marketing inquiry"
+                title="Contact Best Digital Agency in Delhi | Codenclick Technologies"
+                description="Contact Codenclick Technologies in New Delhi. Get a free consultation for web development, SEO, or paid ads. Call +91 8700198968 today."
+                keywords="contact digital agency Delhi, web design inquiry Delhi, hire developers Delhi, Codenclick Technologies contact address"
             />
 
             <div className="max-w-7xl mx-auto relative z-10">
@@ -124,8 +124,8 @@ const Contact = () => {
                                         </div>
                                         <div className="space-y-1">
                                             <h3 className="text-white font-bold text-xl">Office Location</h3>
-                                            <p className="text-gray-400">Sector-2, Faridabad, Haryana</p>
-                                            <p className="text-pink-400/60 text-sm">India, 121004</p>
+                                            <p className="text-gray-400">New Delhi, India</p>
+                                            <p className="text-pink-400/60 text-sm">India, 110001</p>
                                         </div>
                                     </div>
                                 </SpotlightCard>

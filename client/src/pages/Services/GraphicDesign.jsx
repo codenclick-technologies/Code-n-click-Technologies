@@ -88,9 +88,9 @@ const GraphicDesign = () => {
   return (
     <div className="min-h-screen bg-[#020205] text-white overflow-hidden">
       <SEOHead
-        title="Best Graphic Design Company in Faridabad | Code'N'Click"
-        description="Top graphic design agency in Faridabad. We create stunning logos, branding, and marketing materials for businesses in Delhi NCR to captivate audiences."
-        keywords="Best Graphic Design Company Faridabad, Logo Design Services Delhi NCR, Brochure Design Faridabad, Social Media Graphics Agency India, Branding Studio Faridabad"
+        title="Best Graphic Design Company in Delhi | Codenclick Technologies"
+        description="Top graphic design agency in Delhi. We create stunning logos, branding, and marketing materials for businesses in Delhi NCR to captivate audiences."
+        keywords="Best Graphic Design Company Delhi, Logo Design Services Delhi NCR, Brochure Design Delhi, Social Media Graphics Agency India, Branding Studio Delhi"
         canonical="/services/graphic-design"
       />
 
@@ -120,7 +120,7 @@ const GraphicDesign = () => {
             className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-100 to-gray-400"
           >
             Professional Graphic <br className="hidden md:block" />
-            <span className="text-indigo-500">Design in Faridabad</span>
+            <span className="text-indigo-500">Design in New Delhi</span>
           </motion.h1>
 
           <motion.div
@@ -147,7 +147,7 @@ const GraphicDesign = () => {
             In a split second, your customer judges your business based on how it looks. If your branding is outdated or inconsistent, you lose trust before you even get a chance to speak. Design is not just decoration; it is your silent ambassador.
           </p>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            At <strong>Code'N'Click</strong>, the top design studio in <strong>Faridabad</strong>, we merge psychology with aesthetics. We create visual identities that don't just look pretty—they command authority, evoke emotion, and drive conversions. We ensure every pixel serves a business purpose.
+            At <strong>Codenclick Technologies</strong>, the top design studio in <strong>New Delhi</strong>, we merge psychology with aesthetics. We create visual identities that don't just look pretty—they command authority, evoke emotion, and drive conversions. We ensure every pixel serves a business purpose.
           </p>
           <p className="text-indigo-400 font-medium text-lg">
             Brands in Delhi NCR we design for stay memorable.
@@ -161,7 +161,7 @@ const GraphicDesign = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Visual Capabilities</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              We bring your brand to life across every medium.
+              We bring your brand to life across every medium in **Delhi NCR** and beyond.
             </p>
           </div>
 
@@ -309,7 +309,7 @@ const GraphicDesign = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Brands Hire Our Studio</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Delhi Brands Hire Our Studio</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Design is intelligence made visible. We make your brand smarter.
             </p>
@@ -368,7 +368,8 @@ const GraphicDesign = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">IT Consultant</h3>
-                  <p className="text-indigo-400">Rebranding</p>
+                  <h3 className="text-2xl font-bold text-white">IT Consultant</h3>
+                  <p className="text-indigo-400">Gurgaon Rebranding</p>
                 </div>
                 <Award className="text-yellow-500 w-10 h-10" />
               </div>
@@ -391,7 +392,8 @@ const GraphicDesign = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">D2C Brand</h3>
-                  <p className="text-indigo-400">Social Media Styling</p>
+                  <h3 className="text-2xl font-bold text-white">D2C Brand</h3>
+                  <p className="text-indigo-400">Delhi Social Media Styling</p>
                 </div>
                 <Award className="text-yellow-500 w-10 h-10" />
               </div>

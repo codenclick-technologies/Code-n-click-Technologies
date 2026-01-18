@@ -114,7 +114,7 @@ const Footer = () => {
                   <MapPin className="w-5 h-5 text-blue-400" />
                 </div>
                 <span className="text-gray-400">
-                  Sec 2 Faridabad
+                  New Delhi, India
                 </span>
               </li>
               <li className="flex gap-4">

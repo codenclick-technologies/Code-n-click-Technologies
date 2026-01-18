@@ -91,9 +91,9 @@ const SaasDevelopment = () => {
   return (
     <div className="min-h-screen bg-[#020205] text-white overflow-hidden">
       <SEOHead
-        title="Best SaaS Development Company in Faridabad | Code'N'Click"
-        description="Top SaaS development agency in Faridabad & Delhi NCR. We build scalable, secure cloud applications and MVPs for startups and enterprises."
-        keywords="SaaS Development Company Faridabad, Cloud Application Developers Delhi NCR, Custom SaaS Solutions Faridabad, SaaS MVP Development India, Startup Tech Partner Faridabad"
+        title="Best SaaS Development Company in Delhi | Codenclick Technologies"
+        description="Top SaaS development agency in Delhi. We build scalable, secure cloud applications and MVPs for startups and enterprises."
+        keywords="SaaS Development Company Delhi, Cloud Application Developers Delhi, Custom SaaS Solutions Delhi, SaaS MVP Development India, Startup Tech Partner Delhi"
         canonical="/services/saas-development"
       />
 
@@ -123,7 +123,7 @@ const SaasDevelopment = () => {
             className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-100 to-gray-400"
           >
             SaaS Application <br className="hidden md:block" />
-            <span className="text-purple-500">Development in Faridabad</span>
+            <span className="text-purple-500">Development in New Delhi</span>
           </motion.h1>
 
           <motion.div
@@ -150,7 +150,7 @@ const SaasDevelopment = () => {
             Most SaaS startups fail not because of a bad idea, but because of poor execution. Spaghetti code, security vulnerabilities, and scalability nightmares can kill your valuation before you even Series A.
           </p>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            We are <strong>Code'N'Click</strong>, your technical co-founders based in <strong>Faridabad</strong>. We build robust, SOC2-ready SaaS platforms that are designed to handle millions of requests from day one. You focus on user acquisition; we handle the infrastructure that keeps your churn low and your uptime high.
+            We are <strong>Codenclick Technologies</strong>, your technical co-founders based in <strong>New Delhi</strong>. We build robust, SOC2-ready SaaS platforms that are designed to handle millions of requests from day one. You focus on user acquisition; we handle the infrastructure that keeps your churn low and your uptime high.
           </p>
           <p className="text-purple-400 font-medium text-lg">
             Trusted by founders in Delhi NCR to build products that scale.
@@ -164,7 +164,7 @@ const SaasDevelopment = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">SaaS Capabilities</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              From MVP to IPO, we provide end-to-end engineering for software products.
+              From MVP to IPO, we provide end-to-end engineering for software products in **Delhi NCR**.
             </p>
           </div>
 
@@ -312,7 +312,7 @@ const SaasDevelopment = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Founders Partner With Us</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Delhi NCR Founders Partner With Us</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -368,7 +368,8 @@ const SaasDevelopment = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">Fintech Platform</h3>
-                  <p className="text-purple-400">Seed Stage to Series A</p>
+                  <h3 className="text-2xl font-bold text-white">Fintech Platform</h3>
+                  <p className="text-purple-400">Noida: Seed to Series A</p>
                 </div>
                 <Award className="text-yellow-500 w-10 h-10" />
               </div>
@@ -391,7 +392,8 @@ const SaasDevelopment = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">CRM Tool</h3>
-                  <p className="text-purple-400">Bootstrap B2B SaaS</p>
+                  <h3 className="text-2xl font-bold text-white">CRM Tool</h3>
+                  <p className="text-purple-400">Delhi B2B SaaS</p>
                 </div>
                 <Award className="text-yellow-500 w-10 h-10" />
               </div>

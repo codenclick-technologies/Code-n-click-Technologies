@@ -13,49 +13,58 @@ export class ChatbotService {
 
     // Hardcoded knowledge base for the "deep A-Z knowledge" requirement
     private readonly knowledgeBase = `
-    Identity: You are the AI Assistant for Codenclick Technologies.
-    Company: Codenclick Technologies is a premium software development and digital marketing agency based in Faridabad, Delhi NCR, serving clients globally.
-    Tagline: "We don't just write code. We engineer growth."
+    Identity: You are the Senior AI Business Consultant for Codenclick Technologies.
     
-    Services:
-    1. Custom Web Apps: Modern, fast, scalable solutions using React, Node.js, etc.
-    2. SaaS Development: Cloud-native, API-first multi-tenant platforms.
-    3. Meta Ads: ROI-focused campaigns on Facebook & Instagram.
-    4. Google Ads: Search & Shopping mastery.
-    5. Graphic Design & Brand Identity: UI/UX, logos, visual storytelling.
-    6. SEO: Organic growth strategies detailed in their "SEO Master Guide".
+    Role & Objective:
+    - Your primary goal is to **consult** first, then **convert**. Do not just dump information.
+    - Ask 1-2 probing questions to understand the user's business context (e.g., "What industry are you in?" or "Are you looking to scale an existing product or build from scratch?").
+    - Once you understand their need, position Codenclick's services as the *solution* to their specific problem.
+    - **Ultimate Goal**: Capture a lead (Name & Contact) or guide them to the Contact page.
 
-    Key People:
-    - Lokender Chauhan (Founder & CEO, lokender@codenclick.in)
-    - Himanshu Sharma (Head of Growth, himanshu@codenclick.in)
-    - Jitender Saini (Team Lead, jitender@codenclick.in)
+    Company Profile:
+    - **Name**: Codenclick Technologies
+    - **Tagline**: "We don't just write code. We engineer growth."
+    - **Location**: New Delhi, India (Serving Global Clients).
+    - **Vibe**: Premium, High-Tech, Results-Oriented, Reliable.
 
-    Stats: 500+ Partners, 25+ Awards, 12 Countries.
-    Values: Innovation, Integrity, Excellence.
-    Process: 1. Listen First, 2. Smart Strategy, 3. Clean Execution, 4. Scale & Support.
+    Core Services (The "Growth Stack"):
+    1. **Custom Web & SaaS Development**: Scalable, high-performance web apps (React, Node.js, Next.js).
+    2. **Mobile App Development**: Native & Cross-platform (Flutter/React Native).
+    3. **Performance Marketing (Ads)**: Meta (Facebook/Insta) & Google Ads with a focus on ROI/ROAS.
+    4. **SEO & Organic Growth**: Long-term traffic strategies.
+    5. **Brand Identity & Design**: Premium UI/UX, Logo, and Visual Storytelling.
 
-    Contact Info:
-    - Page: /contact
-    - Location: Faridabad, India.
-    
-    Tone & Style:
-    - You represent a Premium, Enterprise-grade brand. Be helpful, polite, and sophisticated.
-    - Avoid saying "I know everything". Instead say "I can help you with that" or "Here is the information".
-    - You must answer in the language the user speaks: English, Hindi, or Hinglish.
-    - If the user asks in Hinglish (e.g., "Website ka price kya hai?"), reply in Hinglish.
-    - Be "point-to-point" and concise. Do not write long paragraphs unless necessary.
-    
+    Key Stats for Authority:
+    - 500+ Satisfied Partners.
+    - 25+ Industry Awards.
+    - Presence in 12+ Countries.
+    - 98% Client Retention Rate.
+
+    Key Personalities:
+    - **Lokender Chauhan**: Founder & CEO (The Visionary).
+    - **Himanshu Sharma**: Head of Growth (The Strategist).
+    - **Jitender Saini**: Tech Lead (The Architect).
+
+    Contact & CTA:
+    - Website: www.codenclick.in
+    - Contact Page: /contact
+    - Email: contact@codenclick.in
+
+    Tone of Voice:
+    - **Language Mirroring (STRICT)**:
+      - **IF User speaks English** -> You MUST reply in **Professional English**.
+        - *User*: "How much for a website?" -> *You*: "The price depends on requirements..."
+      - **IF User speaks Hindi/Hinglish** -> You MUST reply in **Hinglish**.
+        - *User*: "Website ka price kya hai?" -> *You*: "Website ka price requirements par depend karta hai..."
+    - **Professional yet Approachable**: Use "We" and "Our team".
+    - **Confident**: Avoid "I think" or "Maybe". Use "We recommend" or "Our strategy involves".
+    - **Concise**: Use short paragraphs, bullet points, and bold text for readability.
+
     Advanced Capabilities:
-    1. Navigation:
-       - You have the power to navigate the user to different pages of the website.
-       - If a user asks to see a service, portfolio, or contact page, append a navigation command.
-       - Format: {{NAVIGATE:/path/to/page}}
-    
-    2. Lead Generation (CRITICAL):
-       - Your GOAL is to get new business leads.
-       - If a user expresses interest in a project, service, or asks to connect, politely ask for their Name and Contact Info (Phone or Email).
-       - Once they provide it, use the 'saveLead' function to save their details.
-       - After saving, thank them and say someone will contact them shortly.
+1. ** Navigation **: If a user asks for 'Services', 'Portfolio', or 'Contact', append specialized navigation commands like { { NAVIGATE:/services } }.
+2. ** Lead Capture(Critical) **:
+- If a user shows * intent * (price asking, project discussion), say: "To give you an exact estimate, I'd love to have our tech team review this. May I have your **Name** and **Phone Number**?"
+    - Use the 'saveLead' tool immediately when they provide details.
   `;
 
     constructor(
@@ -105,10 +114,21 @@ export class ChatbotService {
         }
 
         try {
-            // Construct messages array
+            // 1. Fetch Real-time Context from DB
+            const dynamicContext = await this.getDynamicContext();
+
+            // 2. Construct System Message with Dynamic Data
+            const systemContent = `
+${this.knowledgeBase}
+
+--- REAL-TIME BUSINESS DATA (Use this to answer accurately) ---
+${dynamicContext}
+-------------------------------------------------------------
+`;
+
             const systemMessage = {
                 role: 'system',
-                content: this.knowledgeBase,
+                content: systemContent,
             };
 
             // Format history (ensure strictly user/assistant roles)
@@ -130,10 +150,11 @@ export class ChatbotService {
                             type: "object",
                             properties: {
                                 name: { type: "string", description: "Name of the potential client" },
-                                contact: { type: "string", description: "Email or Phone number" },
+                                email: { type: "string", description: "Email address extracted from user input" },
+                                phone: { type: "string", description: "Phone number extracted from user input" },
                                 requirement: { type: "string", description: "Brief summary of what they are looking for" }
                             },
-                            required: ["name", "contact"]
+                            required: ["name"]
                         }
                     }
                 }
@@ -153,19 +174,65 @@ export class ChatbotService {
             // Handle Tool Calls (if any)
             if (responseMessage.tool_calls) {
                 this.logger.log(`Tool call received: ${JSON.stringify(responseMessage.tool_calls)}`);
-                const toolCall = responseMessage.tool_calls[0] as any; // Cast to any to bypass TS error or import correct type
+                // @ts-ignore
+                const toolCall = responseMessage.tool_calls[0];
 
                 if (toolCall.function.name === 'saveLead') {
                     const args = JSON.parse(toolCall.function.arguments);
                     this.logger.log(`Attempting to save lead: ${JSON.stringify(args)}`);
 
+                    // SMART CONTACT PARSING (If LLM missed splitting them)
+                    // (Note: LLM is usually good, but this is a fallback for older args.contact usage)
+                    let email = args.email || null;
+                    let phone = args.phone || null;
+
+                    // If LLM returned old 'contact' field (fallback compatibility)
+                    if (args.contact) {
+                        if (args.contact.includes('@')) email = args.contact;
+                        else phone = args.contact;
+                    }
+
                     try {
-                        // SAVE TO DB
+                        // 1. DUPLICATE CHECK (Prevent Spam)
+                        // Only check if we have a valid email or phone to check against
+                        let existingLead = null;
+                        const orConditions = [];
+                        if (email) orConditions.push({ email });
+                        if (phone) orConditions.push({ phone });
+
+                        if (orConditions.length > 0) {
+                            existingLead = await this.prisma.chatbotLead.findFirst({
+                                where: {
+                                    OR: orConditions,
+                                    createdAt: {
+                                        gte: new Date(Date.now() - 24 * 60 * 60 * 1000) // Last 24 hours
+                                    }
+                                }
+                            });
+                        }
+
+                        if (existingLead) {
+                            this.logger.log(`Duplicate lead detected (ID: ${existingLead.id}). Skipping save.`);
+                            // Call LLM with "Already Saved" context
+                            const toolOutputMessage = {
+                                role: "tool",
+                                tool_call_id: toolCall.id,
+                                content: JSON.stringify({ success: true, message: "Details already received previously. Thank user." })
+                            };
+
+                            const finalCompletion = await this.openai.chat.completions.create({
+                                messages: [systemMessage, ...formattedHistory, userMessage, responseMessage, toolOutputMessage] as any,
+                                model: 'gpt-4o-mini',
+                            });
+                            return { reply: finalCompletion.choices[0].message.content };
+                        }
+
+                        // 2. SAVE NEW LEAD
                         const savedLead = await this.prisma.chatbotLead.create({
                             data: {
                                 name: args.name,
-                                email: args.contact.includes('@') ? args.contact : null,
-                                phone: !args.contact.includes('@') ? args.contact : null,
+                                email: email,
+                                phone: phone,
                                 requirement: args.requirement || "Interested in services",
                                 source: "CHATBOT_AI"
                             }
@@ -177,7 +244,6 @@ export class ChatbotService {
 
                     } catch (dbError) {
                         this.logger.error(`Failed to save lead to database`, dbError);
-                        // Continue to respond to user even if save fails, but log it criticaly
                     }
 
                     // Call LLM again with tool output to get final polite response
@@ -206,6 +272,35 @@ export class ChatbotService {
             return {
                 reply: "Maaf kijiye, kuch technical dikkat hai. Please try again later.",
             };
+        }
+    }
+
+    private async getDynamicContext(): Promise<string> {
+        try {
+            // Run independent queries in parallel for performance
+            const [usersCount, openJobs, latestResources] = await Promise.all([
+                this.prisma.user.count({ where: { status: 'ACTIVE' } }),
+                this.prisma.job.count({ where: { isActive: true, isVisibleOnWebsite: true } }),
+                this.prisma.resource.findMany({
+                    where: { status: 'PUBLISHED' },
+                    take: 3,
+                    orderBy: { publishedAt: 'desc' },
+                    select: { title: true, slug: true }
+                })
+            ]);
+
+            const resourceList = latestResources.map(r => `- ${r.title} (/resources/${r.slug})`).join('\n');
+
+            return `
+Current Statistics (As of Now):
+- Active Team Members: ${usersCount} (This shows our scale)
+- Open Hiring Positions: ${openJobs} (Use this if user asks about careers/jobs)
+- Latest Insights/Blogs:
+${resourceList}
+            `;
+        } catch (error) {
+            this.logger.error("Failed to fetch dynamic context", error);
+            return ""; // Fail silently, don't break chat
         }
     }
 
@@ -245,16 +340,16 @@ export class ChatbotService {
             return;
         }
 
-        const subject = `🚀 New Chatbot Lead: ${lead.name}`;
+        const subject = `🚀 New Chatbot Lead: ${lead.name} `;
         const html = `
-            <h2>New Business Lead Captured</h2>
-            <p><strong>Name:</strong> ${lead.name}</p>
-            <p><strong>Contact:</strong> ${lead.email || lead.phone}</p>
-            <p><strong>Requirement:</strong> ${lead.requirement}</p>
-            <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
-            <br />
-            <p>Check the admin dashboard for details.</p>
-        `;
+    < h2 > New Business Lead Captured </h2>
+        < p > <strong>Name: </strong> ${lead.name}</p >
+            <p><strong>Contact: </strong> ${lead.email || lead.phone}</p >
+                <p><strong>Requirement: </strong> ${lead.requirement}</p >
+                    <p><strong>Date: </strong> ${new Date().toLocaleString()}</p >
+                        <br />
+                        < p > Check the admin dashboard for details.</p>
+                            `;
 
         if (this.transporter) {
             try {
@@ -264,7 +359,7 @@ export class ChatbotService {
                     subject: subject,
                     html: html
                 });
-                this.logger.log(`Email notification sent: ${info.messageId}`);
+                this.logger.log(`Email notification sent: ${info.messageId} `);
             } catch (error) {
                 this.logger.error("Failed to send actual email via Transport", error);
                 // Fallback log
@@ -278,8 +373,8 @@ export class ChatbotService {
 
     private logSimulatedEmail(lead: any, recipients: string[]) {
         this.logger.log(`[SIMULATED_EMAIL] 📧 To: [${recipients.join(', ')}]`);
-        this.logger.log(`Subject: New Chatbot Lead - ${lead.name}`);
-        this.logger.log(`Body: Name: ${lead.name}, Contact: ${lead.email || lead.phone}, Req: ${lead.requirement}`);
+        this.logger.log(`Subject: New Chatbot Lead - ${lead.name} `);
+        this.logger.log(`Body: Name: ${lead.name}, Contact: ${lead.email || lead.phone}, Req: ${lead.requirement} `);
     }
 }
 

@@ -47,9 +47,9 @@ const Resources = () => {
   return (
     <div className="min-h-screen bg-[#020205] bg-noise pt-32 pb-20">
       <Helmet>
-        <title>Resources, Guides & Insights | Code'N'Click</title>
-        <meta name="description" content="Explore our library of articles, guides, and videos on web development, SEO, SaaS growth, and digital marketing. Stay ahead with expert insights." />
-        <meta name="keywords" content="web development blog Delhi, web development blog Faridabad, seo guides Delhi, seo guides Faridabad, saas metrics, digital marketing trends Delhi, digital marketing trends Faridabad, react tutorials, next.js performance, tech resources" />
+        <title>Digital Growth Resources & Guides | Codenclick Technologies Delhi</title>
+        <meta name="description" content="Expert insights on web development, SEO, and digital marketing from Delhi's top agency. Tutorials, guides, and industry reports to help you grow." />
+        <meta name="keywords" content="digital marketing blog Delhi, web development tutorials, SEO guides Delhi, business growth tips, Codenclick Technologies resources" />
       </Helmet>
 
       <div className="w-full md:w-[95%] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

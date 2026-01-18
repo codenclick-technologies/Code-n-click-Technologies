@@ -112,8 +112,8 @@ const Portfolio = () => {
   return (
     <>
       <Helmet>
-        <title>Our Portfolio - Transforming Ideas Into Digital Success | Codenclick Technologies</title>
-        <meta name="description" content="Explore our portfolio of cutting-edge digital solutions. From AI-powered platforms to enterprise systems, see how we turn ambitious ideas into market-leading products." />
+        <title>Our Work | Proven Web & App Development Projects in Delhi</title>
+        <meta name="description" content="Explore our portfolio of successful projects delivered for Delhi NCR businesses. From AI-powered SaaS platforms to high-conversion e-commerce stores." />
       </Helmet>
 
       {/* Main Container */}

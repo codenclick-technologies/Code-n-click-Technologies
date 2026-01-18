@@ -1,6 +1,6 @@
 import React from 'react';
 import Hero from '../components/sections/Hero';
-import GrowthSimulator from '../components/sections/GrowthSimulator';
+
 
 
 import ServicesGrid from '../components/sections/ServicesGrid';
@@ -16,15 +16,15 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Your Partner in Digital Growth | Web Development & Marketing Experts"
-        description="We don't just build websites; we build businesses. From custom software to ROI-focused digital marketing, Codenclick Technologies is your partner in scaling up. Based in Faridabad & Delhi NCR, serving the world."
-        keywords="Digital Growth Partner, Custom Web Solutions, ROI Marketing, Business Scaling Experts, Codenclick Technologies, Web Development Faridabad, Digital Agency Delhi"
+        title="Web Development & Digital Marketing Company in Delhi | Codenclick Technologies"
+        description="Codenclick Technologies is the best web development and digital marketing agency in Delhi NCR. We build high-performance websites and ROI-driven marketing campaigns to scale your business."
+        keywords="Web Development Company Delhi, Digital Marketing Agency Delhi, SEO Services Delhi, Best IT Company in Delhi, Codenclick Technologies"
         canonical="/"
       >
 
       </SEO>
       <Hero />
-      <GrowthSimulator />
+
       <ServicesGrid />
       <WhyChooseUs />
       <StatsSection />

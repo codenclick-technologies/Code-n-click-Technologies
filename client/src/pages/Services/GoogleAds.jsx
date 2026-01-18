@@ -88,9 +88,9 @@ const GoogleAds = () => {
   return (
     <div className="min-h-screen bg-[#020205] text-white overflow-hidden">
       <SEOHead
-        title="Best Google Ads Agency in Faridabad | Code'N'Click"
-        description="Top Google Ads agency in Faridabad & Delhi NCR. We create high-ROI search, display, and shopping campaigns to drive qualified traffic and sales."
-        keywords="Best Google Ads Agency Faridabad, PPC Services Delhi NCR, Google Ads Management Cost Faridabad, Lead Generation Company Faridabad, Shopping Ads Agency India"
+        title="Best Google Ads Agency in Delhi | Codenclick Technologies"
+        description="Top Google Ads agency in Delhi & Delhi NCR. We create high-ROI search, display, and shopping campaigns to drive qualified traffic and sales."
+        keywords="Best Google Ads Agency Delhi, PPC Services Delhi NCR, Google Ads Management Cost Delhi, Lead Generation Company Delhi, Shopping Ads Agency India"
         canonical="/services/google-ads"
       />
 
@@ -120,7 +120,7 @@ const GoogleAds = () => {
             className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-yellow-100 to-gray-400"
           >
             Google Ads (PPC) <br className="hidden md:block" />
-            <span className="text-yellow-500">Management in Faridabad</span>
+            <span className="text-yellow-500">Management in New Delhi</span>
           </motion.h1>
 
           <motion.div
@@ -147,7 +147,7 @@ const GoogleAds = () => {
             Are you tired of seeing your ad budget drain away with zero leads to show for it? Poorly managed Google Ads campaigns are a black hole for your marketing dollars. Low Quality Scores, broad match disasters, and weak landing pages are costing you thousands.
           </p>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            At <strong>Code'N'Click</strong>, a results-driven agency in <strong>Faridabad</strong>, we stop the bleeding. We build hyper-targeted campaigns that capture high-intent buyers exactly when they are searching for your solution. We obsess over "Negative Keywords" just as much as positive ones, ensuring you never pay for junk traffic.
+            At <strong>Codenclick Technologies</strong>, a results-driven agency in <strong>New Delhi</strong>, we stop the bleeding. We build hyper-targeted campaigns that capture high-intent buyers exactly when they are searching for your solution. We obsess over "Negative Keywords" just as much as positive ones, ensuring you never pay for junk traffic.
           </p>
           <p className="text-yellow-400 font-medium text-lg">
             We help businesses in Delhi NCR turn ad spend into a predictable revenue engine.
@@ -161,7 +161,7 @@ const GoogleAds = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">PPC Capabilities</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              We dominate the entire Google ecosystem for you.
+              We dominate the entire Google ecosystem for your **Delhi** business.
             </p>
           </div>
 
@@ -309,7 +309,7 @@ const GoogleAds = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Trust Us With Your Spend?</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Why Delhi Trusts Us With Ad Spend</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               We turn Google Ads into a predictable profit machine.
             </p>
@@ -368,7 +368,7 @@ const GoogleAds = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">Local Service Business</h3>
-                  <p className="text-yellow-400">Plumbing Services</p>
+                  <p className="text-yellow-400">Plumbing Services in Delhi</p>
                 </div>
                 <Award className="text-yellow-500 w-10 h-10" />
               </div>
@@ -391,7 +391,7 @@ const GoogleAds = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-white">E-Commerce Store</h3>
-                  <p className="text-yellow-400">Home Decor</p>
+                  <p className="text-yellow-400">Delhi Home Decor Brand</p>
                 </div>
                 <Award className="text-yellow-500 w-10 h-10" />
               </div>

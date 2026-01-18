@@ -142,9 +142,9 @@ const Careers = () => {
   return (
     <div className="min-h-screen bg-[#020205] pt-32 pb-20">
       <Helmet>
-        <title>Careers at Code'N'Click | Join Our Team</title>
-        <meta name="description" content="Join the Code'N'Click team. We are hiring developers, designers, and marketers. Check out our open positions and benefits." />
-        <meta name="keywords" content="tech jobs Delhi, tech jobs Faridabad, web developer careers Delhi, web developer careers Faridabad, ui/ux jobs Delhi, ui/ux jobs Faridabad, remote work, digital agency careers Delhi, digital agency careers Faridabad, IT jobs" />
+        <title>Jobs in Delhi | Hiring Web Developers & Marketers | Codenclick Technologies</title>
+        <meta name="description" content="Looking for tech jobs in Delhi? Join Codenclick Technologies, a top web development and marketing agency. We are hiring developers, designers, and growth hackers." />
+        <meta name="keywords" content="Jobs in Delhi, Web Developer Jobs Delhi, Digital Marketing Jobs Delhi, Tech Careers Delhi NCR, Hiring Developers New Delhi" />
       </Helmet>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
