@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import SEO from '../components/utils/SEO';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import TeamProfileModal from '../components/ui/TeamProfileModal';
-import { Users, Award, Globe, Coffee, Mail } from 'lucide-react';
+import { Users, Award, Globe, Coffee, Mail, Cpu } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 import SpotlightCard from '../components/ui/SpotlightCard';
 
 const team = [
-  { name: 'Lokender Chauhan', role: 'Founder & CEO', bio: 'Visionary leader driving digital transformation for global enterprises.', bioLong: 'Lokender is the driving force behind Codenclick. With a deep passion for technology and business growth, he helps clients navigate the digital landscape with clarity and confidence.', avatar: '👔', email: 'lokender@codenclick.in', skills: ['Business Strategy', 'Tech Leadership', 'Enterprise Solutions'] },
-  { name: 'Himanshu Sharma', role: 'Head of Growth', bio: 'Growth strategist focused on paid & organic acquisition.', bioLong: 'Himanshu specializes in growth strategies combining paid channels and organic funnels. He builds repeatable acquisition systems and analytics stacks.', avatar: '🧑‍💼', email: 'himanshu@codenclick.com', skills: ['Paid acquisition', 'Analytics', 'Funnel optimization'] },
-  { name: 'Jitender Saini', role: 'Team Lead', bio: 'Design systems and product leadership specialist.', bioLong: 'Jitender leads cross-functional teams, design systems and product delivery. He bridges design and engineering to ship high-quality products.', avatar: '👨‍💼', email: 'jitender@codenclick.com', skills: ['Design systems', 'Product leadership', 'UX'] },
+  { 
+    name: 'Lokender Chauhan', 
+    role: 'Founder & CEO', 
+    bio: 'A visionary technologist with over 7 years of experience in architecting scalable digital ecosystems. Lokender started Codenclick with a singular mission: to bridge the gap between complex enterprise engineering and agile startup speed. He has successfully delivered 250+ projects, helping global brands navigate digital transformation with clarity and precision. His leadership style focuses on "Engineering for ROI"—ensuring every line of code contributes to business growth.',
+    avatar: <Cpu size={32} />, // Using an abstract tech icon instead of generic emoji
+    email: 'lokender@codenclick.in', 
+    skills: ['Enterprise Architecture', 'Business Strategy', 'Full-Stack Leadership', 'Cloud Infrastructure'] 
+  }
 ];
 
 const timeline = [
@@ -119,29 +123,57 @@ const About = () => {
           </motion.aside>
         </div>
 
-        {/* Team */}
-        <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-16">
-          <motion.h2 variants={fadeInUp} className="text-3xl font-bold text-white mb-6">The Builders</motion.h2>
-          <motion.div variants={staggerContainer} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Team / The Visionary */}
+        <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-20">
+          <motion.h2 variants={fadeInUp} className="text-3xl font-bold text-white mb-8 text-center">Leadership</motion.h2>
+          <div className="max-w-3xl mx-auto">
             {team.map((member, idx) => (
               <motion.div key={idx} variants={fadeInUp} className="group">
-                <SpotlightCard className="p-6 h-full flex flex-col">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-2xl">{member.avatar}</div>
-                    <div>
-                      <div className="font-bold text-white">{member.name}</div>
-                      <div className="text-xs text-gray-400">{member.role}</div>
-                    </div>
+                <SpotlightCard className="p-8 md:p-10 relative overflow-hidden">
+                  {/* Decorative Background Elements */}
+                  <div className="absolute top-0 right-0 p-3 opacity-10">
+                    <Users size={120} />
                   </div>
-                  <p className="text-sm text-gray-300 flex-grow">{member.bio}</p>
-                  <div className="mt-4 flex items-center justify-between">
-                    <button onClick={() => setSelected(member)} className="text-sm text-cyan-300 hover:underline">View profile</button>
-                    <a href={`mailto:${member.email}`} className="text-sm text-gray-400 flex items-center gap-2"><Mail size={14} /> Contact</a>
+                  
+                  <div className="flex flex-col md:flex-row items-start gap-8 relative z-10">
+                    {/* Avatar / Icon Section */}
+                    <div className="flex-none">
+                      <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center text-white shadow-2xl shadow-blue-500/20">
+                        {member.avatar}
+                      </div>
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="flex-1">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
+                        <div>
+                          <h3 className="text-2xl md:text-3xl font-bold text-white">{member.name}</h3>
+                          <p className="text-blue-400 font-medium tracking-wide uppercase text-sm mt-1">{member.role}</p>
+                        </div>
+                        <div className="flex bg-white/5 rounded-full p-1 border border-white/10">
+                           <a href={`mailto:${member.email}`} className="px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors flex items-center gap-2">
+                              <Mail size={14} /> Contact
+                           </a>
+                        </div>
+                      </div>
+
+                      <p className="text-gray-300 leading-relaxed mb-6 text-sm md:text-base border-l-4 border-blue-500/30 pl-4">
+                        {member.bio}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2">
+                        {member.skills.map((skill, sIdx) => (
+                          <span key={sIdx} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] md:text-xs font-medium text-gray-400 uppercase tracking-wider">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </SpotlightCard>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </motion.section>
 
         {/* Values */}
