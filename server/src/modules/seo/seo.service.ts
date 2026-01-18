@@ -177,6 +177,7 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
             '/careers',
             '/services',
             '/services/web-development',
+            '/services/app-development',
             '/services/saas-development',
             '/services/meta-ads',
             '/services/google-ads',
@@ -185,6 +186,7 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
             '/privacy',
             '/terms',
             '/portfolio',
+            '/brochure',
         ];
 
 

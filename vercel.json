@@ -10,21 +10,6 @@
             "destination": "https://server-sepia-alpha.vercel.app/api/sitemap.xml"
         },
         {
-            "source": "/robots.txt",
-            "destination": "https://server-sepia-alpha.vercel.app/api/robots.txt"
-        },
-        {
-            "source": "/(.*)",
-            "has": [
-                {
-                    "type": "header",
-                    "key": "User-Agent",
-                    "value": ".*(Googlebot|Bingbot|Slurp|DuckDuckGo|Baiduspider|YandexBot|Sogou|Exabot|facebot|facebookexternalhit|LinkedInBot|Twitterbot|Slackbot|TelegramBot|WhatsApp).*"
-                }
-            ],
-            "destination": "https://server-sepia-alpha.vercel.app/api/seo/snapshot?path=/$1"
-        },
-        {
             "source": "/(.*)",
             "destination": "/index.html"
         }
