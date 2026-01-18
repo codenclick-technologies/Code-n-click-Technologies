@@ -225,6 +225,68 @@ const GraphicDesign = () => {
         </div>
       </section>
 
+      {/* 4.5 Technical Showcase */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            {/* Left: Explanation */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">The Psychology of Color</h2>
+              <p className="text-lg text-gray-400 mb-8">
+                Great design follows rules. We select color palettes and typography not because they "look nice," but because they evoke specific psychological responses that align with your brand's mission.
+              </p>
+              
+               <div className="space-y-6">
+                <div className="flex gap-4">
+                   <div className="w-16 h-16 rounded-xl bg-blue-600 shadow-lg shadow-blue-900/50 flex items-center justify-center text-white font-bold text-xs">Trust</div>
+                   <div>
+                      <h4 className="text-white font-bold">Blue (Security)</h4>
+                      <p className="text-gray-400 text-sm">Often used for banks and tech to convey stability.</p>
+                   </div>
+                </div>
+                 <div className="flex gap-4">
+                   <div className="w-16 h-16 rounded-xl bg-orange-500 shadow-lg shadow-orange-900/50 flex items-center justify-center text-white font-bold text-xs">Action</div>
+                   <div>
+                      <h4 className="text-white font-bold">Orange (Energy)</h4>
+                      <p className="text-gray-400 text-sm">Stimulates impulse buying and cheerfulness.</p>
+                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Visual */}
+             <div className="relative">
+                <div className="absolute inset-0 bg-indigo-500/10 blur-3xl rounded-full" />
+                <div className="relative bg-[#0F0F13] border border-white/10 rounded-xl p-6 shadow-2xl skew-y-3 hover:skew-y-0 transition-transform duration-500">
+                    <div className="flex justify-between items-start mb-8">
+                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                            <Zap className="w-6 h-6 text-black" />
+                         </div>
+                         <div className="text-right">
+                            <div className="text-xs text-gray-500 uppercase tracking-widest mb-1">Brand Book</div>
+                             <div className="font-serif text-2xl text-white">Vortex</div>
+                         </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-4 gap-2 mb-8">
+                       <div className="aspect-square bg-[#1a1a1a] rounded text-[10px] flex items-end p-2 text-gray-500 font-mono">#000</div>
+                       <div className="aspect-square bg-indigo-500 rounded text-[10px] flex items-end p-2 text-indigo-200 font-mono">#6366F1</div>
+                       <div className="aspect-square bg-purple-500 rounded text-[10px] flex items-end p-2 text-purple-200 font-mono">#A855F7</div>
+                       <div className="aspect-square bg-white rounded text-[10px] flex items-end p-2 text-gray-400 font-mono">#FFF</div>
+                    </div>
+
+                    <div className="space-y-2">
+                       <div className="h-2 bg-white/10 rounded w-3/4" />
+                       <div className="h-2 bg-white/10 rounded w-1/2" />
+                    </div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* 5. Our Process (H2) */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">

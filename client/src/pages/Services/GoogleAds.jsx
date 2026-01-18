@@ -225,6 +225,78 @@ const GoogleAds = () => {
         </div>
       </section>
 
+      {/* 4.5 Technical Showcase */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Diagram */}
+            <div className="order-2 lg:order-1 relative">
+              <div className="absolute inset-0 bg-yellow-500/10 blur-3xl rounded-full" />
+              <div className="relative border border-white/10 bg-[#0F0F13] rounded-xl p-6 shadow-2xl space-y-4">
+                 {/* Level 1: Campaign */}
+                 <div className="flex justify-center">
+                    <div className="px-6 py-3 bg-yellow-900/30 border border-yellow-500/50 rounded-lg text-yellow-500 font-bold flex items-center gap-2">
+                       <Target className="w-4 h-4" /> Dental Clinic Delhi
+                    </div>
+                 </div>
+                 <div className="h-8 border-l border-white/10 mx-auto w-px h-8 relative">
+                    <div className="absolute top-1/2 left-0 w-32 -translate-x-1/2 h-px bg-white/10" />
+                 </div>
+                 {/* Level 2: Ad Groups */}
+                 <div className="flex justify-between gap-4">
+                    <div className="flex-1 p-3 bg-white/5 border border-white/10 rounded-lg text-center">
+                       <div className="text-sm font-bold text-white mb-1">Teeth Whitening</div>
+                       <div className="text-[10px] text-gray-400">Exact Match</div>
+                    </div>
+                    <div className="flex-1 p-3 bg-white/5 border border-white/10 rounded-lg text-center">
+                       <div className="text-sm font-bold text-white mb-1">Root Canal</div>
+                       <div className="text-[10px] text-gray-400">Phrase Match</div>
+                    </div>
+                 </div>
+                 {/* Level 3: Keywords */}
+                  <div className="grid grid-cols-2 gap-4">
+                     <div className="p-3 bg-black/40 rounded border border-white/5 text-xs text-green-400 font-mono text-center">
+                        +teeth +whitening +delhi
+                     </div>
+                     <div className="p-3 bg-black/40 rounded border border-white/5 text-xs text-green-400 font-mono text-center">
+                        "root canal cost"
+                     </div>
+                  </div>
+              </div>
+            </div>
+
+            {/* Right: Explanation */}
+            <div className="order-1 lg:order-2">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Structured for ROI</h2>
+              <p className="text-lg text-gray-400 mb-8">
+                Amateur campaigns dump all keywords into one bucket. We engineer "Single Keyword Ad Groups" (SKAGs) architectures. This matches the user's search query <strong>exactly</strong> with the ad copy, resulting in higher Quality Scores and lower costs.
+              </p>
+              
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-yellow-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                    <ArrowRight className="w-4 h-4 text-yellow-500" />
+                  </div>
+                  <div>
+                     <h4 className="text-white font-bold">10/10 Quality Score</h4>
+                     <p className="text-gray-400 text-sm">Google rewards relevance with cheaper clicks.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-yellow-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                    <ArrowRight className="w-4 h-4 text-yellow-500" />
+                  </div>
+                  <div>
+                     <h4 className="text-white font-bold">Zero Wasted Spend</h4>
+                     <p className="text-gray-400 text-sm">Negative keyword lists prevent irrelevant clicks.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 5. Our Process (H2) */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">

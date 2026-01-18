@@ -228,6 +228,88 @@ const SaasDevelopment = () => {
         </div>
       </section>
 
+      {/* 4.5 Technical Showcase */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Diagram */}
+            <div className="order-2 lg:order-1 relative">
+                <div className="absolute inset-0 bg-purple-500/10 blur-3xl rounded-full" />
+                <div className="relative p-6 border border-white/10 bg-[#0F0F13] rounded-xl shadow-2xl flex flex-col gap-6 items-center">
+                    {/* Level 1: Users */}
+                    <div className="flex gap-4">
+                        <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+                           <Users className="w-6 h-6 text-gray-400" />
+                        </div>
+                         <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+                           <Users className="w-6 h-6 text-gray-400" />
+                        </div>
+                    </div>
+                     <ArrowRight className="w-6 h-6 text-gray-600 rotate-90" />
+                    {/* Level 2: Load Balancer */}
+                    <div className="w-full max-w-xs p-3 bg-purple-900/30 border border-purple-500/50 rounded text-center text-purple-300 font-bold text-sm">
+                       Load Balancer (Nginx)
+                    </div>
+                     <ArrowRight className="w-6 h-6 text-gray-600 rotate-90" />
+                    {/* Level 3: Services */}
+                    <div className="flex gap-4 w-full justify-center">
+                       <div className="flex-1 p-4 bg-white/5 border border-white/10 rounded flex flex-col items-center gap-2">
+                          <Zap className="w-5 h-5 text-yellow-400" />
+                          <span className="text-xs text-gray-300">Auth Service</span>
+                       </div>
+                       <div className="flex-1 p-4 bg-white/5 border border-white/10 rounded flex flex-col items-center gap-2">
+                          <Database className="w-5 h-5 text-green-400" />
+                          <span className="text-xs text-gray-300">Core API</span>
+                       </div>
+                       <div className="flex-1 p-4 bg-white/5 border border-white/10 rounded flex flex-col items-center gap-2">
+                          <Cloud className="w-5 h-5 text-blue-400" />
+                          <span className="text-xs text-gray-300">Worker Nodes</span>
+                       </div>
+                    </div>
+                    {/* Level 4: Data */}
+                    <div className="flex justify-center gap-8 w-full border-t border-dashed border-white/10 pt-6">
+                        <div className="flex items-center gap-2 text-xs text-gray-400">
+                           <Database className="w-4 h-4 text-purple-400" /> PostgreSQL Primary
+                        </div>
+                         <div className="flex items-center gap-2 text-xs text-gray-400">
+                           <Layers className="w-4 h-4 text-red-400" /> Redis Cache
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Right: Explanation */}
+            <div className="order-1 lg:order-2">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Engineered for Scale</h2>
+              <p className="text-lg text-gray-400 mb-8">
+                Your MVP might start small, but our architecture doesn't. We design systems that decouple services, allowing you to scale up specific parts of your application without rewriting the whole thing.
+              </p>
+              
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle2 className="w-4 h-4 text-purple-500" />
+                  </div>
+                  <div>
+                     <h4 className="text-white font-bold">Zero Single Points of Failure</h4>
+                     <p className="text-gray-400 text-sm">Redundancy at every layer ensures 99.99% uptime.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle2 className="w-4 h-4 text-purple-500" />
+                  </div>
+                  <div>
+                     <h4 className="text-white font-bold">Auto-Scaling Infrastructure</h4>
+                     <p className="text-gray-400 text-sm">Servers spin up automatically when traffic spikes.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 5. Our Process (H2) */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">

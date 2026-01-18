@@ -187,28 +187,7 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
             '/portfolio',
         ];
 
-        // Programmatic Pages: Services x Cities
-        const services = [
-            'web-development',
-            'saas-development',
-            'meta-ads',
-            'google-ads',
-            'graphic-design',
-            'seo'
-        ];
 
-        // Top 10 Tech Cities in India for "Programmatic" scale
-        const cities = [
-            'new-delhi', 'delhi', 'mumbai', 'bangalore', 'hyderabad', 'chennai',
-            'pune', 'noida', 'gurgaon', 'kolkata'
-        ];
-
-        const programmaticRoutes: string[] = [];
-        services.forEach(service => {
-            cities.forEach(city => {
-                programmaticRoutes.push(`/services/${service}/in/${city}`);
-            });
-        });
 
         const urls = [
             ...staticRoutes.map((route) => ({
@@ -223,12 +202,7 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
                 changefreq: 'weekly',
                 priority: '0.7',
             })),
-            ...programmaticRoutes.map((route) => ({
-                loc: `${this.SITE_URL}${route}`,
-                lastmod: new Date().toISOString(),
-                changefreq: 'weekly',
-                priority: '0.6',
-            }))
+
         ];
 
         const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

@@ -18,6 +18,7 @@ const Footer = () => {
   const footerLinks = {
     services: [
       { name: 'Web Development', href: '/services/web-development' },
+      { name: 'App Development', href: '/services/app-development' },
       { name: 'SaaS Development', href: '/services/saas-development' },
       { name: 'Graphic Design', href: '/services/graphic-design' },
       { name: 'SEO Services', href: '/services/seo' },
@@ -29,7 +30,8 @@ const Footer = () => {
       { name: 'Portfolio', href: '/portfolio' },
       { name: 'Careers', href: '/careers' },
       { name: 'Contact', href: '/contact' },
-      { name: 'Resources', href: '/resources' }
+      { name: 'Resources', href: '/resources' },
+      { name: 'View Company Profile', href: '/company-brochure' }
     ],
     legal: [
       { name: 'Privacy Policy', href: '/privacy' },
@@ -46,7 +48,7 @@ const Footer = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          
+
           {/* Brand Column */}
           <div className="space-y-6">
              <Link to="/" className="block">

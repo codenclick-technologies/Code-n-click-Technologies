@@ -142,7 +142,7 @@ const Portfolio = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 leading-[0.9] tracking-tighter text-white"
+              className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-white"
             >
               Building the<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">Future, Today.</span>
@@ -152,7 +152,7 @@ const Portfolio = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-xl md:text-2xl text-gray-400 mx-auto leading-relaxed font-light mb-12"
+              className="text-lg md:text-xl text-gray-400 mx-auto leading-relaxed mb-12"
               style={{ maxWidth: '1200px' }}
             >
               We build products that users love and businesses depend on. From <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 underline">custom web applications</Link> to <Link to="/services/saas-development" className="text-purple-400 hover:text-purple-300 underline">enterprise-grade SaaS platforms</Link>, every project is engineered for scale and performance. Our <Link to="/services/seo" className="text-green-400 hover:text-green-300 underline">SEO expertise</Link> ensures your product gets discovered, while our <Link to="/services/google-ads" className="text-yellow-400 hover:text-yellow-300 underline">performance marketing</Link> drives measurable growth. Whether you need <Link to="/services/graphic-design" className="text-indigo-400 hover:text-indigo-300 underline">stunning UI/UX design</Link> or <Link to="/services/meta-ads" className="text-pink-400 hover:text-pink-300 underline">data-driven advertising campaigns</Link>, we deliver results that matter. Want to learn more? Check out <Link to="/about" className="text-cyan-400 hover:text-cyan-300 underline">our story</Link> or <Link to="/contact" className="text-blue-400 hover:text-blue-300 underline font-semibold">start your project today</Link>.
@@ -214,7 +214,7 @@ const Portfolio = () => {
                       {project.title}
                     </h3>
                     
-                    <p className="text-sm text-gray-400 leading-relaxed mb-8 line-clamp-3 font-light">
+                    <p className="text-sm text-gray-400 leading-relaxed mb-8 line-clamp-3">
                       {project.description}
                     </p>
 
@@ -288,7 +288,7 @@ const Portfolio = () => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-500/5 blur-[120px] rounded-full" />
             
             <div className="relative z-10">
-              <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter">
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
                 Ready to build something <span className="text-blue-500">remarkable?</span>
               </h2>
               <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">

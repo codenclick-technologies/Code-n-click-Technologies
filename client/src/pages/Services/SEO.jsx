@@ -92,6 +92,55 @@ const SEO = () => {
         description="Top-rated SEO agency in Delhi. We help business rank #1 on Google, drive organic traffic, and increase revenue with data-driven strategies."
         keywords="Best SEO Services Delhi, SEO Company Delhi NCR, Local SEO Agency Delhi, Ecommerce SEO Services India, Technical SEO Audit Delhi"
         canonical="/services/seo"
+        schemas={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "serviceType": "Search Engine Optimization",
+            "provider": {
+              "@type": "LocalBusiness",
+              "name": "Codenclick Technologies",
+              "image": "https://codenclick.in/brand-full.png",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "addressCountry": "IN"
+              }
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "New Delhi"
+            },
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "SEO Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Technical SEO Audit"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Local SEO Optimization"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Content Strategy & Link Building"
+                  }
+                }
+              ]
+            }
+          }
+        ]}
       />
 
       {/* 1. H1 - Main Service Title */}
@@ -221,6 +270,76 @@ const SEO = () => {
               </p>
               <Link to="/contact" className="text-green-400 font-bold hover:underline">Start investing in SEO &rarr;</Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4.5 Technical Showcase */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            {/* Left: Explanation */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">The Science Behind Rankings</h2>
+              <p className="text-lg text-gray-400 mb-8">
+                Modern SEO isn't magic; it's engineering. We speak Google's language using advanced Schema Markup and Core Web Vitals optimization to compel the algorithm to rank you higher.
+              </p>
+              
+              <div className="grid grid-cols-3 gap-4 mb-8">
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                  <div className="text-2xl font-bold text-green-400 mb-1">0.8s</div>
+                  <div className="text-xs text-gray-400">LCP (Speed)</div>
+                </div>
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                  <div className="text-2xl font-bold text-green-400 mb-1">0ms</div>
+                  <div className="text-xs text-gray-400">CLS (Stability)</div>
+                </div>
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                  <div className="text-2xl font-bold text-green-400 mb-1">50ms</div>
+                  <div className="text-xs text-gray-400">FID (Response)</div>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                 <div className="flex items-center gap-2 text-sm text-gray-300">
+                    <CheckCircle2 className="w-4 h-4 text-green-500" /> JSON-LD Structured Data
+                 </div>
+                 <div className="flex items-center gap-2 text-sm text-gray-300">
+                    <CheckCircle2 className="w-4 h-4 text-green-500" /> Semantic HTML5
+                 </div>
+              </div>
+            </div>
+
+            {/* Right: Code Block */}
+            <div>
+              <div className="rounded-xl overflow-hidden border border-white/10 bg-[#0F0F13] shadow-2xl relative">
+                <div className="absolute top-4 right-4 px-2 py-1 bg-green-900/30 border border-green-500/30 text-green-400 text-xs rounded">
+                   Google Knowledge Graph
+                </div>
+                <div className="flex items-center gap-2 px-4 py-3 bg-white/5 border-b border-white/5">
+                  <div className="ml-4 text-xs text-gray-400 font-mono">schema-markup.json</div>
+                </div>
+                <div className="p-6 overflow-x-auto">
+                  <pre className="text-sm font-mono text-gray-300">
+                    <code>
+                      {'{'}{'\n'}
+                      {'  '}<span className="text-purple-400">"@context"</span>: <span className="text-green-400">"https://schema.org"</span>,{'\n'}
+                      {'  '}<span className="text-purple-400">"@type"</span>: <span className="text-green-400">"LocalBusiness"</span>,{'\n'}
+                      {'  '}<span className="text-purple-400">"name"</span>: <span className="text-green-400">"Your Brand"</span>,{'\n'}
+                      {'  '}<span className="text-purple-400">"aggregateRating"</span>: {'{'}{'\n'}
+                      {'    '}<span className="text-purple-400">"@type"</span>: <span className="text-green-400">"AggregateRating"</span>,{'\n'}
+                      {'    '}<span className="text-purple-400">"ratingValue"</span>: <span className="text-yellow-400">"4.9"</span>,{'\n'}
+                      {'    '}<span className="text-purple-400">"reviewCount"</span>: <span className="text-blue-400">1250</span>{'\n'}
+                      {'  '}{'}'},{'\n'}
+                      {'  '}<span className="text-purple-400">"priceRange"</span>: <span className="text-green-400">"$$"</span>{'\n'}
+                      {'}'}
+                    </code>
+                  </pre>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

@@ -38,7 +38,7 @@ const ManagerDashboard = lazy(() => import('./pages/Dashboards/ManagerDashboard'
 const OwnerDashboard = lazy(() => import('./pages/Dashboards/OwnerDashboard'));
 const ChatbotLeads = lazy(() => import('./pages/Dashboards/ChatbotLeads'));
 
-const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
+
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Resources = lazy(() => import('./pages/Resources'));
@@ -46,6 +46,8 @@ const ResourceDetail = lazy(() => import('./pages/ResourceDetail'));
 const Careers = lazy(() => import('./pages/Careers'));
 const Services = lazy(() => import('./pages/Services/Services'));
 const SaasDevelopment = lazy(() => import('./pages/Services/SaasDevelopment'));
+const AppDevelopment = lazy(() => import('./pages/Services/AppDevelopment'));
+const Brochure = lazy(() => import('./pages/Brochure'));
 const WebDevelopment = lazy(() => import('./pages/Services/WebDevelopment'));
 const MetaAds = lazy(() => import('./pages/Services/MetaAds'));
 const GoogleAds = lazy(() => import('./pages/Services/GoogleAds'));
@@ -54,7 +56,7 @@ const SEO = lazy(() => import('./pages/Services/SEO'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
-const ServiceLocation = lazy(() => import('./pages/ServiceLocation'));
+
 
 const NotFound = lazy(() => import('./pages/NotFound'));
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -129,17 +131,17 @@ function AppContent() {
               {/* Services explicit pages */}
               <Route path="/services" element={<Services />} />
               <Route path="/services/web-development" element={<WebDevelopment />} />
+              <Route path="/services/app-development" element={<AppDevelopment />} />
               <Route path="/services/saas-development" element={<SaasDevelopment />} />
+              <Route path="/company-brochure" element={<Brochure />} />
               <Route path="/services/meta-ads" element={<MetaAds />} />
               <Route path="/services/google-ads" element={<GoogleAds />} />
               <Route path="/services/graphic-design" element={<GraphicDesign />} />
               <Route path="/services/seo" element={<SEO />} />
 
-              {/* Programmatic SEO Route: /services/web-development/in/delhi */}
-              <Route path="/services/:service/in/:city" element={<ServiceLocation />} />
 
-              {/* Dynamic fallback for legacy service detail pages */}
-              <Route path="/services/:id" element={<ServiceDetail />} />
+
+
 
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />

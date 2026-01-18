@@ -37,6 +37,7 @@ const Navbar = ({ isBannerVisible }) => {
       icon: Briefcase,
       dropdown: [
         { name: 'Web Development', path: '/services/web-development' },
+        { name: 'App Development', path: '/services/app-development' },
         { name: 'SaaS Development', path: '/services/saas-development' },
         { name: 'Meta Ads', path: '/services/meta-ads' },
         { name: 'Google Ads', path: '/services/google-ads' },

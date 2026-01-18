@@ -226,6 +226,66 @@ const MetaAds = () => {
         </div>
       </section>
 
+      {/* 4.5 Technical Showcase */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            {/* Left: Explanation */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">The Retargeting Matrix</h2>
+              <p className="text-lg text-gray-400 mb-8">
+                Most brands only run one ad for everyone. We build intelligent funnels that track where a user is in their journey and serve the perfect message to nudge them to the next step.
+              </p>
+              
+              <div className="space-y-6">
+                <div className="relative pl-8 border-l-2 border-pink-500/30">
+                   <div className="absolute top-0 left-[-9px] w-4 h-4 rounded-full bg-pink-500" />
+                   <h4 className="text-white font-bold text-lg">Top of Funnel (Cold)</h4>
+                   <p className="text-gray-400 text-sm">Goal: Awareness. Content: Viral Videos, Educational Reels.</p>
+                </div>
+                <div className="relative pl-8 border-l-2 border-pink-500/30">
+                   <div className="absolute top-0 left-[-9px] w-4 h-4 rounded-full bg-purple-500" />
+                   <h4 className="text-white font-bold text-lg">Middle of Funnel (Warm)</h4>
+                   <p className="text-gray-400 text-sm">Goal: Consideration. Content: Testimonials, Case Studies.</p>
+                </div>
+                <div className="relative pl-8 border-l-2 border-pink-500/30">
+                   <div className="absolute top-0 left-[-9px] w-4 h-4 rounded-full bg-green-500" />
+                   <h4 className="text-white font-bold text-lg">Bottom of Funnel (Hot)</h4>
+                   <p className="text-gray-400 text-sm">Goal: Purchase. Content: Limited Time Offers, Abandoned Cart Recovery.</p>
+                </div>
+              </div>
+            </div>
+
+             {/* Right: Visual */}
+            <div className="relative">
+               <div className="w-full max-w-md mx-auto aspect-square relative">
+                  {/* Funnel Layers */}
+                  <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-br from-pink-600 to-pink-900 rounded-t-3xl flex items-center justify-center transform scale-100 z-30 shadow-xl border-b border-white/10">
+                     <div className="text-center">
+                        <div className="text-2xl font-bold text-white">1.4M</div>
+                        <div className="text-xs text-pink-200 uppercase tracking-widest">Impressions</div>
+                     </div>
+                  </div>
+                   <div className="absolute top-[30%] left-[10%] right-[10%] h-1/3 bg-gradient-to-br from-purple-600 to-purple-900 flex items-center justify-center transform scale-100 z-20 shadow-xl border-b border-white/10 rounded-xl">
+                     <div className="text-center">
+                        <div className="text-2xl font-bold text-white">25K</div>
+                        <div className="text-xs text-purple-200 uppercase tracking-widest">Visitors</div>
+                     </div>
+                  </div>
+                   <div className="absolute bottom-0 left-[20%] right-[20%] h-1/3 bg-gradient-to-br from-green-600 to-green-900 rounded-b-3xl flex items-center justify-center transform scale-100 z-10 shadow-xl">
+                     <div className="text-center">
+                        <div className="text-2xl font-bold text-white">840</div>
+                        <div className="text-xs text-green-200 uppercase tracking-widest">Sales</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* 5. Our Process (H2) */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">

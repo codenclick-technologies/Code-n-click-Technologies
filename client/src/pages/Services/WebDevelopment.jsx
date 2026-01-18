@@ -100,6 +100,55 @@ const WebDevelopment = () => {
         description="Web Development company in Delhi. We build high-performance, SEO-optimized websites and web apps using React & Next.js to grow your local business."
         keywords=" Web Development Company Delhi, Website Design Company Delhi, Web Development Agency Delhi NCR, Custom Web App Development Delhi, React JS Developers Delhi"
         canonical="/services/web-development"
+        schemas={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "serviceType": "Web Development",
+            "provider": {
+              "@type": "LocalBusiness",
+              "name": "Codenclick Technologies",
+              "image": "https://codenclick.in/brand-full.png",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "addressCountry": "IN"
+              }
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "New Delhi"
+            },
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Web Development Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Custom Web Application Development"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "E-commerce Website Development"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Corporate Website Design"
+                  }
+                }
+              ]
+            }
+          }
+        ]}
       />
 
       {/* 1. H1 - Main Service Title */}
@@ -228,6 +277,85 @@ const WebDevelopment = () => {
                 Businesses with professional web presence see an average of <strong>40% increase in lead generation</strong> and significantly lower bounce rates. It is the highest ROI investment for your brand longevity.
               </p>
               <Link to="/contact" className="text-blue-400 font-bold hover:underline">Calculate your potential ROI &rarr;</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4.5 Technical Showcase */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Code Block */}
+            <div className="order-2 lg:order-1">
+              <div className="rounded-xl overflow-hidden border border-white/10 bg-[#0F0F13] shadow-2xl">
+                <div className="flex items-center gap-2 px-4 py-3 bg-white/5 border-b border-white/5">
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                  </div>
+                  <div className="ml-4 text-xs text-gray-400 font-mono">CleanCode.tsx</div>
+                </div>
+                <div className="p-6 overflow-x-auto">
+                  <pre className="text-sm font-mono text-gray-300">
+                    <code>
+                      <span className="text-purple-400">const</span> <span className="text-blue-400">SecureComponent</span> = <span className="text-yellow-400">()</span> =&gt; {'{'}{'\n'}
+                      {'  '}<span className="text-purple-400">const</span> {'{'}<span className="text-red-400"> data</span>, <span className="text-red-400">loading </span>{'}'} = <span className="text-blue-400">useEncryption</span>(<span className="text-green-400">"AES-256"</span>);{'\n'}
+                      {'\n'}
+                      {'  '}<span className="text-gray-500">// Optimized for 60fps animations</span>{'\n'}
+                      {'  '}<span className="text-purple-400">return</span> ({'\n'}
+                      {'    '}&lt;<span className="text-blue-400">motion.div</span>{'\n'}
+                      {'      '}<span className="text-purple-400">initial</span>={'{{'} <span className="text-orange-400">opacity</span>: <span className="text-red-400">0</span> {'}}'}{'\n'}
+                      {'      '}<span className="text-purple-400">animate</span>={'{{'} <span className="text-orange-400">opacity</span>: <span className="text-red-400">1</span> {'}}'}{'\n'}
+                      {'      '}<span className="text-purple-400">className</span>=<span className="text-green-400">"gpu-accelerated"</span>{'\n'}
+                      {'    '}&gt;{'\n'}
+                      {'      '}{'{'}<span className="text-red-400">loading</span> ? &lt;<span className="text-yellow-400">Skeleton</span> /&gt; : &lt;<span className="text-yellow-400">DataGrid</span> data={'{'}<span className="text-red-400">data</span>{'}'} /&gt;{'}'}{'\n'}
+                      {'    '}&lt;/<span className="text-blue-400">motion.div</span>&gt;{'\n'}
+                      {'  '});{'\n'}
+                      {'}'};
+                    </code>
+                  </pre>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Explanation */}
+            <div className="order-1 lg:order-2">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Technical Excellence Standards</h2>
+              <p className="text-lg text-gray-400 mb-8">
+                We don't just "make it work." We engineer it to last. Every project adheres to strict coding standards to ensure specific performance benchmarks.
+              </p>
+              
+              <div className="space-y-6">
+                <div>
+                  <div className="flex justify-between text-sm font-medium mb-2">
+                    <span className="text-white">Google Lighthouse Performance</span>
+                    <span className="text-green-400">98/100</span>
+                  </div>
+                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-full bg-green-500 w-[98%]" />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between text-sm font-medium mb-2">
+                    <span className="text-white">SEO Optimization Score</span>
+                    <span className="text-green-400">100/100</span>
+                  </div>
+                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-full bg-green-500 w-full" />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between text-sm font-medium mb-2">
+                    <span className="text-white">Accessibility (WCAG 2.1)</span>
+                    <span className="text-green-400">100/100</span>
+                  </div>
+                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div className="h-full bg-green-500 w-full" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
