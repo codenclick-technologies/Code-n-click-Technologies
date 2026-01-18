@@ -46,7 +46,7 @@ const Brochure = () => {
   };
 
   const A4_WIDTH = '210mm';
-  const A4_HEIGHT = '297mm'; // Standard A4 Height
+  const A4_HEIGHT = '296mm'; // Reduce further to safe zone
 
   // Shared Graphic Elements (CSS Shapes)
   const GridPattern = () => (
@@ -58,7 +58,7 @@ const Brochure = () => {
     </div>
   );
 
-  const Page = ({ children, className = "", id }) => (
+  const Page = ({ children, className = "", id, isLastPage = false }) => (
     <div 
       id={id}
       className={`relative overflow-hidden flex flex-col ${isGenerating ? 'm-0 shadow-none rounded-none' : 'shadow-2xl mx-auto my-8'} ${className}`}
@@ -69,8 +69,8 @@ const Brochure = () => {
         minHeight: isGenerating ? A4_HEIGHT : '297mm',
         maxHeight: isGenerating ? A4_HEIGHT : 'none',
         aspectRatio: isGenerating ? 'auto' : '210/297',
-        breakAfter: 'page',
-        pageBreakAfter: 'always',
+        breakAfter: isLastPage ? 'auto' : 'page',
+        pageBreakAfter: isLastPage ? 'auto' : 'always',
         overflow: 'hidden'
       }}
     >
@@ -78,11 +78,13 @@ const Brochure = () => {
       {/* Universal Footer for internal pages only */}
       {!className.includes('bg-slate-900') && !className.includes('bg-blue-600') && (
         <div className="absolute bottom-6 left-10 right-10 flex justify-between items-end border-t border-gray-100 pt-4">
-           <div className="flex items-center gap-2 opacity-50">
-              <img src="/logo.png" className="h-4 w-auto grayscale" alt="Footer Logo" />
-              <span className="text-[10px] text-gray-400 font-bold tracking-widest uppercase">/ 2026 Profile</span>
+           <div className="flex items-center justify-between w-full opacity-50">
+             <div className="flex items-center gap-2">
+                <img src="/logo.png" className="h-4 w-auto grayscale" alt="Footer Logo" />
+                <span className="text-[10px] text-gray-400 font-bold tracking-widest uppercase">/ 2026 Profile</span>
+             </div>
+             <div className="text-[10px] text-gray-400 font-mono">www.codenclick.in</div>
            </div>
-           <div className="text-[10px] text-gray-400 font-mono">www.codenclick.in</div>
         </div>
       )}
     </div>
@@ -293,7 +295,7 @@ const Brochure = () => {
           <Page className="bg-slate-50 text-slate-800">
              <div className="relative z-10 h-full p-12 flex flex-col">
                 <div className="flex items-center gap-4 mb-4">
-                   <span className="text-6xl font-black text-slate-200 pointer-events-none">04</span>
+                   <span className="text-6xl font-black text-slate-200 pointer-events-none">03</span>
                    <h2 className="text-3xl font-bold uppercase tracking-wide text-slate-900">Strategic Impact</h2>
                 </div>
                 <p className="text-sm text-gray-500 max-w-2xl mb-8">
@@ -488,7 +490,7 @@ const Brochure = () => {
              <GridPattern />
              <div className="relative z-10 h-full p-14 flex flex-col">
                 <div className="flex items-center gap-4 mb-16">
-                   <span className="text-6xl font-black text-slate-200 pointer-events-none">05</span>
+                   <span className="text-6xl font-black text-slate-200 pointer-events-none">04</span>
                    <h2 className="text-3xl font-bold uppercase tracking-wide text-slate-900">How We Work</h2>
                 </div>
 
@@ -642,7 +644,7 @@ const Brochure = () => {
           </Page>
 
           {/* ================= PAGE 5: CONTACT ================= */}
-          <Page className="bg-blue-600 text-white relative">
+          <Page className="bg-blue-600 text-white relative" isLastPage={true}>
              <div className="absolute inset-0 opacity-10">
                 <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                    <path d="M0 100 L100 0 L100 100 Z" fill="white" />
