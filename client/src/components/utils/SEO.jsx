@@ -18,7 +18,7 @@ const SEO = ({
   const fullTitle = title && !title.includes(siteName) ? `${title} | ${siteName}` : (title || siteName);
   const fullCanonical = canonical 
     ? (canonical.startsWith('http') ? canonical : `${domain}${canonical.startsWith('/') ? canonical : `/${canonical}`}`)
-    : domain + window.location.pathname;
+    : `${domain}${window.location.pathname}`;
   const fullImageUrl = imageUrl?.startsWith('http') ? imageUrl : `${domain}${imageUrl?.startsWith('/') ? imageUrl : `/${imageUrl}`}`;
   // Default Schemas (Organization & LocalBusiness)
   const defaultSchemas = [
