@@ -12,7 +12,7 @@ const Brochure = () => {
     if (searchParams.get('autoDownload') === 'true') {
       const timer = setTimeout(() => {
         downloadPDF();
-      }, 1000); // Wait 1s for layout to settle
+      }, 1500);
       return () => clearTimeout(timer);
     }
   }, [searchParams]);
@@ -21,22 +21,24 @@ const Brochure = () => {
     setIsGenerating(true);
     const element = brochureRef.current;
     
+    // Professional Print Settings
     const opt = {
       margin: 0,
-      filename: 'Codenclick_Profile_2025.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
+      filename: 'Codenclick_Profile_2026.pdf',
+      image: { type: 'jpeg', quality: 1.0 }, // Max quality
       html2canvas: { 
-        scale: 2, 
+        scale: 2, // High resolution (Retina-like)
         useCORS: true, 
         letterRendering: true,
         scrollY: 0,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff' // Default white base for clean edges
       },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
 
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // Wait for state update and images
+    await new Promise(resolve => setTimeout(resolve, 800));
 
     html2pdf().set(opt).from(element).save().then(() => {
       setIsGenerating(false);
@@ -44,416 +46,661 @@ const Brochure = () => {
   };
 
   const A4_WIDTH = '210mm';
-  const A4_HEIGHT = '296mm'; 
+  const A4_HEIGHT = '297mm'; // Standard A4 Height
 
-  const Page = ({ children, className = "", id, hideWatermark = false }) => (
+  // Shared Graphic Elements (CSS Shapes)
+  const GridPattern = () => (
+    <div className="absolute inset-0 z-0 opacity-[0.03]" 
+      style={{ 
+        backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', 
+        backgroundSize: '20px 20px' 
+      }}>
+    </div>
+  );
+
+  const Page = ({ children, className = "", id }) => (
     <div 
       id={id}
-      className={`relative bg-white overflow-hidden flex flex-col ${isGenerating ? 'm-0 shadow-none' : 'shadow-2xl mx-auto my-8'} ${className}`}
+      className={`relative overflow-hidden flex flex-col ${isGenerating ? 'm-0 shadow-none rounded-none' : 'shadow-2xl mx-auto my-8'} ${className}`}
       style={{ 
         width: isGenerating ? A4_WIDTH : '100%', 
         maxWidth: isGenerating ? 'none' : '210mm',
         height: isGenerating ? A4_HEIGHT : 'auto', 
-        minHeight: isGenerating ? 'auto' : '296mm',
-        aspectRatio: isGenerating ? 'auto' : '210/296',
+        minHeight: isGenerating ? A4_HEIGHT : '297mm',
+        maxHeight: isGenerating ? A4_HEIGHT : 'none',
+        aspectRatio: isGenerating ? 'auto' : '210/297',
+        breakAfter: 'page',
         pageBreakAfter: 'always',
-        breakAfter: 'page' 
+        overflow: 'hidden'
       }}
     >
       {children}
+      {/* Universal Footer for internal pages only */}
+      {!className.includes('bg-slate-900') && !className.includes('bg-blue-600') && (
+        <div className="absolute bottom-6 left-10 right-10 flex justify-between items-end border-t border-gray-100 pt-4">
+           <div className="flex items-center gap-2 opacity-50">
+              <img src="/logo.png" className="h-4 w-auto grayscale" alt="Footer Logo" />
+              <span className="text-[10px] text-gray-400 font-bold tracking-widest uppercase">/ 2026 Profile</span>
+           </div>
+           <div className="text-[10px] text-gray-400 font-mono">www.codenclick.in</div>
+        </div>
+      )}
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] py-8 font-sans text-slate-800 antialiased selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen bg-[#111] py-8 font-sans text-slate-800 antialiased selection:bg-blue-500 selection:text-white">
       
-      {/* Floating Header */}
-      <div className="fixed top-6 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-xl border border-white/10 p-2 pr-6 rounded-full z-50 flex items-center gap-6 shadow-2xl print:hidden animate-fade-in-down w-[90%] sm:w-auto justify-between sm:justify-start">
-         <Link to="/" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all">
-            <ArrowLeft size={20} />
-         </Link>
-         <div className="text-white hidden sm:block text-left">
-            <div className="text-xs text-white/50 uppercase tracking-widest font-bold">Document Preview</div>
-            <div className="font-bold text-sm">Corporate Profile 2025</div>
-         </div>
+      {/* Controls */}
+      <div className="fixed top-6 right-6 z-50 flex gap-4 print:hidden">
          <button 
             onClick={downloadPDF}
             disabled={isGenerating}
-            className="bg-blue-600 hover:bg-blue-500 text-white px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 shadow-lg shadow-blue-600/20 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+            className="bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold flex items-center gap-2 shadow-xl hover:scale-105 transition-all disabled:opacity-50"
          >
-            {isGenerating ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Download size={16} />}
-            {isGenerating ? 'Rendering...' : 'Download PDF'}
+            {isGenerating ? <div className="w-4 h-4 border-2 border-slate-300 border-t-black rounded-full animate-spin" /> : <Download size={18} />}
+            {isGenerating ? 'Exporting PDF...' : 'Download Brochure'}
          </button>
       </div>
 
-      <div className={`pt-20 transform transition-transform origin-top ${isGenerating ? 'scale-100 pt-0' : 'scale-100 sm:scale-100'} flex flex-col items-center px-4 sm:px-0`}>
+      <div className={`transform transition-transform origin-top ${isGenerating ? 'scale-100 pt-0' : 'scale-100 pt-0'} flex flex-col items-center px-4 sm:px-0`}>
         <div ref={brochureRef} className="w-full max-w-[210mm]">
           
-          {/* ================= PAGE 1: COVER (IMPRESSION) ================= */}
-          <Page className="bg-[#050505] text-white">
-             <div className="absolute inset-0">
-               <div className="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-blue-600/20 rounded-full blur-[100px]" />
-               <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-purple-600/20 rounded-full blur-[100px]" />
-               <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+          {/* ================= PAGE 1: COVER ================= */}
+          <Page className="bg-slate-900 text-white relative">
+             {/* Abstract Background Art */}
+             <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute -top-[20%] -right-[20%] w-[800px] h-[800px] bg-blue-600/30 rounded-full blur-[120px]"></div>
+                <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
+                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(45deg, #1e293b 25%, transparent 25%, transparent 75%, #1e293b 75%, #1e293b), linear-gradient(45deg, #1e293b 25%, transparent 25%, transparent 75%, #1e293b 75%, #1e293b)', backgroundPosition: '0 0, 10px 10px', backgroundSize: '20px 20px' }}></div>
              </div>
 
-             <div className="relative z-10 h-full flex flex-col justify-between p-8 sm:p-12 md:p-16">
-                <div className="flex justify-between items-center">
-                   {/* Logo - Text removed to prevent duplication as logo contains text */}
-                   <div className="flex items-center">
-                      <img src="/logo.png" alt="Codenclick" className="h-20 sm:h-28 w-auto object-contain" />
-                   </div>
+             <div className="relative z-10 h-full flex flex-col justify-between p-14">
+                {/* Header */}
+                <div className="flex justify-between items-start">
+                   <img src="/logo.png" className="h-24 w-auto object-contain brightness-0 invert" alt="Logo" />
                    <div className="text-right">
-                       <div className="text-[8px] sm:text-[10px] text-gray-400 uppercase tracking-widest mb-1">Web • Mobile • AI • Growth</div>
-                       <div className="h-0.5 w-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"></div>
+                      <div className="text-blue-400 font-bold uppercase tracking-[0.3em] text-xs mb-2">Corporate Profile</div>
+                      <div className="text-white/60 font-mono text-xs">est. 2018</div>
                    </div>
                 </div>
 
-                <div className="space-y-6 relative z-20 mt-auto mb-auto py-10 sm:py-0">
-                   <div className="inline-block px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4">
-                      Est. 2018 • Global Tech Partner
-                   </div>
-                   <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[6rem] leading-[0.9] font-black tracking-tighter text-white drop-shadow-2xl">
-                      WE DON'T <br/>
-                      JUST DELIVER <br/>
-                      SERVICES. <br/>
-                      <span className="text-blue-500">WE DELIVER</span> <br/>
-                      RESULTS.
+                {/* Main Headline */}
+                <div className="mb-20">
+                   <h1 className="text-[5.5rem] leading-[0.85] font-black tracking-tighter mb-8">
+                      <span className="text-white">FUTURE</span> <br/>
+                      <span className="text-blue-600">READY</span> <br/>
+                      <span className="text-slate-400">ENGINEERING.</span>
                    </h1>
-                   <div className="w-24 sm:w-32 h-2 bg-gradient-to-r from-blue-500 to-purple-500 mt-8 rounded-full"></div>
+                   <div className="h-1 w-32 bg-blue-600 mb-8"></div>
+                   <p className="text-xl text-slate-300 font-light max-w-md leading-relaxed">
+                      We help ambitious brands build scalable digital infrastructure that dominates markets.
+                   </p>
                 </div>
 
-                <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                   <div className="max-w-md">
-                      <p className="text-sm sm:text-lg text-gray-400 font-light leading-relaxed">
-                         Engineers of the digital future. We help ambitious brands build scalable, high-performance software ecosystems that dominate markets.
-                      </p>
-                      <div className="flex flex-wrap gap-4 mt-4 text-[10px] sm:text-xs text-gray-500 font-mono uppercase">
-                         <span>• Startup Scaling</span>
-                         <span>• Enterprise Transformation</span>
-                      </div>
-                   </div>
-                   <div className="text-right w-full md:w-auto">
-                      <div className="text-3xl font-bold font-mono text-white">2025</div>
-                      <div className="text-[10px] text-gray-500 uppercase tracking-widest">Corporate Profile</div>
-                   </div>
-                </div>
-             </div>
-          </Page>
-
-          {/* ================= PAGE 2: VISION & VALUE (DENSE CONTENT) ================= */}
-          <Page className="bg-white">
-             <div className="flex flex-col h-full">
-                {/* Header Strip */}
-                 <div className="bg-[#020205] text-white p-6 sm:p-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div>
-                       <h2 className="text-2xl sm:text-3xl font-bold">The Digital Growth Engine.</h2>
-                       <p className="text-gray-400 text-xs sm:text-sm mt-1">Bridging the gap between complex tech and business ROI.</p>
-                    </div>
-                    <div className="hidden sm:block text-right">
-                       <div className="font-bold text-2xl text-blue-500">02</div>
-                       <div className="text-[10px] text-gray-500 uppercase tracking-widest">About Us</div>
-                    </div>
-                 </div>
-
-                 <div className="p-6 sm:p-10 flex-1 flex flex-col gap-6 sm:gap-8">
-                    {/* Intro */}
-                    <div className="flex flex-col md:flex-row gap-6 sm:gap-8 text-xs sm:text-sm text-gray-600 leading-relaxed text-justify border-b border-gray-100 pb-8">
-                       <p className="flex-1">
-                          <strong>Codenclick Technologies</strong> is more than a software agency; we are your strategic technical partner. We specialize in building robust digital infrastructure—from high-frequency trading platforms to AI-driven marketing ecosystems. Our focus is singular: <strong>metrics that matter.</strong>
-                       </p>
-                       <p className="flex-1">
-                          In a world cluttered with "generic" solutions, we provide bespoke engineering. Whether you are a seed-stage startup needing an MVP in 30 days or an enterprise requiring legacy system modernization, our agile squads deliver with military precision.
-                       </p>
-                    </div>
-
-                    {/* Mission/Vision Split */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div className="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                           <div className="flex items-center gap-3 mb-3">
-                              <div className="p-2 bg-blue-100 text-blue-600 rounded-lg"><Zap size={18}/></div>
-                              <h3 className="font-bold text-[#020205]">Our Vision</h3>
-                           </div>
-                           <p className="text-xs text-gray-500 leading-relaxed">
-                              To be the global backend for digital innovation, empowering businesses to automate, scale, and dominate their industries through superior, future-proof technology.
-                           </p>
-                        </div>
-                        <div className="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                           <div className="flex items-center gap-3 mb-3">
-                              <div className="p-2 bg-purple-100 text-purple-600 rounded-lg"><Shield size={18}/></div>
-                              <h3 className="font-bold text-[#020205]">Our Mission</h3>
-                           </div>
-                           <p className="text-xs text-gray-500 leading-relaxed">
-                              To eliminate technical debt and execution gaps. We treat every line of code as a business asset, ensuring 100% transparency, security, and measurable performance.
-                           </p>
-                        </div>
-                    </div>
-
-                    {/* Why Choose Us - Dense Grid */}
-                    <div className="mt-2">
-                       <h3 className="text-sm font-bold uppercase tracking-widest text-[#020205] mb-4">Why Industry Leaders Partner With Us</h3>
-                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          {[
-                             { t: "Result-Driven Engineering", d: "We don't ship until it works. Focus on load speed, conversion rates, and uptime.", c: "text-blue-600" },
-                             { t: "Transparent Pricing", d: "Fixed scope, fixed price. No hidden hourly billing or surprise cohesive costs.", c: "text-green-600" },
-                             { t: "Global Delivery Standards", d: "ISO-compliant coding practices. Secure, scalable, and documented architectures.", c: "text-purple-600" },
-                             { t: "24/7 Dedicated Support", d: "Post-launch maintenance and real-time monitoring to ensure business continuity.", c: "text-orange-600" }
-                          ].map((item, i) => (
-                             <div key={i} className="flex gap-3 items-start p-3 rounded-lg border border-gray-100 hover:bg-gray-50 bg-white">
-                                <Check size={16} className={`${item.c} mt-1`} />
-                                <div>
-                                   <div className="font-bold text-xs text-[#020205]">{item.t}</div>
-                                   <div className="text-[10px] text-gray-500 leading-snug mt-1">{item.d}</div>
-                                </div>
-                             </div>
-                          ))}
-                       </div>
-                    </div>
-                 </div>
-             </div>
-          </Page>
-
-          {/* ================= PAGE 3: SERVICES (DETAILED & TECHNICAL) ================= */}
-          <Page className="bg-slate-50">
-             <div className="p-6 sm:p-10 h-full flex flex-col">
-                <div className="text-center mb-8">
-                   <h2 className="text-3xl font-extrabold text-[#020205]">Comprehensive Expertise.</h2>
-                   <p className="text-xs text-gray-500 mt-2 uppercase tracking-wide">End-to-End Digital Transformation</p>
-                </div>
-
-                <div className="grid grid-cols-1 gap-3 flex-1">
-                   {[
-                      { 
-                         title: "Custom Website Development", 
-                         desc: "Not just pages, but conversion funnels. We build SEO-ready, lightning-fast React/Next.js websites that rank high and convert visitors.", 
-                         tags: ["Next.js", "React", "Node.js", "Headless CMS"],
-                         icon: Globe, color: "bg-blue-600"
-                      },
-                      { 
-                         title: "Mobile & Web Applications", 
-                         desc: "Scalable SaaS platforms and native apps. From ride-sharing to fintech dashboards, we build complex logic with intuitive UI.", 
-                         tags: ["Flutter", "React Native", "iOS/Android", "PWA"],
-                         icon: Smartphone, color: "bg-indigo-600"
-                      },
-                      { 
-                         title: "SEO & Growth Marketing", 
-                         desc: "Technical SEO and content strategy to dominate SERPs. We fix Core Web Vitals and build authority to drive organic leads.", 
-                         tags: ["Technical SEO", "Backlinking", "CRO", "Site Speed"],
-                         icon: Search, color: "bg-green-600"
-                      },
-                      { 
-                         title: "Performance Advertising", 
-                         desc: "High-ROI Google & Meta Ads. We optimize CPA (Cost Per Acquisition) using data-driven audience targeting and A/B testing.", 
-                         tags: ["Google Ads", "Meta Ads", "Retargeting", "Analytics"],
-                         icon: BarChart, color: "bg-orange-600"
-                      },
-                      { 
-                         title: "SaaS Product Development", 
-                         desc: "From concept to IPO. We handle architecture, database design, API development, and cloud deployment for software products.", 
-                         tags: ["Microservices", "AWS/Azure", "Docker", "CI/CD"],
-                         icon: Cpu, color: "bg-purple-600"
-                      }
-                   ].map((s, i) => (
-                      <div key={i} className="flex gap-5 p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                          <div className={`w-12 h-12 ${s.color} rounded-lg flex items-center justify-center text-white shadow-md flex-shrink-0 hidden sm:flex`}>
-                             <s.icon size={22} />
-                          </div>
-                          <div className={`w-10 h-10 ${s.color} rounded-lg flex items-center justify-center text-white shadow-md flex-shrink-0 flex sm:hidden`}>
-                             <s.icon size={18} />
-                          </div>
-                          <div className="flex-1">
-                             <h3 className="font-bold text-[#020205] text-sm mb-1">{s.title}</h3>
-                             <p className="text-[11px] text-gray-500 leading-relaxed mb-2">{s.desc}</p>
-                             <div className="flex flex-wrap gap-2">
-                                {s.tags.map(t => (
-                                   <span key={t} className="px-1.5 py-0.5 bg-gray-100 text-gray-600 text-[9px] font-bold rounded uppercase tracking-wide">{t}</span>
-                                ))}
-                             </div>
-                          </div>
-                      </div>
-                   ))}
-                </div>
-                
-                {/* Tech Stack Footer */}
-                <div className="mt-8 pt-6 border-t border-gray-200">
-                    <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 text-center">Powered By Modern Tech Stack</div>
-                    <div className="grid grid-cols-3 sm:flex sm:justify-between items-center opacity-60 grayscale px-2 sm:px-8 gap-4 sm:gap-0">
-                        {/* Text Placeholders for Logos to ensure PDF safety */}
-                        <div className="font-black text-sm sm:text-lg text-gray-400 text-center">REACT</div>
-                        <div className="font-black text-sm sm:text-lg text-gray-400 text-center">NODE</div>
-                        <div className="font-black text-sm sm:text-lg text-gray-400 text-center">PYTHON</div>
-                        <div className="font-black text-sm sm:text-lg text-gray-400 text-center">AWS</div>
-                        <div className="font-black text-sm sm:text-lg text-gray-400 text-center">DOCKER</div>
-                        <div className="font-black text-sm sm:text-lg text-gray-400 text-center">MONGO</div>
-                    </div>
-                </div>
-             </div>
-          </Page>
-
-          {/* ================= PAGE 4: PROOF & PROCESS (TRUST BUILDERS) ================= */}
-          <Page className="bg-[#0f1115] text-white">
-             <div className="p-6 sm:p-10 h-full flex flex-col">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end border-b border-white/10 pb-6 mb-8 gap-4">
+                {/* Footer Info */}
+                <div className="grid grid-cols-3 gap-8 border-t border-white/10 pt-8">
                    <div>
-                      <h4 className="text-blue-500 font-bold uppercase text-xs tracking-widest mb-2">How We Work</h4>
-                      <h2 className="text-2xl sm:text-3xl font-extrabold text-white">The Execution Framework.</h2>
+                      <div className="text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-1">Expertise</div>
+                      <div className="text-sm font-medium">Web • Mobile • AI</div>
+                   </div>
+                   <div>
+                      <div className="text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-1">Location</div>
+                      <div className="text-sm font-medium">New Delhi, India</div>
+                   </div>
+                   <div>
+                      <div className="text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-1">Contact</div>
+                      <div className="text-sm font-medium">www.codenclick.in</div>
                    </div>
                 </div>
+             </div>
+          </Page>
 
-                {/* 1. The Process Flow */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
-                   {[
-                      { n: "01", t: "Blueprint", d: "Requirement Analysis & System Architecture Design." },
-                      { n: "02", t: "Design", d: "UI/UX Prototyping & High-Fidelity Mockups." },
-                      { n: "03", t: "Develop", d: "Agile Coding Sprints & Rigorous QA Testing." },
-                      { n: "04", t: "Scale", d: "Deployment, SEO Optimization & Market Launch." }
-                   ].map((step, i) => (
-                      <div key={i} className="bg-white/5 border border-white/10 p-4 rounded-xl relative overflow-hidden group">
-                         <div className="absolute top-0 right-0 p-2 text-4xl font-black text-white/5">{step.n}</div>
-                         <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-xs font-bold mb-3 shadow-lg shadow-blue-600/20">{step.n}</div>
-                         <h3 className="font-bold text-sm text-white mb-1">{step.t}</h3>
-                         <p className="text-[10px] text-gray-400 leading-snug">{step.d}</p>
-                      </div>
-                   ))}
+          {/* ================= PAGE 2: WHO WE ARE (Story) ================= */}
+          <Page className="bg-white text-slate-800">
+             <GridPattern />
+             <div className="relative z-10 h-full p-14 flex flex-col">
+                <div className="flex items-center gap-4 mb-16">
+                   <span className="text-6xl font-black text-slate-200 pointer-events-none">01</span>
+                   <h2 className="text-3xl font-bold uppercase tracking-wide text-slate-900">The Vision</h2>
                 </div>
 
-                {/* 2. Industries & Stats */}
-                <div className="flex-1 flex flex-col gap-6">
-                   <div className="bg-[#1a1d23] rounded-2xl p-6 border border-white/5">
-                      <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Industries We Dominate</h3>
-                      <div className="flex flex-wrap gap-2">
-                         {['FinTech', 'HealthTech', 'E-Commerce', 'EdTech', 'Real Estate', 'Logistics', 'SaaS', 'Hospitality'].map(ind => (
-                            <span key={ind} className="px-3 py-1 bg-white/5 border border-white/10 rounded-md text-[10px] font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
-                               {ind}
-                            </span>
-                         ))}
+                <div className="grid grid-cols-12 gap-12 h-full">
+                   {/* Left Col: The Narrative */}
+                   <div className="col-span-7 flex flex-col justify-center">
+                      <h3 className="text-4xl font-bold leading-tight mb-8">
+                         We leverage technology to turn complex problems into <span className="text-blue-600">seamless growth.</span>
+                      </h3>
+                      <div className="space-y-6 text-gray-600 text-sm leading-7 text-justify">
+                         <p>
+                            At <strong>Codenclick Technologies</strong>, we believe that software isn't just code—it's the nervous system of your business. In an era where digital presence dictates market leadership, "good enough" is no longer enough.
+                         </p>
+                         <p>
+                            We started in 2018 with a simple mission: to bridge the gap between heavy enterprise engineering and agile startup speed. Today, we are the secret weapon for 500+ global brands who refuse to compromise on quality.
+                         </p>
+                         <p>
+                            Our team of architects, designers, and strategists work as an extension of your company. We don't just take orders; we challenge assumptions, refine strategies, and deliver products that scale.
+                         </p>
                       </div>
-                   </div>
 
-                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
-                      <div className="bg-gradient-to-br from-blue-900/40 to-blue-900/10 rounded-2xl p-6 border border-blue-500/20 relative overflow-hidden flex flex-col justify-between group h-full">
-                         <div className="relative z-10">
-                            <div className="text-4xl font-black text-white mb-1">50+</div>
-                            <div className="text-[10px] font-bold uppercase tracking-widest text-blue-300">Enterprise Projects</div>
-                            <p className="text-[10px] text-blue-200/60 mt-4 leading-relaxed mb-6">
-                               From complex dashboard systems to consumer-facing mobile apps, we delivered excellence.
-                            </p>
+                      <div className="mt-12 p-6 bg-slate-50 border-l-4 border-blue-600">
+                         <p className="text-lg italic font-medium text-slate-700">
+                            "Innovation implies doing things differently. But value implies doing things better."
+                         </p>
+                         <div className="mt-4 flex items-center gap-3">
+                            <div className="h-10 w-10 bg-slate-200 rounded-full"></div>
+                            <div>
+                               <div className="text-xs font-bold uppercase">Lokender Chauhan</div>
+                               <div className="text-[10px] text-gray-500">Founder & CEO</div>
+                            </div>
                          </div>
-                         <div className="space-y-2 relative z-10 border-t border-blue-500/10 pt-4">
-                            <div className="flex justify-between text-[10px] text-blue-100/80">
-                                <span>Fintech Portals</span>
-                                <span className="font-bold text-white">12+</span>
-                            </div>
-                            <div className="flex justify-between text-[10px] text-blue-100/80">
-                                <span>SaaS Platforms</span>
-                                <span className="font-bold text-white">25+</span>
-                            </div>
-                            <div className="flex justify-between text-[10px] text-blue-100/80">
-                                <span>Mobile Apps</span>
-                                <span className="font-bold text-white">15+</span>
-                            </div>
-                        </div>
                       </div>
-                      
-                      {/* Testimonial Snapshot */}
-                      <div className="bg-white text-slate-900 rounded-2xl p-6 relative flex flex-col justify-between h-full">
-                          <div>
-                            <div className="text-4xl text-blue-500 font-serif leading-none mb-2">“</div>
-                            <p className="text-xs italic font-medium leading-relaxed mb-4">
-                                Codenclick transformed our offline business into a digital powerhouse. Sales increased by 200% in 6 months.
-                            </p>
-                            <div className="border-t border-gray-100 pt-3">
-                                <div className="font-bold text-xs">CEO, Logistics Startup</div>
-                                <div className="text-[9px] text-gray-400 uppercase">New Delhi, India</div>
-                            </div>
-                          </div>
+                   </div>
 
-                          <div className="mt-4 bg-slate-50 p-3 rounded-lg border border-slate-100 box-border">
-                                <div className="flex items-center justify-between mb-1">
-                                    <div className="text-[10px] text-gray-500 font-bold uppercase">Client Rating</div>
-                                    <div className="flex items-center gap-0.5 text-yellow-500">
-                                        <Star size={10} fill="currentColor" />
-                                        <Star size={10} fill="currentColor" />
-                                        <Star size={10} fill="currentColor" />
-                                        <Star size={10} fill="currentColor" />
-                                        <Star size={10} fill="currentColor" />
-                                    </div>
-                                </div>
-                                <div className="text-[9px] text-gray-400 leading-snug">Based on 40+ verified client reviews.</div>
-                           </div>
+                   {/* Right Col: The Stats */}
+                   <div className="col-span-5 flex flex-col justify-center gap-6">
+                      {[
+                         { num: "250+", label: "Projects Delivered", desc: "India • Dubai • USA" },
+                         { num: "98%", label: "Client Retention", desc: "Relationships, not transactions" },
+                         { num: <Users size={36} />, label: "Expert Team", desc: "Engineers & Creatives" },
+                         { num: "7+", label: "Years Excellence", desc: "Since 2018" }
+                      ].map((stat, i) => (
+                         <div key={i} className="bg-slate-900 text-white p-6 rounded-none shadow-xl hover:translate-x-2 transition-transform">
+                            <div className="text-4xl font-black text-blue-400 mb-1">{stat.num}</div>
+                            <div className="font-bold text-sm uppercase tracking-wider mb-1">{stat.label}</div>
+                            <div className="text-xs text-gray-400">{stat.desc}</div>
+                         </div>
+                      ))}
+                   </div>
+                </div>
+             </div>
+          </Page>
+
+          {/* ================= PAGE 3: WHAT WE DO (Services) ================= */}
+          <Page className="bg-slate-50 text-slate-800">
+             <div className="relative z-10 h-full p-14 flex flex-col">
+                <div className="flex justify-between items-end mb-12 border-b border-slate-200 pb-8">
+                   <div className="flex items-center gap-4">
+                      <span className="text-6xl font-black text-slate-200 pointer-events-none">02</span>
+                      <div>
+                         <h2 className="text-3xl font-bold uppercase tracking-wide text-slate-900">Capabilties</h2>
+                         <p className="text-sm text-gray-500 mt-1">End-to-end digital lifecycle management</p>
+                      </div>
+                   </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-6 flex-1">
+                   {/* Card 1 */}
+                   <div className="bg-white p-8 shadow-sm border border-slate-100 flex flex-col gap-4 group">
+                      <div className="h-12 w-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
+                         <Globe size={24} />
+                      </div>
+                      <h3 className="text-xl font-bold">Web Engineering</h3>
+                      <p className="text-sm text-gray-500 leading-relaxed flex-1">
+                         High-performance websites and web apps built on Next.js and React. SEO-optimized out of the box, ensuring you rank as good as you look.
+                      </p>
+                      <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-50">
+                         {['React', 'Next.js', 'Node', 'Headless CMS'].map(t => <span key={t} className="px-2 py-1 bg-slate-100 text-[10px] font-bold uppercase text-slate-600">{t}</span>)}
+                      </div>
+                   </div>
+
+                   {/* Card 2 */}
+                   <div className="bg-white p-8 shadow-sm border border-slate-100 flex flex-col gap-4 group">
+                      <div className="h-12 w-12 bg-purple-50 text-purple-600 rounded-lg flex items-center justify-center">
+                         <Smartphone size={24} />
+                      </div>
+                      <h3 className="text-xl font-bold">Mobile Applications</h3>
+                      <p className="text-sm text-gray-500 leading-relaxed flex-1">
+                         Native-like experience with Cross-platform tech (Flutter/React Native). One codebase, two platforms (iOS & Android).
+                      </p>
+                      <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-50">
+                         {['Flutter', 'React Native', 'iOS', 'Android'].map(t => <span key={t} className="px-2 py-1 bg-slate-100 text-[10px] font-bold uppercase text-slate-600">{t}</span>)}
+                      </div>
+                   </div>
+
+                   {/* Card 3 */}
+                   <div className="bg-white p-8 shadow-sm border border-slate-100 flex flex-col gap-4 group">
+                      <div className="h-12 w-12 bg-green-50 text-green-600 rounded-lg flex items-center justify-center">
+                         <BarChart size={24} />
+                      </div>
+                      <h3 className="text-xl font-bold">Growth Marketing</h3>
+                      <p className="text-sm text-gray-500 leading-relaxed flex-1">
+                         Data-driven specific campaigns on Google & Meta. We focus on ROAS (Return on Ad Spend), not just vanity clicks.
+                      </p>
+                      <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-50">
+                         {['Google Ads', 'Meta Ads', 'SEO', 'Analytics'].map(t => <span key={t} className="px-2 py-1 bg-slate-100 text-[10px] font-bold uppercase text-slate-600">{t}</span>)}
+                      </div>
+                   </div>
+
+                   {/* Card 4 */}
+                   <div className="bg-white p-8 shadow-sm border border-slate-100 flex flex-col gap-4 group">
+                      <div className="h-12 w-12 bg-orange-50 text-orange-600 rounded-lg flex items-center justify-center">
+                         <Cpu size={24} />
+                      </div>
+                      <h3 className="text-xl font-bold">SaaS & Product</h3>
+                      <p className="text-sm text-gray-500 leading-relaxed flex-1">
+                         Full-cycle product development for startups. From MVP to scaling, we handle the architecture, cloud, and security.
+                      </p>
+                      <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-50">
+                         {['AWS', 'Docker', 'Microservices', 'CI/CD'].map(t => <span key={t} className="px-2 py-1 bg-slate-100 text-[10px] font-bold uppercase text-slate-600">{t}</span>)}
                       </div>
                    </div>
                 </div>
              </div>
           </Page>
 
-          {/* ================= PAGE 5: CONTACT (FINAL CTA) ================= */}
-          <Page className="bg-[#000000] text-white" hideWatermark={true}>
-             <div className="h-full flex flex-col justify-center items-center p-8 sm:p-12 relative overflow-hidden">
-                 {/* Background FX (Static for PDF) */}
-                 <div className="absolute top-0 right-0 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] bg-blue-900/20 rounded-full blur-[100px]"></div>
-                 <div className="absolute bottom-0 left-0 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] bg-purple-900/20 rounded-full blur-[100px]"></div>
+          {/* ================= PAGE 4: STRATEGIC GROWTH (Tree Infographic) ================= */}
+          <Page className="bg-slate-50 text-slate-800">
+             <div className="relative z-10 h-full p-12 flex flex-col">
+                <div className="flex items-center gap-4 mb-4">
+                   <span className="text-6xl font-black text-slate-200 pointer-events-none">04</span>
+                   <h2 className="text-3xl font-bold uppercase tracking-wide text-slate-900">Strategic Impact</h2>
+                </div>
+                <p className="text-sm text-gray-500 max-w-2xl mb-8">
+                   We don't just write code; we architect ecosystems. Our multi-faceted approach ensures every digital touchpoint contributes to your bottom line.
+                </p>
 
-                 <div className="relative z-10 w-full max-w-xl text-center">
-                     <div className="w-auto h-20 mx-auto flex items-center justify-center mb-8">
-                        <img src="/logo.png" alt="Codenclick" className="h-full w-auto object-contain" />
-                     </div>
+                {/* Full Page Tree Infographic */}
+                <div className="flex-1 relative">
+                   <svg viewBox="0 0 800 1000" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+                      <defs>
+                         <linearGradient id="glassBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#e0f2fe" stopOpacity="0.9" />
+                            <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.2" />
+                         </linearGradient>
+                         <linearGradient id="glassPurple" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#fae8ff" stopOpacity="0.9" />
+                            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.2" />
+                         </linearGradient>
+                         <linearGradient id="glassGreen" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#dcfce7" stopOpacity="0.9" />
+                            <stop offset="100%" stopColor="#10b981" stopOpacity="0.2" />
+                         </linearGradient>
+                         <linearGradient id="glassAmber" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#fef3c7" stopOpacity="0.9" />
+                            <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.2" />
+                         </linearGradient>
+                         <filter id="iso-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feDropShadow dx="0" dy="10" stdDeviation="5" floodOpacity="0.15"/>
+                         </filter>
+                      </defs>
 
-                     <h2 className="text-3xl sm:text-5xl font-black mb-6 leading-tight">
-                        Ready to Build the <br/>
-                        <span className="text-blue-500">Extraordinary?</span>
-                     </h2>
-                     <p className="text-gray-400 text-sm sm:text-base mb-10 max-w-md mx-auto">
-                        Stop planning, start executing. Book a free 30-minute technical consultation and let's map out your success.
-                     </p>
+                      {/* --- CENTRAL CONDUIT (Spine) --- */}
+                      <path d="M 400 900 L 400 100" stroke="#cbd5e1" strokeWidth="4" strokeDasharray="4 4" />
+                      <path d="M 400 900 L 400 100" stroke="white" strokeWidth="10" strokeOpacity="0.5" filter="url(#iso-shadow)" />
 
-                     {/* Contact Box */}
-                     <div className="bg-[#111] border border-gray-800 rounded-2xl overflow-hidden w-full mb-8">
-                         <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-gray-800 border-b border-gray-800">
-                             <div className="p-6 flex flex-col items-center hover:bg-white/5 transition-colors">
-                                 <Phone className="text-blue-500 mb-2" size={20}/>
-                                 <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Talk to Sales</div>
-                                 <div className="text-sm font-bold font-mono">+91-870019-8968</div>
+                      {/* --- LEVEL 1: FOUNDATION (Bottom) --- */}
+                      <g transform="translate(400, 800)">
+                         {/* Isometric Plate */}
+                         <g className="group transition-transform duration-500 hover:scale-105">
+                             <polygon points="0,40 100,10 0,-20 -100,10" fill="url(#glassBlue)" stroke="#3b82f6" strokeWidth="2" filter="url(#iso-shadow)" />
+                             <polygon points="-100,10 0,40 0,55 -100,25" fill="#3b82f6" opacity="0.3" /> 
+                             <polygon points="100,10 0,40 0,55 100,25" fill="#2563eb" opacity="0.4" />
+                             
+                             {/* Icon Floating */}
+                             <g transform="translate(0, -30)">
+                                 <foreignObject x="-20" y="-20" width="40" height="40">
+                                     <div className="flex items-center justify-center w-full h-full text-blue-600 animate-bounce">
+                                         <Cpu size={32} />
+                                     </div>
+                                 </foreignObject>
+                             </g>
+                         </g>
+
+                         {/* Connector & Card (LEFT) */}
+                         <path d="M -100 10 L -130 10 L -140 -10" fill="none" stroke="#3b82f6" strokeWidth="2" />
+                         <circle cx="-100" cy="10" r="4" fill="#3b82f6" />
+                         <foreignObject x="-380" y="-80" width="240" height="140">
+                             <div className="bg-white p-4 rounded-xl shadow-lg border-t-4 border-blue-500 text-right">
+                                 <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-1">Foundation</h4>
+                                 <p className="text-[9px] text-slate-500 font-medium leading-relaxed">
+                                     High-availability cloud schemas engineered for 99.99% uptime.
+                                 </p>
                              </div>
-                             <div className="p-6 flex flex-col items-center hover:bg-white/5 transition-colors">
-                                 <Mail className="text-purple-500 mb-2" size={20}/>
-                                 <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Email Us</div>
-                                 <div className="text-sm font-bold font-mono">contact@codenclick.in</div>
+                         </foreignObject>
+                      </g>
+
+                      {/* --- LEVEL 2: EXPERIENCE (Mid-Low) --- */}
+                      <g transform="translate(400, 600)">
+                         {/* Isometric Plate */}
+                         <g className="group transition-transform duration-500 hover:scale-105">
+                             <polygon points="0,40 100,10 0,-20 -100,10" fill="url(#glassGreen)" stroke="#10b981" strokeWidth="2" filter="url(#iso-shadow)" />
+                             <polygon points="-100,10 0,40 0,55 -100,25" fill="#10b981" opacity="0.3" />
+                             <polygon points="100,10 0,40 0,55 100,25" fill="#059669" opacity="0.4" />
+
+                             <g transform="translate(0, -30)">
+                                 <foreignObject x="-20" y="-20" width="40" height="40">
+                                     <div className="flex items-center justify-center w-full h-full text-emerald-600 animate-bounce">
+                                         <Smartphone size={32} />
+                                     </div>
+                                 </foreignObject>
+                             </g>
+                         </g>
+
+                         {/* Connector & Card (RIGHT) */}
+                         <path d="M 100 10 L 130 10 L 140 -10" fill="none" stroke="#10b981" strokeWidth="2" />
+                         <circle cx="100" cy="10" r="4" fill="#10b981" />
+                         <foreignObject x="140" y="-80" width="240" height="140">
+                             <div className="bg-white p-4 rounded-xl shadow-lg border-t-4 border-emerald-500 text-left">
+                                 <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-1">Experience</h4>
+                                 <p className="text-[9px] text-slate-500 font-medium leading-relaxed">
+                                     Pixel-perfect, responsive interfaces that captivate users.
+                                 </p>
                              </div>
-                         </div>
-                         <div className="p-6 flex flex-col items-center hover:bg-white/5 transition-colors">
-                             <MapPin className="text-green-500 mb-2" size={20}/>
-                             <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Headquarters</div>
-                             <div className="text-sm font-bold">New Delhi, India</div>
-                         </div>
-                     </div>
+                         </foreignObject>
+                      </g>
 
-                     {/* QR & Web */}
-                     <div className="flex flex-col items-center gap-3">
-                         <div className="p-3 bg-white rounded-xl shadow-lg shadow-white/10">
-                            <img 
-                                src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://www.codenclick.in&format=png" 
-                                alt="Scan QR" 
-                                className="w-20 h-20 block"
-                                crossOrigin="anonymous" 
-                                onLoad={(e) => e.target.setAttribute('data-loaded', 'true')}
-                            />
-                         </div>
-                         <div className="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold">www.codenclick.in</div>
-                     </div>
-                 </div>
+                      {/* --- LEVEL 3: ECOSYSTEM (Mid-High) --- */}
+                      <g transform="translate(400, 400)">
+                         {/* Isometric Plate */}
+                         <g className="group transition-transform duration-500 hover:scale-105">
+                             <polygon points="0,40 100,10 0,-20 -100,10" fill="url(#glassPurple)" stroke="#8b5cf6" strokeWidth="2" filter="url(#iso-shadow)" />
+                             <polygon points="-100,10 0,40 0,55 -100,25" fill="#8b5cf6" opacity="0.3" />
+                             <polygon points="100,10 0,40 0,55 100,25" fill="#7c3aed" opacity="0.4" />
 
-                 {/* Final Footer */}
-                 <div className="absolute bottom-6 w-full text-center">
-                    <div className="flex justify-center gap-4 text-[10px] text-gray-600 uppercase tracking-widest font-bold">
-                        <span>LinkedIn</span>
-                        <span>•</span>
-                        <span>Instagram</span>
-                        <span>•</span>
-                        <span>Twitter</span>
-                    </div>
-                     <div className="text-[9px] text-gray-700 mt-2">© 2025 Codenclick Technologies. All Rights Reserved.</div>
-                 </div>
+                             <g transform="translate(0, -30)">
+                                 <foreignObject x="-20" y="-20" width="40" height="40">
+                                     <div className="flex items-center justify-center w-full h-full text-violet-600 animate-bounce">
+                                         <Globe size={32} />
+                                     </div>
+                                 </foreignObject>
+                             </g>
+                         </g>
+
+                         {/* Connector & Card (LEFT) */}
+                         <path d="M -100 10 L -130 10 L -140 -10" fill="none" stroke="#8b5cf6" strokeWidth="2" />
+                         <circle cx="-100" cy="10" r="4" fill="#8b5cf6" />
+                         <foreignObject x="-380" y="-80" width="240" height="140">
+                             <div className="bg-white p-4 rounded-xl shadow-lg border-t-4 border-violet-500 text-right">
+                                 <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-1">Ecosystem</h4>
+                                 <p className="text-[9px] text-slate-500 font-medium leading-relaxed">
+                                     Universal API mesh unifying your entire digital workflow.
+                                 </p>
+                             </div>
+                         </foreignObject>
+                      </g>
+
+                      {/* --- LEVEL 4: GROWTH (Top) --- */}
+                      <g transform="translate(400, 200)">
+                         {/* Isometric Plate */}
+                         <g className="group transition-transform duration-500 hover:scale-105">
+                             <polygon points="0,40 100,10 0,-20 -100,10" fill="url(#glassAmber)" stroke="#f59e0b" strokeWidth="2" filter="url(#iso-shadow)" />
+                             <polygon points="-100,10 0,40 0,55 -100,25" fill="#f59e0b" opacity="0.3" />
+                             <polygon points="100,10 0,40 0,55 100,25" fill="#d97706" opacity="0.4" />
+
+                             <g transform="translate(0, -30)">
+                                 <foreignObject x="-20" y="-20" width="40" height="40">
+                                     <div className="flex items-center justify-center w-full h-full text-amber-600 animate-bounce">
+                                         <BarChart size={32} />
+                                     </div>
+                                 </foreignObject>
+                             </g>
+                         </g>
+
+                         {/* Connector & Card (RIGHT) */}
+                         <path d="M 100 10 L 130 10 L 140 -10" fill="none" stroke="#f59e0b" strokeWidth="2" />
+                         <circle cx="100" cy="10" r="4" fill="#f59e0b" />
+                         <foreignObject x="140" y="-80" width="240" height="140">
+                             <div className="bg-white p-4 rounded-xl shadow-lg border-t-4 border-amber-500 text-left">
+                                 <h4 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-1">Growth</h4>
+                                 <p className="text-[9px] text-slate-500 font-medium leading-relaxed">
+                                     Intelligence-driven algorithms maximizing business ROI.
+                                 </p>
+                             </div>
+                         </foreignObject>
+                      </g>
+
+                      {/* --- RIGHT SIDEBAR: HOLOGRAPHIC STATS --- */}
+                      <g transform="translate(730, 100)">
+                         <line x1="40" y1="0" x2="40" y2="800" stroke="#cbd5e1" strokeWidth="2" />
+                         
+                         {/* Stat 1 */}
+                         <g transform="translate(0, 150)">
+                            <path d="M 40 0 L 10 15 L 10 45 L 40 60 Z" fill="#e0f2fe" opacity="0.8" stroke="#3b82f6" />
+                            <circle cx="40" cy="30" r="4" fill="#3b82f6" />
+                            <text x="5" y="32" textAnchor="end" className="text-[10px] font-black fill-blue-600">85%</text>
+                            <text x="5" y="45" textAnchor="end" className="text-[6px] font-bold uppercase fill-slate-400">Efficiency</text>
+                         </g>
+
+                         {/* Stat 2 */}
+                         <g transform="translate(0, 350)">
+                             <path d="M 40 0 L 10 15 L 10 45 L 40 60 Z" fill="#dcfce7" opacity="0.8" stroke="#10b981" />
+                             <circle cx="40" cy="30" r="4" fill="#10b981" />
+                             <text x="5" y="32" textAnchor="end" className="text-[10px] font-black fill-emerald-600">3x</text>
+                             <text x="5" y="45" textAnchor="end" className="text-[6px] font-bold uppercase fill-slate-400">Speed</text>
+                         </g>
+                         
+                         {/* Stat 3 */}
+                         <g transform="translate(0, 550)">
+                             <path d="M 40 0 L 10 15 L 10 45 L 40 60 Z" fill="#fae8ff" opacity="0.8" stroke="#8b5cf6" />
+                             <circle cx="40" cy="30" r="4" fill="#8b5cf6" />
+                             <text x="5" y="32" textAnchor="end" className="text-[10px] font-black fill-violet-600">99%</text>
+                             <text x="5" y="45" textAnchor="end" className="text-[6px] font-bold uppercase fill-slate-400">Uptime</text>
+                         </g>
+                      </g>
+                   </svg>
+                </div>
+             </div>
+          </Page>
+
+          {/* ================= PAGE 5: PROCESS ================= */}
+          <Page className="bg-white text-slate-800">
+             <GridPattern />
+             <div className="relative z-10 h-full p-14 flex flex-col">
+                <div className="flex items-center gap-4 mb-16">
+                   <span className="text-6xl font-black text-slate-200 pointer-events-none">05</span>
+                   <h2 className="text-3xl font-bold uppercase tracking-wide text-slate-900">How We Work</h2>
+                </div>
+
+                <div className="flex-1 flex flex-col justify-center items-center relative mt-8">
+                   {/* INFOGRAPHIC: 5-Step Semi-Circle Process (Rainbow Arch) */}
+                   <div className="relative w-full max-w-4xl aspect-[2/1] mt-10">
+                      <svg viewBox="-100 0 1000 500" className="w-full h-full drop-shadow-2xl">
+                         <defs>
+                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                               <feGaussianBlur stdDeviation="4" result="blur" />
+                               <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                         </defs>
+
+                         {/* Central Hub Title */}
+                         <text x="400" y="450" textAnchor="middle" className="text-3xl font-black fill-slate-800 uppercase tracking-widest">Execution Cycle</text>
+                         
+                         {/* SECTORS group */}
+                         <g transform="translate(400, 400)"> {/* Center point at bottom */}
+                            {[
+                               { id: 1, color: "#06b6d4", icon: Search, label: "Discovery", desc: "Research & Roadmap" }, // Cyan
+                               { id: 2, color: "#10b981", icon: Brain, label: "Design", desc: "UI/UX & Prototype" },   // Emerald
+                               { id: 3, color: "#84cc16", icon: Code2, label: "Development", desc: "Agile Sprints" },    // Lime
+                               { id: 4, color: "#3b82f6", icon: Rocket, label: "Launch", desc: "QA & Deploy" },         // Blue
+                               { id: 5, color: "#6366f1", icon: BarChart, label: "Scale", desc: "Growth & Optimize" }    // Indigo
+                            ].map((s, i) => {
+                               // Calculate Angles for Top Semi-Circle (180 to 360)
+                               const totalSectors = 5;
+                               const startAngle = 180 + (i * (180 / totalSectors));
+                               const endAngle = startAngle + (180 / totalSectors);
+                               
+                               // Helper to convert polar to cartesian (Standard Math)
+                               const p2c = (r, a) => {
+                                  const rad = a * Math.PI / 180;
+                                  return { x: r * Math.cos(rad), y: r * Math.sin(rad) };
+                               };
+
+                               // Inner and Outer Radius
+                               const ir = 120;
+                               const or = 280;
+
+                               const p1 = p2c(ir, startAngle);
+                               const p2 = p2c(or, startAngle);
+                               const p3 = p2c(or, endAngle);
+                               const p4 = p2c(ir, endAngle);
+
+                               // Icon Position (Midpoint radius)
+                               const midAngle = startAngle + (180 / totalSectors) / 2;
+                               const iconPos = p2c((ir + or) / 2, midAngle);
+
+                               // Text/Pin Position
+                               const pinStart = p2c(or, midAngle);
+                               const pinEnd = p2c(or + 40, midAngle);
+                               
+                               // Text Anchoring
+                               const isLeft = midAngle < 270;
+                               const isRight = midAngle > 270;
+                               const textX = pinEnd.x + (isLeft ? -10 : 10);
+                               const textAnchor = isLeft ? "end" : isRight ? "start" : "middle";
+                               const yOffset = midAngle === 270 ? -40 : -10; // Push top center text up
+
+                               return (
+                                  <g key={i} className="group cursor-pointer">
+                                     {/* Sector Path */}
+                                     {/* Note: Arc flag '0 0 1' is correct for clockwise 180->360 sweep? No, SVG y is down. 
+                                         180->360 goes Left->Top(neg)->Right. 
+                                         Since y is inverted, standard circle goes clockwise.
+                                         180 (-1, 0) -> 270 (0, -1) -> 360 (1, 0).
+                                     */}
+                                     <path 
+                                        d={`M ${p1.x} ${p1.y} L ${p2.x} ${p2.y} A ${or} ${or} 0 0 1 ${p3.x} ${p3.y} L ${p4.x} ${p4.y} A ${ir} ${ir} 0 0 0 ${p1.x} ${p1.y} Z`} 
+                                        fill={s.color} 
+                                        className="transition-all duration-300 hover:brightness-110 hover:scale-105 origin-center"
+                                        stroke="white"
+                                        strokeWidth="4"
+                                     />
+                                     
+                                     {/* Icon */}
+                                     <foreignObject x={iconPos.x - 20} y={iconPos.y - 20} width="40" height="40" className="pointer-events-none">
+                                        <div className="flex items-center justify-center w-full h-full text-white drop-shadow-md">
+                                           <s.icon size={28} strokeWidth={2.5} />
+                                        </div>
+                                     </foreignObject>
+
+                                     {/* Label Group */}
+                                     <g className="opacity-80 group-hover:opacity-100 transition-opacity">
+                                         {/* Pin Line */}
+                                         <line x1={pinStart.x} y1={pinStart.y} x2={pinEnd.x} y2={pinEnd.y} stroke={s.color} strokeWidth="2" />
+                                         <circle cx={pinEnd.x} cy={pinEnd.y} r="4" fill={s.color} />
+                                         
+                                         {/* Text */}
+                                         <text x={textX} y={pinEnd.y + yOffset} textAnchor={textAnchor} className="fill-slate-800 font-bold text-lg uppercase">{s.label}</text>
+                                         <text x={textX} y={pinEnd.y + yOffset + 15} textAnchor={textAnchor} className="fill-slate-500 text-xs font-medium">{s.desc}</text>
+                                     </g>
+                                  </g>
+                               );
+                            })}
+                         </g>
+                         
+                         {/* Step Badge (Semi-Circle at bottom) */}
+                         <g transform="translate(400, 400)">
+                           <path d="M -80 0 A 80 80 0 0 1 80 0 Z" fill="white" className="drop-shadow-lg" />
+                           <text y="-25" textAnchor="middle" className="text-4xl font-black fill-slate-300">05</text>
+                           <text y="-10" textAnchor="middle" className="text-[10px] font-bold fill-gray-400 uppercase tracking-widest">Steps</text>
+                         </g>
+                      </svg>
+                   </div>
+
+                   {/* Human Connection Section */}
+                   <div className="grid grid-cols-3 gap-6 w-full max-w-5xl mt-8 px-4 border-t border-slate-100 pt-8">
+                      <div className="text-center group">
+                          <div className="w-10 h-10 mx-auto bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                             <Users size={18} />
+                          </div>
+                          <h4 className="font-bold text-sm text-slate-800 mb-1">People First</h4>
+                          <p className="text-[10px] text-slate-500 leading-relaxed px-2">
+                             We don't just follow tickets. We talk, debate, and collaborate. Your project team is a group of humans who genuinely care.
+                          </p>
+                      </div>
+                      <div className="text-center group">
+                          <div className="w-10 h-10 mx-auto bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                             <Shield size={18} />
+                          </div>
+                          <h4 className="font-bold text-sm text-slate-800 mb-1">Transparent Trust</h4>
+                          <p className="text-[10px] text-slate-500 leading-relaxed px-2">
+                             No black boxes. No hidden costs. Honest communication builds better software than complex code ever could.
+                          </p>
+                      </div>
+                      <div className="text-center group">
+                          <div className="w-10 h-10 mx-auto bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                             <Zap size={18} />
+                          </div>
+                          <h4 className="font-bold text-sm text-slate-800 mb-1">Passion Driven</h4>
+                          <p className="text-[10px] text-slate-500 leading-relaxed px-2">
+                             We don't clock out mentally. We are dreamers and doers who get excited about solving the problems that keep you up at night.
+                          </p>
+                      </div>
+                   </div>
+                </div>
+
+                <div className="mt-auto bg-slate-900 text-white p-8 flex justify-between items-center shadow-2xl">
+                   <div>
+                      <div className="text-blue-400 font-bold uppercase tracking-widest text-xs mb-1">Our Promise</div>
+                      <div className="text-lg font-medium">On-Time. On-Budget. Zero Excuses.</div>
+                   </div>
+                   <div className="h-10 w-10 bg-blue-600 flex items-center justify-center rounded-full">
+                      <Check size={20} />
+                   </div>
+                </div>
+             </div>
+          </Page>
+
+          {/* ================= PAGE 5: CONTACT ================= */}
+          <Page className="bg-blue-600 text-white relative">
+             <div className="absolute inset-0 opacity-10">
+                <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                   <path d="M0 100 L100 0 L100 100 Z" fill="white" />
+                </svg>
+             </div>
+             
+             <div className="relative z-10 h-full p-14 flex flex-col justify-between">
+                <div>
+                   <img src="/logo.png" className="h-16 w-auto brightness-0 invert opacity-50 mb-12" alt="Logo" />
+                   <h2 className="text-6xl font-black leading-tight mb-8">
+                      READY TO <br/>
+                      BUILD THE <br/>
+                      <span className="text-gray-900">EXTRAORDINARY?</span>
+                   </h2>
+                   <p className="text-xl text-blue-100 max-w-md leading-relaxed font-medium">
+                      The future belongs to those who build it. Let's start your digital transformation today.
+                   </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-12 mt-12">
+                   <div className="space-y-8">
+                      <div>
+                         <div className="text-blue-200 text-xs font-bold uppercase tracking-widest mb-2">Call Us</div>
+                         <div className="text-2xl font-bold">+91 870019 8968</div>
+                      </div>
+                      <div>
+                         <div className="text-blue-200 text-xs font-bold uppercase tracking-widest mb-2">Email</div>
+                         <div className="text-2xl font-bold">contact@codenclick.in</div>
+                      </div>
+                      <div>
+                         <div className="text-blue-200 text-xs font-bold uppercase tracking-widest mb-2">Visit</div>
+                         <div className="text-lg font-medium max-w-xs"> New Delhi, India</div>
+                      </div>
+                   </div>
+
+                   <div className="flex flex-col items-end justify-end">
+                      <div className="bg-white p-4 rounded-xl shadow-2xl">
+                         <img 
+                            src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://www.codenclick.in&format=png" 
+                            className="w-32 h-32" 
+                            alt="QR Code" 
+                         />
+                      </div>
+                      <div className="mt-4 text-right">
+                         <div className="text-xs font-bold uppercase tracking-widest opacity-70">Scan to Visit</div>
+                         <div className="font-mono text-sm">www.codenclick.in</div>
+                      </div>
+                   </div>
+                </div>
+
+                <div className="border-t border-white/20 pt-8 flex justify-between items-end">
+                   <div className="text-[10px] opacity-60">
+                      © 2026 Codenclick Technologies. <br/> All Rights Reserved.
+                   </div>
+                   <div className="text-6xl font-black text-blue-900 opacity-30 select-none">
+                      2026
+                   </div>
+                </div>
              </div>
           </Page>
 

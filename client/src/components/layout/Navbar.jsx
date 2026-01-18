@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Sun, Moon, Briefcase, Phone, Info, BookOpen, Users } from 'lucide-react';
+import { Menu, X, ChevronDown, Sun, Moon, Briefcase, Phone, Info, BookOpen, Users, Download } from 'lucide-react';
 
 const Navbar = ({ isBannerVisible }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -115,6 +115,14 @@ const Navbar = ({ isBannerVisible }) => {
           {/* Right Side Actions */}
           <div className="hidden md:flex items-center gap-4">
             <Link
+              to="/company-brochure?autoDownload=true"
+              className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-gray-700 dark:text-gray-300 transition-all hover:scale-110 active:scale-95 group relative"
+              title="Download Brochure"
+            >
+               <Download size={20} className="group-hover:text-blue-500" />
+               <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] bg-black text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Get Profile</span>
+            </Link>
+            <Link
               to="/login"
               className="px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-lg shadow-blue-500/30 transition-all hover:scale-105 active:scale-95"
             >
@@ -175,7 +183,14 @@ const Navbar = ({ isBannerVisible }) => {
                   )}
                 </div>
               ))}
-              <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
+              <div className="pt-4 border-t border-gray-100 dark:border-gray-800 flex flex-col gap-3">
+                <Link
+                   to="/company-brochure?autoDownload=true"
+                   onClick={() => setIsOpen(false)}
+                   className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gray-100 dark:bg-white/10 text-gray-900 dark:text-white font-medium hover:bg-gray-200"
+                >
+                   <Download size={18} /> Download Profile
+                </Link>
                 <Link
                   to="/login"
                   onClick={() => setIsOpen(false)}
