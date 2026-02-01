@@ -51,8 +51,8 @@ const About = () => {
           className="text-center mb-20"
         >
           <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-gray-400">
-            We Don't Just Write Code. <br />
-            <span className="text-blue-500">We Engineer Growth.</span>
+            Your Growth Is Our Mission. <br />
+            <span className="text-blue-500">Real People. Real Results.</span>
           </motion.h1>
           <motion.p variants={fadeInUp} className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-4">
             Codenclick Technologies is a team of builders, strategists, and problem solvers. We exist for one reason: to help ambitious businesses win in the digital age.
@@ -84,23 +84,20 @@ const About = () => {
         {/* Mission + Timeline */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-16">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:col-span-2">
-            <h2 className="text-3xl font-bold text-white mb-4">Our Story</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">Why We Started</h2>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              We started <strong className="text-white">Codenclick Technologies</strong> because we were tired of seeing businesses get burned by "digital agencies" that overpromised and underdelivered. We wanted to build a company that actually cared about the outcome, not just the invoice. Based in Delhi, serving clients across Delhi NCR and beyond, we've built our reputation on delivering real, measurable results.
+              We started <strong className="text-white">Codenclick Technologies</strong> because we saw too many businesses getting lost in "tech talk" and over-complicated agency packages. We wanted to build something different: a **Digital Marketing Agency in Delhi** that actually listens, cares, and delivers what matters most — your success.
             </p>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Today, we are a team of obsessives. Obsessed with clean code, obsessed with conversion rates, and obsessed with helping you win. From <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 underline">custom web applications that power your business operations</Link> to <Link to="/services/saas-development" className="text-purple-400 hover:text-purple-300 underline">scalable SaaS platforms</Link> that serve thousands of users, we build software that doesn't just work—it excels. Our <Link to="/services/seo" className="text-green-400 hover:text-green-300 underline">SEO strategies</Link> and <Link to="/services/google-ads" className="text-yellow-400 hover:text-yellow-300 underline">performance marketing campaigns</Link> are designed to drive sustainable growth, not vanity metrics.
+              Whether it's building a fast <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 underline">Custom Website</Link> or helping you get seen on Google as your <Link to="/services/seo" className="text-green-400 hover:text-green-300 underline">SEO Expert in Delhi</Link>, we focus on what works for your business. No fluff, no jargon, just results that scale.
             </p>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Whether you need <Link to="/services/graphic-design" className="text-indigo-400 hover:text-indigo-300 underline">stunning brand identity and UI/UX design</Link> that captivates your audience, or <Link to="/services/meta-ads" className="text-pink-400 hover:text-pink-300 underline">data-driven Meta advertising campaigns</Link> that maximize your ROAS, we bring the technical expertise and creative thinking that transforms businesses. Check out our <Link to="/portfolio" className="text-cyan-400 hover:text-cyan-300 underline">portfolio of successful projects</Link> to see how we've helped companies like yours achieve breakthrough results.
+              From <Link to="/services/meta-ads" className="text-pink-400 hover:text-pink-300 underline">Meta Ads</Link> to <Link to="/services/google-ads" className="text-yellow-400 hover:text-yellow-300 underline">Google Ads</Link>, every strategy we create is designed to bring you high-quality leads and steady growth. Check out our <Link to="/portfolio" className="text-cyan-400 hover:text-cyan-300 underline">Success Stories</Link> to see how we help brands like yours.
             </p>
 
-            <h3 className="text-2xl font-bold text-white mb-4 mt-8">The Codenclick Technologies Promise</h3>
+            <h3 className="text-2xl font-bold text-white mb-4 mt-8">The Codenclick Promise</h3>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              <strong className="text-white">We build for the long haul.</strong> We're not here for quick projects and quick exits. We want to be the partner you trust when you're scaling your business, launching new products, or entering new markets. That means total transparency, zero technical debt, and results that directly impact your bottom line. Every line of code we write, every campaign we launch, every design we create is built with your sustained success in mind. Our clients don't just work with us once—they come back because we deliver.
-            </p>
-            <p className="text-gray-400 mb-6 leading-relaxed">
-              Our comprehensive <Link to="/services" className="text-blue-400 hover:text-blue-300 underline">suite of digital services</Link> covers everything from initial strategy to ongoing optimization. We don't just hand off a project and disappear—we become an extension of your team, continuously monitoring performance, iterating on what works, and pivoting away from what doesn't. This commitment to partnership, backed by proven results and measurable ROI, is what sets us apart in an industry full of one-and-done vendors.
+              We don't just build and disappear. We become an extension of your team, helping you navigate the digital landscape with ease. Our <Link to="/services" className="text-blue-400 hover:text-blue-300 underline">Digital Services</Link> are built for the long term, ensuring your business stays ahead of the curve.
             </p>
             <p className="text-gray-400 mb-6 leading-relaxed">
               <strong className="text-white">Our work speaks for itself.</strong> We've helped businesses increase their revenue by 300%, reduce their customer acquisition costs by 60%, and scale their platforms to serve millions of users. We don't just promise results—we engineer them. From startups finding product-market fit to established enterprises modernizing their tech stack, our track record proves we know how to turn digital investments into business growth.

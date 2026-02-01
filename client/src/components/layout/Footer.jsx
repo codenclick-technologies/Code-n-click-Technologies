@@ -59,7 +59,7 @@ const Footer = () => {
                 />
              </Link>
              <p className="text-gray-400 leading-relaxed">
-               Transforming ideas into digital reality. We build award-winning websites and high-performance marketing campaigns.
+               Making digital success simple for businesses. We build fast websites and run smart marketing campaigns that actually find your customers.
              </p>
              <div className="flex gap-4">
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 hover:bg-pink-600/20 hover:text-pink-500 transition-colors">

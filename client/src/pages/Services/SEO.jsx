@@ -168,8 +168,8 @@ const SEO = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-green-100 to-gray-400"
           >
-            Search Engine <br className="hidden md:block" />
-            <span className="text-green-500">Optimization in Delhi</span>
+            Rank #1 with <br className="hidden md:block" />
+            <span className="text-green-500">SEO Expert in Delhi</span>
           </motion.h1>
 
           <motion.div
@@ -191,15 +191,15 @@ const SEO = () => {
       {/* 2. Intro Section (Pain Point -> Solution -> Trust) */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#020205]">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">If They Can't Find You, You Don't Exist</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">If They Can't Find You, You're Invisible</h2>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            Having the best product or service means nothing if you're buried on Page 2 of Google. You are losing thousands of dollars in potential revenue every single day to competitors who simply rank higher.
+            Being the best at what you do doesn't matter if nobody can find you on Google. You're losing potential customers every day to competitors who just happened to rank higher.
           </p>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            At <strong>Codenclick Technologies</strong>, a premier SEO agency in <strong>Delhi</strong>, we don't guess. We engineer growth. Using battle-tested, white-hat strategies, we help you climb the rankings, capture high-intent traffic, and turn searchers into loyal customers.
+            At <strong>Codenclick Technologies</strong>, your trusted **SEO Expert in Delhi**, we don't just chase algorithms. We focus on real growth. Our team uses honest, "white-hat" strategies to help you climb the search results, get more traffic, and turn visitors into loyal customers.
           </p>
           <p className="text-green-400 font-medium text-lg">
-            We build digital real estate for Delhi NCR brands that pays dividends for years.
+            We build a digital presence that works as hard as you do.
           </p>
         </div>
       </section>

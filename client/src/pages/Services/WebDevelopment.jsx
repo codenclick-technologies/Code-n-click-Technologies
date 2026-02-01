@@ -176,8 +176,8 @@ const WebDevelopment = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-gray-400"
           >
-            Professional Website <br className="hidden md:block" />
-            <span className="text-blue-500">Development in Delhi</span>
+            High-ROI <br className="hidden md:block" />
+            <span className="text-blue-500">Web Development in Delhi</span>
           </motion.h1>
 
           <motion.div
@@ -199,15 +199,15 @@ const WebDevelopment = () => {
       {/* 2. Intro Section (Pain Point -> Solution -> Trust) */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#020205]">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">Is Your Website Costing You Revenue?</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">Is Your Website Helping or Hurting You?</h2>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            In today's digital-first world, a slow, outdated, or confusing website isn't just an annoyance—it's a revenue killer. You lose potential customers to competitors every second your site fails to load or engage.
+            A slow or confusing website isn't just a minor issue—it's a missed opportunity. Every second your site takes to load, you're losing a potential customer to your competition.
           </p>
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            That's where we step in. At <strong>Codenclick Technologies</strong>, a premier agency based in <strong>Delhi</strong>, we don't just write code; we engineer digital growth engines. We transform your business vision into a high-performance, secure, and <Link to="/services/seo" className="text-blue-400 hover:underline">SEO-optimized</Link> web platform that builds trust instantly.
+            We're here to change that. At <strong>Codenclick Technologies</strong>, the best **Web Development Company in Delhi**, we build fast, beautiful, and secure websites that people actually love to use. We don't just write code; we build your digital store that works 24/7 to find you new customers.
           </p>
           <p className="text-blue-400 font-medium text-lg">
-            Over 50+ businesses in Delhi & NCR trust us to deliver pixel-perfect code.
+            Join the 50+ Delhi brands that have seen real results with our "human-first" approach.
           </p>
         </div>
       </section>

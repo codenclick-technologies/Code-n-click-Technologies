@@ -163,11 +163,11 @@ const Careers = () => {
             We're Hiring
           </motion.div>
           <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 dark:from-white dark:via-blue-400 dark:to-white bg-clip-text text-transparent mb-6">
-            Do The Best Work <br />
-            of Your Life.
+            Let's Build Something <br />
+            Great Together.
           </motion.h1>
           <motion.p variants={fadeInUp} className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            We don't hire employees; we hire owners. If you want to build world-class <Link to="/services/web-development" className="font-bold hover:opacity-80 transition-opacity">tech products</Link> and grow faster than you thought possible, you belong here.
+            We're a team of curious minds, builders, and dreamers. If you love solving real-world problems through <Link to="/services/web-development" className="font-bold hover:opacity-80 transition-opacity">Technology</Link> and want to grow in a friendly, high-energy environment, we’d love to have you.
           </motion.p>
         </motion.div>
 

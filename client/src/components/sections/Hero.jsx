@@ -154,7 +154,7 @@ const Hero = () => {
                             <Star size={14} className="text-yellow-400 fill-yellow-400" />
                             <Star size={14} className="text-yellow-400 fill-yellow-400" />
                         </div>
-                        <span className="text-sm font-medium text-gray-200 tracking-wide">Rated #1 for Reliability & Code Quality</span>
+                        <span className="text-sm font-medium text-gray-200 tracking-wide">Delhi's #1 ROI-Driven Digital Marketing Partner</span>
                     </motion.div>
 
                     {/* Main Title */}
@@ -165,9 +165,9 @@ const Hero = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                         >
-                            <span className="block text-gray-200">Turning Vision Into</span>
+                            <span className="block text-gray-200">Clicks to Revenue.</span>
                             <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 pb-2">
-                                Real Business Value
+                                Delhi’s ROI Agency.
                             </span>
                         </motion.h1>
                     </div>
@@ -178,7 +178,7 @@ const Hero = () => {
                         transition={{ delay: 0.4, duration: 1 }}
                         className="text-lg md:text-xl text-gray-400 max-w-xl leading-relaxed font-light mx-auto lg:mx-0"
                     >
-                        Partner with a team that actually cares about your success. We build <Link to="/services/saas-development" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">custom software</Link>, high-performance <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">web applications</Link>, and digital experiences designed to scale with you and delight your users.
+                        We don't just write code; we build businesses. As a leading <Link to="/services/seo" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">SEO Expert in Delhi</Link>, we help brands grow through high-performance <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">Web Development</Link> and result-driven <Link to="/services/google-ads" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">Digital Marketing</Link> strategies that actually scale.
                     </motion.p>
 
                     {/* Buttons */}

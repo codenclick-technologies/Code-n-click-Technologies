@@ -8,7 +8,7 @@ const services = [
   {
     icon: Code,
     title: 'Custom Web Apps',
-    description: 'We don\'t just write code; we build your digital home. From fast landing pages to complex platforms that grow with your business.',
+    description: 'We don\'t just write code; we build your digital home. As the best Web Development Company in Delhi, we create fast, scalable websites.',
     link: '/services/web-development',
     color: 'from-blue-600 via-indigo-500 to-blue-400',
     glow: 'rgba(59, 130, 246, 0.4)',
@@ -26,7 +26,7 @@ const services = [
   {
     icon: Globe,
     title: 'Social Media Growth',
-    description: 'Getting attention is hard. We create Meta and social ads that actually talk to your customers and make them want to buy.',
+    description: 'Need more customers? We create high-converting Meta and Social Ads that actually speak to your audience and drive real growth.',
     link: '/services/meta-ads',
     color: 'from-purple-600 via-pink-500 to-purple-400',
     glow: 'rgba(168, 85, 247, 0.4)',
@@ -43,8 +43,8 @@ const services = [
   },
   {
     icon: Layout,
-    title: 'Human-First Design',
-    description: 'Good design isn\'t just about looking pretty. We create brands and websites that feel right, look premium, and build instant trust.',
+    title: 'High-Converting Design',
+    description: 'Good design should make you money. We create brands and websites that look premium and are engineered to turn visitors into paying customers.',
     link: '/services/graphic-design',
     color: 'from-pink-600 via-rose-500 to-pink-400',
     glow: 'rgba(244, 63, 94, 0.4)',
@@ -53,7 +53,7 @@ const services = [
   {
     icon: Search,
     title: 'Be Found on Google',
-    description: 'Tired of being on page 10? We help you climb the rankings with SEO that makes sense to people, not just search robots.',
+    description: 'Tired of being on page 10? We help you climb the rankings. Our SEO Experts in Delhi ensure you stay ahead of the competition.',
     link: '/services/seo',
     color: 'from-orange-500 via-amber-400 to-yellow-300',
     glow: 'rgba(249, 115, 22, 0.4)',
@@ -148,8 +148,8 @@ const ServicesGrid = () => {
             transition={{ duration: 0.7 }}
             className="text-4xl md:text-6xl font-black text-white leading-tight mb-6 tracking-tighter"
           >
-            We help your brand <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">stand out and grow.</span>
+            Scale Your Traffic, <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">Leads & Revenue.</span>
           </motion.h2>
 
           <motion.p
@@ -159,7 +159,7 @@ const ServicesGrid = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed"
           >
-            Whether you need a <Link to="/services" className="text-white hover:text-blue-400 transition-colors font-medium border-b border-white/20">new website</Link> or more customers, we combine professional engineering with a simple, human approach that helps you <Link to="/portfolio" className="text-white hover:text-blue-400 transition-colors font-medium border-b border-white/20">scale faster</Link>.
+            Stop guessing and start growing. We use high-performance engineering and data-driven marketing to turn your digital presence into a revenue-generating machine. Ready to <Link to="/contact" className="text-blue-400 hover:text-white transition-colors">outrank your competition?</Link>
           </motion.p>
         </div>
 

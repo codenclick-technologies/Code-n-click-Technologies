@@ -9,14 +9,14 @@ const WhyChooseUs = () => {
     {
       icon: TrendingUp,
       title: 'We care about your ROI',
-      description: 'We don\'t just build for the sake of it. Everything we do is focused on helping you get more leads and grow your actual sales.',
+      description: 'As your partner for Digital Marketing in Delhi, we don\'t just count clicks. We track how many leads actually become your customers.',
       color: 'from-blue-600 via-indigo-500 to-cyan-400',
       glow: 'rgba(59, 130, 246, 0.4)'
     },
     {
       icon: Rocket,
       title: 'Blazing fast speed',
-      description: 'Nobody likes a slow website. We build platforms that load in the blink of an eye, keeping your users happy and engaged.',
+      description: 'Slow websites kill businesses. Our Web Development experts in Delhi build lightning-fast platforms that keep your users happy and buying.',
       color: 'from-orange-600 via-amber-500 to-yellow-400',
       glow: 'rgba(249, 115, 22, 0.4)'
     },
@@ -30,7 +30,7 @@ const WhyChooseUs = () => {
     {
       icon: Users,
       title: 'A partner, not just a vendor',
-      description: 'We don\'t disappear after the launch. We stick around to help you solve problems and scale your business as you grow.',
+      description: 'We aren\'t just a vendor you hire for a month. We stick with you as your GMB Expert and SEO consultant to ensure long-term visibility.',
       color: 'from-pink-600 via-rose-500 to-purple-400',
       glow: 'rgba(244, 63, 94, 0.4)'
     },

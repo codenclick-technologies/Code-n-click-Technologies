@@ -77,13 +77,13 @@ const Contact = () => {
                             </span>
                         </motion.div>
                         <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
-                            Enough Strategy. <br />
+                            Let's Build Your <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
-                                Let's Execute.
+                                Digital Success Story.
                             </span>
                         </motion.h1>
                         <motion.p variants={fadeInUp} className="text-xl text-gray-400 leading-relaxed">
-                            You have a vision. We have the engineering team to build it. Whether you need <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 underline">custom web development</Link>, <Link to="/services/saas-development" className="text-purple-400 hover:text-purple-300 underline">scalable SaaS solutions</Link>, or <Link to="/services/seo" className="text-green-400 hover:text-green-300 underline">SEO strategies that dominate</Link>, we're ready to execute. Our <Link to="/services/google-ads" className="text-yellow-400 hover:text-yellow-300 underline">Google Ads</Link> and <Link to="/services/meta-ads" className="text-pink-400 hover:text-pink-300 underline">Meta Ads specialists</Link> drive real ROI, while our <Link to="/services/graphic-design" className="text-indigo-400 hover:text-indigo-300 underline">design team</Link> creates experiences users love. No fluff, just results. Check our <Link to="/portfolio" className="text-cyan-400 hover:text-cyan-300 underline">portfolio</Link> or learn more <Link to="/about" className="text-blue-400 hover:text-blue-300 underline">about our team</Link>.
+                            Have a project in mind? We're here to help you turn it into reality. Whether you need an <Link to="/services/seo" className="text-green-400 hover:text-green-300 underline">SEO Expert in Delhi</Link> to grow your traffic, or a <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 underline">Web Development</Link> team to build your next big platform, we've got you covered. No confusing jargon, just real conversations and real growth.
                         </motion.p>
                     </div>
 

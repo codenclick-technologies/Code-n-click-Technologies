@@ -200,8 +200,8 @@ const Services = () => {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-5xl md:text-8xl font-black tracking-tight mb-8 leading-[0.9] text-white"
           >
-            Capabilities Scaling <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">Delhi Businesses.</span>
+            Capabilities That Help <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">Delhi Brands Thrive.</span>
           </motion.h1>
 
           <motion.p
@@ -210,7 +210,7 @@ const Services = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed font-light"
           >
-            We don't just deliver services; we deliver results. A **Delhi** based agency delivering <Link to="/services/saas-development" className="text-white hover:text-blue-400 transition-colors border-b border-white/20">high-end engineering</Link> and marketing that actually converts.
+            We don't just deliver services; we deliver solutions that matter. As a premier **Delhi** agency, we combine <Link to="/services/saas-development" className="text-white hover:text-blue-400 transition-colors border-b border-white/20">smart technology</Link> with marketing that actually finds your next customer.
           </motion.p>
         </div>
       </section>
@@ -231,7 +231,7 @@ const Services = () => {
       <section className="py-24 relative overflow-hidden bg-[#020205]" id="services">
         <div className="max-w-7xl mx-auto px-6 z-10">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8 tracking-tighter">Our Core <span className="text-blue-500">Expertise.</span></h2>
+            <h2 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8 tracking-tighter">What We <span className="text-blue-500">Do Best.</span></h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light">Integrated solutions designed to work together for maximum business impact.</p>
           </div>
 
@@ -285,7 +285,7 @@ const Services = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-20 text-balance">
-            <h2 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8 tracking-tighter">How We Make <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Magic Happen.</span></h2>
+            <h2 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8 tracking-tighter">How We Work <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">With You.</span></h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">A proven framework for delivering excellence, without the corporate headache.</p>
           </div>
 
@@ -334,7 +334,7 @@ const Services = () => {
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400">Available for Projects</span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-7xl font-black text-white leading-tight mb-8 tracking-tighter">Ready to Build Something <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Extraordinary?</span></h2>
+          <h2 className="text-4xl md:text-7xl font-black text-white leading-tight mb-8 tracking-tighter">Ready to Build Something <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Amazing Together?</span></h2>
           <p className="text-xl text-gray-400 mb-12 font-light leading-relaxed">
             Stop waiting for the "perfect time". Let's discuss your vision and turn it into a high-performance reality today.
           </p>
