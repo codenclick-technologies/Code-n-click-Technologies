@@ -26,8 +26,8 @@ const TestimonialsSection = () => {
     },
     {
       name: 'Surabhi Rawat',
-      company: 'International Client',
-      role: 'Business Expansion',
+      company: 'Truenorth Consulting',
+      role: 'truenorthae.com | truenorthdigi.com',
       image: '👩‍💼',
       rating: 5,
       quote: 'Working with Codenclick Technologies was a great decision for our Dubai-based business. They understood our target audience perfectly and provided strategies that truly worked for us.',
