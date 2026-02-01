@@ -4,18 +4,26 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/utils/SEO';
 import { motion } from 'framer-motion';
 import TeamProfileModal from '../components/ui/TeamProfileModal';
-import { Users, Award, Globe, Coffee, Mail, Cpu } from 'lucide-react';
+import { Users, Award, Globe, Coffee, Mail, Cpu, Zap, TrendingUp } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 import SpotlightCard from '../components/ui/SpotlightCard';
 
 const team = [
   { 
-    name: 'Lokender Chauhan', 
-    role: 'Founder & CEO', 
-    bio: 'A visionary technologist with over 7 years of experience in architecting scalable digital ecosystems. Lokender started Codenclick with a singular mission: to bridge the gap between complex enterprise engineering and agile startup speed. He has successfully delivered 250+ projects, helping global brands navigate digital transformation with clarity and precision. His leadership style focuses on "Engineering for ROI"—ensuring every line of code contributes to business growth.',
-    avatar: <Cpu size={32} />, // Using an abstract tech icon instead of generic emoji
-    email: 'lokender@codenclick.in', 
-    skills: ['Enterprise Architecture', 'Business Strategy', 'Full-Stack Leadership', 'Cloud Infrastructure'] 
+    name: 'Himanshu', 
+    role: 'Co-Founder & CTO', 
+    bio: 'A seasoned full-stack architect with a focus on scalable cloud infrastructure and performance optimization. With a deep passion for clean code and modern frameworks, Himanshu ensures that every project at Codenclick is built on a foundation of technical excellence.',
+    avatar: <Zap size={32} />,
+    email: 'himanshu@codenclick.in', 
+    skills: ['Architecture', 'Cloud Infrastructure', 'Security', 'Performance'] 
+  },
+  { 
+    name: 'Jitender', 
+    role: 'Co-Founder & COO', 
+    bio: 'A strategic growth specialist with extensive experience in digital marketing and business operations. Jitender bridges the gap between technical execution and business goals, ensuring every digital product we build delivers measurable ROI and sustainable growth.',
+    avatar: <TrendingUp size={32} />,
+    email: 'jitender@codenclick.in', 
+    skills: ['Strategy', 'Marketing', 'Operations', 'Growth'] 
   }
 ];
 
@@ -123,10 +131,9 @@ const About = () => {
           </motion.aside>
         </div>
 
-        {/* Team / The Visionary */}
         <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-20">
           <motion.h2 variants={fadeInUp} className="text-3xl font-bold text-white mb-8 text-center">Leadership</motion.h2>
-          <div className="max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {team.map((member, idx) => (
               <motion.div key={idx} variants={fadeInUp} className="group">
                 <SpotlightCard className="p-8 md:p-10 relative overflow-hidden">
