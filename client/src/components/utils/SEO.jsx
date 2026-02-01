@@ -25,54 +25,85 @@ const SEO = ({
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": `${domain}/#organization`,
       "name": siteName,
       "url": domain,
-      "logo": `${domain}/logo.png`,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${domain}/logo.png`,
+        "width": 180,
+        "height": 60
+      },
       "sameAs": [
         "https://www.facebook.com/codenclick",
         "https://twitter.com/codenclick",
-        "https://www.linkedin.com/company/code-n-click"
-      ]
+        "https://www.linkedin.com/company/code-n-click",
+        "https://www.instagram.com/codenclick"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-870019-8968",
+        "contactType": "customer service",
+        "areaServed": "IN",
+        "availableLanguage": ["en", "hi"]
+      }
     },
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
+      "@id": `${domain}/#localbusiness`,
       "name": siteName,
       "image": `${domain}/logo.png`,
-      "description": "Leading software development and digital marketing agency in Delhi offering GMB Expert services, SEO consultation, and web solutions.",
+      "description": "Premium Digital Agency in Delhi. We specialize in GMB Optimization, SEO, Web Development, and Paid Ads to help businesses grow globally.",
+      "url": domain,
+      "telephone": "+91-870019-8968",
+      "priceRange": "₹₹",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "New Delhi",
         "addressLocality": "Delhi",
         "addressRegion": "Delhi",
+        "postalCode": "110001",
         "addressCountry": "IN"
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "28.6139",
-        "longitude": "77.2090"
+        "latitude": 28.6139,
+        "longitude": 77.2090
       },
-      "areaServed": [
-        { "@type": "City", "name": "Delhi" },
-        { "@type": "City", "name": "Delhi" },
-        { "@type": "City", "name": "Noida" },
-        { "@type": "City", "name": "Gurugram" }
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "10:00",
+          "closes": "14:00"
+        }
       ],
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        "opens": "09:00",
-        "closes": "19:00"
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "24"
       },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+91 8700198968",
-        "contactType": "customer service",
-        "areaServed": "IN",
-        "availableLanguage": ["en", "hi"]
-      },
-      "priceRange": "$$",
-      "url": domain,
-      "telephone": "+91 8700198968"
+      "review": [
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Lucky Sharma" },
+          "reviewBody": "If you’re looking for a reliable digital agency, Codenclick Technologies is a solid choice. Their SEO and website recommendations were genuinely helpful.",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5" }
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Surabhi Rawat" },
+          "reviewBody": "Working with Codenclick Technologies was a great decision for our Dubai-based business. They understood our target audience perfectly.",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5" }
+        }
+      ]
     }
   ];
 
