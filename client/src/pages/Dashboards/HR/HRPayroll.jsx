@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DashboardLayout from '../../../components/layout/DashboardLayout';
 import { 
-  DollarSign, FileText, CheckCircle, Download, 
+  IndianRupee, FileText, CheckCircle, Download, 
   TrendingUp, Users, Calendar, AlertCircle, Mail, Send, MoreVertical 
 } from 'lucide-react';
 import { payrollAPI } from '../../../services/api';
@@ -125,12 +125,12 @@ const HRPayroll = () => {
             <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
               <div className="flex justify-between items-start mb-4">
                 <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-xl text-green-600">
-                  <DollarSign size={24} />
+                  <IndianRupee size={24} />
                 </div>
                 <span className="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded-full dark:bg-green-900/30 dark:text-green-400">+12%</span>
               </div>
               <p className="text-gray-500 text-sm font-medium">Total Expense</p>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mt-1">${summary.totalExpense.toLocaleString()}</h3>
+              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mt-1">₹{summary.totalExpense.toLocaleString()}</h3>
             </div>
 
             <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
@@ -216,11 +216,11 @@ const HRPayroll = () => {
                   className="group relative overflow-hidden p-8 border border-gray-200 dark:border-gray-700 rounded-2xl hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 transition-all cursor-pointer bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-800/50"
                 >
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <DollarSign size={120} />
+                    <IndianRupee size={120} />
                   </div>
                   <div className="relative z-10 flex items-center gap-6">
                     <div className="p-4 bg-blue-600 text-white rounded-2xl shadow-lg shadow-blue-600/30 group-hover:scale-110 transition-transform">
-                      <DollarSign size={32} />
+                      <IndianRupee size={32} />
                     </div>
                     <div>
                       <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Run Payroll</h4>
@@ -284,7 +284,7 @@ const HRPayroll = () => {
                         {slip.month} {slip.year}
                       </td>
                       <td className="px-8 py-5 font-bold text-gray-900 dark:text-white">
-                        ${slip.netSalary.toLocaleString()}
+                        ₹{slip.netSalary.toLocaleString()}
                       </td>
                       <td className="px-8 py-5">
                         <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800">

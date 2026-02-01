@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import DashboardLayout from '../../components/layout/DashboardLayout';
 import { 
-  TrendingUp, Users, DollarSign, Download, BarChart3, 
+  TrendingUp, Users, IndianRupee, Download, BarChart3, 
   ArrowUp, Briefcase, UserPlus, Settings, Search,
   PieChart, Edit, Trash2, XCircle
 } from 'lucide-react';
@@ -570,7 +570,7 @@ const OwnerDashboard = () => {
               <p className="text-4xl font-bold mt-2">₹{(companyStats.avgSalary / 1000).toFixed(0)}K</p>
               <p className="text-purple-100 text-sm mt-2">Per employee</p>
             </div>
-            <div className="p-3 rounded-xl bg-white/20"><DollarSign size={28} /></div>
+            <div className="p-3 rounded-xl bg-white/20"><IndianRupee size={28} /></div>
           </div>
         </div>
 

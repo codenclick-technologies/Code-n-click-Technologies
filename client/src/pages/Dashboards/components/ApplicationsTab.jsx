@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Search, Filter, LayoutGrid, List, MoreVertical, 
-  Calendar, DollarSign, Briefcase, Clock, ChevronRight,
+  Calendar, IndianRupee, Briefcase, Clock, ChevronRight,
   Download, Eye, CheckCircle, XCircle, Loader
 } from 'lucide-react';
 import { applicationsAPI, jobsAPI } from '../../../services/api';
@@ -95,7 +95,7 @@ const ApplicationsTab = () => {
               <Briefcase size={12} />
               <span>{app.experienceYears} Years</span>
               <span className="mx-1">•</span>
-              <DollarSign size={12} />
+              <IndianRupee size={12} />
               <span>{app.expectedCTC ? `${app.expectedCTC / 1000}k` : 'N/A'}</span>
             </div>
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DashboardLayout from '../../../components/layout/DashboardLayout';
 import { 
   Briefcase, Search, Plus, Edit2, Trash2, Eye, EyeOff, 
-  MapPin, Clock, DollarSign, Filter, MoreVertical, CheckCircle, XCircle
+  MapPin, Clock, IndianRupee, Filter, MoreVertical, CheckCircle, XCircle
 } from 'lucide-react';
 import { jobsAPI } from '../../../services/api';
 
@@ -253,7 +253,7 @@ const HRJobs = () => {
                       <span className="flex items-center gap-1"><Briefcase size={16} /> {job.department}</span>
                       <span className="flex items-center gap-1"><Clock size={16} /> {job.type?.replace('_', ' ') || 'N/A'}</span>
                       <span className="flex items-center gap-1"><MapPin size={16} /> {job.location}</span>
-                      <span className="flex items-center gap-1"><DollarSign size={16} /> {job.salaryRange}</span>
+                      <span className="flex items-center gap-1"><IndianRupee size={16} /> {job.salaryRange}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -330,7 +330,7 @@ const HRJobs = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Salary Range</label>
-                  <input type="text" value={jobForm.salaryRange} onChange={(e) => setJobForm({...jobForm, salaryRange: e.target.value})} className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500" placeholder="e.g. $50k - $70k" />
+                  <input type="text" value={jobForm.salaryRange} onChange={(e) => setJobForm({...jobForm, salaryRange: e.target.value})} className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500" placeholder="e.g. ₹5L - ₹7L" />
                 </div>
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Description *</label>

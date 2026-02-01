@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  X, Mail, Phone, Calendar, DollarSign, FileText, 
+  X, Mail, Phone, Calendar, IndianRupee, FileText, 
   Download, ExternalLink, Clock, CheckCircle, XCircle,
   MessageSquare, Send
 } from 'lucide-react';
@@ -243,14 +243,14 @@ const ApplicationDetailsModal = ({ application, onClose, onUpdate }) => {
                   <div>
                     <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Current CTC</div>
                     <div className="text-sm font-medium text-gray-900 dark:text-white flex items-center gap-1">
-                      <DollarSign size={14} className="text-gray-400" />
+                      <IndianRupee size={14} className="text-gray-400" />
                       {application.currentCTC ? application.currentCTC.toLocaleString() : 'N/A'}
                     </div>
                   </div>
                   <div>
                     <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Expected CTC</div>
                     <div className="text-sm font-medium text-gray-900 dark:text-white flex items-center gap-1">
-                      <DollarSign size={14} className="text-gray-400" />
+                      <IndianRupee size={14} className="text-gray-400" />
                       {application.expectedCTC ? application.expectedCTC.toLocaleString() : 'N/A'}
                     </div>
                   </div>

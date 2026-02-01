@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import {
   Briefcase, Heart, Zap, Coffee, ArrowRight, Check,
-  MapPin, Clock, DollarSign, Search, Filter, X,
+  MapPin, Clock, IndianRupee, Search, Filter, X,
   Upload, Send, Loader
 } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '../utils/animations';
@@ -324,8 +324,8 @@ const Careers = () => {
                           </span>
                           {job.salaryMin && job.salaryMax && (
                             <span className="flex items-center gap-1.5">
-                              <DollarSign size={16} className="text-orange-600 dark:text-orange-400" />
-                              {job.salaryCurrency} {job.salaryMin} - {job.salaryMax}
+                              <IndianRupee size={16} className="text-orange-600 dark:text-orange-400" />
+                              {(job.salaryCurrency === '$' || job.salaryCurrency === 'INR') ? '₹' : job.salaryCurrency} {job.salaryMin} - {job.salaryMax}
                             </span>
                           )}
                         </div>
