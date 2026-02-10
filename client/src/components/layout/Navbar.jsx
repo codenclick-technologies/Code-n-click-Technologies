@@ -47,6 +47,7 @@ const Navbar = ({ isBannerVisible }) => {
     },
 
     { name: 'Portfolio', path: '/portfolio', icon: Briefcase },
+    { name: 'Pricing', path: '/pricing', icon: DollarSign },
     { name: 'Resources', path: '/resources', icon: BookOpen },
     { name: 'Careers', path: '/careers', icon: Users },
     { name: 'Contact Us', path: '/contact', icon: Phone },
