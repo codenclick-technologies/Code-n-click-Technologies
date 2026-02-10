@@ -70,7 +70,7 @@ const Navbar = ({ isBannerVisible }) => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-5 xl:space-x-8">
             {navLinks.map((link) => (
               <div
                 key={link.name}
@@ -80,10 +80,25 @@ const Navbar = ({ isBannerVisible }) => {
               >
                 <Link
                   to={link.path}
-                  className="flex items-center gap-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
+                  className="relative flex items-center gap-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors py-2"
                 >
                   {link.name}
-                  {link.dropdown && <ChevronDown size={16} />}
+                  {link.dropdown && <ChevronDown size={14} />}
+                  
+                  {link.name === 'Pricing' && (
+                    <motion.div
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 rounded-full shadow-[0_0_8px_rgba(245,158,11,0.6)]"
+                      animate={{ 
+                        opacity: [0.4, 1, 0.4],
+                        scaleX: [0.9, 1.1, 0.9],
+                      }}
+                      transition={{ 
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  )}
                 </Link>
 
                 {/* Dropdown */}
@@ -114,7 +129,7 @@ const Navbar = ({ isBannerVisible }) => {
           </div>
 
           {/* Right Side Actions */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
             <Link
               to="/company-brochure?autoDownload=true"
               className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-gray-700 dark:text-gray-300 transition-all hover:scale-110 active:scale-95 group relative"
@@ -132,7 +147,7 @@ const Navbar = ({ isBannerVisible }) => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-4">
+          <div className="lg:hidden flex items-center gap-4">
             <button
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle navigation menu"
@@ -151,7 +166,7 @@ const Navbar = ({ isBannerVisible }) => {
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="absolute top-full left-0 right-0 mt-4 mx-4 p-6 bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden md:hidden max-h-[75vh] overflow-y-auto"
+            className="absolute top-full left-0 right-0 mt-4 mx-4 p-6 bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden lg:hidden max-h-[75vh] overflow-y-auto"
           >
             <div className="space-y-3">
               {navLinks.map((link) => (
