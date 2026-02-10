@@ -1,158 +1,138 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Sparkles, ArrowRight, Zap } from 'lucide-react';
+import { X, Trophy, Rocket, CheckCircle, ArrowRight, MessageCircle, Phone } from 'lucide-react';
 
 const LeadMagnetModal = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [email, setEmail] = useState('');
-    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
-        // Show modal after 3 seconds of page load, but only if not shown before in session
-        const hasSeenModal = sessionStorage.getItem('hasSeenLeadModal');
+        // Smart trigger: Show after 5 seconds or upon exit intent (if possible, but simpler here)
+        const hasSeenModal = sessionStorage.getItem('hasSeenPremiumOffer');
         if (!hasSeenModal) {
             const timer = setTimeout(() => {
                 setIsOpen(true);
-                sessionStorage.setItem('hasSeenLeadModal', 'true');
-            }, 3000);
+                sessionStorage.setItem('hasSeenPremiumOffer', 'true');
+            }, 5000);
             return () => clearTimeout(timer);
         }
     }, []);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Here you would integrate with your backend or email service
-        console.log('Lead submitted:', email);
-        setSubmitted(true);
-        setTimeout(() => setIsOpen(false), 2000);
+    const handleWhatsApp = () => {
+        window.open('https://wa.me/919999999999?text=I%20want%20to%20scale%20my%20business%20with%20Code-n-click', '_blank');
+        setIsOpen(false);
     };
 
     return (
         <AnimatePresence>
             {isOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                    {/* Backdrop with blur effect */}
+                    {/* Cinematic Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsOpen(false)}
-                        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                        className="absolute inset-0 bg-black/80 backdrop-blur-md"
                     />
 
-                    {/* Modal Content */}
+                    {/* Ultra-Premium Modal */}
                     <motion.div
-                        initial={{ scale: 0.9, opacity: 0, y: 20 }}
-                        animate={{ scale: 1, opacity: 1, y: 0 }}
-                        exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                        className="relative w-full max-w-lg bg-[#0A0A0A] border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
+                        initial={{ scale: 0.8, opacity: 0, y: 50, rotateX: 10 }}
+                        animate={{ scale: 1, opacity: 1, y: 0, rotateX: 0 }}
+                        exit={{ scale: 0.8, opacity: 0, y: 50 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                        className="relative w-full max-w-2xl bg-[#080808] border border-white/10 rounded-[2rem] shadow-2xl overflow-hidden group"
                     >
-                        {/* Decorative Gradient Background */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10 pointer-events-none" />
-                        
-                        {/* Content Container */}
-                        <div className="relative p-8 md:p-10 text-center">
-                            {/* Close Button */}
-                            <button
-                                onClick={() => setIsOpen(false)}
-                                className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-colors"
-                            >
-                                <X size={20} />
-                            </button>
+                        {/* Holographic/Gradient Effects */}
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+                        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+                        <div className="absolute -top-24 -right-24 w-64 h-64 bg-purple-600/20 rounded-full blur-[80px]"></div>
+                        <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-600/20 rounded-full blur-[80px]"></div>
 
-                            {!submitted ? (
-                                <>
-                                    {/* Icon Header */}
-                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-600 rounded-full flex items-center justify-center shadow-lg shadow-orange-500/30 border-4 border-[#0A0A0A]">
-                                        <Sparkles className="text-white w-10 h-10 animate-pulse" />
-                                    </div>
-
-                                    <div className="mt-8 text-center">
-                                        <div className="inline-block px-3 py-1 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-full border border-orange-500/30 text-orange-400 text-xs font-bold tracking-wider uppercase mb-4 animate-bounce">
-                                            Limited Time Offer
+                        <div className="relative p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center">
+                            
+                            {/* Left Side: Visual Impact */}
+                            <div className="w-full md:w-5/12 text-center md:text-left">
+                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-yellow-400 text-xs font-bold uppercase tracking-widest mb-6 animate-pulse">
+                                    <Trophy size={14} />
+                                    <span>Top Rated Agency</span>
+                                </div>
+                                <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-4">
+                                    Don't Just Build a Website. <br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                                        Build an Empire.
+                                    </span>
+                                </h2>
+                                <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                                    Your competitors are already using AI-driven tech. Give us <strong>15 minutes</strong>, and we'll show you how to beat them.
+                                </p>
+                                
+                                {/* Trust Badges */}
+                                <div className="flex justify-center md:justify-start -space-x-3">
+                                    {[1, 2, 3, 4].map((i) => (
+                                        <div key={i} className={`w-8 h-8 rounded-full border-2 border-[#080808] bg-gray-800 flex items-center justify-center overflow-hidden`}>
+                                            <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i*13}`} alt="User" />
                                         </div>
-                                        
-                                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
-                                            Stop Losing <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Customers!</span>
-                                        </h2>
-                                        
-                                        <p className="text-gray-400 text-sm md:text-base mb-6 max-w-sm mx-auto">
-                                            Your website is leaking revenue. Get our free <strong>"Conversion Audit Checklist"</strong> and turn visitors into buyers instantly.
-                                        </p>
+                                    ))}
+                                    <div className="w-8 h-8 rounded-full border-2 border-[#080808] bg-gray-800 flex items-center justify-center text-[10px] font-bold text-white">
+                                        +500
                                     </div>
+                                </div>
+                                <p className="text-xs text-gray-500 mt-2">Trusted by 500+ Market Leaders</p>
+                            </div>
 
-                                    {/* Benefits List */}
-                                    <div className="bg-white/5 rounded-xl p-4 mb-6 border border-white/10 text-left">
-                                        <ul className="space-y-2 text-sm text-gray-300">
-                                            <li className="flex items-center gap-2">
-                                                <Zap className="w-4 h-4 text-yellow-400" />
-                                                <span>Identify 3 critical design flaws</span>
-                                            </li>
-                                            <li className="flex items-center gap-2">
-                                                <Zap className="w-4 h-4 text-yellow-400" />
-                                                <span>Double your mobile sales speed</span>
-                                            </li>
-                                            <li className="flex items-center gap-2">
-                                                <Zap className="w-4 h-4 text-yellow-400" />
-                                                <span>SEO tricks used by top 1% agencies</span>
-                                            </li>
-                                        </ul>
-                                    </div>
+                            {/* Right Side: The Offer (No Email, Direct Value) */}
+                            <div className="w-full md:w-7/12 bg-white/5 rounded-2xl p-6 border border-white/5 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-4 opacity-10">
+                                    <Rocket size={100} className="text-white transform rotate-12" />
+                                </div>
 
-                                    <form onSubmit={handleSubmit} className="space-y-3">
-                                        <div className="relative group">
-                                            <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-                                            <input
-                                                type="email"
-                                                required
-                                                placeholder="Enter your business email"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                className="relative w-full bg-[#050505] text-white border border-white/10 rounded-xl px-4 py-3.5 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 placeholder-gray-500 transition-all font-medium"
-                                            />
-                                        </div>
-                                        
-                                        <button
-                                            type="submit"
-                                            className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 group uppercase tracking-wide text-sm"
-                                        >
-                                            Send Me The Free Audit
-                                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                        </button>
-                                    </form>
+                                <h3 className="text-xl font-bold text-white mb-4 relative z-10">
+                                    Why Choose Codenclick?
+                                </h3>
+                                
+                                <ul className="space-y-3 mb-8 relative z-10">
+                                    {[
+                                        "2X Faster Load Speeds Guaranteed",
+                                        "Click-to-Conversion Designs",
+                                        "AI-Integrated Sales Funnels"
+                                    ].map((benefit, idx) => (
+                                        <li key={idx} className="flex items-start gap-3 text-sm text-gray-300">
+                                            <CheckCircle className="w-5 h-5 text-green-400 shrink-0" />
+                                            <span>{benefit}</span>
+                                        </li>
+                                    ))}
+                                </ul>
 
-                                    {/* Social Proof + Urgency */}
-                                    <div className="mt-5 flex items-center justify-center gap-4 text-xs text-gray-500 border-t border-white/5 pt-4">
-                                        <div className="flex -space-x-2">
-                                            <div className="w-6 h-6 rounded-full bg-blue-500 border border-[#0A0A0A]"></div>
-                                            <div className="w-6 h-6 rounded-full bg-purple-500 border border-[#0A0A0A]"></div>
-                                            <div className="w-6 h-6 rounded-full bg-green-500 border border-[#0A0A0A]"></div>
-                                        </div>
-                                        <p>Downloaded by <span className="text-white font-semibold">1,200+</span> Founders</p>
-                                    </div>
-                                </>
-                            ) : (
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    className="py-10 text-center"
-                                >
-                                    <div className="mx-auto w-20 h-20 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mb-6 border border-green-500/30">
-                                        <Zap size={40} />
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-white mb-2">Audit Sent! 🚀</h3>
-                                    <p className="text-gray-400 mb-6 max-w-xs mx-auto">
-                                        Your free audit checklist is on its way to <strong>{email}</strong>.
-                                    </p>
+                                <div className="space-y-3 relative z-10">
                                     <button 
-                                        onClick={() => setIsOpen(false)}
-                                        className="text-sm text-gray-500 hover:text-white underline transition-colors"
+                                        onClick={handleWhatsApp}
+                                        className="w-full group bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3.5 rounded-xl shadow-lg shadow-green-500/20 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-3"
                                     >
-                                        Back to Website
+                                        <MessageCircle className="w-5 h-5" />
+                                        <span>Chat on WhatsApp</span>
+                                        <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
                                     </button>
-                                </motion.div>
-                            )}
+                                    
+                                    <div className="text-center">
+                                        <span className="text-gray-500 text-xs uppercase tracking-wider font-semibold">Or</span>
+                                    </div>
+
+                                    <button className="w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 rounded-xl border border-white/10 transition-all flex items-center justify-center gap-2">
+                                        <Phone className="w-4 h-4" />
+                                        <span>Book Free Strategy Call</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
+
+                        {/* Close Button */}
+                        <button
+                            onClick={() => setIsOpen(false)}
+                            className="absolute top-4 right-4 p-2 text-white/30 hover:text-white hover:bg-white/10 rounded-full transition-all"
+                        >
+                            <X size={20} />
+                        </button>
                     </motion.div>
                 </div>
             )}
