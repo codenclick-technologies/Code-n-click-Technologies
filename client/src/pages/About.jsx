@@ -117,76 +117,86 @@ const About = () => {
           </motion.aside>
         </div>
 
-        {/* Founder's Vision - Simplified & Personal */}
+        {/* Founder's Vision - Compact Executive Card */}
         <motion.section 
           initial="hidden" 
           whileInView="visible" 
           viewport={{ once: true }} 
           variants={staggerContainer} 
-          className="mb-32 relative"
+          className="mb-14 relative"
         >
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+          {/* Subtle Background Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[400px] bg-amber-500/5 blur-[100px] rounded-full pointer-events-none"></div>
 
-          <div className="max-w-4xl mx-auto relative z-10">
-            <motion.div variants={fadeInUp} className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 mb-6">
-                <Crown size={14} className="text-amber-500" />
-                <span className="text-amber-500 text-[10px] font-bold uppercase tracking-[0.2em]">A Note From Our Founder</span>
-              </div>
-              <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-tight">
-                "We don't build websites. <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">We build empires."</span>
-              </h2>
-            </motion.div>
-
-            <SpotlightCard className="bg-[#0A0A0B]/50 border-white/5 backdrop-blur-sm rounded-[40px] p-8 md:p-16">
-              <div className="space-y-8">
-                <div className="relative">
-                  <span className="text-8xl text-amber-500/10 font-serif absolute -top-10 -left-4 leading-none select-none">“</span>
-                  <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-medium relative z-10 italic">
-                    {founder.vision}
-                  </p>
+          <div className="max-w-5xl mx-auto relative z-10">
+            <SpotlightCard className="bg-[#0A0A0B]/80 border-white/5 backdrop-blur-md rounded-[32px] overflow-hidden">
+              <div className="grid grid-cols-1 lg:grid-cols-12">
+                
+                {/* Visual Accent Side */}
+                <div className="lg:col-span-1 bg-gradient-to-b from-amber-500/10 to-transparent flex items-center justify-center py-6 lg:py-0 border-b lg:border-b-0 lg:border-r border-white/5">
+                  <div className="lg:-rotate-90 flex items-center gap-4 whitespace-nowrap">
+                    <Crown size={14} className="text-amber-500" />
+                    <span className="text-amber-500 text-[9px] font-black uppercase tracking-[0.4em]">Personal Vision</span>
+                  </div>
                 </div>
 
-                <div className="h-px w-20 bg-gradient-to-r from-amber-500 to-transparent"></div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-4">
-                  <div>
-                    <p className="text-gray-400 leading-relaxed text-lg">
-                      {founder.bio}
-                    </p>
-                    <div className="mt-8">
-                       <h4 className="text-white font-black text-2xl mb-1">{founder.name}</h4>
-                       <p className="text-amber-500 font-bold uppercase tracking-widest text-sm">{founder.role}</p>
-                    </div>
+                {/* Main Content Side */}
+                <div className="lg:col-span-11 p-8 md:p-12">
+                  <div className="relative mb-8">
+                    <span className="text-6xl text-amber-500/10 font-serif absolute -top-8 -left-2 leading-none">“</span>
+                    <h2 className="text-2xl md:text-3xl font-bold text-white leading-tight relative z-10 italic tracking-tight italic">
+                      {founder.vision}
+                    </h2>
                   </div>
 
-                  <div className="flex flex-col justify-end">
-                    <p className="text-xs font-bold text-gray-500 uppercase tracking-[0.3em] mb-6">Execution Pillars</p>
-                    <div className="flex flex-wrap gap-3">
-                      {founder.skills.map((skill) => (
-                        <span key={skill} className="px-4 py-2 bg-white/5 border border-white/10 rounded-2xl text-xs font-bold text-gray-300 hover:border-amber-500/30 transition-colors cursor-default">
-                          {skill}
-                        </span>
-                      ))}
+                  <div className="flex flex-col lg:flex-row gap-10 items-start">
+                    <div className="flex-1">
+                      <p className="text-gray-400 leading-relaxed text-base border-l-2 border-amber-500/30 pl-6">
+                        {founder.bio}
+                      </p>
+                      
+                      <div className="mt-8 flex items-center gap-6">
+                        <div>
+                          <h4 className="text-white font-black text-xl tracking-tight">{founder.name}</h4>
+                          <p className="text-amber-500 font-bold uppercase tracking-[0.2em] text-[9px]">{founder.role}</p>
+                        </div>
+                        <div className="h-8 w-px bg-white/10"></div>
+                        <div className="flex gap-2">
+                          <a href={`mailto:${founder.email}`} className="p-2.5 bg-white/5 border border-white/10 rounded-lg hover:bg-amber-500/10 hover:border-amber-500/30 transition-all text-gray-500 hover:text-amber-500">
+                             <Mail size={16} />
+                          </a>
+                          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 border border-white/10 rounded-lg hover:bg-blue-500/10 hover:border-blue-500/30 transition-all text-gray-500 hover:text-blue-500">
+                             <Shield size={16} />
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                    
-                    <div className="mt-10 flex gap-4">
-                      <a href={`mailto:${founder.email}`} className="flex-1 py-4 bg-white text-black font-black text-sm rounded-2xl text-center hover:bg-gray-200 transition-all shadow-xl shadow-white/5">
+
+                    <div className="w-full lg:w-64 space-y-4">
+                      <div>
+                        <p className="text-[9px] font-black text-gray-500 uppercase tracking-[0.3em] mb-3">Core Expertise</p>
+                        <div className="flex flex-wrap gap-2">
+                          {founder.skills.slice(0, 4).map((skill) => (
+                            <span key={skill} className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] font-bold text-gray-400">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <Link to="/contact" className="block w-full py-3.5 bg-white text-black font-black text-[10px] rounded-lg text-center hover:bg-amber-500 hover:text-white transition-all shadow-lg shadow-black/20 uppercase tracking-widest">
                         DIRECT CONSULTATION
-                      </a>
-                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="px-6 py-4 bg-white/5 border border-white/10 text-white font-bold text-sm rounded-2xl flex items-center justify-center hover:bg-white/10 transition-all">
-                        In
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
+
               </div>
             </SpotlightCard>
-            
-            <motion.p variants={fadeInUp} className="text-center text-gray-500 text-xs mt-12 uppercase tracking-[0.4em]">
-               100% Personal Oversight • Zero Agency Bloat • Direct Results
-            </motion.p>
+            <div className="flex justify-center gap-8 mt-6 opacity-30">
+               <span className="text-[8px] font-bold tracking-[0.2em] text-gray-400">FOUNDER LED STRATEGY</span>
+               <span className="text-[8px] font-bold tracking-[0.2em] text-gray-400">100% HUMANIZED FOCUS</span>
+            </div>
           </div>
         </motion.section>
 
