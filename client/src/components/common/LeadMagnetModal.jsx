@@ -6,13 +6,14 @@ const LeadMagnetModal = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        // Smart trigger: Show after 5 seconds or upon exit intent (if possible, but simpler here)
-        const hasSeenModal = sessionStorage.getItem('hasSeenPremiumOffer');
+        // Force show for testing new design
+        // Using a new key ensures previous visitors see the new offer
+        const hasSeenModal = sessionStorage.getItem('hasSeenEliteOffer_v1');
         if (!hasSeenModal) {
             const timer = setTimeout(() => {
                 setIsOpen(true);
-                sessionStorage.setItem('hasSeenPremiumOffer', 'true');
-            }, 5000);
+                sessionStorage.setItem('hasSeenEliteOffer_v1', 'true');
+            }, 1000); // Show quickly (1s)
             return () => clearTimeout(timer);
         }
     }, []);
