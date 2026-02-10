@@ -12,7 +12,7 @@ const founder = {
   role: 'Founder & CEO', 
   bio: 'The visionary architect behind Codenclick. Lokender combines deep technical expertise with strategic business acumen to drive digital transformation for global enterprises. He believes in building long-term partnerships through transparency, innovation, and measurable results.',
   vision: "A website is not just a digital address; it's your 24/7 sales powerhouse, your brand's heartbeat, and your most valuable asset. My mission is to ensure every business we touch doesn't just survive the digital shift, but dominates it.",
-  avatar: <Crown size={48} />,
+  avatar: '/images/founder.jpg',
   email: 'lokender@codenclick.in', 
   skills: ['Strategic Leadership', 'Software Engineering', 'Business Growth', 'Product Innovation', 'AI Integration'],
   gradient: 'from-[#FFD700] via-amber-500 to-orange-600',
@@ -139,17 +139,37 @@ const About = () => {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
                 <div className="lg:col-span-5 flex flex-col items-center">
-                  <div className="relative">
-                    <motion.div 
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                      className="absolute -inset-4 border-2 border-dashed border-amber-500/30 rounded-full"
-                    ></motion.div>
+                  <div className="relative group/photo">
+                    {/* Dynamic Blur Background for the Image */}
+                    <div className="absolute -inset-6 bg-amber-500/20 rounded-full blur-3xl opacity-50 group-hover:opacity-80 transition-opacity duration-700"></div>
                     
-                    <div className={`w-40 h-40 md:w-56 md:h-56 rounded-full bg-gradient-to-br ${founder.gradient} flex items-center justify-center text-white shadow-[0_0_50px_-12px_rgba(245,158,11,0.5)] relative z-10`}>
-                      {founder.avatar}
-                      <div className="absolute -bottom-2 -right-2 bg-black border border-amber-500/40 p-3 rounded-2xl shadow-xl">
-                        <Award size={24} className="text-amber-500" />
+                    <div className="w-48 h-48 md:w-64 md:h-64 rounded-full p-1 bg-gradient-to-br from-amber-500/50 to-orange-600/50 relative z-10 overflow-hidden shadow-[0_0_50px_-12px_rgba(245,158,11,0.5)]">
+                      <div className="w-full h-full rounded-full overflow-hidden bg-[#0A0A0B] relative flex items-center justify-center">
+                        {/* Background Blurred Image Layer */}
+                        <img 
+                          src={founder.avatar} 
+                          alt="" 
+                          className="absolute inset-0 w-full h-full object-cover scale-150 blur-xl opacity-40 transition-opacity duration-500"
+                          onError={(e) => { e.target.style.opacity = '0' }}
+                        />
+                        {/* Main Sharp Image */}
+                        <img 
+                          src={founder.avatar} 
+                          alt={founder.name} 
+                          className="relative z-10 w-full h-full object-cover object-top hover:scale-105 transition-all duration-700"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'flex';
+                          }}
+                        />
+                        {/* Fallback Icon if Image Missing */}
+                        <div className="hidden absolute inset-0 w-full h-full items-center justify-center bg-gradient-to-br from-amber-500/10 to-orange-600/10">
+                          <Crown size={80} className="text-amber-500/40 animate-pulse" />
+                        </div>
+                      </div>
+                      
+                      <div className="absolute -bottom-2 -right-2 bg-black border border-amber-500/40 p-3 rounded-2xl shadow-xl z-20">
+                        <Crown size={24} className="text-amber-500" />
                       </div>
                     </div>
                   </div>
