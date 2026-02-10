@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Sun, Moon, Briefcase, Phone, Info, BookOpen, Users, Download, DollarSign } from 'lucide-react';
+import { Menu, X, ChevronDown, Sun, Moon, Briefcase, Phone, Info, BookOpen, Users, Download, IndianRupee } from 'lucide-react';
 
 const Navbar = ({ isBannerVisible }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +47,7 @@ const Navbar = ({ isBannerVisible }) => {
     },
 
     { name: 'Portfolio', path: '/portfolio', icon: Briefcase },
-    { name: 'Pricing', path: '/pricing', icon: DollarSign },
+    { name: 'Pricing', path: '/pricing', icon: IndianRupee },
     { name: 'Resources', path: '/resources', icon: BookOpen },
     { name: 'Careers', path: '/careers', icon: Users },
     { name: 'Contact Us', path: '/contact', icon: Phone },
