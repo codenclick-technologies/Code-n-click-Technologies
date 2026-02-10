@@ -151,31 +151,31 @@ const Navbar = ({ isBannerVisible }) => {
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="absolute top-full left-0 right-0 mt-4 mx-4 p-4 bg-gray-900/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden md:hidden max-h-[80vh] overflow-y-auto"
+            className="absolute top-full left-0 right-0 mt-4 mx-4 p-6 bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden md:hidden max-h-[75vh] overflow-y-auto"
           >
-            <div className="space-y-1">
+            <div className="space-y-3">
               {navLinks.map((link) => (
-                <div key={link.name}>
+                <div key={link.name} className="border-b border-white/5 pb-3 last:border-0">
                   <Link
                     to={link.path}
                     onClick={() => !link.dropdown && setIsOpen(false)}
-                    className="flex items-center justify-between text-lg font-medium text-gray-900 dark:text-white"
+                    className="flex items-center justify-between py-3 px-4 rounded-lg hover:bg-white/5 transition-colors"
                   >
-                    <span className="flex items-center gap-3">
-                      <link.icon size={20} className="text-blue-600" />
+                    <span className="flex items-center gap-3 text-base font-medium text-white">
+                      <link.icon size={20} className="text-blue-500" />
                       {link.name}
                     </span>
-                    {link.dropdown && <ChevronDown size={16} />}
+                    {link.dropdown && <ChevronDown size={16} className="text-gray-400" />}
                   </Link>
 
                   {link.dropdown && (
-                    <div className="mt-2 ml-8 space-y-2 border-l-2 border-gray-100 dark:border-gray-800 pl-4">
+                    <div className="mt-2 ml-8 space-y-2 border-l-2 border-blue-500/30 pl-4">
                       {link.dropdown.map((item) => (
                         <Link
                           key={item.name}
                           to={item.path}
                           onClick={() => setIsOpen(false)}
-                          className="block py-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
+                          className="block py-2 px-3 text-sm text-gray-400 hover:text-blue-400 hover:bg-white/5 rounded transition-colors"
                         >
                           {item.name}
                         </Link>

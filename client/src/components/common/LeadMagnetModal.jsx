@@ -121,9 +121,10 @@ const LeadMagnetModal = () => {
 
                         <button
                             onClick={() => setIsOpen(false)}
-                            className="absolute top-4 right-4 p-2 text-white/20 hover:text-white transition-colors"
+                            className="absolute top-3 right-3 z-50 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all backdrop-blur-sm"
+                            aria-label="Close modal"
                         >
-                            <X size={24} />
+                            <X size={20} className="md:w-6 md:h-6" />
                         </button>
                     </motion.div>
                 </div>
