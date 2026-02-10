@@ -1,59 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import SEO from '../components/utils/SEO';
 import { motion } from 'framer-motion';
-import TeamProfileModal from '../components/ui/TeamProfileModal';
-import { Users, Award, Globe, Coffee, Mail, Cpu, Zap, TrendingUp, Crown } from 'lucide-react';
+import { Users, Award, Globe, Coffee, Mail, Cpu, Zap, TrendingUp, Crown, Shield, Rocket } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 import SpotlightCard from '../components/ui/SpotlightCard';
 
-const team = [
-  { 
-    name: 'Lokender Chauhan', 
-    role: 'Founder & CEO', 
-    bio: 'The visionary architect behind Codenclick. Lokender combines deep technical expertise with strategic business acumen to drive digital transformation for global enterprises. He believes in building long-term partnerships through transparency, innovation, and measurable results.',
-    avatar: <Crown size={32} />,
-    email: 'lokender@codenclick.in', 
-    skills: ['Leadership', 'Business Strategy', 'Tech Vision', 'Innovation'],
-    gradient: 'from-amber-500 to-orange-600',
-    shadow: 'shadow-amber-500/20'
-  },
-  { 
-    name: 'Himanshu', 
-    role: 'Co-Founder & CTO', 
-    bio: 'A seasoned full-stack architect with a focus on scalable cloud infrastructure and performance optimization. With a deep passion for clean code and modern frameworks, Himanshu ensures that every project is built on a foundation of technical excellence.',
-    avatar: <Zap size={32} />,
-    email: 'himanshu@codenclick.in', 
-    skills: ['Architecture', 'Cloud Infrastructure', 'Security', 'Performance'],
-    gradient: 'from-blue-600 to-cyan-400',
-    shadow: 'shadow-blue-500/20'
-  },
-  { 
-    name: 'Jitender', 
-    role: 'Co-Founder & COO', 
-    bio: 'A strategic growth specialist with extensive experience in digital marketing and business operations. Jitender bridges the gap between technical execution and business goals, ensuring every digital product delivers measurable ROI and sustainable growth.',
-    avatar: <TrendingUp size={32} />,
-    email: 'jitender@codenclick.in', 
-    skills: ['Strategy', 'Marketing', 'Operations', 'Growth'],
-    gradient: 'from-emerald-500 to-teal-400',
-    shadow: 'shadow-emerald-500/20'
-  }
-];
+const founder = { 
+  name: 'Lokender Chauhan', 
+  role: 'Founder & CEO', 
+  bio: 'The visionary architect behind Codenclick. Lokender combines deep technical expertise with strategic business acumen to drive digital transformation for global enterprises. He believes in building long-term partnerships through transparency, innovation, and measurable results.',
+  vision: "A website is not just a digital address; it's your 24/7 sales powerhouse, your brand's heartbeat, and your most valuable asset. My mission is to ensure every business we touch doesn't just survive the digital shift, but dominates it.",
+  avatar: <Crown size={48} />,
+  email: 'lokender@codenclick.in', 
+  skills: ['Strategic Leadership', 'Software Engineering', 'Business Growth', 'Product Innovation', 'AI Integration'],
+  gradient: 'from-[#FFD700] via-amber-500 to-orange-600',
+  glow: 'rgba(245, 158, 11, 0.4)'
+};
 
 const timeline = [
   { icon: '🚀', title: 'We Dream Big', desc: 'Every project we take on, we approach with ambition. We don\'t settle for incremental improvements — we aim to transform how our clients do business.' },
 ];
 
 const About = () => {
-  const [selected, setSelected] = useState(null);
-
   return (
     <div className="min-h-screen bg-[#020205] text-white overflow-hidden pt-32 px-4 sm:px-6 lg:px-8">
       <SEO
-        title="Codenclick Technologies | Best Digital Agency in Delhi, India"
-        description="Learn about Codenclick Technologies, Delhi's premier software development and digital marketing agency. We engineer growth for businesses through custom code and data-driven marketing."
-        keywords="About Codenclick Technologies, Best Digital Agency Delhi, Software Company Delhi, Web Development Team Delhi, Digital Marketing Experts Delhi"
+        title="About Lokender Chauhan | Founder of Codenclick Technologies"
+        description="Meet Lokender Chauhan, the visionary Founder & CEO of Codenclick Technologies. Learn about his mission to transform businesses through high-performance custom code and elite digital strategies."
+        keywords="Lokender Chauhan, Founder Codenclick, CEO Codenclick, Web Development Expert Delhi, Digital Transformation Leader"
       />
 
       <div className="max-w-7xl mx-auto">
@@ -64,15 +40,15 @@ const About = () => {
           variants={staggerContainer}
           className="text-center mb-20"
         >
-          <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-gray-400">
-            Your Growth Is Our Mission. <br />
-            <span className="text-blue-500">Real People. Real Results.</span>
+          <motion.div variants={fadeInUp} className="inline-block px-4 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6">
+            <span className="text-blue-400 text-xs font-bold uppercase tracking-[0.2em]">Our Story & Vision</span>
+          </motion.div>
+          <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-black mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-gray-400 leading-tight">
+            Your Success Is <br />
+            <span className="text-blue-500">Our Only Currency.</span>
           </motion.h1>
-          <motion.p variants={fadeInUp} className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-4">
-            Codenclick Technologies is a team of builders, strategists, and problem solvers. We exist for one reason: to help ambitious businesses win in the digital age.
-          </motion.p>
-          <motion.p variants={fadeInUp} className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Forget agency bloat and buzzwords. We deliver lean, mean, high-performance digital products that look great and work even better.
+          <motion.p variants={fadeInUp} className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            We don't just build code; we engineer competitive advantages. Codenclick Technologies was born from a simple realization: businesses deserve better than "good enough" digital products.
           </motion.p>
         </motion.section>
 
@@ -114,7 +90,7 @@ const About = () => {
               We don't just build and disappear. We become an extension of your team, helping you navigate the digital landscape with ease. Our <Link to="/services" className="text-blue-400 hover:text-blue-300 underline">Digital Services</Link> are built for the long term, ensuring your business stays ahead of the curve.
             </p>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              <strong className="text-white">Our work speaks for itself.</strong> We've helped businesses increase their revenue by 300%, reduce their customer acquisition costs by 60%, and scale their platforms to serve millions of users. We don't just promise results—we engineer them. From startups finding product-market fit to established enterprises modernizing their tech stack, our track record proves we know how to turn digital investments into business growth.
+              <strong className="text-white">Our work speaks for itself.</strong> We've helped businesses increase their revenue by 300%, reduce their customer acquisition costs by 60%, and scale their platforms to serve millions of users. We don't just promise results—we engineer them.
             </p>
 
             <div className="space-y-6 mt-8">
@@ -142,90 +118,141 @@ const About = () => {
           </motion.aside>
         </div>
 
-        <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-20">
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-white mb-12 text-center">Meet The Leadership</motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {team.map((member, idx) => (
-              <motion.div key={idx} variants={fadeInUp} className="group h-full">
-                <SpotlightCard className="p-1 h-full bg-[#0A0A0A] border-white/5 hover:border-white/10 transition-colors duration-500">
-                  <div className="h-full flex flex-col p-6 md:p-8 relative z-10">
+        {/* Founder Elite Showcase Section */}
+        <motion.section 
+          initial="hidden" 
+          whileInView="visible" 
+          viewport={{ once: true }} 
+          variants={staggerContainer} 
+          className="mb-32"
+        >
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-black text-white mb-12 text-center flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-amber-500 hidden md:block"></div>
+            The Visionary Behind Codenclick
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-amber-500 hidden md:block"></div>
+          </motion.h2>
+
+          <motion.div variants={fadeInUp} className="relative group max-w-5xl mx-auto">
+            <div className="absolute -inset-4 bg-gradient-to-r from-amber-500/20 to-orange-600/20 rounded-[40px] blur-2xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+            
+            <SpotlightCard className="relative overflow-hidden bg-[#0A0A0B] border-white/5 p-8 md:p-16 rounded-[32px]">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div className="lg:col-span-5 flex flex-col items-center">
+                  <div className="relative">
+                    <motion.div 
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                      className="absolute -inset-4 border-2 border-dashed border-amber-500/30 rounded-full"
+                    ></motion.div>
                     
-                    {/* Header: Avatar + Role Badge */}
-                    <div className="flex items-start justify-between mb-6">
-                      <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center text-white shadow-lg ${member.shadow} group-hover:scale-110 transition-transform duration-500`}>
-                        {member.avatar}
-                      </div>
-                      <div className="px-3 py-1 bg-white/5 backdrop-blur-md rounded-full border border-white/10 text-xs font-bold text-gray-300 tracking-wider uppercase">
-                         {member.role.split('&')[0].trim()}
+                    <div className={`w-40 h-40 md:w-56 md:h-56 rounded-full bg-gradient-to-br ${founder.gradient} flex items-center justify-center text-white shadow-[0_0_50px_-12px_rgba(245,158,11,0.5)] relative z-10`}>
+                      {founder.avatar}
+                      <div className="absolute -bottom-2 -right-2 bg-black border border-amber-500/40 p-3 rounded-2xl shadow-xl">
+                        <Award size={24} className="text-amber-500" />
                       </div>
                     </div>
+                  </div>
 
-                    {/* Name & Role */}
-                    <div className="mb-4">
-                      <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all duration-300">
-                        {member.name}
-                      </h3>
-                      <p className={`text-sm font-semibold bg-gradient-to-r ${member.gradient} bg-clip-text text-transparent`}>
-                        {member.role}
-                      </p>
+                  <div className="mt-8 text-center">
+                    <h3 className="text-3xl font-black text-white tracking-tight mb-1">{founder.name}</h3>
+                    <p className="text-amber-500 font-bold uppercase tracking-widest text-sm">{founder.role}</p>
+                    
+                    <div className="flex justify-center gap-3 mt-6">
+                      {['Strategic', 'Technical', 'Innovative'].map((tag) => (
+                        <span key={tag} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] text-gray-400 font-bold">
+                          {tag}
+                        </span>
+                      ))}
                     </div>
+                  </div>
+                </div>
 
-                    {/* Bio */}
-                    <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
-                      {member.bio}
+                <div className="lg:col-span-7 flex flex-col h-full">
+                  <div className="relative mb-8 pt-8">
+                    <span className="absolute top-0 left-0 text-6xl text-amber-500/20 font-serif leading-none transition-transform duration-500 group-hover:scale-110">"</span>
+                    <p className="text-xl md:text-2xl font-bold text-white leading-relaxed italic relative z-10">
+                      {founder.vision}
                     </p>
+                  </div>
 
-                    {/* Skills */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {member.skills.map((skill, sIdx) => (
-                        <span key={sIdx} className="px-2 py-1 bg-white/5 border border-white/5 rounded text-[10px] font-medium text-gray-400 hover:text-white hover:border-white/20 transition-colors cursor-default">
+                  <p className="text-gray-400 text-base leading-relaxed mb-8 border-l-4 border-amber-500/30 pl-6">
+                    {founder.bio}
+                  </p>
+
+                  <div className="mb-10">
+                    <p className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em] mb-4">Core Expertise</p>
+                    <div className="flex flex-wrap gap-2">
+                      {founder.skills.map((skill) => (
+                        <span key={skill} className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-xs font-semibold text-gray-300 transition-all cursor-default hover:border-amber-500/30">
                           {skill}
                         </span>
                       ))}
                     </div>
+                  </div>
 
-                    {/* Action */}
-                    <a href={`mailto:${member.email}`} className="mt-auto w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-gray-300 hover:text-white text-sm font-semibold transition-all flex items-center justify-center gap-2 group/btn">
-                       <Mail size={16} className="group-hover/btn:scale-110 transition-transform" />
-                       Connect
+                  <div className="mt-auto flex flex-col sm:flex-row gap-4">
+                    <a href={`mailto:${founder.email}`} className="flex-1 py-4 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-600 text-black font-black text-sm text-center shadow-lg shadow-amber-500/20 hover:scale-[1.02] active:scale-95 transition-all">
+                      CONVERSATION WITH FOUNDER
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-bold text-sm text-center transition-all">
+                      LinkedIn
                     </a>
                   </div>
-                </SpotlightCard>
-              </motion.div>
-            ))}
-          </div>
+                </div>
+
+              </div>
+            </SpotlightCard>
+          </motion.div>
         </motion.section>
 
-        {/* Values */}
-        <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
-          <h2 className="text-3xl font-bold text-white mb-6">Core values</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[{
-              title: 'Innovation',
-              desc: 'Continuously iterate and experiment to find better solutions.'
-            }, {
-              title: 'Integrity',
-              desc: 'Transparent communication and trust-based relationships.'
-            }, {
-              title: 'Excellence',
-              desc: 'Deliver craftsmanship in code, design, and strategy.'
-            }].map((v, i) => (
-              <SpotlightCard key={i} className="p-6">
-                <h4 className="text-lg font-bold text-white mb-2">{v.title}</h4>
-                <p className="text-gray-400 text-sm">{v.desc}</p>
+        {/* Values - High End Layout */}
+        <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-32">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">The Codenclick Code</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">Our culture is built on these foundational pillars, ensuring every project meets the Lokender Chauhan standard of excellence.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: 'Obsessive Quality', desc: 'We don\'t do "good enough". Every line of code and every pixel in the design must serve a purpose and provide elite value.', icon: Cpu, color: 'text-amber-500' },
+              { title: 'Aggressive Transparency', desc: 'No smoke and mirrors. You get direct access to truth, metrics, and progress. We win or lose together as true partners.', icon: Shield, color: 'text-blue-500' },
+              { title: 'Future-Proof Scalability', desc: 'We build for 10x growth today. Our architectures are designed to handle millions of users without breaking a sweat.', icon: Rocket, color: 'text-emerald-500' }
+            ].map((v, i) => (
+              <SpotlightCard key={i} className="p-8 border-white/5 hover:border-white/20 transition-all group">
+                <v.icon className={`${v.color} mb-6 group-hover:scale-110 transition-transform`} size={40} />
+                <h4 className="text-xl font-black text-white mb-4 tracking-tight">{v.title}</h4>
+                <p className="text-gray-400 text-sm leading-relaxed">{v.desc}</p>
               </SpotlightCard>
             ))}
           </div>
         </motion.section>
 
-        {/* CTA */}
-        <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-8">
-          <h3 className="text-2xl font-bold text-white mb-4">Ready to build something remarkable?</h3>
-          <p className="text-gray-400 mb-6">Whether you're a startup looking to launch your MVP or an established business ready to scale, we're here to help. <Link to="/contact" className="text-blue-400 hover:text-blue-300 underline">Contact us for a free consultation</Link> where we'll analyze your current challenges, identify opportunities, and create a roadmap for success. We'll help you prioritize the highest-impact work that delivers real ROI, not just busy work. Join the <Link to="/careers" className="text-purple-400 hover:text-purple-300 underline">growing team of innovators</Link> or explore our <Link to="/resources" className="text-green-400 hover:text-green-300 underline">free resources and insights</Link> to learn more about digital transformation.</p>
-          <Link to="/contact" className="inline-block px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-semibold hover:scale-105 transition-transform">Get in touch</Link>
+        {/* CTA - Final High Stakes Message */}
+        <motion.section 
+          initial={{ opacity: 0, scale: 0.95 }} 
+          whileInView={{ opacity: 1, scale: 1 }} 
+          viewport={{ once: true }} 
+          className="text-center mb-20 relative px-6 py-20 rounded-[40px] overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-amber-500/5 to-transparent"></div>
+          
+          <div className="relative z-10">
+            <h3 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter">Ready to Build Your Empire?</h3>
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+              Join the ranks of high-growth founders who chose elite engineering over generic templates. Stop settling for less and start building for market dominance.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-6">
+              <Link to="/contact" className="px-10 py-5 bg-white text-black font-black rounded-full hover:bg-gray-200 transition-all hover:scale-105 shadow-xl shadow-white/5">
+                SECURE YOUR SLOT
+              </Link>
+              <Link to="/portfolio" className="px-10 py-5 bg-white/5 border border-white/10 text-white font-black rounded-full hover:bg-white/10 transition-all">
+                VIEW OUR PROOF
+              </Link>
+            </div>
+            <p className="text-gray-500 text-xs mt-8 uppercase tracking-[0.3em]">Direct oversight on all new projects by the Founder</p>
+          </div>
         </motion.section>
       </div>
-      {selected && <TeamProfileModal member={selected} onClose={() => setSelected(null)} />}
     </div>
   );
 };
