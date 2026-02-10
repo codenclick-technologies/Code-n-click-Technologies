@@ -14,7 +14,7 @@ const LeadMagnetModal = () => {
     }, []);
 
     const handleWhatsApp = () => {
-        window.open('https://wa.me/919999999999?text=Hi%20Team%2C%20I%20am%20ready%20to%20build%20my%20website.%20I%20want%20premium%20quality%20work.', '_blank');
+        window.open('https://wa.me/918700198968?text=Hi%20Team%2C%20I%20am%20ready%20to%20build%20my%20website.%20I%20want%20premium%20quality%20work.', '_blank');
         setIsOpen(false);
     };
 

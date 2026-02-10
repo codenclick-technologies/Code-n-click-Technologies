@@ -100,7 +100,7 @@ const Pricing = () => {
         
         const message = `Hi Team, I want to build a ${selectedWebsite?.name}. ${selectedAddonsList ? `Add-ons: ${selectedAddonsList}. ` : ''}Estimated Budget: ₹${total.toLocaleString('en-IN')}. Let's discuss!`;
         
-        window.open(`https://wa.me/919999999999?text=${encodeURIComponent(message)}`, '_blank');
+        window.open(`https://wa.me/918700198968?text=${encodeURIComponent(message)}`, '_blank');
     };
 
     return (
