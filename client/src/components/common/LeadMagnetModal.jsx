@@ -102,12 +102,19 @@ const LeadMagnetModal = () => {
                                 </li>
                             </ul>
 
+                            <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 mb-6 text-center">
+                                <p className="text-amber-500 font-black text-lg animate-pulse">
+                                    RAMDAN SPECIAL: FLAT 20% OFF
+                                </p>
+                                <p className="text-gray-400 text-[10px] uppercase tracking-tighter">Valid for next 48 hours only</p>
+                            </div>
+
                             <button 
                                 onClick={handleWhatsApp}
                                 className="w-full group relative overflow-hidden bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-black font-bold py-4 rounded-xl shadow-[0_0_30px_-5px_rgba(245,158,11,0.4)] transition-all duration-300 transform hover:-translate-y-1"
                             >
                                 <span className="relative z-10 flex items-center justify-center gap-2">
-                                    YES, BUILD MY EMPIRE
+                                    YES, CLAIM MY DISCOUNT
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </span>
                                 {/* Shine Effect */}
@@ -115,7 +122,7 @@ const LeadMagnetModal = () => {
                             </button>
                             
                             <p className="text-center text-[10px] text-gray-600 mt-4 uppercase tracking-widest">
-                                Limited capacity for new projects
+                                *Only 3 slots remaining at this price
                             </p>
                         </div>
 
