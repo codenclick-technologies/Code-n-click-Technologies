@@ -57,6 +57,7 @@ const SEO = lazy(() => import('./pages/Services/SEO'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
+const Pricing = lazy(() => import('./pages/Pricing'));
 
 
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -150,6 +151,7 @@ function AppContent() {
               <Route path="/resources/:slug" element={<ResourceDetail />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/pricing" element={<Pricing />} />
 
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfService />} />
