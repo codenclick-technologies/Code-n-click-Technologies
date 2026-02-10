@@ -4,26 +4,40 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/utils/SEO';
 import { motion } from 'framer-motion';
 import TeamProfileModal from '../components/ui/TeamProfileModal';
-import { Users, Award, Globe, Coffee, Mail, Cpu, Zap, TrendingUp } from 'lucide-react';
+import { Users, Award, Globe, Coffee, Mail, Cpu, Zap, TrendingUp, Crown } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 import SpotlightCard from '../components/ui/SpotlightCard';
 
 const team = [
   { 
+    name: 'Lokender Chauhan', 
+    role: 'Founder & CEO', 
+    bio: 'The visionary architect behind Codenclick. Lokender combines deep technical expertise with strategic business acumen to drive digital transformation for global enterprises. He believes in building long-term partnerships through transparency, innovation, and measurable results.',
+    avatar: <Crown size={32} />,
+    email: 'lokender@codenclick.in', 
+    skills: ['Leadership', 'Business Strategy', 'Tech Vision', 'Innovation'],
+    gradient: 'from-amber-500 to-orange-600',
+    shadow: 'shadow-amber-500/20'
+  },
+  { 
     name: 'Himanshu', 
     role: 'Co-Founder & CTO', 
-    bio: 'A seasoned full-stack architect with a focus on scalable cloud infrastructure and performance optimization. With a deep passion for clean code and modern frameworks, Himanshu ensures that every project at Codenclick is built on a foundation of technical excellence.',
+    bio: 'A seasoned full-stack architect with a focus on scalable cloud infrastructure and performance optimization. With a deep passion for clean code and modern frameworks, Himanshu ensures that every project is built on a foundation of technical excellence.',
     avatar: <Zap size={32} />,
     email: 'himanshu@codenclick.in', 
-    skills: ['Architecture', 'Cloud Infrastructure', 'Security', 'Performance'] 
+    skills: ['Architecture', 'Cloud Infrastructure', 'Security', 'Performance'],
+    gradient: 'from-blue-600 to-cyan-400',
+    shadow: 'shadow-blue-500/20'
   },
   { 
     name: 'Jitender', 
     role: 'Co-Founder & COO', 
-    bio: 'A strategic growth specialist with extensive experience in digital marketing and business operations. Jitender bridges the gap between technical execution and business goals, ensuring every digital product we build delivers measurable ROI and sustainable growth.',
+    bio: 'A strategic growth specialist with extensive experience in digital marketing and business operations. Jitender bridges the gap between technical execution and business goals, ensuring every digital product delivers measurable ROI and sustainable growth.',
     avatar: <TrendingUp size={32} />,
     email: 'jitender@codenclick.in', 
-    skills: ['Strategy', 'Marketing', 'Operations', 'Growth'] 
+    skills: ['Strategy', 'Marketing', 'Operations', 'Growth'],
+    gradient: 'from-emerald-500 to-teal-400',
+    shadow: 'shadow-emerald-500/20'
   }
 ];
 
@@ -66,14 +80,14 @@ const About = () => {
         <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           {[
             { icon: Users, label: 'Partners Who Trust Us', value: '500+', subtext: 'Startups to enterprises' },
-            { icon: Award, label: 'Industry Recognition', value: '25+', subtext: 'Awards &amp; accolades' },
+            { icon: Award, label: 'Industry Recognition', value: '25+', subtext: 'Awards & accolades' },
             { icon: Globe, label: 'Global Impact', value: '12', subtext: 'Countries, 1 mission' },
-            { icon: Coffee, label: 'Fueled By Passion', value: '10k+', subtext: 'Cups &amp; counting' },
+            { icon: Coffee, label: 'Fueled By Passion', value: '10k+', subtext: 'Cups & counting' },
           ].map((s, i) => (
             <motion.div key={i} variants={fadeInUp} className="">
-              <SpotlightCard className="p-6 text-center">
-                <s.icon className="mx-auto text-cyan-400 mb-3" size={28} />
-                <div className="text-3xl font-extrabold text-white">{s.value}</div>
+              <SpotlightCard className="p-6 text-center h-full flex flex-col justify-center items-center group hover:border-white/20 transition-colors">
+                <s.icon className="text-cyan-400 mb-3 group-hover:scale-110 transition-transform duration-300" size={28} />
+                <div className="text-3xl font-extrabold text-white mb-1">{s.value}</div>
                 <div className="text-gray-300 font-semibold text-sm">{s.label}</div>
                 <div className="text-gray-500 text-xs mt-1">{s.subtext}</div>
               </SpotlightCard>
@@ -105,10 +119,10 @@ const About = () => {
 
             <div className="space-y-6 mt-8">
               {timeline.map((t, idx) => (
-                <div key={idx} className="flex gap-4 items-start">
-                  <div className="flex-none w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 flex items-center justify-center text-2xl">{t.icon}</div>
+                <div key={idx} className="flex gap-4 items-start group">
+                  <div className="flex-none w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">{t.icon}</div>
                   <div>
-                    <h4 className="text-lg font-bold text-white">{t.title}</h4>
+                    <h4 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">{t.title}</h4>
                     <p className="text-gray-400 text-sm mt-1">{t.desc}</p>
                   </div>
                 </div>
@@ -116,7 +130,7 @@ const About = () => {
             </div>
           </motion.div>
 
-          <motion.aside initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-2xl bg-[#050505]/80 backdrop-blur-xl border border-white/5 p-6 shadow-2xl">
+          <motion.aside initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-2xl bg-[#050505]/80 backdrop-blur-xl border border-white/5 p-6 shadow-2xl sticky top-32">
             <h3 className="text-lg font-bold text-white mb-3">Our Mantra</h3>
             <ul className="text-gray-400 space-y-3 text-sm">
               <li>✓ Code that scales</li>
@@ -124,55 +138,57 @@ const About = () => {
               <li>✓ Marketing that delivers ROI</li>
               <li>✓ Partnerships that last</li>
             </ul>
-            <a href="/contact" className="inline-block mt-6 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-semibold">Start construction</a>
+            <a href="/contact" className="inline-block mt-6 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-cyan-500/20 transition-all w-full text-center">Start construction</a>
           </motion.aside>
         </div>
 
         <motion.section variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-20">
-          <motion.h2 variants={fadeInUp} className="text-3xl font-bold text-white mb-8 text-center">Leadership</motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold text-white mb-12 text-center">Meet The Leadership</motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {team.map((member, idx) => (
-              <motion.div key={idx} variants={fadeInUp} className="group">
-                <SpotlightCard className="p-8 md:p-10 relative overflow-hidden">
-                  {/* Decorative Background Elements */}
-                  <div className="absolute top-0 right-0 p-3 opacity-10">
-                    <Users size={120} />
-                  </div>
-                  
-                  <div className="flex flex-col md:flex-row items-start gap-8 relative z-10">
-                    {/* Avatar / Icon Section */}
-                    <div className="flex-none">
-                      <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center text-white shadow-2xl shadow-blue-500/20">
+              <motion.div key={idx} variants={fadeInUp} className="group h-full">
+                <SpotlightCard className="p-1 h-full bg-[#0A0A0A] border-white/5 hover:border-white/10 transition-colors duration-500">
+                  <div className="h-full flex flex-col p-6 md:p-8 relative z-10">
+                    
+                    {/* Header: Avatar + Role Badge */}
+                    <div className="flex items-start justify-between mb-6">
+                      <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center text-white shadow-lg ${member.shadow} group-hover:scale-110 transition-transform duration-500`}>
                         {member.avatar}
                       </div>
+                      <div className="px-3 py-1 bg-white/5 backdrop-blur-md rounded-full border border-white/10 text-xs font-bold text-gray-300 tracking-wider uppercase">
+                         {member.role.split('&')[0].trim()}
+                      </div>
                     </div>
 
-                    {/* Content Section */}
-                    <div className="flex-1">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
-                        <div>
-                          <h3 className="text-2xl md:text-3xl font-bold text-white">{member.name}</h3>
-                          <p className="text-blue-400 font-medium tracking-wide uppercase text-sm mt-1">{member.role}</p>
-                        </div>
-                        <div className="flex bg-white/5 rounded-full p-1 border border-white/10">
-                           <a href={`mailto:${member.email}`} className="px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors flex items-center gap-2">
-                              <Mail size={14} /> Contact
-                           </a>
-                        </div>
-                      </div>
-
-                      <p className="text-gray-300 leading-relaxed mb-6 text-sm md:text-base border-l-4 border-blue-500/30 pl-4">
-                        {member.bio}
+                    {/* Name & Role */}
+                    <div className="mb-4">
+                      <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all duration-300">
+                        {member.name}
+                      </h3>
+                      <p className={`text-sm font-semibold bg-gradient-to-r ${member.gradient} bg-clip-text text-transparent`}>
+                        {member.role}
                       </p>
-
-                      <div className="flex flex-wrap gap-2">
-                        {member.skills.map((skill, sIdx) => (
-                          <span key={sIdx} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] md:text-xs font-medium text-gray-400 uppercase tracking-wider">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
                     </div>
+
+                    {/* Bio */}
+                    <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                      {member.bio}
+                    </p>
+
+                    {/* Skills */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {member.skills.map((skill, sIdx) => (
+                        <span key={sIdx} className="px-2 py-1 bg-white/5 border border-white/5 rounded text-[10px] font-medium text-gray-400 hover:text-white hover:border-white/20 transition-colors cursor-default">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Action */}
+                    <a href={`mailto:${member.email}`} className="mt-auto w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-gray-300 hover:text-white text-sm font-semibold transition-all flex items-center justify-center gap-2 group/btn">
+                       <Mail size={16} className="group-hover/btn:scale-110 transition-transform" />
+                       Connect
+                    </a>
                   </div>
                 </SpotlightCard>
               </motion.div>
