@@ -70,7 +70,7 @@ const Navbar = ({ isBannerVisible }) => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-5 xl:space-x-8">
+          <div className="hidden xl:flex items-center space-x-4 2xl:space-x-8">
             {navLinks.map((link) => (
               <div
                 key={link.name}
@@ -80,7 +80,7 @@ const Navbar = ({ isBannerVisible }) => {
               >
                 <Link
                   to={link.path}
-                  className="relative flex items-center gap-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors py-2"
+                  className="relative flex items-center gap-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-semibold transition-colors py-2"
                 >
                   {link.name}
                   {link.dropdown && <ChevronDown size={14} />}
@@ -129,25 +129,25 @@ const Navbar = ({ isBannerVisible }) => {
           </div>
 
           {/* Right Side Actions */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden xl:flex items-center gap-3 2xl:gap-4">
             <Link
               to="/company-brochure?autoDownload=true"
-              className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-gray-700 dark:text-gray-300 transition-all hover:scale-110 active:scale-95 group relative"
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-700 dark:text-gray-300 transition-all hover:scale-110 active:scale-95 group relative"
               title="Download Brochure"
             >
-               <Download size={20} className="group-hover:text-blue-500" />
+               <Download size={18} className="group-hover:text-blue-500" />
                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] bg-black text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Get Profile</span>
             </Link>
             <Link
               to="/login"
-              className="px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-lg shadow-blue-500/30 transition-all hover:scale-105 active:scale-95"
+              className="px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-lg shadow-blue-500/30 transition-all hover:scale-105 active:scale-95"
             >
               Login
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center gap-4">
+          <div className="xl:hidden flex items-center gap-4">
             <button
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle navigation menu"
@@ -166,7 +166,7 @@ const Navbar = ({ isBannerVisible }) => {
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="absolute top-full left-0 right-0 mt-4 mx-4 p-6 bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden lg:hidden max-h-[75vh] overflow-y-auto"
+            className="absolute top-full left-0 right-0 mt-4 mx-4 p-6 bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden xl:hidden max-h-[75vh] overflow-y-auto"
           >
             <div className="space-y-3">
               {navLinks.map((link) => (
