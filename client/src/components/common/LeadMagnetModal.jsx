@@ -6,16 +6,11 @@ const LeadMagnetModal = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        // Force show for testing new design
-        // Using a new key ensures previous visitors see the new offer
-        const hasSeenModal = sessionStorage.getItem('hasSeenEliteOffer_v1');
-        if (!hasSeenModal) {
-            const timer = setTimeout(() => {
-                setIsOpen(true);
-                sessionStorage.setItem('hasSeenEliteOffer_v1', 'true');
-            }, 1000); // Show quickly (1s)
-            return () => clearTimeout(timer);
-        }
+        // Show modal on every reload/visit as requested
+        const timer = setTimeout(() => {
+            setIsOpen(true);
+        }, 1500);
+        return () => clearTimeout(timer);
     }, []);
 
     const handleWhatsApp = () => {
