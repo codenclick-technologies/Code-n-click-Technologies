@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Trophy, Rocket, CheckCircle, ArrowRight, MessageCircle, Phone } from 'lucide-react';
+import { X, Trophy, Rocket, CheckCircle, ArrowRight, MessageCircle, Phone, Sparkles } from 'lucide-react';
 
 const LeadMagnetModal = () => {
     const [isOpen, setIsOpen] = useState(false);
