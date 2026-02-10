@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Sun, Moon, Briefcase, Phone, Info, BookOpen, Users, Download } from 'lucide-react';
+import { Menu, X, ChevronDown, Sun, Moon, Briefcase, Phone, Info, BookOpen, Users, Download, DollarSign } from 'lucide-react';
 
 const Navbar = ({ isBannerVisible }) => {
   const [isOpen, setIsOpen] = useState(false);
