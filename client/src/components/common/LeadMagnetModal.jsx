@@ -18,7 +18,7 @@ const LeadMagnetModal = () => {
     }, []);
 
     const handleWhatsApp = () => {
-        window.open('https://wa.me/919999999999?text=I%20want%20to%20scale%20my%20business%20with%20Code-n-click', '_blank');
+        window.open('https://wa.me/919999999999?text=Hi%20Team%2C%20I%20am%20ready%20to%20build%20my%20website.%20I%20want%20premium%20quality%20work.', '_blank');
         setIsOpen(false);
     };
 
@@ -32,106 +32,102 @@ const LeadMagnetModal = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsOpen(false)}
-                        className="absolute inset-0 bg-black/80 backdrop-blur-md"
+                        className="absolute inset-0 bg-black/90 backdrop-blur-xl"
                     />
 
-                    {/* Ultra-Premium Modal */}
+                    {/* Elite Authority Modal */}
                     <motion.div
-                        initial={{ scale: 0.8, opacity: 0, y: 50, rotateX: 10 }}
-                        animate={{ scale: 1, opacity: 1, y: 0, rotateX: 0 }}
-                        exit={{ scale: 0.8, opacity: 0, y: 50 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                        className="relative w-full max-w-2xl bg-[#080808] border border-white/10 rounded-[2rem] shadow-2xl overflow-hidden group"
+                        initial={{ scale: 0.9, opacity: 0, y: 30 }}
+                        animate={{ scale: 1, opacity: 1, y: 0 }}
+                        exit={{ scale: 0.9, opacity: 0, y: 30 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        className="relative w-full max-w-3xl bg-[#050505] border border-amber-500/20 rounded-[24px] shadow-2xl shadow-amber-900/20 overflow-hidden flex flex-col md:flex-row"
                     >
-                        {/* Holographic/Gradient Effects */}
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-                        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
-                        <div className="absolute -top-24 -right-24 w-64 h-64 bg-purple-600/20 rounded-full blur-[80px]"></div>
-                        <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-600/20 rounded-full blur-[80px]"></div>
+                        {/* Gold Glow Effects */}
+                        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+                        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none"></div>
 
-                        <div className="relative p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center">
-                            
-                            {/* Left Side: Visual Impact */}
-                            <div className="w-full md:w-5/12 text-center md:text-left">
-                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-yellow-400 text-xs font-bold uppercase tracking-widest mb-6 animate-pulse">
-                                    <Trophy size={14} />
-                                    <span>Top Rated Agency</span>
-                                </div>
-                                <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-4">
-                                    Don't Just Build a Website. <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-                                        Build an Empire.
-                                    </span>
-                                </h2>
-                                <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                                    Your competitors are already using AI-driven tech. Give us <strong>15 minutes</strong>, and we'll show you how to beat them.
-                                </p>
-                                
-                                {/* Trust Badges */}
-                                <div className="flex justify-center md:justify-start -space-x-3">
-                                    {[1, 2, 3, 4].map((i) => (
-                                        <div key={i} className={`w-8 h-8 rounded-full border-2 border-[#080808] bg-gray-800 flex items-center justify-center overflow-hidden`}>
-                                            <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i*13}`} alt="User" />
-                                        </div>
-                                    ))}
-                                    <div className="w-8 h-8 rounded-full border-2 border-[#080808] bg-gray-800 flex items-center justify-center text-[10px] font-bold text-white">
-                                        +500
-                                    </div>
-                                </div>
-                                <p className="text-xs text-gray-500 mt-2">Trusted by 500+ Market Leaders</p>
+                        {/* Left Side: The "CEO" Pitch */}
+                        <div className="w-full md:w-3/5 p-8 md:p-12 relative z-10">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-950/30 border border-amber-500/30 rounded-full mb-6">
+                                <Trophy size={12} className="text-amber-500" />
+                                <span className="text-amber-500 text-[10px] font-bold tracking-[0.2em] uppercase">For Serious Business Owners Only</span>
                             </div>
 
-                            {/* Right Side: The Offer (No Email, Direct Value) */}
-                            <div className="w-full md:w-7/12 bg-white/5 rounded-2xl p-6 border border-white/5 relative overflow-hidden">
-                                <div className="absolute top-0 right-0 p-4 opacity-10">
-                                    <Rocket size={100} className="text-white transform rotate-12" />
-                                </div>
+                            <h2 className="text-3xl md:text-5xl font-black text-white leading-[1.1] mb-6 tracking-tight">
+                                We Don't Just Build Websites. <br/>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-600">
+                                    We Build 24/7 Sales Machines.
+                                </span>
+                            </h2>
 
-                                <h3 className="text-xl font-bold text-white mb-4 relative z-10">
-                                    Why Choose Codenclick?
-                                </h3>
-                                
-                                <ul className="space-y-3 mb-8 relative z-10">
-                                    {[
-                                        "2X Faster Load Speeds Guaranteed",
-                                        "Click-to-Conversion Designs",
-                                        "AI-Integrated Sales Funnels"
-                                    ].map((benefit, idx) => (
-                                        <li key={idx} className="flex items-start gap-3 text-sm text-gray-300">
-                                            <CheckCircle className="w-5 h-5 text-green-400 shrink-0" />
-                                            <span>{benefit}</span>
-                                        </li>
+                            <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 border-l-2 border-amber-500/50 pl-4 font-medium">
+                                "Listen, a website is useless if it doesn't print money. Most agencies sell you a digital brochure. We engineer <strong>Market Dominance</strong>. If you want to crush your competition and automate your sales, you're in the right place."
+                            </p>
+
+                            <div className="flex items-center gap-4">
+                                <div className="flex -space-x-3">
+                                     {[1, 2, 3].map((i) => (
+                                        <div key={i} className="w-10 h-10 rounded-full border-2 border-[#050505] bg-gray-800 overflow-hidden">
+                                            <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i+20}`} alt="Client" />
+                                        </div>
                                     ))}
-                                </ul>
-
-                                <div className="space-y-3 relative z-10">
-                                    <button 
-                                        onClick={handleWhatsApp}
-                                        className="w-full group bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3.5 rounded-xl shadow-lg shadow-green-500/20 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-3"
-                                    >
-                                        <MessageCircle className="w-5 h-5" />
-                                        <span>Chat on WhatsApp</span>
-                                        <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
-                                    </button>
-                                    
-                                    <div className="text-center">
-                                        <span className="text-gray-500 text-xs uppercase tracking-wider font-semibold">Or</span>
+                                </div>
+                                <div>
+                                    <div className="flex text-amber-500">
+                                        {[1,2,3,4,5].map(i => <Sparkles key={i} size={12} fill="currentColor" />)}
                                     </div>
-
-                                    <button className="w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 rounded-xl border border-white/10 transition-all flex items-center justify-center gap-2">
-                                        <Phone className="w-4 h-4" />
-                                        <span>Book Free Strategy Call</span>
-                                    </button>
+                                    <p className="text-xs text-gray-500 font-medium">Joined by 500+ Top Founders</p>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Close Button */}
+                        {/* Right Side: The Offer & Action */}
+                        <div className="w-full md:w-2/5 bg-white/[0.02] border-l border-white/5 p-8 md:p-12 flex flex-col justify-center relative">
+                            {/* Texture */}
+                            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+
+                            <h3 className="text-xl font-bold text-white mb-6 relative z-10">
+                                Why Industry Leaders Choose Us:
+                            </h3>
+                            
+                            <ul className="space-y-4 mb-10 relative z-10">
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
+                                    <span className="text-sm text-gray-300 font-medium">Psychology-Based Design</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
+                                    <span className="text-sm text-gray-300 font-medium">Enterprise-Grade Security</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
+                                    <span className="text-sm text-gray-300 font-medium">Built to Scale to Millions</span>
+                                </li>
+                            </ul>
+
+                            <button 
+                                onClick={handleWhatsApp}
+                                className="w-full group relative overflow-hidden bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-black font-bold py-4 rounded-xl shadow-[0_0_30px_-5px_rgba(245,158,11,0.4)] transition-all duration-300 transform hover:-translate-y-1"
+                            >
+                                <span className="relative z-10 flex items-center justify-center gap-2">
+                                    YES, BUILD MY EMPIRE
+                                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </span>
+                                {/* Shine Effect */}
+                                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"></div>
+                            </button>
+                            
+                            <p className="text-center text-[10px] text-gray-600 mt-4 uppercase tracking-widest">
+                                Limited capacity for new projects
+                            </p>
+                        </div>
+
                         <button
                             onClick={() => setIsOpen(false)}
-                            className="absolute top-4 right-4 p-2 text-white/30 hover:text-white hover:bg-white/10 rounded-full transition-all"
+                            className="absolute top-4 right-4 p-2 text-white/20 hover:text-white transition-colors"
                         >
-                            <X size={20} />
+                            <X size={24} />
                         </button>
                     </motion.div>
                 </div>
