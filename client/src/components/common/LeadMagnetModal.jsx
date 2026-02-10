@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Trophy, Rocket, CheckCircle, ArrowRight, MessageCircle, Phone, Sparkles } from 'lucide-react';
+import { X, Trophy, Rocket, CheckCircle, ArrowRight, MessageCircle, Phone, Star } from 'lucide-react';
 
 const LeadMagnetModal = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +76,7 @@ const LeadMagnetModal = () => {
                                 </div>
                                 <div>
                                     <div className="flex text-amber-500">
-                                        {[1,2,3,4,5].map(i => <Sparkles key={i} size={12} fill="currentColor" />)}
+                                        {[1,2,3,4,5].map(i => <Star key={i} size={12} fill="currentColor" />)}
                                     </div>
                                     <p className="text-xs text-gray-500 font-medium">Joined by 500+ Top Founders</p>
                                 </div>
