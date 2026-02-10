@@ -12,7 +12,7 @@ const founder = {
   role: 'Founder & CEO', 
   bio: 'The visionary architect behind Codenclick. Lokender combines deep technical expertise with strategic business acumen to drive digital transformation for global enterprises. He believes in building long-term partnerships through transparency, innovation, and measurable results.',
   vision: "A website is not just a digital address; it's your 24/7 sales powerhouse, your brand's heartbeat, and your most valuable asset. My mission is to ensure every business we touch doesn't just survive the digital shift, but dominates it.",
-  avatar: '/images/founder.jpg',
+  avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop', // Temporary professional placeholder
   email: 'lokender@codenclick.in', 
   skills: ['Strategic Leadership', 'Software Engineering', 'Business Growth', 'Product Innovation', 'AI Integration'],
   gradient: 'from-[#FFD700] via-amber-500 to-orange-600',
