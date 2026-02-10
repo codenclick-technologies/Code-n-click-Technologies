@@ -11,17 +11,20 @@ const routes = [
   '/',
   '/about',
   '/contact',
-  '/resources',
   '/careers',
   '/portfolio',
   '/privacy',
+  '/terms',
+  '/company-brochure',
   '/services',
   '/services/web-development',
+  '/services/app-development',
   '/services/saas-development',
   '/services/meta-ads',
   '/services/google-ads',
   '/services/graphic-design',
-  '/services/seo'
+  '/services/seo',
+  '/resources'
 ];
 
 const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
