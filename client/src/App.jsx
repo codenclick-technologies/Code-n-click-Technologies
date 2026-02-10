@@ -11,6 +11,7 @@ import SmoothScroll from './components/utils/SmoothScroll';
 import CustomCursor from './components/common/CustomCursor';
 import { Analytics } from '@vercel/analytics/react';
 import Chatbot from './components/chatbot/Chatbot';
+import LeadMagnetModal from './components/common/LeadMagnetModal';
 
 // Critical Routes (eager load)
 import Home from './pages/Home';
@@ -318,6 +319,7 @@ function AppContent() {
       {!isDashboard && <Footer />}
       {!isDashboard && <Chatbot />}
       {!isDashboard && <ScrollToTopButton />}
+      {!isDashboard && <LeadMagnetModal />}
     </div>
   );
 }
