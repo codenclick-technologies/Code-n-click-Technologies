@@ -3,20 +3,9 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import SEO from '../components/utils/SEO';
 import { motion } from 'framer-motion';
-import { Users, Award, Globe, Coffee, Mail, Cpu, Zap, TrendingUp, Crown, Shield, Rocket } from 'lucide-react';
+import { Users, Award, Globe, Coffee, Cpu, Zap, TrendingUp, Shield, Rocket } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 import SpotlightCard from '../components/ui/SpotlightCard';
-
-const founder = { 
-  name: 'Lokender Chauhan', 
-  role: 'Founder & CEO', 
-  bio: 'The visionary architect behind Codenclick. Lokender combines deep technical expertise with strategic business acumen to drive digital transformation for global enterprises. He believes in building long-term partnerships through transparency, innovation, and measurable results.',
-  vision: "A website is not just a digital address; it's your 24/7 sales powerhouse, your brand's heartbeat, and your most valuable asset. My mission is to ensure every business we touch doesn't just survive the digital shift, but dominates it.",
-  email: 'lokender@codenclick.in', 
-  skills: ['Strategic Leadership', 'Software Engineering', 'Business Growth', 'Product Innovation', 'AI Integration'],
-  gradient: 'from-[#FFD700] via-amber-500 to-orange-600',
-  glow: 'rgba(245, 158, 11, 0.4)'
-};
 
 const timeline = [
   { icon: '🚀', title: 'We Dream Big', desc: 'Every project we take on, we approach with ambition. We don\'t settle for incremental improvements — we aim to transform how our clients do business.' },
@@ -26,9 +15,9 @@ const About = () => {
   return (
     <div className="min-h-screen bg-[#020205] text-white overflow-hidden pt-32 px-4 sm:px-6 lg:px-8">
       <SEO
-        title="About Lokender Chauhan | Founder of Codenclick Technologies"
-        description="Meet Lokender Chauhan, the visionary Founder & CEO of Codenclick Technologies. Learn about his mission to transform businesses through high-performance custom code and elite digital strategies."
-        keywords="Lokender Chauhan, Founder Codenclick, CEO Codenclick, Web Development Expert Delhi, Digital Transformation Leader"
+        title="About Us | Codenclick Technologies"
+        description="Learn about Codenclick Technologies and our mission to transform businesses through high-performance custom code and elite digital strategies."
+        keywords="Codenclick Technologies, Web Development Agency Delhi, Digital Transformation Leader, Custom Software Development"
       />
 
       <div className="max-w-7xl mx-auto">
@@ -117,94 +106,13 @@ const About = () => {
           </motion.aside>
         </div>
 
-        {/* Founder's Vision - Compact Executive Card */}
-        <motion.section 
-          initial="hidden" 
-          whileInView="visible" 
-          viewport={{ once: true }} 
-          variants={staggerContainer} 
-          className="mb-14 relative"
-        >
-          {/* Subtle Background Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[400px] bg-amber-500/5 blur-[100px] rounded-full pointer-events-none"></div>
 
-          <div className="max-w-5xl mx-auto relative z-10">
-            <SpotlightCard className="bg-[#0A0A0B]/80 border-white/5 backdrop-blur-md rounded-[32px] overflow-hidden">
-              <div className="grid grid-cols-1 lg:grid-cols-12">
-                
-                {/* Visual Accent Side */}
-                <div className="lg:col-span-1 bg-gradient-to-b from-amber-500/10 to-transparent flex items-center justify-center py-6 lg:py-0 border-b lg:border-b-0 lg:border-r border-white/5">
-                  <div className="lg:-rotate-90 flex items-center gap-4 whitespace-nowrap">
-                    <Crown size={14} className="text-amber-500" />
-                    <span className="text-amber-500 text-[9px] font-black uppercase tracking-[0.4em]">Personal Vision</span>
-                  </div>
-                </div>
-
-                {/* Main Content Side */}
-                <div className="lg:col-span-11 p-8 md:p-12">
-                  <div className="relative mb-8">
-                    <span className="text-6xl text-amber-500/10 font-serif absolute -top-8 -left-2 leading-none">“</span>
-                    <h2 className="text-2xl md:text-3xl font-bold text-white leading-tight relative z-10 italic tracking-tight italic">
-                      {founder.vision}
-                    </h2>
-                  </div>
-
-                  <div className="flex flex-col lg:flex-row gap-10 items-start">
-                    <div className="flex-1">
-                      <p className="text-gray-400 leading-relaxed text-base border-l-2 border-amber-500/30 pl-6">
-                        {founder.bio}
-                      </p>
-                      
-                      <div className="mt-8 flex items-center gap-6">
-                        <div>
-                          <h4 className="text-white font-black text-xl tracking-tight">{founder.name}</h4>
-                          <p className="text-amber-500 font-bold uppercase tracking-[0.2em] text-[9px]">{founder.role}</p>
-                        </div>
-                        <div className="h-8 w-px bg-white/10"></div>
-                        <div className="flex gap-2">
-                          <a href={`mailto:${founder.email}`} className="p-2.5 bg-white/5 border border-white/10 rounded-lg hover:bg-amber-500/10 hover:border-amber-500/30 transition-all text-gray-500 hover:text-amber-500">
-                             <Mail size={16} />
-                          </a>
-                          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 border border-white/10 rounded-lg hover:bg-blue-500/10 hover:border-blue-500/30 transition-all text-gray-500 hover:text-blue-500">
-                             <Shield size={16} />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="w-full lg:w-64 space-y-4">
-                      <div>
-                        <p className="text-[9px] font-black text-gray-500 uppercase tracking-[0.3em] mb-3">Core Expertise</p>
-                        <div className="flex flex-wrap gap-2">
-                          {founder.skills.slice(0, 4).map((skill) => (
-                            <span key={skill} className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-md text-[9px] font-bold text-gray-400">
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      <Link to="/contact" className="block w-full py-3.5 bg-white text-black font-black text-[10px] rounded-lg text-center hover:bg-amber-500 hover:text-white transition-all shadow-lg shadow-black/20 uppercase tracking-widest">
-                        DIRECT CONSULTATION
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </SpotlightCard>
-            <div className="flex justify-center gap-8 mt-6 opacity-30">
-               <span className="text-[8px] font-bold tracking-[0.2em] text-gray-400">FOUNDER LED STRATEGY</span>
-               <span className="text-[8px] font-bold tracking-[0.2em] text-gray-400">100% HUMANIZED FOCUS</span>
-            </div>
-          </div>
-        </motion.section>
 
         {/* Values - High End Layout */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-32">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4">The Codenclick Code</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Our culture is built on these foundational pillars, ensuring every project meets the Lokender Chauhan standard of excellence.</p>
+            <p className="text-gray-400 max-w-2xl mx-auto">Our culture is built on these foundational pillars, ensuring every project meets our highest standard of excellence.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -243,7 +151,7 @@ const About = () => {
                 VIEW OUR PROOF
               </Link>
             </div>
-            <p className="text-gray-500 text-xs mt-8 uppercase tracking-[0.3em]">Direct oversight on all new projects by the Founder</p>
+
           </div>
         </motion.section>
       </div>

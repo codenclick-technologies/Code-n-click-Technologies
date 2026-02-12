@@ -272,7 +272,21 @@ ${dynamicContext}
                 reply: responseMessage.content,
             };
         } catch (error) {
-            this.logger.error('OpenAI Chat Error', error);
+            this.logger.error('OpenAI Chat Error: ' + (error?.message || 'Unknown error'), error);
+
+            // Check for specific OpenAI errors
+            if (error?.type === 'insufficient_quota') {
+                return {
+                    reply: "System Info: OpenAI API Quota exceeded. Please check your billing or API key usage. (Admin notice: Recharge OpenAI credits)",
+                };
+            }
+
+            if (error?.status === 401) {
+                return {
+                    reply: "System Info: Invalid OpenAI API Key. Please verify the key in .env file.",
+                };
+            }
+
             return {
                 reply: "Maaf kijiye, kuch technical dikkat hai. Please try again later.",
             };
