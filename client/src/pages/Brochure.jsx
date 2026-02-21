@@ -192,8 +192,8 @@ const Brochure = () => {
                          <div className="mt-4 flex items-center gap-3">
                             <div className="h-10 w-10 bg-slate-200 rounded-full"></div>
                             <div>
-                               <div className="text-xs font-bold uppercase">Lokender Chauhan</div>
-                               <div className="text-[10px] text-gray-500">Founder & CEO</div>
+                               <div className="text-xs font-bold uppercase">Team Codenclick</div>
+                               <div className="text-[10px] text-gray-500">Execution Excellence</div>
                             </div>
                          </div>
                       </div>

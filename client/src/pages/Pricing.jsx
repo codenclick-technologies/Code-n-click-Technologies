@@ -278,10 +278,10 @@ const Pricing = () => {
                                         "90% of our clients who started with WordPress eventually migrated to Custom to save on hosting costs and improve Google rankings."
                                     </p>
                                     <div className="flex items-center gap-4 mb-8">
-                                        <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-500 flex items-center justify-center font-bold">LC</div>
+                                        <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-500 flex items-center justify-center font-bold">CC</div>
                                         <div>
-                                            <p className="font-bold">Lokender Chauhan</p>
-                                            <p className="text-xs text-gray-500">Founder, Codenclick</p>
+                                            <p className="font-bold">Team Codenclick</p>
+                                            <p className="text-xs text-gray-500">Growth Specialists</p>
                                         </div>
                                     </div>
                                     <button 
