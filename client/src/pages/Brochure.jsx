@@ -190,12 +190,14 @@ const Brochure = () => {
                             "Innovation implies doing things differently. But value implies doing things better."
                          </p>
                          <div className="mt-4 flex items-center gap-3">
-                            <div className="h-10 w-10 bg-slate-200 rounded-full"></div>
-                            <div>
-                               <div className="text-xs font-bold uppercase">Team Codenclick</div>
-                               <div className="text-[10px] text-gray-500">Execution Excellence</div>
-                            </div>
-                         </div>
+                             <div className="h-10 w-10 bg-slate-100 rounded-full overflow-hidden border border-slate-200 flex items-center justify-center p-1">
+                                <img src="/faviconimage.png" alt="Company Logo" className="w-full h-full object-contain" />
+                             </div>
+                             <div>
+                                <div className="text-xs font-bold uppercase">Team Codenclick</div>
+                                <div className="text-[10px] text-gray-500">Execution Excellence</div>
+                             </div>
+                          </div>
                       </div>
                    </div>
 
