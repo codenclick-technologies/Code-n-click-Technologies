@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Download, Globe, Mail, Phone, MapPin, Zap, Users, Shield, Cpu, Code2, Rocket, BarChart, Layers, Brain, Check, Search, Smartphone, Star, Heart, Sparkles, MessageCircle } from 'lucide-react';
+import { Download, Globe, Mail, Phone, MapPin, Zap, Users, Shield, Cpu, Code2, Rocket, BarChart, Layers, Brain, Check, Search, Smartphone, Star, Heart, Sparkles, MessageCircle, TrendingUp } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import html2pdf from 'html2pdf.js';
 
