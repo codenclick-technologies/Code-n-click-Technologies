@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "name": "codenclick-technologies",
     "redirects": [
         {
             "source": "/case-studies",
@@ -15,6 +16,17 @@
             "source": "/brochure",
             "destination": "/company-brochure",
             "permanent": true
+        },
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "codenclick.in"
+                }
+            ],
+            "destination": "https://www.codenclick.in/$1",
+            "permanent": true
         }
     ],
     "rewrites": [
@@ -29,6 +41,14 @@
         {
             "source": "/robots.txt",
             "destination": "https://server-sepia-alpha.vercel.app/api/robots.txt"
+        },
+        {
+            "source": "/ads.txt",
+            "destination": "/ads.txt"
+        },
+        {
+            "source": "/((?!api|sitemap.xml|robots.txt|ads.txt|_next|static|favicon.ico|faviconimage.png|logo.png|brand-full.png|brand-c.png|manifest.json|assets).*(\\.html|\\.js|\\.css|\\.png|\\.jpg|\\.jpeg|\\.svg|\\.gif|\\.json|\\.xml|\\.txt)$)",
+            "destination": "/$1"
         },
         {
             "source": "/(.*)",

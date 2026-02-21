@@ -105,8 +105,10 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
             }
         };
 
-        // Remove trailing slash for consistency
-        const cleanPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
+        // Humanize & Clean Path
+        let cleanPath = path;
+        if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+        if (cleanPath.endsWith('/') && cleanPath.length > 1) cleanPath = cleanPath.slice(0, -1);
 
         // Default Metadata
         let title = "Codenclick Technologies | Premium Web & App Development";
@@ -208,8 +210,6 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
                     }
                 </script>` : ''}
                 <style>
-
-
                     body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; color: #333; background: #fff; }
                     h1 { font-size: 2.5rem; color: #111; margin-bottom: 20px; }
                     p { font-size: 1.1rem; margin-bottom: 15px; }
@@ -308,4 +308,3 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
         return sitemap;
     }
 }
-
