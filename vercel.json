@@ -1,0 +1,49 @@
+{
+    "version": 2,
+    "redirects": [
+        {
+            "source": "/case-studies",
+            "destination": "/portfolio",
+            "permanent": true
+        },
+        {
+            "source": "/tools",
+            "destination": "/services",
+            "permanent": true
+        },
+        {
+            "source": "/brochure",
+            "destination": "/company-brochure",
+            "permanent": true
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/api/:path*",
+            "destination": "https://server-sepia-alpha.vercel.app/api/:path*"
+        },
+        {
+            "source": "/sitemap.xml",
+            "destination": "https://server-sepia-alpha.vercel.app/api/sitemap.xml"
+        },
+        {
+            "source": "/robots.txt",
+            "destination": "https://server-sepia-alpha.vercel.app/api/robots.txt"
+        },
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "User-Agent",
+                    "value": ".*(Googlebot|bingbot|Baiduspider|YandexBot|Sogou).*"
+                }
+            ],
+            "destination": "https://server-sepia-alpha.vercel.app/api/snapshot?path=/$1"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}

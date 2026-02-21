@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /images/
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /change-password
+Disallow: /forgot-password
+Disallow: /reset-password
+
+# Sitemap location
+Sitemap: https://codenclick.in/sitemap.xml
