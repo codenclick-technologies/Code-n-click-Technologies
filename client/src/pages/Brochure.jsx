@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Download, Globe, Mail, Phone, MapPin, Zap, Users, Shield, Cpu, Code2, Rocket, BarChart, Layers, Brain, Check, Search, Smartphone, Star, Heart, Sparkles, MessageCircle, TrendingUp } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
-import html2pdf from 'html2pdf.js';
+// html2pdf is dynamically imported inside downloadPDF() to keep initial bundle lean
 
 const Brochure = () => {
   const brochureRef = useRef(null);
@@ -38,6 +38,9 @@ const Brochure = () => {
 
     await new Promise(resolve => setTimeout(resolve, 800));
 
+    // Dynamic import — html2pdf.js (~800KB) is only fetched when user clicks download
+    const html2pdfModule = await import('html2pdf.js');
+    const html2pdf = html2pdfModule.default;
     html2pdf().set(opt).from(element).save().then(() => {
       setIsGenerating(false);
     });

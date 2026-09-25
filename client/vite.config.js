@@ -31,6 +31,9 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
           ui: ['lucide-react', 'framer-motion'],
+          // html2pdf is a heavy library (~800kB) only needed on /company-brochure
+          // Isolating it prevents it from bloating the main bundle
+          'html2pdf': ['html2pdf.js'],
         },
       },
     },
