@@ -1,7 +1,7 @@
 {
   "name": "codenclick-technologies",
   "author": "Codenclick Technologies",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "build": "cd client && npm install && npm run build",
