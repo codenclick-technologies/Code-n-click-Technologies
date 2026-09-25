@@ -139,6 +139,66 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Regional Locations & Growth Hubs */}
+        <div className="pt-8 pb-8 border-t border-white/5">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-300">
+              Regional Digital Marketing Hubs
+            </h4>
+            <Link
+              to="/digital-marketing-agency"
+              className="text-xs text-blue-400 hover:text-blue-300 transition-colors"
+            >
+              Explore National Hub Directory →
+            </Link>
+          </div>
+          <div className="flex flex-wrap gap-x-6 gap-y-2.5 text-xs text-gray-400">
+            <Link to="/digital-marketing-agency/delhi" className="hover:text-blue-400 transition-colors">
+              Delhi
+            </Link>
+            <span className="text-white/10">•</span>
+            <Link to="/digital-marketing-agency/gurgaon" className="hover:text-blue-400 transition-colors">
+              Gurgaon
+            </Link>
+            <span className="text-white/10">•</span>
+            <Link to="/digital-marketing-agency/noida" className="hover:text-blue-400 transition-colors">
+              Noida
+            </Link>
+            <span className="text-white/10">•</span>
+            <Link to="/digital-marketing-agency/greater-noida" className="hover:text-blue-400 transition-colors">
+              Greater Noida
+            </Link>
+            <span className="text-white/10">•</span>
+            <Link to="/digital-marketing-agency/ghaziabad" className="hover:text-blue-400 transition-colors">
+              Ghaziabad
+            </Link>
+            <span className="text-white/10">•</span>
+            <Link to="/digital-marketing-agency/faridabad" className="hover:text-blue-400 transition-colors">
+              Faridabad
+            </Link>
+            <span className="text-white/10">•</span>
+            <Link to="/digital-marketing-agency/mumbai" className="hover:text-blue-400 transition-colors">
+              Mumbai
+            </Link>
+            <span className="text-white/10">•</span>
+            <Link to="/digital-marketing-agency/bangalore" className="hover:text-blue-400 transition-colors">
+              Bangalore
+            </Link>
+            <span className="text-white/10">•</span>
+            <Link to="/digital-marketing-agency/pune" className="hover:text-blue-400 transition-colors">
+              Pune
+            </Link>
+            <span className="text-white/10">•</span>
+            <Link to="/digital-marketing-agency/hyderabad" className="hover:text-blue-400 transition-colors">
+              Hyderabad
+            </Link>
+            <span className="text-white/10">•</span>
+            <Link to="/digital-marketing-agency/jaipur" className="hover:text-blue-400 transition-colors">
+              Jaipur
+            </Link>
+          </div>
+        </div>
+
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">

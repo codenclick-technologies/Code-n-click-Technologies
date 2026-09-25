@@ -58,7 +58,8 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
 const Pricing = lazy(() => import('./pages/Pricing'));
-
+const AgencyHubPage = lazy(() => import('./pages/Location/AgencyHubPage'));
+const CityLandingPage = lazy(() => import('./pages/Location/CityLandingPage'));
 
 const NotFound = lazy(() => import('./pages/NotFound'));
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -141,11 +142,9 @@ function AppContent() {
               <Route path="/services/graphic-design" element={<GraphicDesign />} />
               <Route path="/services/seo" element={<SEO />} />
 
-
-
-
-
-              <Route path="/about" element={<About />} />
+              {/* Scalable Digital Marketing Agency Location SEO Hub & City Routes */}
+              <Route path="/digital-marketing-agency" element={<AgencyHubPage />} />
+              <Route path="/digital-marketing-agency/:citySlug" element={<CityLandingPage />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/resources" element={<Resources />} />
               <Route path="/resources/:slug" element={<ResourceDetail />} />

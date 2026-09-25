@@ -38,16 +38,16 @@ const WhyChooseUs = () => {
 
   return (
     <section className="relative py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-[#020205] overflow-hidden">
-      
+
       <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-purple-600/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none" 
-           style={{ 
-             backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
-             backgroundSize: '100px 100px',
-             maskImage: 'radial-gradient(circle at center, black, transparent 80%)'
-           }} 
+      <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+          backgroundSize: '100px 100px',
+          maskImage: 'radial-gradient(circle at center, black, transparent 80%)'
+        }}
       />
 
       <div className="relative max-w-7xl mx-auto z-10">
@@ -98,27 +98,27 @@ const WhyChooseUs = () => {
                 className="group relative h-full will-change-transform"
               >
                 <SpotlightCard className="h-full bg-[#0A0A0B]/80 backdrop-blur-xl border border-white/5 group-hover:border-white/20 transition-all duration-700 rounded-[2.5rem] overflow-hidden flex flex-col p-8">
-                    
-                    <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${reason.color} opacity-0 group-hover:opacity-10 blur-[40px] transition-all duration-700 rounded-full z-0`} />
 
-                    <div className="relative z-10 flex flex-col h-full">
-                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${reason.color} p-[1.5px] mb-8 group-hover:rotate-[10deg] transition-transform duration-500`}>
-                            <div className="w-full h-full bg-[#0A0A0B] rounded-2xl flex items-center justify-center">
-                                <Icon className="w-7 h-7 text-white" />
-                            </div>
-                        </div>
+                  <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${reason.color} opacity-0 group-hover:opacity-10 blur-[40px] transition-all duration-700 rounded-full z-0`} />
 
-                        <h3 className="text-xl font-bold text-white mb-4 tracking-tight group-hover:text-blue-400 transition-colors duration-500">
-                            {reason.title}
-                        </h3>
-                        <p className="text-sm text-gray-500 leading-relaxed font-light group-hover:text-gray-400 transition-colors duration-500">
-                            {reason.description}
-                        </p>
-
-                        <div className="mt-auto pt-8">
-                            <div className={`h-1 w-0 group-hover:w-full bg-gradient-to-r ${reason.color} transition-all duration-700 rounded-full`} />
-                        </div>
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${reason.color} p-[1.5px] mb-8 group-hover:rotate-[10deg] transition-transform duration-500`}>
+                      <div className="w-full h-full bg-[#0A0A0B] rounded-2xl flex items-center justify-center">
+                        <Icon className="w-7 h-7 text-white" />
+                      </div>
                     </div>
+
+                    <h3 className="text-xl font-bold text-white mb-4 tracking-tight group-hover:text-blue-400 transition-colors duration-500">
+                      {reason.title}
+                    </h3>
+                    <p className="text-sm text-gray-500 leading-relaxed font-light group-hover:text-gray-400 transition-colors duration-500">
+                      {reason.description}
+                    </p>
+
+                    <div className="mt-auto pt-8">
+                      <div className={`h-1 w-0 group-hover:w-full bg-gradient-to-r ${reason.color} transition-all duration-700 rounded-full`} />
+                    </div>
+                  </div>
                 </SpotlightCard>
               </motion.div>
             );
@@ -134,14 +134,14 @@ const WhyChooseUs = () => {
         >
           <p className="text-gray-500 text-sm font-light mb-8 uppercase tracking-[0.3em]">Ready to start your journey?</p>
           <motion.div className="inline-block relative group/btn px-4">
-             <div className="absolute inset-x-0 inset-y-0 bg-blue-600 blur-2xl opacity-10 group-hover/btn:opacity-30 transition-opacity" />
-             <Link
-                to="/contact"
-                className="relative inline-flex items-center gap-4 px-10 py-5 bg-white text-black font-black uppercase tracking-[0.2em] text-[10px] rounded-2xl transition-all shadow-2xl hover:bg-blue-600 hover:text-white group"
-             >
-                Let's have a chat
-                <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform" />
-             </Link>
+            <div className="absolute inset-x-0 inset-y-0 bg-blue-600 blur-2xl opacity-10 group-hover/btn:opacity-30 transition-opacity" />
+            <Link
+              to="/contact"
+              className="relative inline-flex items-center gap-4 px-10 py-5 bg-white text-black font-black uppercase tracking-[0.2em] text-[10px] rounded-2xl transition-all shadow-2xl hover:bg-blue-600 hover:text-white group"
+            >
+              Let's have a chat
+              <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform" />
+            </Link>
           </motion.div>
         </motion.div>
       </div>

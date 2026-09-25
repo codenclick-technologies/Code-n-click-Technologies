@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /brand-full.png
+Allow: /faviconimage.png
+Allow: /digital-marketing-agency/
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /change-password
+Disallow: /forgot-password
+Disallow: /reset-password
+
+Sitemap: https://www.codenclick.in/sitemap.xml

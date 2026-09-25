@@ -43,6 +43,7 @@ const Navbar = ({ isBannerVisible }) => {
         { name: 'Google Ads', path: '/services/google-ads' },
         { name: 'Graphic Design', path: '/services/graphic-design' },
         { name: 'SEO', path: '/services/seo' },
+        { name: 'Digital Marketing Hub', path: '/digital-marketing-agency' },
       ]
     },
 

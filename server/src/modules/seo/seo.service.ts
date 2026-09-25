@@ -102,6 +102,11 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
                 title: "Terms of Service | Codenclick Technologies",
                 description: "Read our terms of service to understand the rules and guidelines for using our services.",
                 h1: "Terms of Service"
+            },
+            '/digital-marketing-agency': {
+                title: "Digital Marketing Agency | Performance Marketing & SEO | Codenclick",
+                description: "Codenclick is a performance-driven digital marketing agency helping businesses scale across India. We deliver technical SEO, high-ROAS paid ads, custom web apps, and AI automation.",
+                h1: "Digital Marketing Agency & Growth Engineering"
             }
         };
 
@@ -122,8 +127,70 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
             title = meta.title;
             description = meta.description;
             h1 = meta.h1;
+        } else if (cleanPath.startsWith('/digital-marketing-agency/')) {
+            // 2. City Landing Pages: /digital-marketing-agency/gurgaon
+            const citySlug = cleanPath.split('/')[2]?.toLowerCase();
+            const cityMetaMap: Record<string, { title: string; description: string; h1: string }> = {
+                delhi: {
+                    title: "Digital Marketing Agency in Delhi | SEO, Paid Ads & Web | Codenclick",
+                    description: "Codenclick is a performance-driven digital marketing agency in Delhi. We specialize in organic SEO, Google & Meta Ads, conversion-first websites, and AI automation for scaling brands.",
+                    h1: "Digital Marketing Agency in Delhi"
+                },
+                gurgaon: {
+                    title: "Digital Marketing Agency in Gurgaon | SEO, Ads & AI | Codenclick",
+                    description: "Codenclick is a digital marketing agency in Gurgaon offering SEO, Google Ads, Meta Ads, website development, AI automation and growth-focused digital solutions.",
+                    h1: "Digital Marketing Agency in Gurgaon"
+                },
+                faridabad: {
+                    title: "Digital Marketing Agency in Faridabad | SEO & B2B Lead Gen | Codenclick",
+                    description: "Codenclick is a growth-driven digital marketing agency in Faridabad helping manufacturers, industrial suppliers, SMEs, and local businesses build digital visibility and qualified inbound leads.",
+                    h1: "Digital Marketing Agency in Faridabad"
+                },
+                noida: {
+                    title: "Digital Marketing Agency in Noida | SEO, Ads & Web | Codenclick",
+                    description: "Codenclick is a premier digital marketing agency in Noida offering technical SEO, performance advertising, modern web development, and AI automation for growing brands.",
+                    h1: "Digital Marketing Agency in Noida"
+                },
+                mumbai: {
+                    title: "Digital Marketing Agency in Mumbai | Performance Marketing & SEO | Codenclick",
+                    description: "Codenclick is a performance digital marketing agency in Mumbai. We engineer high-ROAS paid media, enterprise technical SEO, bespoke web apps, and automated growth funnels.",
+                    h1: "Digital Marketing Agency in Mumbai"
+                },
+                bangalore: {
+                    title: "Digital Marketing Agency in Bangalore | Tech & Growth SEO | Codenclick",
+                    description: "Codenclick is a technology-focused digital marketing agency in Bangalore. We specialize in product-led SEO, high-scale performance ads, custom web apps, and AI growth workflows.",
+                    h1: "Digital Marketing Agency in Bangalore"
+                },
+                pune: {
+                    title: "Digital Marketing Agency in Pune | SEO, Ads & Engineering | Codenclick",
+                    description: "Codenclick is a performance digital marketing agency in Pune delivering technical SEO, high-ROAS ads, custom web apps, and automated B2B lead generation systems.",
+                    h1: "Digital Marketing Agency in Pune"
+                },
+                hyderabad: {
+                    title: "Digital Marketing Agency in Hyderabad | SEO, Ads & Web | Codenclick",
+                    description: "Codenclick is a performance digital marketing agency in Hyderabad offering technical SEO, enterprise web development, high-ROI Google & Meta Ads, and AI automation.",
+                    h1: "Digital Marketing Agency in Hyderabad"
+                },
+                jaipur: {
+                    title: "Digital Marketing Agency in Jaipur | SEO, Ads & Web | Codenclick",
+                    description: "Codenclick is a performance-driven digital marketing agency in Jaipur. We specialize in B2B export SEO, high-ROAS ads, custom web development, and local search dominance.",
+                    h1: "Digital Marketing Agency in Jaipur"
+                }
+            };
+
+            const cityData = cityMetaMap[citySlug];
+            if (cityData) {
+                title = cityData.title;
+                description = cityData.description;
+                h1 = cityData.h1;
+            } else {
+                const formattedCity = citySlug ? (citySlug.charAt(0).toUpperCase() + citySlug.slice(1)) : 'India';
+                title = `Digital Marketing Agency in ${formattedCity} | Codenclick Technologies`;
+                description = `Scale your business in ${formattedCity} with Codenclick Technologies. SEO, Google Ads, Meta Ads, and modern web engineering.`;
+                h1 = `Digital Marketing Agency in ${formattedCity}`;
+            }
         } else if (cleanPath.includes('/services/') && cleanPath.includes('/in/')) {
-            // 2. Programmatic SEO Page: /services/web-development/in/delhi
+            // 3. Programmatic Service In City
             const parts = cleanPath.split('/');
             const service = parts[2].replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
             const city = parts[4].replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
@@ -132,7 +199,7 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
             description = `Looking for the best ${service} in ${city}? We provide top-tier ${service} solutions tailored for your business in ${city}. Get a free quote today.`;
             h1 = `${service} in ${city}`;
         } else if (cleanPath.includes('/resources/')) {
-            // 3. Blog Post
+            // 4. Blog Post
             const slug = cleanPath.split('/').pop();
             const resource = await this.prisma.resource.findUnique({ where: { slug } });
             if (resource) {
@@ -179,12 +246,22 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
                             "position": 1,
                             "name": "Home",
                             "item": "https://www.codenclick.in/"
-                        }${cleanPath !== '/' ? `, {
+                        }${cleanPath.startsWith('/digital-marketing-agency/') ? `, {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "Digital Marketing Agency",
+                            "item": "https://www.codenclick.in/digital-marketing-agency"
+                        }, {
+                            "@type": "ListItem",
+                            "position": 3,
+                            "name": "${h1}",
+                            "item": "https://www.codenclick.in${cleanPath}"
+                        }` : (cleanPath !== '/' ? `, {
                             "@type": "ListItem",
                             "position": 2,
                             "name": "${h1}",
                             "item": "https://www.codenclick.in${cleanPath}"
-                        }` : ''}]
+                        }` : '')}]
                     }
                 </script>
                 ${cleanPath.includes('/services/') ? `
@@ -273,6 +350,16 @@ Sitemap: ${this.SITE_URL}/sitemap.xml
             '/terms',
             '/portfolio',
             '/company-brochure',
+            '/digital-marketing-agency',
+            '/digital-marketing-agency/delhi',
+            '/digital-marketing-agency/gurgaon',
+            '/digital-marketing-agency/faridabad',
+            '/digital-marketing-agency/noida',
+            '/digital-marketing-agency/mumbai',
+            '/digital-marketing-agency/bangalore',
+            '/digital-marketing-agency/pune',
+            '/digital-marketing-agency/hyderabad',
+            '/digital-marketing-agency/jaipur',
         ];
 
         const urls = [

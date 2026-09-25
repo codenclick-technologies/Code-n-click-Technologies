@@ -278,14 +278,14 @@ const SEO = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black/20">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            
+
             {/* Left: Explanation */}
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">The Science Behind Rankings</h2>
               <p className="text-lg text-gray-400 mb-8">
                 Modern SEO isn't magic; it's engineering. We speak Google's language using advanced Schema Markup and Core Web Vitals optimization to compel the algorithm to rank you higher.
               </p>
-              
+
               <div className="grid grid-cols-3 gap-4 mb-8">
                 <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
                   <div className="text-2xl font-bold text-green-400 mb-1">0.8s</div>
@@ -302,12 +302,12 @@ const SEO = () => {
               </div>
 
               <div className="flex gap-4">
-                 <div className="flex items-center gap-2 text-sm text-gray-300">
-                    <CheckCircle2 className="w-4 h-4 text-green-500" /> JSON-LD Structured Data
-                 </div>
-                 <div className="flex items-center gap-2 text-sm text-gray-300">
-                    <CheckCircle2 className="w-4 h-4 text-green-500" /> Semantic HTML5
-                 </div>
+                <div className="flex items-center gap-2 text-sm text-gray-300">
+                  <CheckCircle2 className="w-4 h-4 text-green-500" /> JSON-LD Structured Data
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-300">
+                  <CheckCircle2 className="w-4 h-4 text-green-500" /> Semantic HTML5
+                </div>
               </div>
             </div>
 
@@ -315,7 +315,7 @@ const SEO = () => {
             <div>
               <div className="rounded-xl overflow-hidden border border-white/10 bg-[#0F0F13] shadow-2xl relative">
                 <div className="absolute top-4 right-4 px-2 py-1 bg-green-900/30 border border-green-500/30 text-green-400 text-xs rounded">
-                   Google Knowledge Graph
+                  Google Knowledge Graph
                 </div>
                 <div className="flex items-center gap-2 px-4 py-3 bg-white/5 border-b border-white/5">
                   <div className="ml-4 text-xs text-gray-400 font-mono">schema-markup.json</div>

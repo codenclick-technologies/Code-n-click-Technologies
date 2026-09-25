@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 
 const SpotlightCard = ({ children, className = "" }) => {
   const divRef = useRef(null);
-  
+
   const handleMouseMove = (e) => {
     if (!divRef.current || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0)) return;
 
@@ -10,7 +10,7 @@ const SpotlightCard = ({ children, className = "" }) => {
     const rect = div.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     div.style.setProperty("--mouse-x", `${x}px`);
     div.style.setProperty("--mouse-y", `${y}px`);
   };

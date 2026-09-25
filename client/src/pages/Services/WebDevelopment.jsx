@@ -326,7 +326,7 @@ const WebDevelopment = () => {
               <p className="text-lg text-gray-400 mb-8">
                 We don't just "make it work." We engineer it to last. Every project adheres to strict coding standards to ensure specific performance benchmarks.
               </p>
-              
+
               <div className="space-y-6">
                 <div>
                   <div className="flex justify-between text-sm font-medium mb-2">
@@ -558,7 +558,7 @@ const WebDevelopment = () => {
             <div className="glass-panel p-8 rounded-3xl border border-white/10 flex flex-col hover:border-blue-500/50 transition-colors">
               <h3 className="text-xl font-bold text-white mb-2">Starter</h3>
               <p className="text-sm text-gray-400 mb-6">Perfect for small businesses & landing pages</p>
-              
+
               <div className="mb-6 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
                 <h4 className="text-blue-400 font-bold mb-2 flex items-center gap-2">
                   <CheckCircle2 size={18} /> Recommended Stack
@@ -589,7 +589,7 @@ const WebDevelopment = () => {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-bold">Most Popular</div>
               <h3 className="text-xl font-bold text-white mb-2">Growth</h3>
               <p className="text-sm text-gray-400 mb-6">For growing businesses with dynamic content</p>
-              
+
               <div className="mb-6 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
                 <h4 className="text-blue-400 font-bold mb-2 flex items-center gap-2">
                   <CheckCircle2 size={18} /> Recommended Stack
@@ -620,7 +620,7 @@ const WebDevelopment = () => {
             <div className="glass-panel p-8 rounded-3xl border border-white/10 flex flex-col hover:border-purple-500/50 transition-colors">
               <h3 className="text-xl font-bold text-white mb-2">Enterprise</h3>
               <p className="text-sm text-gray-400 mb-6">For complex applications & high-traffic platforms</p>
-              
+
               <div className="mb-6 p-4 rounded-xl bg-purple-500/10 border border-purple-500/20">
                 <h4 className="text-purple-400 font-bold mb-2 flex items-center gap-2">
                   <CheckCircle2 size={18} /> Recommended Stack

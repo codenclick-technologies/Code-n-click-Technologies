@@ -85,7 +85,7 @@ const StatsSection = () => {
 
   return (
     <section className="relative py-16 lg:py-20 bg-[#020205] overflow-hidden selection:bg-blue-500/30">
-      
+
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-blue-600/5 rounded-full blur-[120px] mix-blend-screen opacity-50 hidden md:block" />
       </div>
@@ -94,7 +94,7 @@ const StatsSection = () => {
 
       <div className="max-w-7xl mx-auto relative z-10 px-6">
         <div className="text-center mb-20 lg:mb-24 px-4">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -103,8 +103,8 @@ const StatsSection = () => {
             <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
             <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">Our Story in Numbers</span>
           </motion.div>
-          
-          <motion.h2 
+
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -113,8 +113,8 @@ const StatsSection = () => {
           >
             Real results for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">real people.</span>
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -144,7 +144,7 @@ const StatsSection = () => {
 const StatCard = ({ stat, index }) => {
   const cardRef = useRef(null);
   const Icon = stat.icon;
-  
+
   const handleMouseMove = (e) => {
     if (!cardRef.current || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0)) return;
     const rect = cardRef.current.getBoundingClientRect();
@@ -166,8 +166,8 @@ const StatCard = ({ stat, index }) => {
       className="group relative h-full will-change-transform"
     >
       <div className="relative h-full p-8 rounded-[2.5rem] bg-[#030303]/80 backdrop-blur-xl border border-white/5 overflow-hidden transition-all duration-500 group-hover:border-white/20 group-hover:shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)]">
-        
-        <div 
+
+        <div
           className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out z-0"
           style={{
             background: `radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), ${stat.glow}, transparent 80%)`,
@@ -175,11 +175,11 @@ const StatCard = ({ stat, index }) => {
         />
 
         <div className="relative z-10 flex flex-col h-full">
-          
+
           <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${stat.color} p-[1px] mb-8 group-hover:scale-110 transition-transform duration-500`}>
-             <div className="w-full h-full bg-[#020205] rounded-2xl flex items-center justify-center">
-                <Icon className="w-7 h-7 text-white" />
-             </div>
+            <div className="w-full h-full bg-[#020205] rounded-2xl flex items-center justify-center">
+              <Icon className="w-7 h-7 text-white" />
+            </div>
           </div>
 
           <div className={`text-5xl md:text-6xl font-black text-white mb-4 tracking-tighter`}>
@@ -189,19 +189,19 @@ const StatCard = ({ stat, index }) => {
           <h4 className="text-xl font-bold text-gray-100 mb-3 group-hover:text-white transition-colors">
             {stat.label}
           </h4>
-          
+
           <p className="text-sm text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors flex-grow">
             {stat.detail}
           </p>
 
           <div className="mt-8 relative h-1 w-full bg-white/5 rounded-full overflow-hidden">
-             <motion.div 
-               initial={{ x: '-100%' }}
-               whileInView={{ x: '0%' }}
-               viewport={{ once: true }}
-               transition={{ duration: 1.2, delay: 0.5 + (index * 0.1), ease: "easeOut" }}
-               className={`absolute inset-0 bg-gradient-to-r ${stat.color} opacity-70`}
-             />
+            <motion.div
+              initial={{ x: '-100%' }}
+              whileInView={{ x: '0%' }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.5 + (index * 0.1), ease: "easeOut" }}
+              className={`absolute inset-0 bg-gradient-to-r ${stat.color} opacity-70`}
+            />
           </div>
         </div>
 
