@@ -1,152 +1,177 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { TrendingUp, Zap, Shield, Users, ArrowUpRight, BarChart3, Rocket, Lock } from 'lucide-react';
+import React, { memo } from 'react';
+import { motion } from 'framer-motion';
+import { 
+  TrendingUp, 
+  Rocket, 
+  Lock, 
+  Users, 
+  CheckCircle2, 
+  ArrowRight,
+  ShieldCheck,
+  Zap,
+  Sparkles,
+  BarChart3
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
-import SpotlightCard from '../ui/SpotlightCard';
+
+const reasons = [
+  {
+    icon: TrendingUp,
+    title: 'Obsessed with Net Revenue & ROI',
+    description: 'We don’t celebrate vanity metrics like impressions and clicks. We track every rupee spent directly back to pipeline value, qualified leads, and closed deals.',
+    lightBg: 'bg-blue-50',
+    borderColor: 'border-blue-200',
+    textColor: 'text-blue-600',
+    stat: '+340%',
+    statLabel: 'Avg. First-Year ROI Lift'
+  },
+  {
+    icon: Rocket,
+    title: 'Sub-Second Page Load Velocity',
+    description: 'Slow websites kill conversion rates. We eliminate heavy WordPress bloat and build headless, custom React applications that render in under 600ms on mobile.',
+    lightBg: 'bg-amber-50',
+    borderColor: 'border-amber-200',
+    textColor: 'text-amber-600',
+    stat: '480ms',
+    statLabel: 'Average LCP Speed'
+  },
+  {
+    icon: Lock,
+    title: 'Bank-Grade Code & Data Security',
+    description: 'Your intellectual property and client data are non-negotiable. Every system undergoes strict vulnerability assessments, OWASP compliance, and SSL enforcement.',
+    lightBg: 'bg-emerald-50',
+    borderColor: 'border-emerald-200',
+    textColor: 'text-emerald-600',
+    stat: '100%',
+    statLabel: 'Secure Code Audited'
+  },
+  {
+    icon: Users,
+    title: 'Senior Engineering Partners, Not Vendors',
+    description: 'You communicate directly with experienced product engineers and growth strategists on dedicated channels. No account manager telephone games or delays.',
+    lightBg: 'bg-purple-50',
+    borderColor: 'border-purple-200',
+    textColor: 'text-purple-600',
+    stat: '95%',
+    statLabel: 'Client Retention Rate'
+  },
+];
 
 const WhyChooseUs = () => {
-  const reasons = [
-    {
-      icon: TrendingUp,
-      title: 'We care about your ROI',
-      description: 'As your partner for Digital Marketing in Delhi, we don\'t just count clicks. We track how many leads actually become your customers.',
-      color: 'from-blue-600 via-indigo-500 to-cyan-400',
-      glow: 'rgba(59, 130, 246, 0.4)'
-    },
-    {
-      icon: Rocket,
-      title: 'Blazing fast speed',
-      description: 'Slow websites kill businesses. Our Web Development experts in Delhi build lightning-fast platforms that keep your users happy and buying.',
-      color: 'from-orange-600 via-amber-500 to-yellow-400',
-      glow: 'rgba(249, 115, 22, 0.4)'
-    },
-    {
-      icon: Lock,
-      title: 'Safety you can trust',
-      description: 'Your data is precious. We use enterprise-level security to make sure your website and your customers are always protected.',
-      color: 'from-emerald-600 via-teal-500 to-green-400',
-      glow: 'rgba(16, 185, 129, 0.4)'
-    },
-    {
-      icon: Users,
-      title: 'A partner, not just a vendor',
-      description: 'We aren\'t just a vendor you hire for a month. We stick with you as your GMB Expert and SEO consultant to ensure long-term visibility.',
-      color: 'from-pink-600 via-rose-500 to-purple-400',
-      glow: 'rgba(244, 63, 94, 0.4)'
-    },
-  ];
-
   return (
-    <section className="relative py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-[#020205] overflow-hidden">
-
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-purple-600/5 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"
+    <section className="relative py-20 lg:py-28 bg-white text-slate-900 overflow-hidden">
+      {/* Subtle Background Mesh Glow */}
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-[500px] pointer-events-none opacity-40"
         style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
-          backgroundSize: '100px 100px',
-          maskImage: 'radial-gradient(circle at center, black, transparent 80%)'
+          background: "radial-gradient(circle at center, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.03) 50%, transparent 80%)"
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto z-10">
-        <div className="text-center mb-20 px-4">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-bold uppercase tracking-wider mb-5 shadow-sm"
           >
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-300">Why brands love us</span>
+            <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+            <span>The Codenclick Difference</span>
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="text-4xl md:text-6xl font-black text-white leading-tight mb-8 tracking-tighter"
+            transition={{ delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6 font-outfit"
           >
-            Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">Growth.</span> <br />
-            Designed for <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400">People.</span>
+            Why Ambitious Brands{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600">
+              Trust Our Team
+            </span>
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed"
+            transition={{ delay: 0.2 }}
+            className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal"
           >
-            We combine high-end technology with a deep understanding of what people actually want. No jargon, just <Link to="/services" className="text-white hover:text-blue-400 transition-colors font-medium border-b border-white/20">real results</Link> for your business. <Link to="/contact" className="text-blue-400 hover:text-white transition-colors">Let's talk growth.</Link>
+            We operate at the intersection of technical engineering precision and commercial growth psychology to guarantee measurable business impact.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {reasons.map((reason, idx) => {
+        {/* 4 Value Pillars in 2x2 Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {reasons.map((reason, index) => {
             const Icon = reason.icon;
+
             return (
               <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
+                key={reason.title}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -8 }}
-                className="group relative h-full will-change-transform"
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="p-8 lg:p-10 rounded-3xl bg-[#FAFBFC] border border-slate-200/90 hover:border-blue-400/50 shadow-sm hover:shadow-xl hover:shadow-slate-900/5 transition-all duration-300 flex flex-col justify-between"
               >
-                <SpotlightCard className="h-full bg-[#0A0A0B]/80 backdrop-blur-xl border border-white/5 group-hover:border-white/20 transition-all duration-700 rounded-[2.5rem] overflow-hidden flex flex-col p-8">
-
-                  <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${reason.color} opacity-0 group-hover:opacity-10 blur-[40px] transition-all duration-700 rounded-full z-0`} />
-
-                  <div className="relative z-10 flex flex-col h-full">
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${reason.color} p-[1.5px] mb-8 group-hover:rotate-[10deg] transition-transform duration-500`}>
-                      <div className="w-full h-full bg-[#0A0A0B] rounded-2xl flex items-center justify-center">
-                        <Icon className="w-7 h-7 text-white" />
-                      </div>
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <div className={`w-14 h-14 rounded-2xl ${reason.lightBg} ${reason.borderColor} border flex items-center justify-center shadow-sm`}>
+                      <Icon className={`w-7 h-7 ${reason.textColor}`} />
                     </div>
-
-                    <h3 className="text-xl font-bold text-white mb-4 tracking-tight group-hover:text-blue-400 transition-colors duration-500">
-                      {reason.title}
-                    </h3>
-                    <p className="text-sm text-gray-500 leading-relaxed font-light group-hover:text-gray-400 transition-colors duration-500">
-                      {reason.description}
-                    </p>
-
-                    <div className="mt-auto pt-8">
-                      <div className={`h-1 w-0 group-hover:w-full bg-gradient-to-r ${reason.color} transition-all duration-700 rounded-full`} />
+                    <div className="text-right">
+                      <p className="text-2xl font-black text-slate-900 font-mono">{reason.stat}</p>
+                      <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">{reason.statLabel}</p>
                     </div>
                   </div>
-                </SpotlightCard>
+
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">
+                    {reason.title}
+                  </h3>
+
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                    {reason.description}
+                  </p>
+                </div>
               </motion.div>
             );
           })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-center mt-20"
-        >
-          <p className="text-gray-500 text-sm font-light mb-8 uppercase tracking-[0.3em]">Ready to start your journey?</p>
-          <motion.div className="inline-block relative group/btn px-4">
-            <div className="absolute inset-x-0 inset-y-0 bg-blue-600 blur-2xl opacity-10 group-hover/btn:opacity-30 transition-opacity" />
+        {/* Comparison Banner */}
+        <div className="p-8 lg:p-10 rounded-3xl bg-slate-900 text-white shadow-xl border border-slate-800 flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="space-y-3 text-center lg:text-left">
+            <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 text-xs font-bold uppercase tracking-wider">
+              No More Guesswork
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-bold text-white">
+              Ready to Upgrade from Traditional Freelancers & Agencies?
+            </h3>
+            <p className="text-sm text-slate-400 max-w-2xl">
+              Get direct access to certified engineers, dedicated PMs, clean GitHub code repos, and guaranteed delivery timelines.
+            </p>
+          </div>
+
+          <div className="flex-shrink-0">
             <Link
               to="/contact"
-              className="relative inline-flex items-center gap-4 px-10 py-5 bg-white text-black font-black uppercase tracking-[0.2em] text-[10px] rounded-2xl transition-all shadow-2xl hover:bg-blue-600 hover:text-white group"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-blue-500/30 transition-all hover:scale-105 active:scale-95"
             >
-              Let's have a chat
-              <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform" />
+              <span>Get Free Technical Consultation</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
+
       </div>
     </section>
   );
 };
 
-export default WhyChooseUs;
+export default memo(WhyChooseUs);

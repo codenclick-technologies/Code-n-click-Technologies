@@ -1,340 +1,379 @@
-import React, { useRef, memo } from "react";
+import React, { useState, memo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-    motion,
-    // useScroll, // Unused
-    useTransform,
-    useSpring,
-    useMotionValue,
-    // useMotionTemplate, // Unused
-} from "framer-motion";
-import {
-    ArrowRight,
-    TrendingUp,
-    CheckCircle2,
-    Users,
-    Code2,
-    Layout,
-    Smartphone,
-    Star,
+  ArrowRight,
+  TrendingUp,
+  CheckCircle2,
+  Users,
+  Code2,
+  Smartphone,
+  Star,
+  Download,
+  Zap,
+  ShieldCheck,
+  BarChart3,
+  Layers,
+  Sparkles,
+  ArrowUpRight
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-// --- Advanced Components (Memoized for Performance) ---
-
-const ParticleVortex = memo(() => {
-    // Adaptive particle count - Extremely low for performance
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
-    if (isMobile) return null; // Completely disable on mobile to prevent lag
-
-    const count = 10;
-
-    return (
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none translate-z-0">
-            {[...Array(count)].map((_, i) => (
-                <motion.div
-                    key={i}
-                    className="absolute top-1/2 left-1/2 rounded-full border border-blue-500/10 will-change-transform"
-                    style={{
-                        width: `${(i + 1) * 120}px`,
-                        height: `${(i + 1) * 120}px`,
-                        x: "-50%",
-                        y: "-50%",
-                    }}
-                    animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
-                    transition={{ duration: 80 + i * 10, repeat: Infinity, ease: "linear" }}
-                />
-            ))}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#020205] via-transparent to-[#020205]" />
-        </div>
-    );
-});
-
-const PerspectiveGrid = memo(() => {
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
-    if (isMobile) return null; // Completely disable on mobile
-
-    return (
-        <div className="absolute inset-0 z-0 pointer-events-none perspective-[1000px] overflow-hidden translate-z-0">
-            <motion.div
-                className="absolute -bottom-[30%] -left-[50%] w-[200%] h-[100%] origin-bottom will-change-transform"
-                style={{
-                    rotateX: "60deg",
-                    background: "linear-gradient(transparent 20%, rgba(59, 130, 246, 0.05) 21%, transparent 22%), linear-gradient(90deg, transparent 20%, rgba(59, 130, 246, 0.05) 21%, transparent 22%)",
-                    backgroundSize: "60px 60px"
-                }}
-                animate={{ y: [0, 60] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-            >
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-950/30 to-[#020205]" />
-            </motion.div>
-        </div>
-    );
-});
-
-const HighlightText = ({ text }) => {
-    return (
-        <span className="relative inline-block group">
-            <span className="relative z-10">{text}</span>
-            <span className="absolute bottom-2 left-0 w-full h-3 bg-blue-600/20 -z-10 group-hover:h-full transition-all duration-500 ease-out rounded-sm" />
-        </span>
-    )
-}
-
-// --- Main Hero Component ---
-
 const Hero = () => {
-    const containerRef = useRef(null);
+  const [activeTab, setActiveTab] = useState("web");
 
-    // Motion Values (No State Re-renders)
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
+  const tabContent = {
+    web: {
+      badge: "High-Performance Web Apps",
+      title: "Sub-Second Custom React & Headless Web",
+      stat1: { label: "LCP Load Speed", val: "480ms", sub: "Core Web Vitals 99+" },
+      stat2: { label: "Conversion Lift", val: "+210%", sub: "Above Industry Avg" },
+      stat3: { label: "SEO Health Score", val: "100/100", sub: "Zero Crawler Errors" },
+      features: [
+        "Headless React 19 Architecture",
+        "Edge-cached Global CDN",
+        "Dynamic Open Graph & Schema",
+        "Zero-Bloat Custom UI/UX"
+      ]
+    },
+    saas: {
+      badge: "SaaS & Cloud Platforms",
+      title: "Scalable Multi-Tenant Architecture",
+      stat1: { label: "Concurrent Users", val: "50,000+", sub: "Seamless Concurrency" },
+      stat2: { label: "System Uptime", val: "99.99%", sub: "Enterprise SLA" },
+      stat3: { label: "Database Latency", val: "<12ms", sub: "Optimized Indexing" },
+      features: [
+        "Secure Stripe & Razorpay Billing",
+        "Role-Based Access Control (RBAC)",
+        "REST & GraphQL Microservices",
+        "Automated CI/CD Pipelines"
+      ]
+    },
+    growth: {
+      badge: "Paid Ads & Acquisition",
+      title: "High-ROAS Meta & Google Ad Funnels",
+      stat1: { label: "Average ROAS", val: "4.8x", sub: "Omnichannel Return" },
+      stat2: { label: "Customer Acquisition", val: "-38%", sub: "Reduced CAC" },
+      stat3: { label: "Qualified Pipeline", val: "₹18Cr+", sub: "Total Pipeline Value" },
+      features: [
+        "High-Intent Negative Bidding Shields",
+        "Hyper-segmented Lookalike Audiences",
+        "WhatsApp Automation Hand-offs",
+        "Server-Side Conversion CAPI Tracking"
+      ]
+    },
+    seo: {
+      badge: "Top 1% SEO & Generative Search",
+      title: "Dominate Google & Perplexity AI Overviews",
+      stat1: { label: "Top 3 SERP Ranks", val: "84%", sub: "Commercial Keywords" },
+      stat2: { label: "Organic Monthly Traffic", val: "1.2M+", sub: "Across Client Network" },
+      stat3: { label: "Entity Authority", val: "AEO/GEO Ready", sub: "Structured Knowledge Graph" },
+      features: [
+        "Semantic Topic Clustering",
+        "Local Pincode & City Hubs",
+        "Google Rich Snippets FAQ Markup",
+        "Instant Edge Snapshot Rendering"
+      ]
+    }
+  };
 
-    // Detect if touch device to disable mouse effects
-    const [isTouchDevice, setIsTouchDevice] = React.useState(false);
+  const current = tabContent[activeTab];
 
-    React.useEffect(() => {
-        setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  return (
+    <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-white text-slate-900 overflow-hidden">
+      {/* Premium Subtle Ambient Gradients */}
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[650px] pointer-events-none opacity-60"
+        style={{
+          background: "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.15) 0%, rgba(99, 102, 241, 0.08) 40%, rgba(236, 72, 153, 0.03) 70%, transparent 100%)"
+        }}
+      />
 
-        // Set initial center position for spotlight
-        mouseX.set(window.innerWidth / 2);
-        mouseY.set(window.innerHeight / 2);
-    }, [mouseX, mouseY]);
+      {/* Subtle Dot Grid */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-[0.25]"
+        style={{
+          backgroundImage: "radial-gradient(#CBD5E1 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+          maskImage: "radial-gradient(ellipse 60% 50% at 50% 25%, black 40%, transparent 100%)"
+        }}
+      />
 
-    const handleMouseMove = (e) => {
-        if (isTouchDevice) return;
-        mouseX.set(e.clientX);
-        mouseY.set(e.clientY);
-    };
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        
+        {/* Top Badges & Announcement */}
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/80 shadow-sm text-xs sm:text-sm font-semibold text-blue-700"
+          >
+            <Sparkles className="w-4 h-4 text-blue-600" />
+            <span>Top-Rated Web & Digital Growth Agency in Delhi NCR</span>
+          </motion.div>
 
-    // Smooth Springs for Interactivity
-    const smoothX = useSpring(mouseX, { stiffness: 50, damping: 20 });
-    const smoothY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-700 shadow-sm"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            <span>Now Booking Q2 2026 Projects</span>
+          </motion.div>
+        </div>
 
-    // Derived Transforms - Only calculate if visible (Desktop)
-    const rotateX = useTransform(smoothY, [0, window.innerHeight], [5, -5]);
-    const rotateY = useTransform(smoothX, [0, window.innerWidth], [-5, 5]);
+        {/* Main Hero Header */}
+        <div className="text-center max-w-4xl mx-auto mb-12 lg:mb-16">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.12] mb-6 font-outfit"
+          >
+            Engineering Digital Products &{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500">
+              Growth Engines
+            </span>{" "}
+            That Scale Your Revenue.
+          </motion.h1>
 
-    return (
-        <section
-            ref={containerRef}
-            onMouseMove={handleMouseMove}
-            className="relative w-full min-h-screen bg-[#020205] overflow-hidden flex items-center selection:bg-blue-500/30 font-sans pt-32 lg:pt-32"
-        >
-            <PerspectiveGrid />
-            <ParticleVortex />
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.25 }}
+            className="text-lg sm:text-xl md:text-2xl text-slate-600 font-normal leading-relaxed max-w-3xl mx-auto mb-10"
+          >
+            We replace generic templates with custom, sub-second web applications, enterprise SaaS platforms, and ROI-driven SEO & Ads funnels built to win.
+          </motion.p>
 
-            {/* Optimized Spotlight - Uses Transform instead of Background property */}
-            {!isTouchDevice && (
-                <motion.div
-                    className="absolute -left-[500px] -top-[500px] w-[1000px] h-[1000px] pointer-events-none opacity-40 z-0 will-change-transform"
-                    style={{
-                        background: "radial-gradient(circle at center, rgba(59, 130, 246, 0.12), transparent 70%)",
-                        x: smoothX,
-                        y: smoothY,
-                    }}
-                />
-            )}
+          {/* Action CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.35 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5"
+          >
+            <Link
+              to="/contact"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-bold text-base shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 hover:scale-[1.02] active:scale-95 transition-all duration-200"
+            >
+              <span>Schedule Free Strategy Call</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
 
-            <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            <Link
+              to="/company-brochure"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full bg-white hover:bg-slate-50 text-slate-800 font-bold text-base border border-slate-300 shadow-sm hover:shadow hover:border-slate-400 active:scale-95 transition-all duration-200"
+            >
+              <Download className="w-4 h-4 text-blue-600" />
+              <span>Get Company Profile</span>
+            </Link>
+          </motion.div>
 
-                {/* --- LEFT: CONTROL INTERFACE --- */}
-                <div className="space-y-8 lg:space-y-10 pt-12 lg:pt-0 lg:mt-20 text-center lg:text-left">
-
-                    {/* Header Badge */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl hover:bg-white/10 transition-colors mx-auto lg:mx-0"
-                    >
-                        <div className="flex gap-1.5">
-                            <Star size={14} className="text-yellow-400 fill-yellow-400" />
-                            <Star size={14} className="text-yellow-400 fill-yellow-400" />
-                            <Star size={14} className="text-yellow-400 fill-yellow-400" />
-                            <Star size={14} className="text-yellow-400 fill-yellow-400" />
-                            <Star size={14} className="text-yellow-400 fill-yellow-400" />
-                        </div>
-                        <span className="text-sm font-medium text-gray-200 tracking-wide">Delhi's #1 ROI-Driven Digital Marketing Partner</span>
-                    </motion.div>
-
-                    {/* Main Title */}
-                    <div className="relative z-10 max-w-2xl mx-auto lg:mx-0">
-                        <motion.h1
-                            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1]"
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        >
-                            <span className="block text-gray-200">Clicks to Revenue.</span>
-                            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 pb-2">
-                                Delhi’s ROI Agency.
-                            </span>
-                        </motion.h1>
-                    </div>
-
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 1 }}
-                        className="text-lg md:text-xl text-gray-400 max-w-xl leading-relaxed font-light mx-auto lg:mx-0"
-                    >
-                        We don't just write code; we build businesses. As a leading <Link to="/services/seo" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">SEO Expert in Delhi</Link>, we help brands grow through high-performance <Link to="/services/web-development" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">Web Development</Link> and result-driven <Link to="/services/google-ads" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">Digital Marketing</Link> strategies that actually scale.
-                    </motion.p>
-
-                    {/* Buttons */}
-                    <div className="flex flex-wrap gap-5 justify-center lg:justify-start">
-                        <Link to="/contact">
-                            <motion.button
-                                whileHover={{ scale: 1.02, backgroundColor: "#2563eb" }}
-                                whileTap={{ scale: 0.98 }}
-                                className="group flex items-center gap-3 px-8 py-4 bg-blue-600 text-white font-semibold text-lg rounded-xl shadow-[0_20px_40px_-15px_rgba(37,99,235,0.5)] transition-all"
-                            >
-                                Start Your Project
-                                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                            </motion.button>
-                        </Link>
-
-                        <Link to="/portfolio">
-                            <motion.button
-                                whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.08)" }}
-                                whileTap={{ scale: 0.98 }}
-                                className="px-8 py-4 border border-white/10 bg-white/5 text-white font-medium text-lg rounded-xl backdrop-blur-sm transition-all"
-                            >
-                                View Our Work
-                            </motion.button>
-                        </Link>
-                    </div>
-
-                    {/* Stats */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6, duration: 1 }}
-                        className="border-t border-white/10 pt-8 flex flex-wrap gap-8 lg:gap-12 justify-center lg:justify-start"
-                    >
-                        {[
-                            { label: "Client Retention", val: "98%" },
-                            { label: "Projects Launched", val: "500+" },
-                            { label: "Support & Care", val: "24/7" }
-                        ].map((stat, i) => (
-                            <div key={i} className="group cursor-default">
-                                <div className="text-3xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors duration-300">{stat.val}</div>
-                                <div className="text-sm text-gray-500 font-medium uppercase tracking-wider">{stat.label}</div>
-                            </div>
-                        ))}
-                    </motion.div>
-
-                </div>
-
-                {/* --- RIGHT: 3D DASHBOARD --- */}
-                <div className="relative h-[800px] hidden lg:flex items-center justify-center perspective-[2000px]">
-
-                    {/* Main Card */}
-                    <motion.div
-                        style={{ rotateX, rotateY, z: 100 }}
-                        className="relative w-[520px] h-[640px] bg-[#030303]/90 backdrop-blur-2xl border border-white/10 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col"
-                    >
-                        {/* Glow Effects */}
-                        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 pointer-events-none" />
-
-                        {/* Header */}
-                        <div className="p-8 border-b border-white/5 flex justify-between items-center">
-                            <div>
-                                <h3 className="text-white font-semibold text-lg flex items-center gap-2">
-                                    <TrendingUp className="text-blue-500" size={20} />
-                                    Business Growth
-                                </h3>
-                                <p className="text-xs text-gray-500 mt-1">Real-time Impact Analysis</p>
-                            </div>
-                            <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold animate-pulse">
-                                GROWING
-                            </div>
-                        </div>
-
-                        {/* Body */}
-                        <div className="p-8 flex-1 flex flex-col gap-6">
-
-                            {/* Main Stat */}
-                            <div className="bg-white/5 rounded-2xl p-6 border border-white/5 group hover:border-blue-500/30 transition-colors">
-                                <div className="flex justify-between items-end mb-4">
-                                    <div>
-                                        <p className="text-gray-400 text-sm mb-1">Monthly Active Users</p>
-                                        <h2 className="text-4xl font-bold text-white tracking-tight">24,500</h2>
-                                    </div>
-                                    <div className="text-emerald-400 text-sm font-semibold mb-1 flex items-center gap-1">
-                                        +127% <TrendingUp size={14} />
-                                    </div>
-                                </div>
-                                {/* Chart */}
-                                <div className="h-32 flex items-end gap-2">
-                                    {[30, 45, 40, 60, 55, 75, 80, 95, 100].map((h, i) => (
-                                        <motion.div
-                                            key={i}
-                                            initial={{ height: 0 }}
-                                            animate={{ height: `${h}%` }}
-                                            transition={{ duration: 1.5, delay: 0.2 + (i * 0.05), ease: [0.22, 1, 0.36, 1] }}
-                                            className="flex-1 bg-gradient-to-t from-blue-600/20 to-blue-500 rounded-t-md hover:to-blue-400 transition-all cursor-pointer"
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Services Row */}
-                            <div className="grid grid-cols-2 gap-4">
-                                {[
-                                    { icon: Layout, title: "Custom Web", desc: "Designed for Scale", color: "text-blue-400" },
-                                    { icon: Smartphone, title: "Mobile Apps", desc: "iOS & Android", color: "text-purple-400" }
-                                ].map((item, i) => (
-                                    <motion.div
-                                        key={i}
-                                        whileHover={{ scale: 1.02 }}
-                                        className="bg-white/5 p-5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors cursor-default"
-                                    >
-                                        <item.icon className={`${item.color} mb-3`} size={24} />
-                                        <h4 className="text-white font-medium">{item.title}</h4>
-                                        <p className="text-gray-500 text-xs">{item.desc}</p>
-                                    </motion.div>
-                                ))}
-                            </div>
-
-                            {/* System Status */}
-                            <div className="mt-auto pt-4 flex items-center gap-4 text-xs font-mono text-gray-500">
-                                <div className="flex gap-1.5 items-center">
-                                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                                    <span className="text-gray-400">System Healthy</span>
-                                </div>
-                                <div className="ml-auto text-blue-400">All Systems Go</div>
-                            </div>
-
-                        </div>
-                    </motion.div>
-
-                    {/* Parallax Elements */}
-                    <motion.div
-                        style={{ x: useTransform(smoothX, [0, window.innerWidth], [20, -20]), y: useTransform(smoothY, [0, window.innerHeight], [20, -20]), z: 50 }}
-                        className="absolute -right-12 top-1/4 p-5 bg-[#030303]/90 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl"
-                    >
-                        <Users className="text-blue-400" size={32} />
-                    </motion.div>
-
-                    <motion.div
-                        style={{ x: useTransform(smoothX, [0, window.innerWidth], [-20, 20]), y: useTransform(smoothY, [0, window.innerHeight], [-20, 20]), z: 150 }}
-                        className="absolute -left-12 bottom-1/3 p-5 bg-[#030303]/90 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl"
-                    >
-                        <Code2 className="text-emerald-400" size={32} />
-                    </motion.div>
-
-                </div>
-
+          {/* Micro Trust Indicators */}
+          <div className="flex flex-wrap items-center justify-center gap-6 mt-8 text-xs sm:text-sm text-slate-500 font-medium">
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <span>100% Code Ownership</span>
             </div>
-        </section>
-    );
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <span>Sub-600ms Load Time</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <span>No Retainer Lock-in</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Live Interactive Showcase Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.45 }}
+          className="relative max-w-5xl mx-auto rounded-3xl bg-white border border-slate-200/90 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.1)] p-6 sm:p-8 lg:p-10 overflow-hidden"
+        >
+          {/* Subtle Accent Glow Inside Card */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full blur-3xl opacity-60 pointer-events-none" />
+
+          {/* Interactive Navigation Pills */}
+          <div className="relative z-10 flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-8">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-1">
+                INTERACTIVE CAPABILITY CONSOLE
+              </p>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+                Explore How We Deliver Results
+              </h2>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2 p-1.5 bg-slate-100 rounded-2xl border border-slate-200/80">
+              {[
+                { id: "web", label: "Web Apps", icon: Code2 },
+                { id: "saas", label: "SaaS Platforms", icon: Layers },
+                { id: "growth", label: "Performance Ads", icon: TrendingUp },
+                { id: "seo", label: "AI Search & SEO", icon: BarChart3 },
+              ].map((tab) => {
+                const Icon = tab.icon;
+                const isSelected = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                      isSelected
+                        ? "bg-white text-blue-600 shadow-md shadow-slate-200/80 font-bold"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/60"
+                    }`}
+                  >
+                    <Icon className={`w-4 h-4 ${isSelected ? "text-blue-600" : "text-slate-400"}`} />
+                    <span>{tab.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Dynamic Content Display */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+            >
+              {/* Left Column: Metrics & Architecture */}
+              <div className="lg:col-span-7 space-y-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider">
+                  <Zap className="w-3.5 h-3.5 text-blue-600" />
+                  <span>{current.badge}</span>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
+                  {current.title}
+                </h3>
+
+                {/* 3 Metric Cards */}
+                <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+                    <p className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+                      {current.stat1.val}
+                    </p>
+                    <p className="text-xs font-bold text-slate-700 mt-1">{current.stat1.label}</p>
+                    <p className="text-[10px] text-slate-500">{current.stat1.sub}</p>
+                  </div>
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-blue-50/70 border border-blue-200/70">
+                    <p className="text-2xl sm:text-3xl font-black text-blue-600 font-mono">
+                      {current.stat2.val}
+                    </p>
+                    <p className="text-xs font-bold text-slate-700 mt-1">{current.stat2.label}</p>
+                    <p className="text-[10px] text-slate-500">{current.stat2.sub}</p>
+                  </div>
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+                    <p className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+                      {current.stat3.val}
+                    </p>
+                    <p className="text-xs font-bold text-slate-700 mt-1">{current.stat3.label}</p>
+                    <p className="text-[10px] text-slate-500">{current.stat3.sub}</p>
+                  </div>
+                </div>
+
+                {/* Feature Checklist */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+                  {current.features.map((feat, idx) => (
+                    <div key={idx} className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium">
+                      <div className="w-4 h-4 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                        <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                      </div>
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Column: Interactive Code & Visual Card */}
+              <div className="lg:col-span-5">
+                <div className="rounded-2xl bg-slate-900 text-slate-100 p-5 sm:p-6 shadow-xl border border-slate-800">
+                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
+                    <div className="flex items-center gap-2">
+                      <span className="w-3 h-3 rounded-full bg-rose-500/80" />
+                      <span className="w-3 h-3 rounded-full bg-amber-500/80" />
+                      <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                      <span className="ml-2 text-xs font-mono text-slate-400">production.pipeline.ts</span>
+                    </div>
+                    <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800">
+                      LIVE 2026
+                    </span>
+                  </div>
+
+                  <div className="font-mono text-xs space-y-2 text-slate-300">
+                    <p className="text-blue-400">// Enterprise Grade Deployment</p>
+                    <p><span className="text-purple-400">const</span> <span className="text-amber-300">deployment</span> = <span className="text-blue-400">await</span> engine.<span className="text-emerald-300">initialize</span>(&#123;</p>
+                    <p className="pl-4">framework: <span className="text-emerald-300">"React 19 + Next Architecture"</span>,</p>
+                    <p className="pl-4">performance: <span className="text-emerald-300">"LCP &lt; 500ms"</span>,</p>
+                    <p className="pl-4">security: <span className="text-emerald-300">"Zero Vulnerability Guard"</span>,</p>
+                    <p className="pl-4">revenueTracking: <span className="text-cyan-400">true</span></p>
+                    <p>&#125;);</p>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
+                    <span className="text-slate-400">Ready to build your roadmap?</span>
+                    <Link
+                      to="/services"
+                      className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 font-bold transition-colors"
+                    >
+                      <span>Explore all services</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Client Trust & Rating Strip */}
+        <div className="mt-14 pt-8 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-6 text-slate-600">
+          <div className="flex items-center gap-3">
+            <div className="flex -space-x-2">
+              {["👨‍💼", "👩‍💻", "👨‍💻", "👩‍💼"].map((emoji, i) => (
+                <div key={i} className="w-9 h-9 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-sm shadow-sm">
+                  {emoji}
+                </div>
+              ))}
+            </div>
+            <div>
+              <div className="flex items-center gap-1 text-amber-500">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                ))}
+                <span className="text-xs font-bold text-slate-800 ml-1">4.9 / 5.0</span>
+              </div>
+              <p className="text-xs text-slate-500 font-medium">Over 200+ Businesses Scaled Across India & UAE</p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-6 sm:gap-8 font-semibold text-xs sm:text-sm text-slate-400 uppercase tracking-wider">
+            <span>STARTUPS</span>
+            <span>•</span>
+            <span>ENTERPRISES</span>
+            <span>•</span>
+            <span>D2C BRANDS</span>
+            <span>•</span>
+            <span>SAAS FOUNDERS</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
 };
 
-
-export default Hero;
-
-
-
-
+export default memo(Hero);

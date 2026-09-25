@@ -6,9 +6,9 @@ import { Menu, X, ChevronDown, Sun, Moon, Briefcase, Phone, Info, BookOpen, User
 const Navbar = ({ isBannerVisible }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  // const [isDark, setIsDark] = useState(false); // Unused
   const [activeDropdown, setActiveDropdown] = useState(null);
-  // const location = useLocation(); // Unused
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   // Handle Scroll
   useEffect(() => {
@@ -26,8 +26,6 @@ const Navbar = ({ isBannerVisible }) => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-
 
   const navLinks = [
     { name: 'About Us', path: '/about', icon: Info },
@@ -54,8 +52,24 @@ const Navbar = ({ isBannerVisible }) => {
     { name: 'Contact Us', path: '/contact', icon: Phone },
   ];
 
+  const navContainerClass = isHome
+    ? `fixed left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 transition-all duration-300 rounded-full border ${
+        isBannerVisible && !isScrolled ? 'top-14' : 'top-4'
+      } ${
+        isScrolled
+          ? 'bg-white/90 backdrop-blur-xl border-slate-200/90 shadow-xl shadow-slate-900/5 py-2 text-slate-800'
+          : 'bg-white/75 backdrop-blur-md border-slate-200/60 shadow-sm py-3 text-slate-800'
+      }`
+    : `fixed left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 transition-all duration-300 rounded-full border border-white/10 ${
+        isBannerVisible && !isScrolled ? 'top-14' : 'top-4'
+      } ${
+        isScrolled
+          ? 'bg-[#020205]/85 backdrop-blur-xl shadow-2xl py-2'
+          : 'bg-transparent py-4'
+      }`;
+
   return (
-    <nav className={`fixed left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 transition-all duration-300 rounded-full border border-white/10 ${isBannerVisible && !isScrolled ? 'top-14' : 'top-4'} ${isScrolled ? 'bg-[#020205]/85 backdrop-blur-xl shadow-2xl py-2' : 'bg-transparent py-4'}`}>
+    <nav className={navContainerClass}>
       <div className="px-6 sm:px-8">
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
@@ -81,7 +95,11 @@ const Navbar = ({ isBannerVisible }) => {
               >
                 <Link
                   to={link.path}
-                  className="relative flex items-center gap-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-semibold transition-colors py-2"
+                  className={`relative flex items-center gap-1 text-sm font-semibold transition-colors py-2 ${
+                    isHome 
+                      ? 'text-slate-800 hover:text-blue-600' 
+                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                  }`}
                 >
                   {link.name}
                   {link.dropdown && <ChevronDown size={14} />}
@@ -133,7 +151,11 @@ const Navbar = ({ isBannerVisible }) => {
           <div className="hidden xl:flex items-center gap-3 2xl:gap-4">
             <Link
               to="/company-brochure?autoDownload=true"
-              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-gray-700 dark:text-gray-300 transition-all hover:scale-110 active:scale-95 group relative"
+              className={`p-2 rounded-full transition-all hover:scale-110 active:scale-95 group relative ${
+                isHome
+                  ? 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'
+                  : 'bg-white/10 hover:bg-white/20 text-gray-700 dark:text-gray-300'
+              }`}
               title="Download Brochure"
             >
                <Download size={18} className="group-hover:text-blue-500" />
@@ -152,7 +174,11 @@ const Navbar = ({ isBannerVisible }) => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle navigation menu"
-              className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className={`p-2 rounded-lg transition-colors ${
+                isHome
+                  ? 'text-slate-800 hover:bg-slate-100'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
