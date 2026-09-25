@@ -7,12 +7,13 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Response } from 'express';
-import * as fs from 'fs';
-import * as path from 'path';
 
 /**
  * Global HTTP Exception Filter
- * Provides consistent error response format across the application
+ * Provides consistent error response format across the application.
+ * NOTE: File-system logging is intentionally omitted — Vercel serverless
+ * environments mount /var/task as read-only. All logs stream to stdout/stderr
+ * and are captured natively by Vercel's log aggregation.
  */
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -35,37 +36,18 @@ export class HttpExceptionFilter implements ExceptionFilter {
         message = (exceptionResponse as any).message || message;
         error = (exceptionResponse as any).error || error;
       } else {
-        message = exceptionResponse;
+        message = exceptionResponse as string;
       }
     } else if (exception instanceof Error) {
       message = exception.message;
       error = exception.name;
     }
 
-    // Log error
+    // Structured log — captured by Vercel log aggregation via stdout
     this.logger.error(
-      `${request.method} ${request.url}`,
-      exception instanceof Error ? exception.stack : exception,
+      `[${request.method}] ${request.url} → ${status}`,
+      exception instanceof Error ? exception.stack : String(exception),
     );
-
-    // Detailed debug logging to a file we can read
-    const errorLog = {
-      timestamp: new Date().toISOString(),
-      path: request.url,
-      method: request.method,
-      status,
-      message,
-      error,
-      stack: exception instanceof Error ? exception.stack : 'No stack trace',
-      body: request.body,
-    };
-
-    try {
-      const logPath = path.join(process.cwd(), 'error_debug.log');
-      fs.appendFileSync(logPath, JSON.stringify(errorLog, null, 2) + '\n---\n');
-    } catch (e) {
-      this.logger.error('Failed to write to error_debug.log', e.stack);
-    }
 
     // Send response
     response.status(status).json({
